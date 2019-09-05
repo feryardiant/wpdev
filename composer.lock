@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e13457ea21b2d161d0f6c2541995b89",
+    "content-hash": "68b324102fb6014444ca78c744efafd4",
     "packages": [
         {
             "name": "aaemnnosttv/wp-cli-dotenv-command",

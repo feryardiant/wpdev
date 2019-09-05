@@ -1,27 +1,21 @@
 {
-  "name": "roots/bedrock",
+  "name": "feryardiant/wordpress-boilerplate",
   "type": "project",
   "license": "MIT",
-  "description": "WordPress boilerplate based-on roots/bedrock.",
+  "description": "WordPress boilerplate based-on Bedrock by Roots.",
   "homepage": "https://roots.io/bedrock/",
   "authors": [
     {
-      "name": "Scott Walkinshaw",
-      "email": "scott.walkinshaw@gmail.com",
-      "homepage": "https://github.com/swalkinshaw"
-    },
-    {
-      "name": "Ben Word",
-      "email": "ben@benword.com",
-      "homepage": "https://github.com/retlehs"
+      "name": "Fery Wardiyanto",
+      "email": "ferywardiyanto@gmail.com",
+      "homepage": "https://github.com/feryardiant"
     }
   ],
   "keywords": [
     "bedrock", "composer", "roots", "wordpress", "wp", "wp-config", "boilerplate"
   ],
   "support": {
-    "issues": "https://github.com/roots/bedrock/issues",
-    "forum": "https://discourse.roots.io/category/bedrock"
+    "issues": "https://github.com/feryardiant/wordpress-boilerplate/issues"
   },
   "scripts": {
     "post-root-package-install": [

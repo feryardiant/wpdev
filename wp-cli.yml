@@ -1,4 +1,3 @@
 path: web/wp
-user: admin
 server:
   docroot: web
