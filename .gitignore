@@ -39,5 +39,4 @@ wp-cli.local.yml
 # But Keep these
 # --------------------------
 !/.env.example
-!.htaccess
 !.gitkeep
