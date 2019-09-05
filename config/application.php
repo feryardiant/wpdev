@@ -52,6 +52,14 @@ Config::define('CONTENT_DIR', '/app');
 Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
+
+/**
+ * ClearDB config on Heroku
+ */
+if (env('CLEARDB_DATABASE_URL')) {
+    putenv(sprintf('DATABASE_URL=%s', env('CLEARDB_DATABASE_URL')));
+}
+
 /**
  * DB settings
  */
