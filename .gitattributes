@@ -9,5 +9,5 @@
 CONTRIBUTING.md  export-ignore
 CHANGELOG.md     export-ignore
 app.json         export-ignore
-composer.lock    export-ignore
+# composer.lock    export-ignore
 Procfile         export-ignore
