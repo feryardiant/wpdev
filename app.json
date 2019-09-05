@@ -1,0 +1,68 @@
+{
+  "name": "WordPress Boilerplate",
+  "repository": "https://github.com/feryardiant/wordpress-boilerplate",
+  "image": "heroku/php",
+  "scripts": {
+    "postdeploy": "php artisan migrate --seed --no-ansi --force"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "env": {
+    "WP_ENV": {
+      "required": true
+    },
+    "WP_HOME": {
+      "required": true
+    },
+    "WP_SITEURL": {
+      "required": true
+    },
+    "WP_DEBUG": {
+      "description": "Set this to 'TRUE' to turn on debug logging",
+      "value": "FALSE",
+      "required": false
+    },
+    "AUTH_KEY": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "SECURE_AUTH_KEY": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "LOGGED_IN_KEY": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "NONCE_KEY": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "AUTH_SALT": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "SECURE_AUTH_SALT": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "LOGGED_IN_SALT": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    },
+    "NONCE_SALT": {
+      "description": "A secret key to increase security of stored information.",
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    "cleardb:ignite"
+  ],
+  "buildpacks": [
+    { "url": "heroku/php" }
+  ]
+}
