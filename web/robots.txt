@@ -1,0 +1,30 @@
+# Google Image
+User-agent: Googlebot-Image
+Disallow:
+Allow: /*
+
+# Google AdSense
+User-agent: Mediapartners-Google
+Disallow:
+
+# digg mirror
+User-agent: duggmirror
+Disallow: /
+
+# global
+User-agent: *
+Disallow: /app/plugins/
+Disallow: /app/cache/
+Disallow: /app/themes/
+Disallow: /category/*/*
+Disallow: /cgi-bin/
+Disallow: /comments/
+Disallow: /feed/
+Disallow: /trackback/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: */trackback/
+Disallow: */feed/
+Disallow: */comments/
+Disallow: /*?
+Allow: /app/uploads/
