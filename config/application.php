@@ -97,14 +97,18 @@ Config::define('DISALLOW_FILE_MODS', true);
 /**
  * Debugging Settings
  */
-Config::define('WP_DEBUG_DISPLAY', false);
-Config::define('SCRIPT_DEBUG', false);
+Config::define('WP_DEBUG',         env('WP_DEBUG') ?: false);
+Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?: false);
+Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?: false);
 ini_set('display_errors', 0);
+
+/* @link https://jetpack.com/support/development-mode/  */
+Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: false);
 
 /**
  * Multisite Settings
  */
-Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));
+// Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));
 $multisite = env('MULTISITE') ?: false;
 
 if ($multisite) {
