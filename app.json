@@ -1,10 +1,7 @@
 {
   "name": "WordPress Boilerplate",
   "repository": "https://github.com/feryardiant/wordpress-boilerplate",
-  "image": "heroku/php",
-  "scripts": {
-    "postdeploy": "php artisan migrate --seed --no-ansi --force"
-  },
+  "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
   "formation": {
     "web": {
       "quantity": 1,
