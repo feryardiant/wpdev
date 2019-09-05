@@ -1,0 +1,43 @@
+# Generic
+# --------------------------
+Thumbs.db
+Desktop.ini
+Icon?
+.directory
+*.cache
+*.old
+*.log
+._
+*~
+
+# IDE Project Configurations
+# --------------------------
+nbproject
+.idea
+.settings
+.vscode
+.project
+*.sublime-*
+
+# WordPress
+# --------------------------
+web/wp
+web/.htaccess
+
+# Development
+# --------------------------
+/vendor
+.vagrant
+.php-version
+node_modules
+Vagrantfile
+homestead.yml
+wp-cli.local.yml
+.env.*
+.env
+
+# But Keep these
+# --------------------------
+!/.env.example
+!.htaccess
+!.gitkeep

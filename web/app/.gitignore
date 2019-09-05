@@ -1,0 +1,7 @@
+mu-plugins/*
+plugins/*
+themes/*
+uploads/*
+
+!.gitignore
+!index.php
