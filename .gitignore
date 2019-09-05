@@ -21,8 +21,8 @@ nbproject
 
 # WordPress
 # --------------------------
-web/wp
-web/.htaccess
+public/wp
+public/.htaccess
 
 # Development
 # --------------------------
