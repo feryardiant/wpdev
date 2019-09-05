@@ -8,6 +8,7 @@
 .github          export-ignore
 CONTRIBUTING.md  export-ignore
 CHANGELOG.md     export-ignore
-app.json         export-ignore
+
+# app.json         export-ignore
 # composer.lock    export-ignore
-Procfile         export-ignore
+# Procfile         export-ignore
