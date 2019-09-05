@@ -22,7 +22,7 @@
       "php -r \"copy('.env.example', '.env');\""
     ],
     "copy:htaccess": [
-      "php -r \"copy('web/.htaccess.example', 'web/.htaccess');\""
+      "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
     ],
     "test": [
       "phpcs"
