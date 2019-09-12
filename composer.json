@@ -24,6 +24,12 @@
     "copy:htaccess": [
       "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
     ],
+    "heroku:install": [
+      "composer copy:htaccess",
+      "wp option update permalink_structure '/%postname%/'",
+      "wp option update timezone_string 'Asia/Jakarta'",
+      "wp option update link_manager_enabled '1'"
+    ],
     "test": [
       "phpcs"
     ]

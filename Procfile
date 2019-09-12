@@ -1,2 +1,2 @@
-release: composer copy:htaccess
+release: composer heroku:install
 web: vendor/bin/heroku-php-nginx -C config/heroku/nginx.conf public
