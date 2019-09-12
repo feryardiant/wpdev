@@ -20,7 +20,7 @@
     "WP_DEBUG": {
       "required": false,
       "description": "Set this to 'TRUE' to turn on debug logging",
-      "value": "FALSE"
+      "value": "true"
     },
     "HEROKU_APP_NAME": {
       "required": true,
