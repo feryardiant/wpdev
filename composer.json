@@ -43,6 +43,7 @@
     "roots/wp-password-bcrypt": "^1.0",
     "vlucas/phpdotenv": "^3.4",
     "wp-cli/core-command": "^2.0",
+    "wp-cli/entity-command": "^2.0",
     "wp-cli/wp-cli": "^2.3",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.6.4"
