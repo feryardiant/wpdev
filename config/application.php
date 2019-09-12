@@ -42,8 +42,15 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 /**
  * URLs
  */
-Config::define('WP_HOME', env('WP_HOME'));
-Config::define('WP_SITEURL', env('WP_SITEURL'));
+if (array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+$_http_schema = array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+$_http_name   = array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost';
+$_site_url    = $_http_schema."://".$_http_name;
+
+Config::define('WP_HOME', env('WP_HOME') ?: $_site_url);
+Config::define('WP_SITEURL', env('WP_SITEURL') ?: $_site_url);
 
 /**
  * Custom Content Directory
@@ -100,7 +107,7 @@ Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 // Disable the plugin and theme file editor in the admin
 Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
-Config::define('DISALLOW_FILE_MODS', true);
+// Config::define('DISALLOW_FILE_MODS', true);
 
 /**
  * Debugging Settings
