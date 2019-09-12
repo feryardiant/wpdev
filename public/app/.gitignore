@@ -1,7 +1,7 @@
-mu-plugins/*
+mu-plugins/*/*
 plugins/*
 themes/*
 uploads/*
 
-!.gitignore
+# !.gitignore
 !index.php
