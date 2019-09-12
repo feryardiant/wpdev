@@ -7,6 +7,6 @@ if [ ! -z $WP_SITEURL ]; then
         --title="WordPress Site" \
         --admin_user="admin" \
         --admin_password="secret" \
-        --admin_email="admin@$WP_SITEURL" \
+        --admin_email="admin@example.com" \
         --skip-email
 fi
