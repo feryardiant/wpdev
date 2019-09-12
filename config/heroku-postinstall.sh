@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 cd $HOME
 
-if [ ! -z $WP_SITEURL ]; then
+if [ ! -z $HEROKU_APP_NAME ]; then
     vendor/bin/wp core install \
-        --url="$WP_SITEURL" \
+        --url="${HEROKU_APP_NAME}.herokuapp.com" \
         --title="WordPress Site" \
         --admin_user="admin" \
         --admin_password="secret" \
