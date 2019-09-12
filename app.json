@@ -2,6 +2,11 @@
   "name": "WordPress Boilerplate",
   "repository": "https://github.com/feryardiant/wordpress-boilerplate",
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
+  "scripts": {
+    "postdeploy": [
+      "config/heroku/postinstall.sh"
+    ]
+  },
   "formation": {
     "web": {
       "quantity": 1,
@@ -12,16 +17,14 @@
     "WP_ENV": {
       "required": true
     },
-    "WP_HOME": {
-      "required": true
-    },
-    "WP_SITEURL": {
-      "required": true
-    },
     "WP_DEBUG": {
+      "required": false,
       "description": "Set this to 'TRUE' to turn on debug logging",
-      "value": "FALSE",
-      "required": false
+      "value": "FALSE"
+    },
+    "HEROKU_APP_NAME": {
+      "required": true,
+      "description": "Only for automated deploys, please don't enter anything!"
     },
     "AUTH_KEY": {
       "description": "A secret key to increase security of stored information.",
