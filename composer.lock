@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97a74c99a1394e622db18c97deee90d0",
+    "content-hash": "8cfce7ce9c0da86ef19b2330edc14d40",
     "packages": [
         {
             "name": "composer/installers",
@@ -2095,6 +2095,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/debug-bar/"
+        },
+        {
+            "name": "wpackagist-plugin/theme-check",
+            "version": "20190801.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/theme-check/",
+                "reference": "tags/20190801.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/theme-check.20190801.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/theme-check/"
         }
     ],
     "aliases": [],
@@ -2105,7 +2123,13 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-exif": "*",
+        "ext-gd": "*",
+        "ext-gettext": "*",
+        "ext-imagick": "*",
+        "ext-mbstring": "*",
+        "ext-xmlrpc": "*"
     },
     "platform-dev": []
 }

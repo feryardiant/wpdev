@@ -84,12 +84,15 @@
     "wp-cli/db-command": "^2.0",
     "wp-cli/scaffold-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
-    "wpackagist-plugin/debug-bar": "^1.0"
+    "wpackagist-plugin/debug-bar": "^1.0",
+    "wpackagist-plugin/theme-check": "20190801.1"
   },
   "extra": {
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
+        "wpackagist-plugin/debug-bar",
         "wpackagist-plugin/regenerate-thumbnails",
+        "wpackagist-plugin/theme-check",
         "wpackagist-plugin/wordpress-importer",
         "type:wordpress-muplugin"
       ],
