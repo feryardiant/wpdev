@@ -54,6 +54,12 @@
   ],
   "require": {
     "php": ">=7.1",
+    "ext-exif": "*",
+    "ext-gd": "*",
+    "ext-gettext": "*",
+    "ext-imagick": "*",
+    "ext-mbstring": "*",
+    "ext-xmlrpc": "*",
     "composer/installers": "^1.7",
     "local-theme/starter-child": "*",
     "oscarotero/env": "^1.2",
@@ -77,7 +83,8 @@
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/db-command": "^2.0",
     "wp-cli/scaffold-command": "^2.0",
-    "wp-coding-standards/wpcs": "^2.1"
+    "wp-coding-standards/wpcs": "^2.1",
+    "wpackagist-plugin/debug-bar": "^1.0"
   },
   "extra": {
     "installer-paths": {

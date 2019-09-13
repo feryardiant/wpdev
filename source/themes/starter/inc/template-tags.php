@@ -30,7 +30,7 @@ if ( ! function_exists( 'starter_posted_on' ) ) :
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
-		echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+		echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 endif;
@@ -46,7 +46,7 @@ if ( ! function_exists( 'starter_posted_by' ) ) :
 			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 		);
 
-		echo '<span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+		echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 endif;
@@ -61,15 +61,21 @@ if ( ! function_exists( 'starter_entry_footer' ) ) :
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'starter' ) );
 			if ( $categories_list ) {
-				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'starter' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+				printf(
+					/* translators: 1: list of categories. */
+					'<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'starter' ) . '</span>',
+					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
 			}
 
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'starter' ) );
 			if ( $tags_list ) {
-				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'starter' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+				printf(
+					/* translators: 1: list of tags. */
+					'<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'starter' ) . '</span>',
+					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
 			}
 		}
 
@@ -97,11 +103,11 @@ if ( ! function_exists( 'starter_entry_footer' ) ) :
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
 					__( 'Edit <span class="screen-reader-text">%s</span>', 'starter' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
+					[
+						'span' => [
+							'class' => [],
+						],
+					]
 				),
 				get_the_title()
 			),
@@ -142,7 +148,7 @@ if ( ! function_exists( 'starter_post_thumbnail' ) ) :
 			?>
 		</a>
 
-		<?php
+			<?php
 		endif; // End is_singular().
 	}
 endif;

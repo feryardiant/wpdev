@@ -14,7 +14,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
@@ -40,7 +40,7 @@
 			$starter_description = get_bloginfo( 'description', 'display' );
 			if ( $starter_description || is_customize_preview() ) :
 				?>
-				<p class="site-description"><?php echo $starter_description; /* WPCS: xss ok. */ ?></p>
+				<p class="site-description"><?php echo $starter_description; /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 

@@ -24,7 +24,7 @@ get_header();
 				</h1>
 			</header><!-- .page-header -->
 
-			<?php
+		<?php
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
