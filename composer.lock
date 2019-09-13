@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46ba264d656f971fcdc8af99ae98decc",
+    "content-hash": "8ca7a7a5ab121a470a92c8360b50b840",
     "packages": [
         {
             "name": "composer/installers",
@@ -189,6 +189,70 @@
                 "versioning"
             ],
             "time": "2019-03-19T17:25:45+00:00"
+        },
+        {
+            "name": "local-plugin/sample",
+            "version": "dev-starter",
+            "dist": {
+                "type": "path",
+                "url": "source/plugins/sample",
+                "reference": "c003f8a52e49978319aefd249be892c51ac49df8"
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fery Wardiyanto",
+                    "email": "ferywardiyanto@gmail.com"
+                }
+            ],
+            "description": "Another Wordpress Plugin"
+        },
+        {
+            "name": "local-theme/starter",
+            "version": "dev-starter",
+            "dist": {
+                "type": "path",
+                "url": "source/themes/starter",
+                "reference": "b695aad8e8633f17522afe51a2c1f72e244c5665"
+            },
+            "type": "wordpress-theme",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fery Wardiyanto",
+                    "email": "ferywardiyanto@gmail.com"
+                }
+            ],
+            "description": "Another Wordpress Theme"
+        },
+        {
+            "name": "local-theme/starter-child",
+            "version": "dev-starter",
+            "dist": {
+                "type": "path",
+                "url": "source/themes/starter-child",
+                "reference": "522d30350bda0429dc872d91882f977470f134d7"
+            },
+            "require": {
+                "local-plugin/sample": "*",
+                "local-theme/starter": "*"
+            },
+            "type": "wordpress-theme",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fery Wardiyanto",
+                    "email": "ferywardiyanto@gmail.com"
+                }
+            ],
+            "description": "Another Wordpress Child Theme"
         },
         {
             "name": "mustache/mustache",
@@ -802,76 +866,6 @@
             "time": "2019-04-25T05:45:44+00:00"
         },
         {
-            "name": "wp-cli/db-command",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wp-cli/db-command.git",
-                "reference": "dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0",
-                "reference": "dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0",
-                "shasum": ""
-            },
-            "require": {
-                "wp-cli/wp-cli": "^2"
-            },
-            "require-dev": {
-                "wp-cli/entity-command": "^1.3 || ^2",
-                "wp-cli/wp-cli-tests": "^2.1"
-            },
-            "type": "wp-cli-package",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                },
-                "bundled": true,
-                "commands": [
-                    "db",
-                    "db clean",
-                    "db create",
-                    "db drop",
-                    "db reset",
-                    "db check",
-                    "db optimize",
-                    "db prefix",
-                    "db repair",
-                    "db cli",
-                    "db query",
-                    "db export",
-                    "db import",
-                    "db search",
-                    "db tables",
-                    "db size",
-                    "db columns"
-                ]
-            },
-            "autoload": {
-                "psr-4": {
-                    "": "src/"
-                },
-                "files": [
-                    "db-command.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Bachhuber",
-                    "email": "daniel@runcommand.io",
-                    "homepage": "https://runcommand.io"
-                }
-            ],
-            "description": "Performs basic database operations using credentials stored in wp-config.php.",
-            "homepage": "https://github.com/wp-cli/db-command",
-            "time": "2019-04-25T00:28:40+00:00"
-        },
-        {
             "name": "wp-cli/entity-command",
             "version": "v2.0.6",
             "source": {
@@ -1076,6 +1070,63 @@
             "description": "Manage WordPress comments, menus, options, posts, sites, terms, and users.",
             "homepage": "https://github.com/wp-cli/entity-command",
             "time": "2019-04-25T04:51:40+00:00"
+        },
+        {
+            "name": "wp-cli/maintenance-mode-command",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/maintenance-mode-command.git",
+                "reference": "db4671c14ea4c0c42f423a09cf8e9303778bb1a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/maintenance-mode-command/zipball/db4671c14ea4c0c42f423a09cf8e9303778bb1a4",
+                "reference": "db4671c14ea4c0c42f423a09cf8e9303778bb1a4",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "^2"
+            },
+            "require-dev": {
+                "wp-cli/wp-cli-tests": "^2.1"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "maintenance-mode",
+                    "maintenance-mode activate",
+                    "maintenance-mode deactivate",
+                    "maintenance-mode status",
+                    "maintenance-mode is-active"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "WP_CLI\\MaintenanceMode\\": "src/"
+                },
+                "files": [
+                    "maintenance-mode-command.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thrijith Thankachan",
+                    "email": "thrijith13@gmail.com",
+                    "homepage": "https://thrijith.com"
+                }
+            ],
+            "description": "Activates, deactivates or checks the status of the maintenance mode of a site.",
+            "homepage": "https://github.com/wp-cli/maintenance-mode-command",
+            "time": "2019-04-19T15:37:30+00:00"
         },
         {
             "name": "wp-cli/mustangostang-spyc",
@@ -1320,6 +1371,232 @@
             "description": "Dotenv commands for WP-CLI",
             "homepage": "https://aaemnnost.tv/wp-cli-commands/dotenv/",
             "time": "2018-05-21T06:56:59+00:00"
+        },
+        {
+            "name": "dealerdirect/phpcodesniffer-composer-installer",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dealerdirect/phpcodesniffer-composer-installer.git",
+                "reference": "e749410375ff6fb7a040a68878c656c2e610b132"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dealerdirect/phpcodesniffer-composer-installer/zipball/e749410375ff6fb7a040a68878c656c2e610b132",
+                "reference": "e749410375ff6fb7a040a68878c656c2e610b132",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": "^5.3|^7",
+                "squizlabs/php_codesniffer": "^2|^3"
+            },
+            "require-dev": {
+                "composer/composer": "*",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "sensiolabs/security-checker": "^4.1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Franck Nijhof",
+                    "email": "franck.nijhof@dealerdirect.com",
+                    "homepage": "http://www.frenck.nl",
+                    "role": "Developer / IT Manager"
+                }
+            ],
+            "description": "PHP_CodeSniffer Standards Composer Installer Plugin",
+            "homepage": "http://www.dealerdirect.com",
+            "keywords": [
+                "PHPCodeSniffer",
+                "PHP_CodeSniffer",
+                "code quality",
+                "codesniffer",
+                "composer",
+                "installer",
+                "phpcs",
+                "plugin",
+                "qa",
+                "quality",
+                "standard",
+                "standards",
+                "style guide",
+                "stylecheck",
+                "tests"
+            ],
+            "time": "2018-10-26T13:21:45+00:00"
+        },
+        {
+            "name": "phpcompatibility/php-compatibility",
+            "version": "9.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
+                "reference": "9999344e47e7af6b00e1a898eacc4e4368fb7196"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibility/zipball/9999344e47e7af6b00e1a898eacc4e4368fb7196",
+                "reference": "9999344e47e7af6b00e1a898eacc4e4368fb7196",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "squizlabs/php_codesniffer": "^2.3 || ^3.0.2"
+            },
+            "conflict": {
+                "squizlabs/php_codesniffer": "2.6.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically.",
+                "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
+            },
+            "type": "phpcodesniffer-standard",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Wim Godden",
+                    "homepage": "https://github.com/wimg",
+                    "role": "lead"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "homepage": "https://github.com/jrfnl",
+                    "role": "lead"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/PHPCompatibility/PHPCompatibility/graphs/contributors"
+                }
+            ],
+            "description": "A set of sniffs for PHP_CodeSniffer that checks for PHP cross-version compatibility.",
+            "homepage": "http://techblog.wimgodden.be/tag/codesniffer/",
+            "keywords": [
+                "compatibility",
+                "phpcs",
+                "standards"
+            ],
+            "time": "2019-09-05T18:36:49+00:00"
+        },
+        {
+            "name": "phpcompatibility/phpcompatibility-paragonie",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPCompatibility/PHPCompatibilityParagonie.git",
+                "reference": "b1bb79a7cab1fb856b56f1b5cf110b6e52d8e936"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityParagonie/zipball/b1bb79a7cab1fb856b56f1b5cf110b6e52d8e936",
+                "reference": "b1bb79a7cab1fb856b56f1b5cf110b6e52d8e936",
+                "shasum": ""
+            },
+            "require": {
+                "phpcompatibility/php-compatibility": "^9.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5",
+                "paragonie/random_compat": "dev-master",
+                "paragonie/sodium_compat": "dev-master"
+            },
+            "suggest": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
+                "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
+            },
+            "type": "phpcodesniffer-standard",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Wim Godden",
+                    "role": "lead"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "role": "lead"
+                }
+            ],
+            "description": "A set of rulesets for PHP_CodeSniffer to check for PHP cross-version compatibility issues in projects, while accounting for polyfills provided by the Paragonie polyfill libraries.",
+            "homepage": "http://phpcompatibility.com/",
+            "keywords": [
+                "compatibility",
+                "paragonie",
+                "phpcs",
+                "polyfill",
+                "standards"
+            ],
+            "time": "2019-08-28T15:58:19+00:00"
+        },
+        {
+            "name": "phpcompatibility/phpcompatibility-wp",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPCompatibility/PHPCompatibilityWP.git",
+                "reference": "41bef18ba688af638b7310666db28e1ea9158b2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/41bef18ba688af638b7310666db28e1ea9158b2f",
+                "reference": "41bef18ba688af638b7310666db28e1ea9158b2f",
+                "shasum": ""
+            },
+            "require": {
+                "phpcompatibility/php-compatibility": "^9.0",
+                "phpcompatibility/phpcompatibility-paragonie": "^1.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5"
+            },
+            "suggest": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
+                "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
+            },
+            "type": "phpcodesniffer-standard",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Wim Godden",
+                    "role": "lead"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "role": "lead"
+                }
+            ],
+            "description": "A ruleset for PHP_CodeSniffer to check for PHP cross-version compatibility issues in projects, while accounting for polyfills provided by WordPress.",
+            "homepage": "http://phpcompatibility.com/",
+            "keywords": [
+                "compatibility",
+                "phpcs",
+                "standards",
+                "wordpress"
+            ],
+            "time": "2019-08-28T14:22:28+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -1623,6 +1900,183 @@
                 "standards"
             ],
             "time": "2019-04-10T23:49:02+00:00"
+        },
+        {
+            "name": "wp-cli/db-command",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/db-command.git",
+                "reference": "dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0",
+                "reference": "dc0f8e4d5783d8a4ee01da1119b8fe8038fe1aa0",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "^2"
+            },
+            "require-dev": {
+                "wp-cli/entity-command": "^1.3 || ^2",
+                "wp-cli/wp-cli-tests": "^2.1"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "db",
+                    "db clean",
+                    "db create",
+                    "db drop",
+                    "db reset",
+                    "db check",
+                    "db optimize",
+                    "db prefix",
+                    "db repair",
+                    "db cli",
+                    "db query",
+                    "db export",
+                    "db import",
+                    "db search",
+                    "db tables",
+                    "db size",
+                    "db columns"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "db-command.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Performs basic database operations using credentials stored in wp-config.php.",
+            "homepage": "https://github.com/wp-cli/db-command",
+            "time": "2019-04-25T00:28:40+00:00"
+        },
+        {
+            "name": "wp-cli/scaffold-command",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/scaffold-command.git",
+                "reference": "9c6450e9ccf2d032913fced69f3188bc8ec4e3e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/scaffold-command/zipball/9c6450e9ccf2d032913fced69f3188bc8ec4e3e6",
+                "reference": "9c6450e9ccf2d032913fced69f3188bc8ec4e3e6",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "^2"
+            },
+            "require-dev": {
+                "wp-cli/extension-command": "^1.2 || ^2",
+                "wp-cli/wp-cli-tests": "^2.1"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "scaffold",
+                    "scaffold underscores",
+                    "scaffold block",
+                    "scaffold child-theme",
+                    "scaffold plugin",
+                    "scaffold plugin-tests",
+                    "scaffold post-type",
+                    "scaffold taxonomy",
+                    "scaffold theme-tests"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "scaffold-command.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Generates code for post types, taxonomies, blocks, plugins, child themes, etc.",
+            "homepage": "https://github.com/wp-cli/scaffold-command",
+            "time": "2019-04-25T00:44:34+00:00"
+        },
+        {
+            "name": "wp-coding-standards/wpcs",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/WordPress-Coding-Standards.git",
+                "reference": "bd9c33152115e6741e3510ff7189605b35167908"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/bd9c33152115e6741e3510ff7189605b35167908",
+                "reference": "bd9c33152115e6741e3510ff7189605b35167908",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "squizlabs/php_codesniffer": "^3.3.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
+            },
+            "type": "phpcodesniffer-standard",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/graphs/contributors"
+                }
+            ],
+            "description": "PHP_CodeSniffer rules (sniffs) to enforce WordPress coding conventions",
+            "keywords": [
+                "phpcs",
+                "standards",
+                "wordpress"
+            ],
+            "time": "2019-05-21T02:50:00+00:00"
         }
     ],
     "aliases": [],

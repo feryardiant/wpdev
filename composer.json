@@ -24,6 +24,12 @@
     "copy:htaccess": [
       "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
     ],
+    "lint:themes": [
+      "phpcs --standard=source/themes/ruleset.xml source/themes"
+    ],
+    "lint:plugins": [
+      "phpcs --standard=source/plugins/ruleset.xml source/plugins"
+    ],
     "test": [
       "phpcs"
     ]
@@ -32,11 +38,24 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+      "type": "path",
+      "url": "source/themes/starter"
+    },
+    {
+      "type": "path",
+      "url": "source/themes/starter-child"
+    },
+    {
+      "type": "path",
+      "url": "source/plugins/sample"
     }
   ],
   "require": {
     "php": ">=7.1",
     "composer/installers": "^1.7",
+    "local-theme/starter-child": "*",
     "oscarotero/env": "^1.2",
     "roots/wordpress": "^5.2",
     "roots/wp-config": "^1.0",
@@ -44,16 +63,21 @@
     "vlucas/phpdotenv": "^3.4",
     "wp-cli/core-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
+    "wp-cli/maintenance-mode-command": "^2.0",
     "wp-cli/wp-cli": "^2.3",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.6.4"
   },
   "require-dev": {
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
     "roave/security-advisories": "dev-master",
     "roots/multisite-url-fixer": "^1.1",
-    "squizlabs/php_codesniffer": "^3.4.2",
-    "wp-cli/db-command": "^2.0"
+    "squizlabs/php_codesniffer": "^3.4",
+    "wp-cli/db-command": "^2.0",
+    "wp-cli/scaffold-command": "^2.0",
+    "wp-coding-standards/wpcs": "^2.1"
   },
   "extra": {
     "installer-paths": {

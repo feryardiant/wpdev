@@ -1,0 +1,29 @@
+{
+  "name": "local-theme/starter-child",
+  "description": "Another Wordpress Child Theme",
+  "type": "wordpress-theme",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fery Wardiyanto",
+      "email": "ferywardiyanto@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "local-theme/starter": "*",
+    "local-plugin/sample": "*"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

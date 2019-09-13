@@ -1,0 +1,20 @@
+{
+  "name": "local-theme/starter",
+  "description": "Another Wordpress Theme",
+  "type": "wordpress-theme",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fery Wardiyanto",
+      "email": "ferywardiyanto@gmail.com"
+    }
+  ],
+  "require": {},
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

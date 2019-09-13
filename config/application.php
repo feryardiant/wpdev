@@ -58,6 +58,7 @@ Config::define('WP_SITEURL', env('WP_SITEURL') ?: $_site_url);
 Config::define('CONTENT_DIR', '/app');
 Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
+Config::define('WP_DEFAULT_THEME', env('WP_DEFAULT_THEME') ?: 'starter-child');
 
 
 /**
