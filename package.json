@@ -1,0 +1,71 @@
+{
+  "name": "wpbp",
+  "version": "0.0.0",
+  "description": "[Bedrock](https://roots.io/bedrock/) is a modern WordPress stack that helps you get started with the best development tools and project structure.",
+  "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "keywords": [
+    "wordpress",
+    "wordpress-theme",
+    "wordpress-boilerplate"
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "cross-env": "^5.2.1",
+    "del": "^5.1.0",
+    "dotenv": "^8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "wordpress"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-console": 2
+    }
+  },
+  "eslintIgnore": [
+    "/node_modules/**",
+    "/public/**",
+    "**/vendor/**",
+    "/gulpfile.js",
+    "/**.old"
+  ],
+  "stylelint": {
+    "extends": "stylelint-config-wordpress/scss"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}
