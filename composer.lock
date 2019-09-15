@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c099168420172502acdd89058f47ae3",
+    "content-hash": "cd3954566ab29c9199e3668cbeaedbd7",
     "packages": [
         {
             "name": "composer/installers",
@@ -208,7 +208,10 @@
                     "email": "ferywardiyanto@gmail.com"
                 }
             ],
-            "description": "Another Wordpress Theme"
+            "description": "Another Wordpress Theme",
+            "transport-options": {
+                "symlink": false
+            }
         },
         {
             "name": "mustache/mustache",
@@ -2213,6 +2216,59 @@
             "description": "Generates code for post types, taxonomies, blocks, plugins, child themes, etc.",
             "homepage": "https://github.com/wp-cli/scaffold-command",
             "time": "2019-04-25T00:44:34+00:00"
+        },
+        {
+            "name": "wp-cli/server-command",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/server-command.git",
+                "reference": "fa5487926906903d0a466c2c672057bdf79b4b10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/server-command/zipball/fa5487926906903d0a466c2c672057bdf79b4b10",
+                "reference": "fa5487926906903d0a466c2c672057bdf79b4b10",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "^2"
+            },
+            "require-dev": {
+                "wp-cli/wp-cli-tests": "^2.1"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "server"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "server-command.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Launches PHP's built-in web server for a specific WordPress installation.",
+            "homepage": "https://github.com/wp-cli/server-command",
+            "time": "2019-07-16T15:10:07+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
