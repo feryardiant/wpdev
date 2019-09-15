@@ -10,6 +10,6 @@
 
 ## Credits
 
-* [Bedrock](https://roots.io/bedrock/) - [MIT License](https://github.com/roots/bedrock/blob/master/LICENSE.md)
 * [WordPress](https://wordpress.org/) - [GPLv2 License](https://wordpress.org/about/license/)
+* [Bedrock](https://roots.io/bedrock/) - [MIT License](https://github.com/roots/bedrock/blob/master/LICENSE.md)
 * [Underscores](https://underscores.me) - [GPLv2 License](https://github.com/Automattic/_s/blob/master/LICENSE)

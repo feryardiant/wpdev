@@ -4,8 +4,6 @@
 # WordPress Coding Standards
 # https://make.wordpress.org/core/handbook/coding-standards/
 
-root = true
-
 [*]
 charset = utf-8
 end_of_line = lf

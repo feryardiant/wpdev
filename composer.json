@@ -3,12 +3,19 @@
   "type": "project",
   "license": "MIT",
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
-  "homepage": "https://roots.io/bedrock/",
+  "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
   "authors": [
     {
       "name": "Fery Wardiyanto",
       "email": "ferywardiyanto@gmail.com",
-      "homepage": "https://github.com/feryardiant"
+      "homepage": "https://github.com/feryardiant/",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Roots Team",
+      "email": "team@roots.io",
+      "homepage": "https://roots.io/bedrock/",
+      "role": "Author"
     }
   ],
   "keywords": [
@@ -30,6 +37,11 @@
     "lint:plugins": [
       "phpcs --standard=source/plugins/ruleset.xml source/plugins"
     ],
+    "wp:reset": [
+      "wp db reset --yes",
+      "wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
+      "wp option update permalink_structure '/%postname%/'"
+    ],
     "test": [
       "phpcs"
     ]
@@ -41,15 +53,11 @@
     },
     {
       "type": "path",
-      "url": "source/themes/starter"
+      "url": "source/themes/wpbp"
     },
     {
       "type": "path",
-      "url": "source/themes/starter-child"
-    },
-    {
-      "type": "path",
-      "url": "source/plugins/sample"
+      "url": "source/plugins/dummy"
     }
   ],
   "require": {
@@ -61,7 +69,7 @@
     "ext-mbstring": "*",
     "ext-xmlrpc": "*",
     "composer/installers": "^1.7",
-    "local-theme/starter-child": "*",
+    "local-theme/wpbp": "*",
     "oscarotero/env": "^1.2",
     "roots/wordpress": "^5.2",
     "roots/wp-config": "^1.0",

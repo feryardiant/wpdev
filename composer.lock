@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cfce7ce9c0da86ef19b2330edc14d40",
+    "content-hash": "d1d17dd70e013611456f194432bf30ca",
     "packages": [
         {
             "name": "composer/installers",
@@ -191,36 +191,16 @@
             "time": "2019-03-19T17:25:45+00:00"
         },
         {
-            "name": "local-plugin/sample",
+            "name": "local-theme/wpbp",
             "version": "dev-starter",
             "dist": {
                 "type": "path",
-                "url": "source/plugins/sample",
-                "reference": "c003f8a52e49978319aefd249be892c51ac49df8"
-            },
-            "type": "wordpress-plugin",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fery Wardiyanto",
-                    "email": "ferywardiyanto@gmail.com"
-                }
-            ],
-            "description": "Another Wordpress Plugin"
-        },
-        {
-            "name": "local-theme/starter",
-            "version": "dev-starter",
-            "dist": {
-                "type": "path",
-                "url": "source/themes/starter",
-                "reference": "b695aad8e8633f17522afe51a2c1f72e244c5665"
+                "url": "source/themes/wpbp",
+                "reference": "614964323259a10ef54142950b0de285f0c8cbea"
             },
             "type": "wordpress-theme",
             "license": [
-                "MIT"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -229,30 +209,6 @@
                 }
             ],
             "description": "Another Wordpress Theme"
-        },
-        {
-            "name": "local-theme/starter-child",
-            "version": "dev-starter",
-            "dist": {
-                "type": "path",
-                "url": "source/themes/starter-child",
-                "reference": "522d30350bda0429dc872d91882f977470f134d7"
-            },
-            "require": {
-                "local-plugin/sample": "*",
-                "local-theme/starter": "*"
-            },
-            "type": "wordpress-theme",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fery Wardiyanto",
-                    "email": "ferywardiyanto@gmail.com"
-                }
-            ],
-            "description": "Another Wordpress Child Theme"
         },
         {
             "name": "mustache/mustache",

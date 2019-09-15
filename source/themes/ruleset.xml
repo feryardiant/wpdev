@@ -29,7 +29,7 @@
 	<arg name="parallel" value="8"/>
 
 	<!-- Only check the PHP, CSS and SCSS files. JS files are checked separately with JSCS and JSHint. -->
-	<arg name="extensions" value="php,css,scss/css"/>
+	<arg name="extensions" value="php"/>
 
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>.</file>
@@ -54,16 +54,17 @@
 		 Multiple valid text domains can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="starter"/>
+			<property name="text_domain" type="array" value="wpbp"/>
 		</properties>
 	</rule>
 
-	<!-- Allow for theme specific exceptions to the file name rules based
-		 on the theme hierarchy. -->
+	<!-- Allow for theme specific exceptions to the file name rules based on the theme hierarchy. -->
 	<rule ref="WordPress.Files.FileName">
 		<properties>
 			<property name="is_theme" value="true"/>
+			<property name="strict_class_file_names" value="false"/>
 		</properties>
+		<!-- <exclude name="WordPress.Files.FileName.InvalidClassFileName" /> -->
 	</rule>
 
 	<!-- Set the minimum supported WP version. This is used by several sniffs.
@@ -86,7 +87,7 @@
 		 Multiple valid prefixes can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="starter" />
+			<property name="prefixes" type="array" value="wpbp" />
 		</properties>
 	</rule>
 
@@ -106,6 +107,10 @@
 		<exclude name="PEAR.Functions.FunctionDeclaration.BraceOnSameLine"/>
 	</rule>
 
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+	</rule>
+
 
 	<!--
 	#############################################################################
@@ -114,7 +119,7 @@
 	-->
 
 
-	<config name="testVersion" value="5.5-99.0"/>
+	<config name="testVersion" value="7.0-99.0"/>
 	<rule ref="PHPCompatibility">
 		<!-- Whitelist PHP native classes, interfaces, functions and constants which
 			 are back-filled by WP.
