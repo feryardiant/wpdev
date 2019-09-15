@@ -37,10 +37,16 @@
     "lint:plugins": [
       "phpcs --standard=source/plugins/ruleset.xml source/plugins"
     ],
-    "wp:reset": [
-      "wp db reset --yes",
+    "wp:install": [
       "wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
       "wp option update permalink_structure '/%postname%/'"
+    ],
+    "wp:reset": [
+      "wp db reset --yes",
+      "@wp:install"
+    ],
+    "wp:theme-pot": [
+      "wp i18n make-pot source/themes/wpbp source/themes/wpbp/languages/wpbp.pot --slug=wpbp --domain=wpbp --skip-js"
     ],
     "test": [
       "phpcs"
@@ -90,6 +96,7 @@
     "roots/multisite-url-fixer": "^1.1",
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/db-command": "^2.0",
+    "wp-cli/i18n-command": "^2.2",
     "wp-cli/scaffold-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/debug-bar": "^1.0",
