@@ -1,18 +1,18 @@
-const { readdirSync } = require('fs')
-const { task, parallel, series, watch } = require('gulp');
+const { spawn } = require('child_process')
+const { task, parallel, series, watch } = require('gulp')
 
-const babel = require('gulp-babel');
+const babel = require('gulp-babel')
 
-const del = require('del');
-const path = require('path');
+const del = require('del')
+const path = require('path')
 
-require('dotenv').config();
+const { wpServer, scandir } = require('./build/util')
 
-const paths = {
-  img: 'images/**',
-  css: 'scss/*.scss',
-  js: 'js/*.js',
-}
+let server
+
+process.on('exit', () => {
+  if (server) server.kill('SIGKILL')
+})
 
 const tasks = {
   pot: (src, dest) => (done) => {
@@ -41,34 +41,6 @@ const tasks = {
   },
 }
 
-const readdirOpt = { withFileTypes: true }
-const scandir = (dir, dest) => readdirSync(dir, readdirOpt).reduce((build, sub) => {
-  if (!sub.isDirectory()) return build
-
-  return readdirSync(path.join(dir, sub.name), readdirOpt).reduce((build, source) => {
-    if (!source.isDirectory()) return build
-
-    let target = path.join(sub.name, source.name)
-    build[source.name] = {
-      pot: {
-        src: path.join(dir, target, '**.php'),
-        dest: path.join(dest, target, 'languages', `${source.name}.pot`)
-      }
-    }
-
-    Object.keys(paths).forEach(asset => {
-      target = path.join(target, 'assets')
-
-      build[source.name][asset] = {
-        src: path.join(dir, target, paths[asset]),
-        dest: path.join(dest, target, asset)
-      }
-    })
-
-    return build
-  }, {})
-}, {})
-
 const build = scandir('source', 'public/app')
 const assets = []
 
@@ -85,6 +57,7 @@ for (const [name, asset] of Object.entries(build)) {
 }
 
 exports.default = (done) => {
+  server = wpServer()
   console.log('done')
   return done()
 }
