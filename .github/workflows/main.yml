@@ -10,11 +10,12 @@ on: [pull_request, push]
 #       - master
 
 jobs:
-  build-and-deploy:
+  run:
+    name: Runs on PHP ${{ matrix.php-versions }} & WP ${{ matrix.wp-versions }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        wordpress-versions: ['5.0', '5.1', '5.2']
+        wp-versions: ['5.0', '5.1', '5.2']
         php-versions: ['7.1', '7.2', '7.3']
     steps:
     - uses: actions/checkout@master
@@ -23,11 +24,17 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
         extension-csv: mbstring, xdebug
+    - name: Install dependencies
+      env:
+        CI: 1
+      run: |
+        composer install
+        npm install
     - name: Check PHP Version
       run: php -v
+    - name: Check PHP Extensions
+      run: php -m
     - name: Check Composer Version
       run: composer -V
     - name: Check WordPress Version
       run: wp core version
-    - name: Check PHP Extensions
-      run: php -m
