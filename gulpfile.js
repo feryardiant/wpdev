@@ -1,13 +1,13 @@
-const { task, parallel, series, watch } = require('gulp')
+const { task, parallel, series} = require('gulp')
 
 const babel = require('gulp-babel')
 
 const del = require('del')
 const path = require('path')
 
-const { configure } = require('./build/util')
+const { configure, watch } = require('./build/util')
 
-configure('source', 'public/app', {
+const tasks = configure('source', 'public/app', {
   pot: (src, dest) => (done) => {
     console.log(src, dest)
     return done()
@@ -34,8 +34,7 @@ configure('source', 'public/app', {
   },
 })
 
-exports.default = async (done) => {
-  console.log('done')
-
-  return done()
+exports.default = () => {
+  console.log('Watching source...')
+  return watch(tasks)
 }

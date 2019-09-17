@@ -4,7 +4,7 @@ const execFile = promisify(require('child_process').execFile)
 // const { spawn, execFile } = require('child_process')
 const path = require('path')
 
-const { task, parallel, series } = require('gulp')
+const { task, parallel, series, watch } = require('gulp')
 
 require('dotenv').config()
 
@@ -62,12 +62,14 @@ const scandir = exports.scandir = (dir, dest) => {
 const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const assetTasks = []
+  const toWatch = {}
 
   for (const [name, asset] of scandir(src, dest)) {
     Object.keys(asset).forEach(key => {
       const assetTask = `${name}:${key}`
       task(assetTask, tasks[key](asset[key].src, asset[key].dest))
       assetTasks.push(assetTask)
+      toWatch[assetTask] = asset[key].src
     })
 
     task(`${name}:build`, series(...assetTasks))
@@ -75,4 +77,12 @@ const configure = exports.configure = (src, dest, tasks) => {
   }
 
   task('build', series(...buildTasks))
+
+  return toWatch
+}
+
+exports.watch = (tasks) => {
+  for (const [assetTask, src] of Object.entries(tasks)) {
+    watch(src, parallel(assetTask))
+  }
 }
