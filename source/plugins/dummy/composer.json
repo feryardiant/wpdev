@@ -1,5 +1,5 @@
 {
-  "name": "local-plugin/sample",
+  "name": "local-plugin/dummy",
   "description": "Another Wordpress Plugin",
   "type": "wordpress-plugin",
   "license": "MIT",
