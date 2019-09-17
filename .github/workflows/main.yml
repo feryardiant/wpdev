@@ -23,12 +23,12 @@ jobs:
       uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
-        extension-csv: mbstring, xdebug
+        extension-csv: exif, gd, gettext, imagick, mbstring, xmlrpc
     - name: Install dependencies
       env:
         CI: 1
       run: |
-        composer install
+        composer require roots/wordpress ${{ matrix.wp-versions }}
         npm install
     - name: Check PHP Version
       run: php -v
