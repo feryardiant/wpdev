@@ -28,7 +28,7 @@ jobs:
       env:
         CI: 1
       run: |
-        composer require roots/wordpress ${{ matrix.wp-versions }}
+        composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
         npm install
     - name: Check PHP Version
       run: php -v
@@ -37,4 +37,4 @@ jobs:
     - name: Check Composer Version
       run: composer -V
     - name: Check WordPress Version
-      run: wp core version
+      run: vendor/bin/wp core version
