@@ -67,7 +67,11 @@ const configure = exports.configure = (src, dest, tasks) => {
   for (const [name, asset] of scandir(src, dest)) {
     Object.keys(asset).forEach(key => {
       const assetTask = `${name}:${key}`
-      task(assetTask, tasks[key](asset[key].src, asset[key].dest))
+
+      task(assetTask, (done) => {
+        return tasks[key](asset[key].src, asset[key].dest, done)
+      })
+
       assetTasks.push(assetTask)
       toWatch[assetTask] = asset[key].src
     })
