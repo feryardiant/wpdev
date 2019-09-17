@@ -23,6 +23,7 @@ const wpServer = exports.wpServer = async () => {
 
 const scandir = exports.scandir = (dir, dest) => {
   const readdirOpt = { withFileTypes: true }
+  const tmpDir = 'public/app'
   const paths = {
     img: 'images/**',
     css: 'scss/*.scss',
@@ -39,18 +40,23 @@ const scandir = exports.scandir = (dir, dest) => {
       build[source.name] = {
         pot: {
           src: path.join(dir, target, '**.php'),
-          dest: path.join(dest, target, 'languages', `${source.name}.pot`)
+          dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
         }
       }
 
       Object.keys(paths).forEach(asset => {
-        target = path.join(target, 'assets')
+        const buildTarget = path.join(target, 'assets')
 
         build[source.name][asset] = {
-          src: path.join(dir, target, paths[asset]),
-          dest: path.join(dest, target, asset)
+          src: path.join(dir, buildTarget, paths[asset]),
+          dest: path.join(tmpDir, buildTarget, asset)
         }
       })
+
+      build[source.name].zip = {
+        src: path.join(tmpDir, target, '*'),
+        dest: path.join(dest)
+      }
 
       return build
     }, {})
@@ -69,7 +75,7 @@ const configure = exports.configure = (src, dest, tasks) => {
       const assetTask = `${name}:${key}`
 
       task(assetTask, (done) => {
-        return tasks[key](asset[key].src, asset[key].dest, done)
+        return tasks[key](asset[key].src, asset[key].dest, name, done)
       })
 
       assetTasks.push(assetTask)

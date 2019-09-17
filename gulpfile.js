@@ -7,31 +7,37 @@ const path = require('path')
 
 const { configure, watch } = require('./build/util')
 
-const tasks = configure('source', 'public/app', {
-  pot (src, dest, done) {
+const tasks = configure('source', 'build', {
+  pot (src, dest, name, done) {
     console.log(src, dest)
     return done()
     // return gulp.src(src)
     // .pipe(dest)
   },
-  img (src, dest, done) {
+  img (src, dest, name, done) {
     console.log(src, dest)
     return done()
     // return gulp.src(src)
     // .pipe(dest)
   },
-  css (src, dest, done) {
+  css (src, dest, name, done) {
     console.log(src, dest)
     return done()
     // return gulp.src(src)
     // .pipe(dest)
   },
-  js (src, dest, done) {
+  js (src, dest, name, done) {
     console.log(src, dest)
     return done()
     // return gulp.src(src)
     //   .pipe(dest)
   },
+  zip (src, dest, name, done) {
+    console.log('compressing', src, `${dest}/${name}.zip`)
+    return done()
+    // return gulp.src(src)
+    //   .pipe(dest)
+  }
 })
 
 exports.default = () => {
