@@ -1,0 +1,33 @@
+name: Tests and Build
+
+on: [pull_request, push]
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#   push:
+#     branches:
+#       - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        wordpress-versions: ['5.0', '5.1', '5.2']
+        php-versions: ['7.1', '7.2', '7.3']
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup PHP
+      uses: shivammathur/setup-php@master
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extension-csv: mbstring, xdebug
+    - name: Check PHP Version
+      run: php -v
+    - name: Check Composer Version
+      run: composer -V
+    - name: Check WordPress Version
+      run: wp core version
+    - name: Check PHP Extensions
+      run: php -m
