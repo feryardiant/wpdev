@@ -49,21 +49,21 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:16
+#: footer.php:20
 msgid "https://wordpress.org/"
 msgstr ""
 
 #. translators: %s: CMS name, i.e. WordPress.
-#: footer.php:19
+#: footer.php:23
 msgid "Proudly powered by %s"
 msgstr ""
 
 #. translators: 1: Theme name, 2: Theme author.
-#: footer.php:25
+#: footer.php:29
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
-#: header.php:35, includes/theme.php:367
+#: header.php:29, includes/theme.php:390
 msgid "Primary Menu"
 msgstr ""
 
@@ -111,43 +111,43 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/theme.php:258
+#: includes/theme.php:280
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:263
+#: includes/theme.php:285
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:268
+#: includes/theme.php:290
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:273
+#: includes/theme.php:295
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:278
+#: includes/theme.php:300
 msgid "Huge"
 msgstr ""
 
-#: includes/theme.php:368
+#: includes/theme.php:391
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/theme.php:417
+#: includes/theme.php:440
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/theme.php:419
+#: includes/theme.php:442
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/theme.php:427
+#: includes/theme.php:450
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/theme.php:429
+#: includes/theme.php:452
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
@@ -156,7 +156,7 @@ msgid "Nothing Found"
 msgstr ""
 
 #. translators: 1: link to WP admin new post page.
-#: template-parts/content-none.php:25
+#: template-parts/content-none.php:26
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-none.php:46
+#: template-parts/content-none.php:42
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Search Results for: %s"
 msgstr ""
 
-#: template-parts/wrapper.php:29
+#: template-parts/wrapper.php:27
 msgid "Skip to content"
 msgstr ""
 
