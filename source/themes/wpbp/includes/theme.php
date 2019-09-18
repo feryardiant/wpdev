@@ -55,6 +55,7 @@ class Theme {
 		add_action( 'widgets_init', [ $this, 'widgets_init' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'wp_head', [ $this, 'head' ] );
+		add_action( 'login_head', [ $this, 'login_head' ] );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 
@@ -394,6 +395,23 @@ class Theme {
 	}
 
 	/**
+	 * Custom login hook.
+	 *
+	 * @return void
+	 */
+	public function login_head() {
+		$theme_version = $this->info( 'version' );
+		$login_style   = $this->css_login_style();
+
+		if ( $login_style ) {
+			wp_register_style( 'wpbp-custom-login', false, [], $theme_version );
+			wp_add_inline_style( 'wpbp-custom-login', $this->css_login_style() );
+
+			wp_enqueue_style( 'wpbp-custom-login' );
+		}
+	}
+
+	/**
 	 * Set up the WordPress core custom header feature.
 	 *
 	 * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -491,14 +509,6 @@ class Theme {
 
 		wp_enqueue_script( 'wpbp-script', $this->assets_url( 'navigation.js' ), [], $theme_version, true );
 
-		/**
-		 * Remove WP-Emoji.
-		 *
-		 * @see https://www.denisbouquet.com/remove-wordpress-emoji-code/
-		 */
-		// remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		// remove_action( 'wp_print_styles', 'print_emoji_styles' );
-
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
@@ -512,46 +522,62 @@ class Theme {
 	 * @return string
 	 */
 	protected function css_variables() {
-		$variables = [
-			'white-color'            => $this->get_mod( 'custom_white_color', '#fff' ),
-			'gray-color'             => $this->get_mod( 'custom_gray_color', '#6c757d' ),
-			'gray-dark-color'        => $this->get_mod( 'custom_gray_dark_color', '#343a40' ),
-			'primary-color'          => $this->get_mod( 'custom_primary_color', '#007bff' ),
-			'secondary-color'        => $this->get_mod( 'custom_secondary_color', '#6c757d' ),
-			'success-color'          => $this->get_mod( 'custom_success_color', '#28a745' ),
-			'info-color'             => $this->get_mod( 'custom_info_color', '#17a2b8' ),
-			'warning-color'          => $this->get_mod( 'custom_warning_color', '#ffc107' ),
-			'danger-color'           => $this->get_mod( 'custom_danger_color', '#dc3545' ),
-			'light-color'            => $this->get_mod( 'custom_light_color', '#f8f9fa' ),
-			'dark-color'             => $this->get_mod( 'custom_dark_color', '#343a40' ),
+		return Style::make( [
+			':root' => [
+				'--white-color'            => $this->get_mod( 'custom_white_color', '#fff' ),
+				'--gray-color'             => $this->get_mod( 'custom_gray_color', '#6c757d' ),
+				'--gray-dark-color'        => $this->get_mod( 'custom_gray_dark_color', '#343a40' ),
+				'--primary-color'          => $this->get_mod( 'custom_primary_color', '#007bff' ),
+				'--secondary-color'        => $this->get_mod( 'custom_secondary_color', '#6c757d' ),
+				'--success-color'          => $this->get_mod( 'custom_success_color', '#28a745' ),
+				'--info-color'             => $this->get_mod( 'custom_info_color', '#17a2b8' ),
+				'--warning-color'          => $this->get_mod( 'custom_warning_color', '#ffc107' ),
+				'--danger-color'           => $this->get_mod( 'custom_danger_color', '#dc3545' ),
+				'--light-color'            => $this->get_mod( 'custom_light_color', '#f8f9fa' ),
+				'--dark-color'             => $this->get_mod( 'custom_dark_color', '#343a40' ),
 
-			'breakpoint-xs'          => '0',
-			'breakpoint-sm'          => $this->get_mod( 'custom_breakpoint_sm', '576px' ),
-			'breakpoint-md'          => $this->get_mod( 'custom_breakpoint_md', '768px' ),
-			'breakpoint-lg'          => $this->get_mod( 'custom_breakpoint_lg', '992px' ),
-			'breakpoint-xl'          => $this->get_mod( 'custom_breakpoint_xl', '1200px' ),
+				'--breakpoint-xs'          => '0',
+				'--breakpoint-sm'          => $this->get_mod( 'custom_breakpoint_sm', '576px' ),
+				'--breakpoint-md'          => $this->get_mod( 'custom_breakpoint_md', '768px' ),
+				'--breakpoint-lg'          => $this->get_mod( 'custom_breakpoint_lg', '992px' ),
+				'--breakpoint-xl'          => $this->get_mod( 'custom_breakpoint_xl', '1200px' ),
 
-			'font-family-sans-serif' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-			'font-family-monospace'  => 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+				'--font-family-sans-serif' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+				'--font-family-monospace'  => 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 
-			'link-color'             => $this->get_mod( 'custom_link_color', '#007bff' ),
-			'link-hover-color'       => $this->get_mod( 'custom_link_hover_color', '#007bff' ),
-			'link-active-color'      => $this->get_mod( 'custom_link_active_color', '#007bff' ),
+				'--link-color'             => $this->get_mod( 'custom_link_color', '#007bff' ),
+				'--link-hover-color'       => $this->get_mod( 'custom_link_hover_color', '#007bff' ),
+				'--link-active-color'      => $this->get_mod( 'custom_link_active_color', '#007bff' ),
 
-			'background-color'       => get_theme_mod( 'background_color', '#fff' ),
-			'border-color'           => $this->get_mod( 'custom_border_color', '#007bff' ),
-			'text-color'             => $this->get_mod( 'custom_text_color', '#343a40' ),
-			'paragraph-color'        => $this->get_mod( 'custom_paragraph_color', '#343a40' ),
-			'heading-color'          => $this->get_mod( 'custom_heading_color', '#343a40' ),
-		];
+				'--background-color'       => get_theme_mod( 'background_color', '#fff' ),
+				'--border-color'           => $this->get_mod( 'custom_border_color', '#007bff' ),
+				'--text-color'             => $this->get_mod( 'custom_text_color', '#343a40' ),
+				'--paragraph-color'        => $this->get_mod( 'custom_paragraph_color', '#343a40' ),
+				'--heading-color'          => $this->get_mod( 'custom_heading_color', '#343a40' ),
+			],
+		] );
+	}
 
-		$styles = [];
+	/**
+	 * Custom login style.
+	 *
+	 * @return string
+	 */
+	public function css_login_style() {
+		$custom_logo_id  = get_theme_mod( 'custom_logo' );
+		$custom_logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
 
-		foreach ( $variables as $key => $value ) {
-			$styles[] = '--' . $key . ': ' . $value . ';' . PHP_EOL;
+		if ( ! $custom_logo_url ) {
+			return null;
 		}
 
-		return esc_html( ':root {' . PHP_EOL . implode( ' ', $styles ) . PHP_EOL . ' }' );
+		return Style::make( function ( Style $style ) use ( $custom_logo_url ) {
+			return [
+				'.login h1 a' => [
+					'background-image' => $style->url( $custom_logo_url ) . ' !important',
+				],
+			];
+		} );
 	}
 
 	/**
