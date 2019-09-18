@@ -59,8 +59,10 @@ final class Theme {
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 
-		$this->wrapper    = Wrapper::class;
-		$this->customizer = Integrations\Customizer::class;
+		$this->initialize( [
+			Wrapper::class,
+			Customizer::class,
+		] );
 
 		/**
 		 * Load Jetpack compatibility file.
@@ -647,6 +649,24 @@ final class Theme {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Class initializer.
+	 *
+	 * @param  array $classes
+	 * @return void
+	 */
+	private function initialize( array $classes ) {
+		foreach ( $classes as $name => $class ) {
+			if ( is_numeric( $name ) ) {
+				$name = strtolower(
+					str_replace( [ '\\', __NAMESPACE__ . '.' ], [ '.', '' ], $class )
+				);
+			}
+
+			$this->$name = $class;
+		}
 	}
 
 	/**

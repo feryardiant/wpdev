@@ -7,10 +7,9 @@
  * @since       0.1.0
  */
 
-namespace WPBP\Integrations;
+namespace WPBP;
 
 use WP_Customize_Color_Control;
-use WPBP\Theme;
 use WP_Customize_Manager;
 
 /**
