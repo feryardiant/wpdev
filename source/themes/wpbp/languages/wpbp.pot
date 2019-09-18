@@ -1,38 +1,19 @@
-# Copyright (C) 2019 Fery Wardiyanto
-# This file is distributed under the GNU General Public License v2 or later.
+# Copyright (C) 2019 wpbp v0.1.0
+# This file is distributed under the same license as the wpbp v0.1.0 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPBP Theme 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wpbp\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: wpbp v0.1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-18T05:00:44+07:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
-"X-Domain: wpbp\n"
-
-#. Theme Name of the theme
-msgid "WPBP Theme"
-msgstr ""
-
-#. Theme URI of the theme
-msgid "https://github.com/feryardiant/wordpress-boilerplate/"
-msgstr ""
-
-#. Description of the theme
-msgid "Custom WordPress Theme developed by Fery Wardiyanto"
-msgstr ""
-
-#. Author of the theme
-msgid "Fery Wardiyanto"
-msgstr ""
-
-#. Author URI of the theme
-msgid "https://github.com/feryardiant/"
-msgstr ""
+"Language-Team: Fery Wardiyanto <ferywardiyanto@gmail.com>\n"
+"Last-Translator: Fery Wardiyanto <ferywardiyanto@gmail.com>\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 404.php:19
 msgid "Oops! That page can&rsquo;t be found."
@@ -86,9 +67,123 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:50
-#: includes/theme.php:368
+#: header.php:50, includes/theme.php:368
 msgid "Primary Menu"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:24
+msgid "Search Results for: %s"
+msgstr ""
+
+#. translators: %s: post date.
+#: includes/template-tags.php:31
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#. translators: %s: post author.
+#: includes/template-tags.php:47
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/template-tags.php:64
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of categories.
+#: includes/template-tags.php:68
+msgid "Posted in %1$s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/template-tags.php:74
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of tags.
+#: includes/template-tags.php:78
+msgid "Tagged %1$s"
+msgstr ""
+
+#. translators: %s: post title
+#: includes/template-tags.php:90
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#. translators: %s: Name of current post. Only visible to screen readers
+#: includes/template-tags.php:107, template-parts/content-page.php:39
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: includes/theme.php:259
+msgid "Small"
+msgstr ""
+
+#: includes/theme.php:264
+msgid "Normal"
+msgstr ""
+
+#: includes/theme.php:269
+msgid "Medium"
+msgstr ""
+
+#: includes/theme.php:274
+msgid "Large"
+msgstr ""
+
+#: includes/theme.php:279
+msgid "Huge"
+msgstr ""
+
+#: includes/theme.php:369
+msgid "Footer Menu"
+msgstr ""
+
+#: includes/theme.php:418
+msgid "Main Sidebar"
+msgstr ""
+
+#: includes/theme.php:420
+msgid "Main sidebar that placed on the side of your page."
+msgstr ""
+
+#: includes/theme.php:428
+msgid "Footer Widgets"
+msgstr ""
+
+#: includes/theme.php:430
+msgid "Footer widget that placed on the bottom of your page."
+msgstr ""
+
+#: template-parts/content-none.php:16
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:26
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:39
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:46
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:26, template-parts/content.php:45
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:34
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
 #: includes/integrations/customizer.php:97
@@ -133,120 +228,4 @@ msgstr ""
 
 #: includes/integrations/customizer.php:138
 msgid "Heading Color"
-msgstr ""
-
-#. translators: %s: post date.
-#: includes/template-tags.php:31
-msgctxt "post date"
-msgid "Posted on %s"
-msgstr ""
-
-#. translators: %s: post author.
-#: includes/template-tags.php:47
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/template-tags.php:64
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of categories.
-#: includes/template-tags.php:68
-msgid "Posted in %1$s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/template-tags.php:74
-msgctxt "list item separator"
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of tags.
-#: includes/template-tags.php:78
-msgid "Tagged %1$s"
-msgstr ""
-
-#. translators: %s: post title
-#: includes/template-tags.php:90
-msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
-msgstr ""
-
-#. translators: %s: Name of current post. Only visible to screen readers
-#: includes/template-tags.php:107
-#: template-parts/content-page.php:39
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
-
-#: includes/theme.php:259
-msgid "Small"
-msgstr ""
-
-#: includes/theme.php:264
-msgid "Normal"
-msgstr ""
-
-#: includes/theme.php:269
-msgid "Medium"
-msgstr ""
-
-#: includes/theme.php:274
-msgid "Large"
-msgstr ""
-
-#: includes/theme.php:279
-msgid "Huge"
-msgstr ""
-
-#: includes/theme.php:369
-msgid "Footer Menu"
-msgstr ""
-
-#: includes/theme.php:418
-msgid "Main Sidebar"
-msgstr ""
-
-#: includes/theme.php:420
-msgid "Main sidebar that placed on the side of your page."
-msgstr ""
-
-#: includes/theme.php:428
-msgid "Footer Widgets"
-msgstr ""
-
-#: includes/theme.php:430
-msgid "Footer widget that placed on the bottom of your page."
-msgstr ""
-
-#. translators: %s: search query.
-#: search.php:24
-msgid "Search Results for: %s"
-msgstr ""
-
-#: template-parts/content-none.php:16
-msgid "Nothing Found"
-msgstr ""
-
-#. translators: 1: link to WP admin new post page.
-#: template-parts/content-none.php:26
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: template-parts/content-none.php:39
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr ""
-
-#: template-parts/content-none.php:46
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr ""
-
-#: template-parts/content-page.php:26
-#: template-parts/content.php:45
-msgid "Pages:"
-msgstr ""
-
-#. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content.php:34
-msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
