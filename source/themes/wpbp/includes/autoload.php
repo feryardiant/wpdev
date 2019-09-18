@@ -24,3 +24,18 @@ spl_autoload_register( function ( $class_name ) {
 		require_once $path;
 	}
 } );
+
+$wpbp_files = new \RecursiveIteratorIterator(
+	new \RecursiveDirectoryIterator( __DIR__ )
+);
+
+/**
+ * @var \SplFileInfo $wpbp_file
+ */
+foreach ( $wpbp_files as $wpbp_file ) {
+	if ( substr( $wpbp_file->getFilename(), -14 ) === '-functions.php' ) {
+		require_once $wpbp_file->getPathname();
+	}
+}
+
+unset( $wpbp_files, $wpbp_file );
