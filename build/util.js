@@ -6,6 +6,8 @@ const path = require('path')
 
 const { task, parallel, series, watch } = require('gulp')
 
+const pkgJson = require('./../package.json')
+
 require('dotenv').config()
 
 function serverLog (type) {
@@ -39,7 +41,7 @@ const scandir = exports.scandir = (dir, dest) => {
       let target = path.join(sub.name, source.name)
       build[source.name] = {
         pot: {
-          src: path.join(dir, target, '**.php'),
+          src: path.join(dir, target, '**/*.php'),
           dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
         }
       }
@@ -54,7 +56,7 @@ const scandir = exports.scandir = (dir, dest) => {
       })
 
       build[source.name].zip = {
-        src: path.join(tmpDir, target, '*'),
+        src: path.join(tmpDir, target, '**'),
         dest: path.join(dest)
       }
 
@@ -69,13 +71,20 @@ const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const assetTasks = []
   const toWatch = {}
+  const options = {
+    version: pkgJson.version,
+    author: pkgJson.author
+  }
 
   for (const [name, asset] of scandir(src, dest)) {
     Object.keys(asset).forEach(key => {
       const assetTask = `${name}:${key}`
 
+      options.name = name
+      options.type = key
+
       task(assetTask, (done) => {
-        return tasks[key](asset[key].src, asset[key].dest, name, done)
+        return tasks[key](asset[key].src, asset[key].dest, options, done)
       })
 
       assetTasks.push(assetTask)
