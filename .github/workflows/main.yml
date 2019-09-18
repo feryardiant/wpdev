@@ -27,9 +27,6 @@ jobs:
     - name: Install dependencies
       env:
         WP_ENV: development
-        WP_HOME: http://localhost
-        WP_SITEURL: ${{ WP_HOME }}
-        WP_DEFAULT_THEME: wpbp
         AUTH_KEY: 'E_T!Eph},?^d[TR@ E/0vr|s o/vsrONGY!UldxBuN5$J3Z([y=J7JXnWs,2W~?~'
         SECURE_AUTH_KEY: '&Wse_:+6g;?1i20v3NR*<YhfE|t(Ba^Z.7M&@wxRl<q~C1dKQpz)<1xe0kN1tFNl'
         LOGGED_IN_KEY: 'emvX9-(Y3+|$eSR}9>3nw|sDeh={+Fo+s.|Yp3}$5aB$8-HzT-vPzwcvIq_!EztR'
