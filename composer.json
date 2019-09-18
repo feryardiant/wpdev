@@ -34,9 +34,6 @@
     "post-root-package-install": [
       "php -r \"copy('.env.example', '.env');\""
     ],
-    "pre-install-cmd": [
-      "[ ! -z $CI ] && echo 'Run on CI: $CI'"
-    ],
     "copy:htaccess": [
       "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
     ],
@@ -51,19 +48,16 @@
       "phpcs --standard=source/plugins/ruleset.xml source/plugins"
     ],
     "wp:install": [
-      "wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
-      "wp option update permalink_structure '/%postname%/'"
+      "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
+      "vendor/bin/wp option update permalink_structure '/%postname%/'"
     ],
     "wp:reset": [
-      "wp db reset --yes",
+      "vendor/bin/wp db reset --yes",
       "@wp:install"
     ],
     "wp:make-pot": [
-      "wp i18n make-pot source/plugins/dummy source/plugins/dummy/languages/dummy.pot --slug=dummy --domain=dummy --skip-js",
-      "wp i18n make-pot source/themes/wpbp source/themes/wpbp/languages/wpbp.pot --slug=wpbp --domain=wpbp --skip-js"
-    ],
-    "symlink:false": [
-      "sed -i -E 's~\"symlink\": true~\"symlink\": false~' composer.json"
+      "vendor/bin/wp i18n make-pot source/plugins/dummy source/plugins/dummy/languages/dummy.pot --slug=dummy --domain=dummy --skip-js",
+      "vendor/bin/wp i18n make-pot source/themes/wpbp source/themes/wpbp/languages/wpbp.pot --slug=wpbp --domain=wpbp --skip-js"
     ],
     "test": [
       "phpcs"
