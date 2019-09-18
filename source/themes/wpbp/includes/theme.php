@@ -12,7 +12,10 @@ namespace WPBP;
 /**
  * Theme Setup Class.
  *
- * @subpackage  Theme Setup
+ * @subpackage    Theme Setup
+ * @property-read Wrapper $wrapper
+ * @property-read Integrations\Customizer $customizer
+ * @property-read Integrations\JetPack $jetpack
  */
 class Theme {
 	/**
@@ -34,18 +37,11 @@ class Theme {
 	private static $cached;
 
 	/**
-	 * Customizer object.
+	 * Theme instances container.
 	 *
-	 * @var Integration\Customizer
+	 * @var array
 	 */
-	protected $customizer;
-
-	/**
-	 * Customizer object.
-	 *
-	 * @var Integration\JetPack
-	 */
-	protected $jetpack;
+	protected $instances = [];
 
 	/**
 	 * Initialize class.
@@ -62,13 +58,14 @@ class Theme {
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 
-		$this->customizer = new Integrations\Customizer( $this );
+		$this->wrapper    = Wrapper::class;
+		$this->customizer = Integrations\Customizer::class;
 
 		/**
 		 * Load Jetpack compatibility file.
 		 */
 		if ( defined( 'JETPACK__VERSION' ) ) {
-			$this->jetpack = new Integrations\JetPack();
+			$this->jetpack = Integrations\JetPack::class;
 		}
 	}
 
@@ -119,6 +116,28 @@ class Theme {
 		}
 
 		return $theme_info[ $name ] ?? null;
+	}
+
+	/**
+	 * Get main template.
+	 *
+	 * @see Wrapper::get_main()
+	 *
+	 * @return string
+	 */
+	public function get_main_template() {
+		return $this->wrapper->get_main();
+	}
+
+	/**
+	 * Get base template.
+	 *
+	 * @see Wrapper::get_base()
+	 *
+	 * @return string
+	 */
+	public function get_base_template() {
+		return $this->wrapper->get_base();
 	}
 
 	/**
@@ -254,33 +273,36 @@ class Theme {
 		/**
 		 * Add support for editor font sizes.
 		 */
-		add_theme_support( 'editor-font-sizes', [
-			[
-				'name' => __( 'Small', 'wpbp' ),
-				'size' => 12,
-				'slug' => 'small',
-			],
-			[
-				'name' => __( 'Normal', 'wpbp' ),
-				'size' => 14,
-				'slug' => 'normal',
-			],
-			[
-				'name' => __( 'Medium', 'wpbp' ),
-				'size' => 20,
-				'slug' => 'medium',
-			],
-			[
-				'name' => __( 'Large', 'wpbp' ),
-				'size' => 26,
-				'slug' => 'large',
-			],
-			[
-				'name' => __( 'Huge', 'wpbp' ),
-				'size' => 32,
-				'slug' => 'huge',
-			],
-		] );
+		add_theme_support(
+			'editor-font-sizes',
+			apply_filters( 'wpbp_editor_font_sizes_args', [
+				[
+					'name' => __( 'Small', 'wpbp' ),
+					'size' => 12,
+					'slug' => 'small',
+				],
+				[
+					'name' => __( 'Normal', 'wpbp' ),
+					'size' => 14,
+					'slug' => 'normal',
+				],
+				[
+					'name' => __( 'Medium', 'wpbp' ),
+					'size' => 20,
+					'slug' => 'medium',
+				],
+				[
+					'name' => __( 'Large', 'wpbp' ),
+					'size' => 26,
+					'slug' => 'large',
+				],
+				[
+					'name' => __( 'Huge', 'wpbp' ),
+					'size' => 32,
+					'slug' => 'huge',
+				],
+			] )
+		);
 
 		/**
 		 * Add support for responsive embedded content.
@@ -436,6 +458,20 @@ class Theme {
 	}
 
 	/**
+	 * Get dynamyc sidebar.
+	 *
+	 * @param  int|string $index
+	 * @return void
+	 */
+	public function get_active_widgets( $index ) {
+		if ( ! is_active_sidebar( $index ) ) {
+			return;
+		}
+
+		dynamic_sidebar( $index );
+	}
+
+	/**
 	 * Enqueue scripts and styles
 	 *
 	 * @internal
@@ -454,6 +490,14 @@ class Theme {
 		wp_style_add_data( 'wpbp-style', 'rtl', 'replace' );
 
 		wp_enqueue_script( 'wpbp-script', $this->assets_url( 'navigation.js' ), [], $theme_version, true );
+
+		/**
+		 * Remove WP-Emoji.
+		 *
+		 * @see https://www.denisbouquet.com/remove-wordpress-emoji-code/
+		 */
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -577,5 +621,44 @@ class Theme {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Setup class instances.
+	 *
+	 * @param  string          $name
+	 * @param  string|\Closure $instance
+	 * @throws \InvalidArgumentException If argument invalid.
+	 */
+	public function __set( string $name, $instance ) {
+		if ( array_key_exists( $name, $this->instances ) ) {
+			return;
+		}
+
+		if ( $instance instanceof \Closure ) {
+			$instance = $instance( $this );
+		}
+
+		if ( is_string( $instance ) && class_exists( $instance ) ) {
+			$instance = new $instance( $this );
+		} else {
+			throw new \InvalidArgumentException( 'Setup instance error.' );
+		}
+
+		$this->instances[ $name ] = $instance;
+	}
+
+	/**
+	 * Get class instance by $name.
+	 *
+	 * @param  string $name
+	 * @return mixed
+	 */
+	public function __get( string $name ) {
+		if ( ! array_key_exists( $name, $this->instances ) ) {
+			return null;
+		}
+
+		return $this->instances[ $name ];
 	}
 }
