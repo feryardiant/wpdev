@@ -17,7 +17,7 @@ namespace WPBP;
  * @property-read Integrations\Customizer $customizer
  * @property-read Integrations\JetPack $jetpack
  */
-class Theme {
+final class Theme {
 	/**
 	 * Transient Names.
 	 *
@@ -41,7 +41,7 @@ class Theme {
 	 *
 	 * @var array
 	 */
-	protected $instances = [];
+	private $instances = [];
 
 	/**
 	 * Initialize class.
