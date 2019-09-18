@@ -22,4 +22,4 @@ Config::define('DISALLOW_FILE_MODS', false);
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
 
 /** @link https://jetpack.com/support/development-mode/  */
-Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: false);
+Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: true);
