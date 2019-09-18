@@ -36,6 +36,7 @@ jobs:
         LOGGED_IN_SALT: 'XRV|G 4vbFVv,m),uw|+O@C0:/3#WAaLsxN )}/0}@7*lXuhJ1XdD4H4 M)m4N{B'
         NONCE_SALT: 'r#]|3-gQfc`H>j,DWWzF4[yMeuy0t[E~6^Nezjt-$5KG6b3369M/wu1`U6k/O.DP'
       run: |
-        'sed -i -E "s~symlink: true~symlink: false~"" composer.json'
-        'composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest'
-        'echo WordPress version $(vendor/bin/wp core version)'
+        # 'cp .env.example .env'
+        # 'sed -i -E "s~symlink: true~symlink: false~"" composer.json'
+        composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
+        echo WordPress version $(vendor/bin/wp core version)
