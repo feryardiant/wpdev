@@ -1,7 +1,6 @@
 {
   "name": "wpbp",
-  "version": "0.0.0",
-  "description": "[Bedrock](https://roots.io/bedrock/) is a modern WordPress stack that helps you get started with the best development tools and project structure.",
+  "version": "0.1.0",
   "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -10,13 +9,6 @@
     "wordpress-theme",
     "wordpress-boilerplate"
   ],
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -25,7 +17,8 @@
     "del": "^5.1.0",
     "dotenv": "^8.1.0",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0"
+    "gulp-babel": "^8.0.0",
+    "gulp-wp-pot": "^2.3.5"
   },
   "babel": {
     "presets": [
