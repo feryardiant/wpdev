@@ -11,12 +11,15 @@ on: [push]
 
 jobs:
   run:
-    name: Runs on PHP ${{ matrix.php-versions }} & WP ${{ matrix.wp-versions }}
+    name: Runs on WordPress ${{ matrix.wp-versions }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        php-versions: ['7.1']
         wp-versions: ['5.0', '5.1', '5.2']
-        php-versions: ['7.1', '7.2', '7.3']
+      # exclude:
+      #   - php-versions: 7.2
+      #     wp-versions: 5.0
     steps:
     - uses: actions/checkout@master
     - name: Setup PHP
