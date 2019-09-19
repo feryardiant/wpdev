@@ -10,6 +10,8 @@ const pkgJson = require('./../package.json')
 
 require('dotenv').config()
 
+const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
+
 if (process.env.WP_ENV && !process.env.NODE_ENV) {
   process.env.NODE_ENV = process.env.WP_ENV
 }
@@ -27,14 +29,34 @@ const wpServer = exports.wpServer = async () => {
   console.error(stderr)
 }
 
-const scandir = exports.scandir = (dir, dest) => {
-  const readdirOpt = { withFileTypes: true }
-  const tmpDir = 'public/app'
-  const paths = {
+const globalConfig = {
+  version: pkgJson.version,
+  author: pkgJson.author,
+
+  paths: {
     img: 'img/**',
     css: 'scss/**/*.scss',
     js: 'js/**/*.js',
-  }
+  },
+
+  pot: {
+    wpPot: {}
+  },
+  img: {
+    imagemin: {}
+  },
+  css: {
+    sass: {
+      includePaths: ['node_modules']
+    }
+  },
+  js: {}
+}
+
+const scandir = exports.scandir = (dir, dest) => {
+  const readdirOpt = { withFileTypes: true }
+  const tmpDir = 'public/app'
+  const paths = globalConfig.paths
 
   const sourceDir = readdirSync(dir, readdirOpt).reduce((build, sub) => {
     if (!sub.isDirectory()) return build
@@ -83,20 +105,34 @@ const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const assetTasks = []
   const toWatch = {}
-  const options = {
-    version: pkgJson.version,
-    author: pkgJson.author
-  }
 
   for (const [name, asset] of scandir(src, dest)) {
     Object.keys(asset).forEach(key => {
       const assetTask = `${name}:${key}`
 
-      options.name = name
-      options.type = key
+      const config = {
+        name: name,
+        type: '',
+        version: globalConfig.version,
+        author: globalConfig.author
+      }
+
+      if (['js', 'css'].includes(key)) {
+        config.rename = {
+          suffix: '.min'
+        }
+      }
+
+      if (globalConfig.hasOwnProperty(key)) {
+        Object.assign(config, globalConfig[key])
+      }
 
       task(assetTask, (done) => {
-        return tasks[key](asset[key].src, asset[key].dest, options, done)
+        return tasks[key]({
+          src: asset[key].src,
+          dest: asset[key].dest,
+          config: config
+        }, done)
       })
 
       assetTasks.push(assetTask)
