@@ -5,6 +5,7 @@ const sass = require('gulp-sass')
 const postcss = require('gulp-postcss')
 const wpPot = require('gulp-wp-pot')
 const rename = require('gulp-rename')
+const imagemin = require('gulp-imagemin')
 
 const del = require('del')
 const path = require('path')
@@ -61,11 +62,10 @@ const tasks = configure('source', 'build', {
     // return gulp.src(src)
     //   .pipe(gulp.dest(dest))
   },
-  img (src, dest, opt, done) {
-    console.log(src, dest)
-    return done()
-    // return gulp.src(src)
-    //   .pipe(gulp.dest(dest))
+  img (src, dest) {
+    return gulp.src(src)
+      .pipe(imagemin())
+      .pipe(gulp.dest(dest))
   },
   zip (src, dest, opt, done) {
     console.log('compressing', src, `${dest}/${opt.name}.zip`)
