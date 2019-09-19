@@ -10,6 +10,10 @@ const pkgJson = require('./../package.json')
 
 require('dotenv').config()
 
+if (process.env.WP_ENV && !process.env.NODE_ENV) {
+  process.env.NODE_ENV = process.env.WP_ENV
+}
+
 function serverLog (type) {
   return function (log) {
     console[type].apply(null, [log.toString().trim()])

@@ -9,16 +9,31 @@
     "wordpress-theme",
     "wordpress-boilerplate"
   ],
-  "dependencies": {},
+  "scripts": {
+    "lint:css": "stylelint"
+  },
+  "dependencies": {
+    "bulma": "^0.7.5"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
+    "autoprefixer": "^9.6.1",
     "cross-env": "^5.2.1",
+    "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "dotenv": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "gulp-wp-pot": "^2.3.5"
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-wp-pot": "^2.3.5",
+    "postcss-reporter": "^6.0.1",
+    "sass": "^1.22.12",
+    "stylelint": "^10.1.0",
+    "stylelint-config-standard-scss": "^1.1.0",
+    "stylelint-scss": "^3.11.0"
   },
   "babel": {
     "presets": [
@@ -54,7 +69,7 @@
     "/**.old"
   ],
   "stylelint": {
-    "extends": "stylelint-config-wordpress/scss"
+    "extends": "stylelint-config-standard-scss"
   },
   "browserslist": [
     "> 1%",
