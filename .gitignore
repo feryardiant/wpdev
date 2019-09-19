@@ -28,6 +28,7 @@ public/.htaccess
 # Development
 # --------------------------
 /vendor
+/sources/**.css
 .vagrant
 .php-version
 node_modules
