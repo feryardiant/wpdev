@@ -32,8 +32,6 @@ const tasks = configure('source', 'build', {
       .pipe(gulp.dest(dest))
   },
   css (src, dest) {
-    sass.compiler = require('sass')
-
     const processors = [
       // stylelint,
       // reporter({ clearReportedMessages: true }),
