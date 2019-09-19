@@ -60,6 +60,8 @@ $_site_url    = $_http_schema."://".$_http_name;
 Config::define('WP_HOME',     env('WP_HOME') ?: $_site_url);
 Config::define('WP_SITEURL',  env('WP_SITEURL') ?: $_site_url);
 
+unset($_http_schema, $_http_name, $_heroku_appname, $_site_url);
+
 /**
  * Custom Content Directory
  */
@@ -94,6 +96,8 @@ if (env('DATABASE_URL')) {
     Config::define('DB_USER',      $dsn->user);
     Config::define('DB_PASSWORD',  $dsn->pass ?? null);
     Config::define('DB_HOST',      isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
+
+    unset($dsn);
 }
 
 /**
@@ -144,3 +148,5 @@ Config::apply();
 if (!defined('ABSPATH')) {
     define('ABSPATH', $webroot_dir . '/wp/');
 }
+
+unset($multisite, $env_config, $webroot_dir);
