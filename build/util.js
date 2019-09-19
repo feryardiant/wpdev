@@ -31,9 +31,9 @@ const scandir = exports.scandir = (dir, dest) => {
   const readdirOpt = { withFileTypes: true }
   const tmpDir = 'public/app'
   const paths = {
-    img: 'images/**',
-    css: 'scss/*.scss',
-    js: 'js/*.js',
+    img: 'img/**',
+    css: 'scss/**/*.scss',
+    js: 'js/**/*.js',
   }
 
   const sourceDir = readdirSync(dir, readdirOpt).reduce((build, sub) => {
@@ -45,17 +45,25 @@ const scandir = exports.scandir = (dir, dest) => {
       let target = path.join(sub.name, source.name)
       build[source.name] = {
         pot: {
-          src: path.join(dir, target, '**/*.php'),
+          src: path.join(dir, target, '**', '*.php'),
           dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
         }
       }
 
       Object.keys(paths).forEach(asset => {
-        const buildTarget = path.join(target, 'assets')
+        const assetPath = path.join(target, 'assets')
+        const srcPath = [
+          path.join(dir, assetPath, paths[asset])
+        ]
+
+        if (['js', 'css'].includes(asset)) {
+          const excludes = path.join(dir, assetPath, paths[asset].replace(/\./, '.min.'))
+          srcPath.push(`!${excludes}`)
+        }
 
         build[source.name][asset] = {
-          src: path.join(dir, buildTarget, paths[asset]),
-          dest: path.join(tmpDir, buildTarget, asset)
+          src: srcPath,
+          dest: path.join(tmpDir, assetPath, asset)
         }
       })
 
@@ -106,6 +114,6 @@ const configure = exports.configure = (src, dest, tasks) => {
 
 exports.watch = (tasks) => {
   for (const [assetTask, src] of Object.entries(tasks)) {
-    watch(src, parallel(assetTask))
+    watch(src, series(assetTask))
   }
 }
