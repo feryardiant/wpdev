@@ -177,7 +177,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_parent_directory_uri( string $suffix ) {
-		return $this->info( 'parent_directory_uri' ) . $suffix;
+		return trailingslashit( get_template_directory_uri() ) . $suffix;
 	}
 
 	/**
@@ -188,7 +188,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_child_directory_uri( string $suffix ) {
-		return $this->info( 'child_directory_uri' ) . $suffix;
+		return trailingslashit( get_stylesheet_directory_uri() ) . $suffix;
 	}
 
 	/**
