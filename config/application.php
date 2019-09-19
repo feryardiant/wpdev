@@ -50,6 +50,11 @@ if (array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER["HTTP_X_FOR
 
 $_http_schema = array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
 $_http_name   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+if ($_heroku_appname = env('HEROKU_APP_NAME')) {
+    $_http_name = $_heroku_appname.'.herokuapp.com';
+}
+
 $_site_url    = $_http_schema."://".$_http_name;
 
 Config::define('WP_HOME',     env('WP_HOME') ?: $_site_url);
