@@ -1,0 +1,231 @@
+# Copyright (C) 2019 wpbp v0.1.0
+# This file is distributed under the same license as the wpbp v0.1.0 package.
+msgid ""
+msgstr ""
+"Project-Id-Version: wpbp v0.1.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Fery Wardiyanto <ferywardiyanto@gmail.com>\n"
+"Last-Translator: Fery Wardiyanto <ferywardiyanto@gmail.com>\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:19
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
+#: 404.php:28
+msgid "Most Used Categories"
+msgstr ""
+
+#. translators: %1$s: smiley
+#: 404.php:44
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:37
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:43
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:20
+msgid "https://wordpress.org/"
+msgstr ""
+
+#. translators: %s: CMS name, i.e. WordPress.
+#: footer.php:23
+msgid "Proudly powered by %s"
+msgstr ""
+
+#. translators: 1: Theme name, 2: Theme author.
+#: footer.php:29
+msgid "Theme: %1$s by %2$s."
+msgstr ""
+
+#: header.php:29, includes/theme.php:391
+msgid "Primary Menu"
+msgstr ""
+
+#. translators: %s: post date.
+#: includes/template-tags.php:31
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#. translators: %s: post author.
+#: includes/template-tags.php:47
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/template-tags.php:64
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of categories.
+#: includes/template-tags.php:68
+msgid "Posted in %1$s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/template-tags.php:74
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of tags.
+#: includes/template-tags.php:78
+msgid "Tagged %1$s"
+msgstr ""
+
+#. translators: %s: post title
+#: includes/template-tags.php:90
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#. translators: %s: Name of current post. Only visible to screen readers
+#: includes/template-tags.php:107, template-parts/content-page.php:38
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: includes/theme.php:281
+msgid "Small"
+msgstr ""
+
+#: includes/theme.php:286
+msgid "Normal"
+msgstr ""
+
+#: includes/theme.php:291
+msgid "Medium"
+msgstr ""
+
+#: includes/theme.php:296
+msgid "Large"
+msgstr ""
+
+#: includes/theme.php:301
+msgid "Huge"
+msgstr ""
+
+#: includes/theme.php:392
+msgid "Footer Menu"
+msgstr ""
+
+#: includes/theme.php:458
+msgid "Main Sidebar"
+msgstr ""
+
+#: includes/theme.php:460
+msgid "Main sidebar that placed on the side of your page."
+msgstr ""
+
+#: includes/theme.php:468
+msgid "Footer Widgets"
+msgstr ""
+
+#: includes/theme.php:470
+msgid "Footer widget that placed on the bottom of your page."
+msgstr ""
+
+#: template-parts/content-none.php:15
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:26
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:38
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:42
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:25, template-parts/content.php:45
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:34
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#. translators: %s: search query.
+#: template-parts/general.php:21
+msgid "Search Results for: %s"
+msgstr ""
+
+#: template-parts/wrapper.php:27
+msgid "Skip to content"
+msgstr ""
+
+#: includes/integrations/customizer.php:97
+msgid "Choose the option that you want."
+msgstr ""
+
+#: includes/integrations/customizer.php:100
+msgid "Logo Image Only"
+msgstr ""
+
+#: includes/integrations/customizer.php:101
+msgid "Logo Text Only"
+msgstr ""
+
+#: includes/integrations/customizer.php:102
+msgid "Show Both"
+msgstr ""
+
+#: includes/integrations/customizer.php:103
+msgid "Disable"
+msgstr ""
+
+#: includes/integrations/customizer.php:118
+msgid "Link Color"
+msgstr ""
+
+#: includes/integrations/customizer.php:122
+msgid "Link Active Color"
+msgstr ""
+
+#: includes/integrations/customizer.php:126
+msgid "Link Hover Color"
+msgstr ""
+
+#: includes/integrations/customizer.php:130
+msgid "Text Color"
+msgstr ""
+
+#: includes/integrations/customizer.php:134
+msgid "Paragraph Color"
+msgstr ""
+
+#: includes/integrations/customizer.php:138
+msgid "Heading Color"
+msgstr ""

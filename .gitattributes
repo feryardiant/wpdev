@@ -6,6 +6,7 @@
 *.js    linguist-vendored
 
 .github          export-ignore
+docs             export-ignore
 CONTRIBUTING.md  export-ignore
 CHANGELOG.md     export-ignore
 

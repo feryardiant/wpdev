@@ -1,0 +1,35 @@
+# Copyright (C) 2019 Fery Wardiyanto
+# This file is distributed under the same license as the Dummy plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Dummy 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/dummy\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-09-18T05:00:43+07:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.3.0\n"
+"X-Domain: dummy\n"
+
+#. Plugin Name of the plugin
+msgid "Dummy"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/feryardiant/wordpress-boilerplate"
+msgstr ""
+
+#. Description of the plugin
+msgid "Awesome Dummy Plugin"
+msgstr ""
+
+#. Author of the plugin
+msgid "Fery Wardiyanto"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/feryardiant/"
+msgstr ""

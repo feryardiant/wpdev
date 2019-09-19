@@ -1,7 +1,7 @@
 # editorconfig.org
 root = true
 
-[{*,!node_modules/**,!vendor/**}]
+[**]
 end_of_line = lf
 indent_style = space
 charset = utf-8
@@ -13,5 +13,11 @@ indent_size = 4
 [*.{js,yml,json,scss}]
 indent_size = 2
 
+[source/**.php]
+indent_style = tab
+
 [*.md]
 trim_trailing_whitespace = false
+
+[{*.txt,wp-config-sample.php}]
+end_of_line = crlf

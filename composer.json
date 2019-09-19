@@ -3,16 +3,29 @@
   "type": "project",
   "license": "MIT",
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
-  "homepage": "https://roots.io/bedrock/",
+  "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
   "authors": [
     {
       "name": "Fery Wardiyanto",
       "email": "ferywardiyanto@gmail.com",
-      "homepage": "https://github.com/feryardiant"
+      "homepage": "https://github.com/feryardiant/",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Roots Team",
+      "email": "team@roots.io",
+      "homepage": "https://roots.io/bedrock/",
+      "role": "Author"
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config", "boilerplate"
+    "bedrock",
+    "composer",
+    "roots",
+    "wordpress",
+    "wp",
+    "wp-config",
+    "boilerplate"
   ],
   "support": {
     "issues": "https://github.com/feryardiant/wordpress-boilerplate/issues"
@@ -24,19 +37,62 @@
     "copy:htaccess": [
       "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
     ],
+    "lint": [
+      "@lint:themes",
+      "@lint:plugins"
+    ],
+    "lint:themes": [
+      "phpcs --standard=source/themes/ruleset.xml source/themes"
+    ],
+    "lint:plugins": [
+      "phpcs --standard=source/plugins/ruleset.xml source/plugins"
+    ],
+    "wp:install": [
+      "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
+      "vendor/bin/wp option update permalink_structure '/%postname%/'"
+    ],
+    "wp:reset": [
+      "vendor/bin/wp db reset --yes",
+      "@wp:install"
+    ],
+    "wp:make-pot": [
+      "vendor/bin/wp i18n make-pot source/plugins/dummy source/plugins/dummy/languages/dummy.pot --slug=dummy --domain=dummy --skip-js",
+      "vendor/bin/wp i18n make-pot source/themes/wpbp source/themes/wpbp/languages/wpbp.pot --slug=wpbp --domain=wpbp --skip-js"
+    ],
     "test": [
       "phpcs"
     ]
   },
-  "repositories": [
-    {
+  "repositories": {
+    "wpackagist": {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    "wpbp_theme": {
+      "type": "path",
+      "url": "source/themes/wpbp",
+      "options": {
+        "symlink": false
+      }
+    },
+    "dummy_plugin": {
+      "type": "path",
+      "url": "source/plugins/dummy",
+      "options": {
+        "symlink": false
+      }
     }
-  ],
+  },
   "require": {
     "php": ">=7.1",
+    "ext-exif": "*",
+    "ext-gd": "*",
+    "ext-gettext": "*",
+    "ext-imagick": "*",
+    "ext-mbstring": "*",
+    "ext-xmlrpc": "*",
     "composer/installers": "^1.7",
+    "local-theme/wpbp": "*",
     "oscarotero/env": "^1.2",
     "roots/wordpress": "^5.2",
     "roots/wp-config": "^1.0",
@@ -44,26 +100,41 @@
     "vlucas/phpdotenv": "^3.4",
     "wp-cli/core-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
+    "wp-cli/maintenance-mode-command": "^2.0",
     "wp-cli/wp-cli": "^2.3",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.6.4"
   },
   "require-dev": {
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
     "roave/security-advisories": "dev-master",
     "roots/multisite-url-fixer": "^1.1",
-    "squizlabs/php_codesniffer": "^3.4.2",
-    "wp-cli/db-command": "^2.0"
+    "squizlabs/php_codesniffer": "^3.4",
+    "wp-cli/db-command": "^2.0",
+    "wp-cli/i18n-command": "^2.2",
+    "wp-cli/scaffold-command": "^2.0",
+    "wp-cli/server-command": "^2.0",
+    "wp-coding-standards/wpcs": "^2.1",
+    "wpackagist-plugin/debug-bar": "^1.0",
+    "wpackagist-plugin/theme-check": "20190801.1"
   },
   "extra": {
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
+        "wpackagist-plugin/debug-bar",
         "wpackagist-plugin/regenerate-thumbnails",
+        "wpackagist-plugin/theme-check",
         "wpackagist-plugin/wordpress-importer",
         "type:wordpress-muplugin"
       ],
-      "public/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "public/app/themes/{$name}/": ["type:wordpress-theme"]
+      "public/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "public/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "wordpress-install-dir": "public/wp"
   },
