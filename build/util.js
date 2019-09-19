@@ -42,15 +42,30 @@ const globalConfig = {
   pot: {
     wpPot: {}
   },
+
   img: {
     imagemin: {}
   },
+
   css: {
     sass: {
       includePaths: ['node_modules']
     }
   },
-  js: {}
+
+  js: {
+    uglify: {},
+    babel: {
+      presets: [
+        [
+          "@babel/preset-env",
+          {
+            modules: false
+          }
+        ]
+      ]
+    }
+  }
 }
 
 const scandir = exports.scandir = (dir, dest) => {

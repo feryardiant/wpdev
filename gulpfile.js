@@ -58,10 +58,6 @@ const tasks = configure('source', 'build', {
       autoprefixer(),
     ]
 
-    config.sass = {
-      includePaths: ['node_modules']
-    }
-
     if (isProduction) {
       config.postcss.push(cssnano())
     }
@@ -69,6 +65,7 @@ const tasks = configure('source', 'build', {
     return gulp.src(src, { since: gulp.lastRun(stylelint) })
       .pipe(sass(config.sass).on('error', sass.logError))
       .pipe(postcss(config.postcss))
+      .pipe(gulp.dest(dest))
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
   },
@@ -83,9 +80,14 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   js ({ src, dest, config }) {
-    return gulp.src(src)
-      .pipe(babel())
-      .pipe(uglify(config.uglify))
+    const stream = gulp.src(src)
+      .pipe(babel(config.babel))
+
+    if (isProduction) {
+      stream.pipe(uglify(config.uglify))
+    }
+
+    return stream
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
   },
