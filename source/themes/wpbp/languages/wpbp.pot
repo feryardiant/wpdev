@@ -33,19 +33,19 @@ msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #. translators: 1: title.
-#: comments.php:37
+#: comments.php:35
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
-#: comments.php:43
+#: comments.php:41
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:68
+#: comments.php:66
 msgid "Comments are closed."
 msgstr ""
 
@@ -151,55 +151,55 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/theme.php:284
+#: includes/theme.php:285
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:289
+#: includes/theme.php:290
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:294
+#: includes/theme.php:295
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:299
+#: includes/theme.php:300
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:304
+#: includes/theme.php:305
 msgid "Huge"
 msgstr ""
 
-#: includes/theme.php:394
+#: includes/theme.php:395
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/theme.php:395
+#: includes/theme.php:396
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/theme.php:461
+#: includes/theme.php:462
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/theme.php:463
+#: includes/theme.php:464
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/theme.php:471
+#: includes/theme.php:472
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/theme.php:473
+#: includes/theme.php:474
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
-#: includes/walker-nav-menu.php:32
+#: includes/walker-nav-menu.php:38
 msgid "Add a menu"
 msgstr ""
 
-#: includes/walker-nav-menu.php:34
+#: includes/walker-nav-menu.php:40
 msgid "Primary menu goes here"
 msgstr ""
 
@@ -234,6 +234,6 @@ msgstr ""
 msgid "Search Results for: %s"
 msgstr ""
 
-#: template-parts/wrapper.php:28
+#: template-parts/wrapper.php:25
 msgid "Skip to content"
 msgstr ""

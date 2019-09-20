@@ -58,7 +58,8 @@ final class Theme {
 		add_action( 'login_head', [ $this, 'login_head' ] );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
-		add_filter( 'set_url_scheme', [ $this, 'set_url_scheme' ], 10, 1 );
+		add_filter( 'set_url_scheme', [ $this, 'set_url_scheme' ], 10 );
+		add_filter( 'wp_nav_menu_args', [ $this, 'nav_menu_args' ], 10 );
 
 		$this->initialize( [
 			Wrapper::class,
@@ -481,6 +482,7 @@ final class Theme {
 	/**
 	 * Get dynamyc sidebar.
 	 *
+	 * @since 0.1.1
 	 * @param  int|string $index
 	 * @return void
 	 */
@@ -564,6 +566,8 @@ final class Theme {
 	/**
 	 * Custom login style.
 	 *
+	 * @internal
+	 * @since 0.1.1
 	 * @return string
 	 */
 	public function css_login_style() {
@@ -586,6 +590,7 @@ final class Theme {
 	/**
 	 * Get Theme Modification value.
 	 *
+	 * @since 0.1.1
 	 * @param  string $name
 	 * @param  mixed  $default
 	 * @return mixed
@@ -653,10 +658,12 @@ final class Theme {
 	}
 
 	/**
-	 * Class initializer.
+	 * Customize root url on development mode.
 	 *
-	 * @param  array $classes
-	 * @return void
+	 * @internal
+	 * @since 0.1.1
+	 * @param  string $url
+	 * @return string
 	 */
 	public function set_url_scheme( $url ) {
 		$home = env( 'WP_HOME' );
@@ -666,15 +673,39 @@ final class Theme {
 		], [ $home, $home ], $url );
 
 		if ( env( 'WP_ENV' ) === 'development' ) {
+			// phpcs:disable WordPress.Security.ValidatedSanitizedInput
 			$url = str_replace( $home, 'http://' . $_SERVER['HTTP_HOST'], $url );
+			// phpcs:enable
 		}
 
 		return $url;
 	}
 
 	/**
+	 * Customize nav menu arguments.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @param  array $args
+	 * @return array
+	 */
+	public function nav_menu_args( $args ) {
+		$walker = new Walker_Nav_Menu();
+
+		$args['container']   = false;
+		$args['menu_class']  = 'navbar-start';
+		$args['items_wrap']  = '<div id="%1$s" class="%2$s">%3$s</div>';
+		$args['after']       = '</div>';
+		$args['walker']      = $walker;
+		$args['fallback_cb'] = [ $walker, 'fallback' ];
+
+		return $args;
+	}
+
+	/**
 	 * Class initializer.
 	 *
+	 * @since 0.1.1
 	 * @param  array $classes
 	 * @return void
 	 */
@@ -693,6 +724,8 @@ final class Theme {
 	/**
 	 * Setup class instances.
 	 *
+	 * @internal
+	 * @since 0.1.1
 	 * @param  string          $name
 	 * @param  string|\Closure $instance
 	 * @throws \InvalidArgumentException If argument invalid.
@@ -718,6 +751,8 @@ final class Theme {
 	/**
 	 * Get class instance by $name.
 	 *
+	 * @internal
+	 * @since 0.1.1
 	 * @param  string $name
 	 * @return mixed
 	 */

@@ -1,2 +1,6 @@
 @import './variables';
-// @import './bulma';
+
+/**
+ * Import Content only.
+ */
+@import 'bulma/sass/elements/content.sass';

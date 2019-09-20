@@ -2,20 +2,17 @@
  * Alignments
  * -------------------------------------------------------------- */
 .alignleft {
-  display: inline;
-  float: left;
-  margin-right: 1.5em;
+  @extend .is-pulled-left;
+
+  margin-right: 1rem;
 }
 
 .alignright {
-  display: inline;
-  float: right;
-  margin-left: 1.5em;
+  @extend .is-pulled-right;
+
+  margin-left: 1rem;
 }
 
 .aligncenter {
-  clear: both;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  @extend .is-clearfix;
 }

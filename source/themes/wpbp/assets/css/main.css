@@ -214,6 +214,9 @@
   fieldset[disabled] .pagination-ellipsis {
     cursor: not-allowed; }
 
+/**
+ * Import Bulma Base.
+ */
 /*! minireset.css v0.0.4 | MIT License | github.com/jgthms/minireset.css */
 html,
 body,
@@ -1217,7 +1220,10 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   position: relative !important; }
 
 /**
- * Something.
+ * Import Customization.
+ */
+/**
+ * Import Bulma Elements.
  */
 .box {
   background-color: white;
@@ -2749,9 +2755,6 @@ a.tag:hover {
   .subtitle.is-7 {
     font-size: 0.75rem; }
 
-/**
- * Something.
- */
 .heading {
   display: block;
   font-size: 11px;
@@ -2789,7 +2792,7 @@ a.tag:hover {
   vertical-align: top; }
 
 /**
- * Something.
+ * Import Bulma Form.
  */
 .input, .textarea, .select select {
   background-color: white;
@@ -3706,7 +3709,7 @@ a.tag:hover {
     font-size: 1.5rem; }
 
 /**
- * Something.
+ * Import Bulma Components.
  */
 .breadcrumb {
   font-size: 1rem;
@@ -5329,7 +5332,7 @@ label.panel-block {
     font-size: 1.5rem; }
 
 /**
- * Something.
+ * Import Bulma Grid.
  */
 .column {
   display: block;
@@ -6904,7 +6907,7 @@ label.panel-block {
       width: 100%; } }
 
 /**
- * Something.
+ * Import Bulma Layouts.
  */
 .hero {
   -webkit-box-align: stretch;
@@ -7453,6 +7456,6 @@ label.panel-block {
     .section.is-large {
       padding: 18rem 1.5rem; } }
 
-.footer {
+#site-footer {
   background-color: #fafafa;
-  padding: 3rem 1.5rem 6rem; }
+  padding: 2rem 1rem 4rem; }

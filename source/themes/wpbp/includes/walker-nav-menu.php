@@ -22,6 +22,12 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		// .
 	}
 
+	/**
+	 * Fallback output if no menu exists.
+	 *
+	 * @param  array $args
+	 * @return void
+	 */
 	public function fallback( $args ) {
 		$item = [];
 		$args = is_array( $args ) ? (object) $args : $args;
@@ -29,28 +35,51 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		if ( current_user_can( 'edit_theme_options' ) ) {
 			$href = admin_url( 'nav-menus.php' );
 
-			$item[] = '<a class="navbar-item" href="'. esc_url( $href ) . '">' . esc_html__( 'Add a menu', 'wpbp' ) . '</a>';
+			$item[] = '<a class="navbar-item" href="' . esc_url( $href ) . '">' . esc_html__( 'Add a menu', 'wpbp' ) . '</a>';
 		} else {
 			$item[] = '<div class="navbar-item">' . esc_html__( 'Primary menu goes here', 'wpbp' ) . '</div>';
 		}
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( $args->items_wrap, $args->menu_id, $args->menu_class, join( '', $item ) );
+		// phpcs:enable
 	}
 
 	/**
-	 * @inheritDoc
+	 * Start Menu Level.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @param  string $output
+	 * @param  int    $depth
+	 * @param  array  $args
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
 
-		$classes    = apply_filters( 'nav_menu_submenu_css_class', [ 'navbar-dropdown' ], $args, $depth );
+		$classes = [ 'navbar-dropdown is-boxed' ];
+
+		if ( $depth >= 1 ) {
+			$classes[] = 'submenu-depth-' . $depth;
+		}
+
+		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		$classes = apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth );
+		// phpcs:enable
+
 		$attributes = ( ! empty( $classes ) ) ? 'class="' . esc_attr( join( ' ', $classes ) ) . '"' : '';
 
 		$output .= "{$eol}{$indent}<div $attributes>{$eol}";
 	}
 
 	/**
-	 * @inheritDoc
+	 * End Menu Level.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @param  string $output
+	 * @param  int    $depth
+	 * @param  array  $args
 	 */
 	public function end_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
@@ -59,14 +88,22 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 	}
 
 	/**
-	 * @inheritDoc
+	 * Start Menu Eleent.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @param  string   $output
+	 * @param  stdClass $item
+	 * @param  int      $depth
+	 * @param  array    $args
+	 * @param  int      $id
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
 
 		$title = $item->title ?: $item->post_title;
 
-		if ( $title === '---' ) {
+		if ( '---' === $title ) {
 			$output .= '<hr class="navbar-divider">';
 			return;
 		}
@@ -76,11 +113,14 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$has_children    = $args->walker->has_children;
 
 		if ( $has_children ) {
-			$item->classes[] = 'has-dropdown is-hoverable';
+			$item->classes[] = 'is-hoverable has-dropdown';
 		}
 
-		$args      = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
-		$classes   = apply_filters( 'nav_menu_css_class', array_filter( $item->classes ), $item, $args, $depth );
+		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		$args    = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
+		$classes = apply_filters( 'nav_menu_css_class', array_filter( $item->classes ), $item, $args, $depth );
+		// phpcs:enable
+
 		$item_atts = 'id="' . esc_attr( 'menu-item-' . $item->ID ) . '"';
 
 		if ( ! empty( $classes ) ) {
@@ -101,11 +141,18 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 	}
 
 	/**
-	 * @inheritDoc
+	 * End Menu Element.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @param  string   $output
+	 * @param  stdClass $item
+	 * @param  int      $depth
+	 * @param  array    $args
 	 */
 	public function end_el( &$output, $item, $depth = 0, $args = [] ) {
-		$eol = $this->get_indentation( $args, $depth )[ 1 ];
-		$tag = in_array( 'has-children', $item->classes ) ? 'div' : 'a';
+		$eol = $this->get_indentation( $args, $depth )[1];
+		$tag = in_array( 'has-children', $item->classes, true ) ? 'div' : 'a';
 
 		$output .= "</{$tag}>{$eol}";
 	}

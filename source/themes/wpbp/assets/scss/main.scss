@@ -1,2 +1,17 @@
 @import './variables';
-@import './bulma';
+
+/**
+ * Import Bulma Base.
+ */
+@import 'bulma/sass/base/minireset.sass';
+@import 'bulma/sass/base/generic.sass';
+@import 'bulma/sass/base/helpers.sass';
+
+/**
+ * Import Customization.
+ */
+@import './elements';
+@import './form';
+@import './components';
+@import './grid';
+@import './layout';
