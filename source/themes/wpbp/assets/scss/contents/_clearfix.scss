@@ -7,14 +7,14 @@
 .site-header,
 .site-content,
 .site-footer {
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: "";
     display: table;
     table-layout: fixed;
   }
 
-  &:after {
+  &::after {
     clear: both;
   }
 }

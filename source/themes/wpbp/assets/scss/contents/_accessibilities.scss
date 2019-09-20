@@ -2,7 +2,7 @@
  * Accessibility
  * -------------------------------------------------------------- */
 
- /* Text meant only for screen readers. */
+/* Text meant only for screen readers. */
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -14,9 +14,9 @@
   position: absolute !important;
   width: 1px;
   word-wrap: normal !important;
-  /* Many screen reader and browser combinations announce broken words as they would appear visually. */
 }
 
+/* Many screen reader and browser combinations announce broken words as they would appear visually. */
 .screen-reader-text:focus {
   background-color: #f1f1f1;
   border-radius: 3px;
@@ -36,7 +36,6 @@
   top: 5px;
   width: auto;
   z-index: 100000;
-  /* Above WP toolbar. */
 }
 
 /* Do not show the outline on the skip link target. */
