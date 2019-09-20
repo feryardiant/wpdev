@@ -129,14 +129,14 @@ const tasks = configure('source', 'build', {
 })
 
 /**
- * Watch the changes.
- *
- * @return {stream}
+ * Start php development server and watch files changes.
  */
 exports.default = () => {
   const config = {
-    ini: './public/.user.ini',
-    base: './public'
+    debug: true,
+    ini: 'public/.user.ini',
+    base: 'public',
+    router: './server.php'
   }
 
   connect.server(config, () => {
