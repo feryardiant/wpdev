@@ -32,6 +32,7 @@ const wpServer = exports.wpServer = async () => {
 const globalConfig = {
   version: pkgJson.version,
   author: pkgJson.author,
+  watch: false,
 
   paths: {
     img: 'img/**',
@@ -48,6 +49,11 @@ const globalConfig = {
   },
 
   css: {
+    stylelint: {
+      failAfterError: isProduction,
+      reporters: [],
+      debug: !isProduction
+    },
     sass: {
       includePaths: ['node_modules']
     }
@@ -55,16 +61,7 @@ const globalConfig = {
 
   js: {
     uglify: {},
-    babel: {
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            modules: false
-          }
-        ]
-      ]
-    }
+    babel: pkgJson.babel
   }
 }
 
@@ -81,6 +78,7 @@ const scandir = exports.scandir = (dir, dest) => {
 
       let target = path.join(sub.name, source.name)
       build[source.name] = {
+        type: sub.name,
         pot: {
           src: path.join(dir, target, '**', '*.php'),
           dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
@@ -122,24 +120,31 @@ const configure = exports.configure = (src, dest, tasks) => {
   const toWatch = {}
 
   for (const [name, asset] of scandir(src, dest)) {
-    Object.keys(asset).forEach(key => {
-      const assetTask = `${name}:${key}`
+    const config = {
+      name: name,
+      type: asset.type,
+      version: globalConfig.version,
+      author: globalConfig.author
+    }
 
-      const config = {
-        name: name,
-        type: '',
-        version: globalConfig.version,
-        author: globalConfig.author
+    for (const key of Object.keys(asset)) {
+      if (key === 'type') {
+        continue
       }
 
       if (['js', 'css'].includes(key)) {
         config.rename = {
           suffix: '.min'
         }
+
+        config.browserslist = pkgJson.browserslist
       }
+
+      const assetTask = `${name}:${key}`
 
       if (globalConfig.hasOwnProperty(key)) {
         Object.assign(config, globalConfig[key])
+        toWatch[assetTask] = asset[key].src
       }
 
       task(assetTask, (done) => {
@@ -151,8 +156,7 @@ const configure = exports.configure = (src, dest, tasks) => {
       })
 
       assetTasks.push(assetTask)
-      toWatch[assetTask] = asset[key].src
-    })
+    }
 
     task(`${name}:build`, series(...assetTasks))
     buildTasks.push(...assetTasks)

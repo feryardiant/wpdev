@@ -1,20 +1,19 @@
 const gulp = require('gulp')
 
+const autoprefixer = require('gulp-autoprefixer')
 const babel = require('gulp-babel')
+const cleanCSS = require('gulp-clean-css')
+const eslint = require('gulp-eslint')
 const imagemin = require('gulp-imagemin')
-const postcss = require('gulp-postcss')
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
+const stylelint = require('gulp-stylelint')
 const uglify = require('gulp-uglify')
 const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
 
 const del = require('del')
 const path = require('path')
-const autoprefixer = require('autoprefixer')
-const cssnano = require('cssnano')
-const reporter = require('postcss-reporter')
-const stylelint = require('stylelint')
 
 const { configure, watch, isProduction } = require('./build/util')
 
@@ -52,20 +51,17 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   css ({ src, dest, config }) {
-    config.postcss = [
-      // stylelint,
-      // reporter({ clearReportedMessages: true }),
-      autoprefixer(),
-    ]
+    config.stylelint.reporters.push({
+      formatter: require('stylelint-formatter-pretty'),
+      console: true
+    })
 
-    if (isProduction) {
-      config.postcss.push(cssnano())
-    }
-
-    return gulp.src(src, { since: gulp.lastRun(stylelint) })
+    return gulp.src(src)
+      .pipe(stylelint(config.stylelint))
       .pipe(sass(config.sass).on('error', sass.logError))
-      .pipe(postcss(config.postcss))
+      .pipe(autoprefixer())
       .pipe(gulp.dest(dest))
+      .pipe(cleanCSS())
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
   },
@@ -81,13 +77,16 @@ const tasks = configure('source', 'build', {
    */
   js ({ src, dest, config }) {
     const stream = gulp.src(src)
-      .pipe(babel(config.babel))
+      .pipe(eslint())
+      .pipe(eslint.format('pretty'))
 
     if (isProduction) {
-      stream.pipe(uglify(config.uglify))
+      stream.pipe(eslint.failAfterError())
     }
 
     return stream
+      .pipe(babel(config.babel))
+      .pipe(uglify(config.uglify))
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
   },

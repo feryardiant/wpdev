@@ -10,6 +10,7 @@
     "wordpress-boilerplate"
   ],
   "scripts": {
+    "lint:js": "eslint",
     "lint:css": "stylelint"
   },
   "dependencies": {
@@ -18,23 +19,28 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
-    "autoprefixer": "^9.6.1",
+    "@wordpress/eslint-plugin": "^3.1.0",
+    "babel-eslint": "^10.0.3",
     "cross-env": "^5.2.1",
-    "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "dotenv": "^8.1.0",
+    "eslint": "^6.4.0",
+    "eslint-formatter-pretty": "^2.1.1",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
     "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-imagemin": "^6.1.0",
-    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
+    "gulp-stylelint": "^9.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-wp-pot": "^2.3.5",
     "gulp-zip": "^5.0.0",
-    "postcss-reporter": "^6.0.1",
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
+    "stylelint-formatter-pretty": "^1.1.2",
     "stylelint-scss": "^3.11.0"
   },
   "babel": {
@@ -51,19 +57,38 @@
     "root": true,
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "es6": true
+    },
+    "globals": {
+      "jQuery": true,
+      "wp": true
     },
     "extends": [
-      "wordpress"
+      "plugin:@wordpress/eslint-plugin/esnext"
     ],
     "parserOptions": {
+      "ecmaVersion": 8,
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-console": 2
+      "indent": [
+        2,
+        2
+      ],
+      "no-console": 2,
+      "semi": [
+        2,
+        "never"
+      ],
+      "wrap-iife": [
+        2,
+        "inside"
+      ]
     }
   },
   "eslintIgnore": [
+    "/build/**",
     "/node_modules/**",
     "/public/**",
     "**/vendor/**",
