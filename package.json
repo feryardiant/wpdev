@@ -34,6 +34,7 @@
     "gulp-connect-php": "^1.0.3",
     "gulp-eslint": "^6.0.0",
     "gulp-imagemin": "^6.1.0",
+    "gulp-phpcs": "^3.1.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-stylelint": "^9.0.0",

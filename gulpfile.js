@@ -1,15 +1,13 @@
 const path = require('path')
 
-const browserSync = require('browser-sync').create()
-const del = require('del')
 const gulp = require('gulp')
-
 const autoprefixer = require('gulp-autoprefixer')
 const babel = require('gulp-babel')
 const connect = require('gulp-connect-php')
 const cleanCSS = require('gulp-clean-css')
 const eslint = require('gulp-eslint')
 const imagemin = require('gulp-imagemin')
+const phpcs = require('gulp-phpcs')
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
 const stylelint = require('gulp-stylelint')
@@ -21,7 +19,7 @@ const { configure, watch, isProduction } = require('./build/util')
 
 const tasks = configure('source', 'build', {
   /**
-   * Generate translation file.
+   * Lint PHP fiels and generate translation file.
    *
    * @param {Object}       param0
    * @param {Array|String} param0.src
@@ -29,7 +27,7 @@ const tasks = configure('source', 'build', {
    * @param {Object}       param0.
    * @return {stream}
    */
-  pot ({ src, dest, config }) {
+  php ({ src, dest, config }) {
     config.wpPot = {
       domain: config.name,
       package: `${config.name} v${config.version}`,
@@ -38,7 +36,11 @@ const tasks = configure('source', 'build', {
       team: config.author
     }
 
+    config.phpcs.standard = `source/${config.type}/ruleset.xml`
+
     return gulp.src(src)
+      .pipe(phpcs(config.phpcs))
+      .pipe(phpcs.reporter('log'))
       .pipe(wpPot(config.wpPot))
       .pipe(gulp.dest(dest))
   },
@@ -58,7 +60,7 @@ const tasks = configure('source', 'build', {
       console: true
     })
 
-    return gulp.src(src)
+    return gulp.src(src, { sourcemaps: true })
       .pipe(stylelint(config.stylelint))
       .pipe(sass(config.sass).on('error', sass.logError))
       .pipe(autoprefixer())
@@ -66,7 +68,6 @@ const tasks = configure('source', 'build', {
       .pipe(cleanCSS())
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
-      .pipe(browserSync.stream())
   },
 
   /**
@@ -79,7 +80,7 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   js ({ src, dest, config }) {
-    const stream = gulp.src(src)
+    const stream = gulp.src(src, { sourcemaps: true })
       .pipe(eslint())
       .pipe(eslint.format('pretty'))
 
@@ -92,7 +93,6 @@ const tasks = configure('source', 'build', {
       .pipe(uglify(config.uglify))
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
-      .pipe(browserSync.stream())
   },
 
   /**
@@ -132,6 +132,7 @@ const tasks = configure('source', 'build', {
  * Start php development server and watch files changes.
  */
 exports.default = () => {
+  const server = require('browser-sync').create()
   const config = {
     ini: 'public/.user.ini',
     base: 'public',
@@ -149,7 +150,7 @@ exports.default = () => {
   }
 
   connect.server(config, () => {
-    browserSync.init({
+    server.init({
       proxy: '127.0.0.1:8000',
       notify: false,
       open: false,
@@ -161,6 +162,6 @@ exports.default = () => {
       ]
     })
 
-    watch(tasks, browserSync)
+    watch(tasks, server)
   })
 }

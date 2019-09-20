@@ -40,7 +40,10 @@ const globalConfig = {
     js: 'js/**/*.js',
   },
 
-  pot: {
+  php: {
+    phpcs: {
+      bin: 'vendor/bin/phpcs'
+    },
     wpPot: {}
   },
 
@@ -76,19 +79,19 @@ const scandir = exports.scandir = (dir, dest) => {
     return readdirSync(path.join(dir, sub.name), readdirOpt).reduce((build, source) => {
       if (!source.isDirectory()) return build
 
-      let target = path.join(sub.name, source.name)
+      let target = `${sub.name}/${source.name}`
       build[source.name] = {
         type: sub.name,
-        pot: {
-          src: path.join(dir, target, '**', '*.php'),
-          dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
+        php: {
+          src: `${dir}/${target}/**/*.php`,
+          dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
         }
       }
 
       Object.keys(paths).forEach(asset => {
-        const assetPath = path.join(target, 'assets')
+        const assetPath = `${target}/assets`
         const srcPath = [
-          path.join(dir, assetPath, paths[asset])
+          `${dir}/${assetPath}/${paths[asset]}`
         ]
 
         if (['js', 'css'].includes(asset)) {
@@ -98,13 +101,13 @@ const scandir = exports.scandir = (dir, dest) => {
 
         build[source.name][asset] = {
           src: srcPath,
-          dest: path.join(tmpDir, assetPath, asset)
+          dest: `${dir}/${assetPath}/${asset}`
         }
       })
 
       build[source.name].zip = {
-        src: path.join(tmpDir, target, '**'),
-        dest: path.join(dest)
+        src: `${tmpDir}/${target}/**`,
+        dest: dest
       }
 
       return build
@@ -140,14 +143,14 @@ const configure = exports.configure = (src, dest, tasks) => {
         config.browserslist = pkgJson.browserslist
       }
 
-      const assetTask = `${name}:${key}`
+      const taskName = `${name}:${key}`
 
       if (globalConfig.hasOwnProperty(key)) {
         Object.assign(config, globalConfig[key])
-        toWatch[assetTask] = asset[key].src
+        toWatch[taskName] = asset[key].src
       }
 
-      task(assetTask, (done) => {
+      task(taskName, (done) => {
         return tasks[key]({
           src: asset[key].src,
           dest: asset[key].dest,
@@ -155,7 +158,7 @@ const configure = exports.configure = (src, dest, tasks) => {
         }, done)
       })
 
-      assetTasks.push(assetTask)
+      assetTasks.push(taskName)
     }
 
     task(`${name}:build`, series(...assetTasks))
@@ -168,9 +171,12 @@ const configure = exports.configure = (src, dest, tasks) => {
 }
 
 exports.watch = (tasks, browserSync) => {
-  watch('source/**/*.php').on('change', browserSync.reload)
+  const reload = (done) => {
+    browserSync.reload()
+    done()
+  }
 
-  for (const [assetTask, src] of Object.entries(tasks)) {
-    watch(src, series(assetTask))
+  for (const [taskName, src] of Object.entries(tasks)) {
+    watch(src, series(taskName, reload))
   }
 }
