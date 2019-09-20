@@ -135,6 +135,7 @@ const tasks = configure('source', 'build', {
  */
 exports.default = () => {
   const config = {
+    ini: './public/.user.ini',
     base: './public'
   }
 
@@ -142,10 +143,15 @@ exports.default = () => {
     browserSync.init({
       proxy: '127.0.0.1:8000',
       notify: false,
-      open: false
+      open: false,
+      serveStatic: [
+        {
+          route: '/wp-includes',
+          dir: './public/wp/wp-includes'
+        }
+      ]
     })
 
     watch(tasks, browserSync)
-    // console.log('PHP Development Server Connected.')
   })
 }

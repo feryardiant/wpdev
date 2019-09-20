@@ -15,7 +15,7 @@ use WP_Customize_Manager;
 /**
  * WordPress Customizer Setup Class.
  *
- * @subpackage  WordPress Customizer Setup
+ * @category  WordPress Customizer Setup
  */
 class Customizer {
 	/**

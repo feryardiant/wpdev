@@ -151,48 +151,56 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/theme.php:283
+#: includes/theme.php:284
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:288
+#: includes/theme.php:289
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:293
+#: includes/theme.php:294
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:298
+#: includes/theme.php:299
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:303
+#: includes/theme.php:304
 msgid "Huge"
 msgstr ""
 
-#: includes/theme.php:393
+#: includes/theme.php:394
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/theme.php:394
+#: includes/theme.php:395
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/theme.php:460
+#: includes/theme.php:461
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/theme.php:462
+#: includes/theme.php:463
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/theme.php:470
+#: includes/theme.php:471
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/theme.php:472
+#: includes/theme.php:473
 msgid "Footer widget that placed on the bottom of your page."
+msgstr ""
+
+#: includes/walker-nav-menu.php:32
+msgid "Add a menu"
+msgstr ""
+
+#: includes/walker-nav-menu.php:34
+msgid "Primary menu goes here"
 msgstr ""
 
 #: template-parts/content-none.php:15

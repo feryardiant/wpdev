@@ -27,7 +27,7 @@ Env::init();
 $dotenv = Dotenv\Dotenv::create($root_dir);
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
-    $dotenv->required(['WP_HOME', 'WP_SITEURL']);
+    $dotenv->required(['WP_HOME']);
     if (!env('DATABASE_URL')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
@@ -55,9 +55,9 @@ if ($_heroku_appname = env('HEROKU_APP_NAME')) {
     $_http_name = $_heroku_appname.'.herokuapp.com';
 }
 
-$_site_url    = $_http_schema."://".$_http_name;
+$_site_url    = env('WP_HOME') ?: $_http_schema."://".$_http_name;
 
-Config::define('WP_HOME',     env('WP_HOME') ?: $_site_url);
+Config::define('WP_HOME',     $_site_url);
 Config::define('WP_SITEURL',  env('WP_SITEURL') ?: $_site_url);
 
 unset($_http_schema, $_http_name, $_heroku_appname, $_site_url);

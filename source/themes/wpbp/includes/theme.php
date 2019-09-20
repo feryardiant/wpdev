@@ -58,6 +58,7 @@ final class Theme {
 		add_action( 'login_head', [ $this, 'login_head' ] );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
+		add_filter( 'set_url_scheme', [ $this, 'set_url_scheme' ], 10, 1 );
 
 		$this->initialize( [
 			Wrapper::class,
@@ -649,6 +650,26 @@ final class Theme {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Class initializer.
+	 *
+	 * @param  array $classes
+	 * @return void
+	 */
+	public function set_url_scheme( $url ) {
+		$home = env( 'WP_HOME' );
+		$url  = str_replace( [
+			env( 'WP_SITEURL' ),
+			env( 'WP_HOME' ),
+		], [ $home, $home ], $url );
+
+		if ( env( 'WP_ENV' ) === 'development' ) {
+			$url = str_replace( $home, 'http://' . $_SERVER['HTTP_HOST'], $url );
+		}
+
+		return $url;
 	}
 
 	/**
