@@ -114,7 +114,6 @@
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/i18n-command": "^2.2",
     "wp-cli/scaffold-command": "^2.0",
-    "wp-cli/server-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/debug-bar": "^1.0",
     "wpackagist-plugin/theme-check": "20190801.1"

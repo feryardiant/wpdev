@@ -167,7 +167,9 @@ const configure = exports.configure = (src, dest, tasks) => {
   return toWatch
 }
 
-exports.watch = (tasks) => {
+exports.watch = (tasks, browserSync) => {
+  watch('source/**/*.php').on('change', browserSync.reload)
+
   for (const [assetTask, src] of Object.entries(tasks)) {
     watch(src, series(assetTask))
   }

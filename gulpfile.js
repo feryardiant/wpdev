@@ -1,7 +1,12 @@
+const path = require('path')
+
+const browserSync = require('browser-sync').create()
+const del = require('del')
 const gulp = require('gulp')
 
 const autoprefixer = require('gulp-autoprefixer')
 const babel = require('gulp-babel')
+const connect = require('gulp-connect-php')
 const cleanCSS = require('gulp-clean-css')
 const eslint = require('gulp-eslint')
 const imagemin = require('gulp-imagemin')
@@ -11,9 +16,6 @@ const stylelint = require('gulp-stylelint')
 const uglify = require('gulp-uglify')
 const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
-
-const del = require('del')
-const path = require('path')
 
 const { configure, watch, isProduction } = require('./build/util')
 
@@ -64,6 +66,7 @@ const tasks = configure('source', 'build', {
       .pipe(cleanCSS())
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
+      .pipe(browserSync.stream())
   },
 
   /**
@@ -89,6 +92,7 @@ const tasks = configure('source', 'build', {
       .pipe(uglify(config.uglify))
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest))
+      .pipe(browserSync.stream())
   },
 
   /**
@@ -130,6 +134,18 @@ const tasks = configure('source', 'build', {
  * @return {stream}
  */
 exports.default = () => {
-  console.log('Watching source...')
-  return watch(tasks)
+  const config = {
+    base: './public'
+  }
+
+  connect.server(config, () => {
+    browserSync.init({
+      proxy: '127.0.0.1:8000',
+      notify: false,
+      open: false
+    })
+
+    watch(tasks, browserSync)
+    // console.log('PHP Development Server Connected.')
+  })
 }
