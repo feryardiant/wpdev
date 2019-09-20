@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template wrapper for our theme
  *
@@ -15,7 +16,7 @@ $wpbp_base_template = wpbp()->get_base_template();
 <html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
@@ -24,28 +25,30 @@ $wpbp_base_template = wpbp()->get_base_template();
 
 <body <?php body_class(); ?>>
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
+		<a class="skip-link is-sr-only" href="#content"><?php esc_html_e('Skip to content', 'wpbp'); ?></a>
 
 		<header id="masthead" class="site-header">
-			<?php get_header( $wpbp_base_template ); ?>
-		</header><!-- #masthead -->
+			<?php get_header($wpbp_base_template); ?>
+		</header> <!-- #masthead -->
 
 		<section id="content" class="site-content">
-			<div id="primary" class="content-area">
-				<main id="main" class="site-main">
-					<?php load_template( wpbp()->get_main_template() ); ?>
-				</main><!-- #main -->
-			</div><!-- #primary -->
+			<div class="container">
+				<div id="primary" class="content-area">
+					<main id="main" class="site-main">
+						<?php load_template(wpbp()->get_main_template()); ?>
+					</main> <!-- #main -->
+				</div> <!-- #primary -->
 
-			<aside id="secondary" class="widget-area">
-				<?php get_sidebar( $wpbp_base_template ); ?>
-			</aside><!-- #secondary -->
-		</section><!-- #content -->
+				<aside id="secondary" class="widget-area">
+					<?php get_sidebar($wpbp_base_template); ?>
+				</aside> <!-- #secondary -->
+			</div>
+		</section> <!-- #content -->
 
 		<footer id="colophon" class="site-footer">
-			<?php get_footer( $wpbp_base_template ); ?>
-		</footer><!-- #colopon -->
-	</div><!-- #page -->
+			<?php get_footer($wpbp_base_template); ?>
+		</footer> <!-- #colopon -->
+	</div> <!-- #page -->
 
 	<?php wp_footer(); ?>
 </body>

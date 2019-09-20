@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The header for our theme
  *
@@ -11,27 +12,55 @@
  * @since       0.1.0
  */
 
-?>
-<div class="site-branding">
-	<?php the_custom_logo(); ?>
+?><div class="container">
 
-	<h1 class="site-title">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-	</h1><!-- .site-title -->
+	<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
+		<div class="navbar-brand">
+			<a class="navbar-item" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+				<?php the_custom_logo(); ?>
+				<h1 class="site-title"><?php bloginfo('name'); ?></h1> <!-- .site-title -->
 
-	<?php $wpbp_description = get_bloginfo( 'description', 'display' ); ?>
-	<?php if ( $wpbp_description || is_customize_preview() ) : ?>
-		<p class="site-description"><?php echo esc_html( $wpbp_description ); ?></p>
-	<?php endif; ?>
-</div><!-- .site-branding -->
+				<?php $wpbp_description = get_bloginfo('description', 'display'); ?>
+				<?php if ($wpbp_description || is_customize_preview()) : ?>
+					<p class="site-description"><?php echo esc_html($wpbp_description); ?></p>
+				<?php endif; ?>
+			</a> <!-- .navbar-item -->
+		</div> <!-- .navbar-brand -->
 
-<nav id="site-navigation" class="main-navigation">
-	<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wpbp' ); ?></button>
+		<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+			<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+		</a>
 
-	<?php
-	wp_nav_menu( [
-		'theme_location' => 'primary',
-		'menu_id'        => 'primary-menu',
-	] );
-	?>
-</nav><!-- #site-navigation -->
+		<div id="navbarBasicExample" class="navbar-menu">
+			<!-- <div class="navbar-start">
+				<a class="navbar-item">Home</a>
+
+				<a class="navbar-item">Documentation</a>
+
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link">More</a>
+
+					<div class="navbar-dropdown">
+						<a class="navbar-item">About</a>
+						<a class="navbar-item">Jobs</a>
+						<a class="navbar-item">Contact</a>
+						<hr class="navbar-divider">
+						<a class="navbar-item">Report an issue</a>
+					</div>
+				</div>
+			</div> -->
+
+			<?php
+			wp_nav_menu( [
+				'theme_location' => 'primary',
+				'container'      => '',
+				'menu_id'        => 'primary-menu',
+				'menu_class'     => 'navbar-menu',
+				'after'          => '</div>',
+				'walker'         => new WPBP\Walker_Nav_Menu()
+			] );
+			?>
+		</div>
+	</nav> <!-- .navbar -->
+
+</div>

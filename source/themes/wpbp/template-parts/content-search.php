@@ -20,17 +20,17 @@
 			wpbp_posted_on();
 			wpbp_posted_by();
 			?>
-		</div><!-- .entry-meta -->
+		</div> <!-- .entry-meta -->
 		<?php endif; ?>
-	</header><!-- .entry-header -->
+	</header> <!-- .entry-header -->
 
 	<?php wpbp_post_thumbnail(); ?>
 
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+	</div> <!-- .entry-summary -->
 
 	<footer class="entry-footer">
 		<?php wpbp_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
-</article><!-- #post-<?php the_ID(); ?> -->
+	</footer> <!-- .entry-footer -->
+</article> <!-- #post-<?php the_ID(); ?> -->

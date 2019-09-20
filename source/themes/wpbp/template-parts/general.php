@@ -25,7 +25,7 @@ if ( have_posts() ) {
 		the_archive_description( '<div class="archive-description">', '</div>' );
 	}
 
-	echo '</header><!-- .page-header -->';
+	echo '</header> <!-- .page-header -->';
 
 	/* Start the Loop */
 	while ( have_posts() ) {

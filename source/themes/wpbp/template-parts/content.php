@@ -22,9 +22,9 @@
 		if ( 'post' === get_post_type() ) :
 			?>
 			<div class="entry-meta">
-			</div><!-- .entry-meta -->
+			</div> <!-- .entry-meta -->
 		<?php endif; ?>
-	</header><!-- .entry-header -->
+	</header> <!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php
@@ -46,8 +46,8 @@
 			'after'  => '</div>',
 		] );
 		?>
-	</div><!-- .entry-content -->
+	</div> <!-- .entry-content -->
 
 	<footer class="entry-footer">
-	</footer><!-- .entry-footer -->
-</article><!-- #post-<?php the_ID(); ?> -->
+	</footer> <!-- .entry-footer -->
+</article> <!-- #post-<?php the_ID(); ?> -->
