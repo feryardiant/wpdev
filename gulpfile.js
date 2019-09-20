@@ -67,7 +67,7 @@ const tasks = configure('source', 'build', {
       .pipe(gulp.dest(dest))
       .pipe(cleanCSS())
       .pipe(rename(config.rename))
-      .pipe(gulp.dest(dest))
+      .pipe(gulp.dest(dest, { sourcemaps: true }))
   },
 
   /**
@@ -92,7 +92,7 @@ const tasks = configure('source', 'build', {
       .pipe(babel(config.babel))
       .pipe(uglify(config.uglify))
       .pipe(rename(config.rename))
-      .pipe(gulp.dest(dest))
+      .pipe(gulp.dest(dest, { sourcemaps: true }))
   },
 
   /**
