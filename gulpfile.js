@@ -133,7 +133,6 @@ const tasks = configure('source', 'build', {
  */
 exports.default = () => {
   const config = {
-    debug: true,
     ini: 'public/.user.ini',
     base: 'public',
     router: './server.php'
