@@ -135,7 +135,17 @@ exports.default = () => {
   const config = {
     ini: 'public/.user.ini',
     base: 'public',
-    router: './server.php'
+    router: './server.php',
+    configCallback (type, args) {
+      if (type === connect.OPTIONS_PHP_CLI_ARR) {
+        return [
+          '-e',
+          '-d', 'cli_server.color=on'
+        ].concat(args)
+      }
+
+      return args
+    }
   }
 
   connect.server(config, () => {
