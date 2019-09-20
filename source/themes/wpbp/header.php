@@ -32,32 +32,15 @@
 		</a>
 
 		<div id="navbarBasicExample" class="navbar-menu">
-			<!-- <div class="navbar-start">
-				<a class="navbar-item">Home</a>
-
-				<a class="navbar-item">Documentation</a>
-
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link">More</a>
-
-					<div class="navbar-dropdown">
-						<a class="navbar-item">About</a>
-						<a class="navbar-item">Jobs</a>
-						<a class="navbar-item">Contact</a>
-						<hr class="navbar-divider">
-						<a class="navbar-item">Report an issue</a>
-					</div>
-				</div>
-			</div> -->
-
 			<?php
 			wp_nav_menu( [
 				'theme_location' => 'primary',
-				'container'      => '',
-				'menu_id'        => 'primary-menu',
-				'menu_class'     => 'navbar-menu',
+				'container'      => false,
+				'menu_class'     => 'navbar-start',
+				'items_wrap'     => '<div id="%1$s" class="%2$s">%3$s</div>',
 				'after'          => '</div>',
-				'walker'         => new WPBP\Walker_Nav_Menu()
+				'walker'         => $walker = new WPBP\Walker_Nav_Menu(),
+				'fallback_cb'    => [ $walker, 'fallback' ]
 			] );
 			?>
 		</div>

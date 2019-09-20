@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -12,17 +12,29 @@ namespace WPBP;
 /**
  * Theme Style Class.
  *
- * @subpackage  Theme Style
+ * @category Theme Menu
  */
 class Walker_Nav_Menu extends \Walker_Nav_Menu {
 	/**
 	 * Initialize class.
 	 */
 	public function __construct() {
-		add_filter('wp_nav_menu_items', function ( $item, $args ) {
-			var_dump($item);
-			var_dump($args);
-		});
+		// .
+	}
+
+	public function fallback( $args ) {
+		$item = [];
+		$args = is_array( $args ) ? (object) $args : $args;
+
+		if ( current_user_can( 'edit_theme_options' ) ) {
+			$href = admin_url( 'nav-menus.php' );
+
+			$item[] = '<a class="navbar-item" href="'. esc_url( $href ) . '">' . esc_html__( 'Add a menu', 'wpbp' ) . '</a>';
+		} else {
+			$item[] = '<div class="navbar-item">' . esc_html__( 'Primary menu goes here', 'wpbp' ) . '</div>';
+		}
+
+		printf( $args->items_wrap, $args->menu_id, $args->menu_class, join( '', $item ) );
 	}
 
 	/**
@@ -61,7 +73,7 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 
 		$item->classes   = empty( $item->classes ) ? [] : (array) $item->classes;
 		$item->classes[] = 'navbar-item menu-item-' . $item->ID;
-		$has_children    = $args['walker']->has_children;
+		$has_children    = $args->walker->has_children;
 
 		if ( $has_children ) {
 			$item->classes[] = 'has-dropdown is-hoverable';
@@ -105,7 +117,11 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 	 * @param  int      $depth
 	 * @return array
 	 */
-	protected function get_indentation( $args, int $depth = 0 ) {
+	protected function get_indentation( &$args, int $depth = 0 ) {
+		if ( is_array( $args ) ) {
+			$args = (object) $args;
+		}
+
 		$is_discarded = isset( $args->item_spacing ) && 'discard' === $args->item_spacing;
 
 		$tab = $is_discarded ? '' : "\t";
@@ -113,6 +129,6 @@ class Walker_Nav_Menu extends \Walker_Nav_Menu {
 
 		$indent = $depth > 0 ? str_repeat( $tab, $depth ) : $tab;
 
-		return [ $indent, $eol ]; 
+		return [ $indent, $eol ];
 	}
 }
