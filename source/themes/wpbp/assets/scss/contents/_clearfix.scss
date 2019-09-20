@@ -1,28 +1,20 @@
 /* --------------------------------------------------------------
  * Clearings
  * -------------------------------------------------------------- */
-.clear:before,
-.clear:after,
-.entry-content:before,
-.entry-content:after,
-.comment-content:before,
-.comment-content:after,
-.site-header:before,
-.site-header:after,
-.site-content:before,
-.site-content:after,
-.site-footer:before,
-.site-footer:after {
-  content: "";
-  display: table;
-  table-layout: fixed;
-}
+.clear,
+.entry-content,
+.comment-content,
+.site-header,
+.site-content,
+.site-footer {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    table-layout: fixed;
+  }
 
-.clear:after,
-.entry-content:after,
-.comment-content:after,
-.site-header:after,
-.site-content:after,
-.site-footer:after {
-  clear: both;
+  &:after {
+    clear: both;
+  }
 }
