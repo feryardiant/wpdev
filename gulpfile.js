@@ -152,12 +152,17 @@ exports.default = () => {
   connect.server(config, () => {
     server.init({
       proxy: '127.0.0.1:8000',
+      baseDir: './public',
       notify: false,
       open: false,
       serveStatic: [
         {
-          route: '/wp-admin',
-          dir: 'public/wp/wp-admin'
+          route: '/wp-admin/js',
+          dir: 'public/wp/wp-admin/js'
+        },
+        {
+          route: '/wp-admin/css',
+          dir: 'public/wp/wp-admin/css'
         },
         {
           route: '/wp-includes',
