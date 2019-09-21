@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -14,14 +14,7 @@ namespace WPBP;
  *
  * @category  Theme Style
  */
-class Menu {
-	/**
-	 * Theme Instance
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
+class Menu extends Feature {
 	/**
 	 * Initialize class.
 	 *
@@ -29,7 +22,7 @@ class Menu {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme = $theme;
+		parent::__construct( $theme );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 

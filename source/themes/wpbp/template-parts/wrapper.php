@@ -4,9 +4,9 @@
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 $wpbp_base_template = wpbp()->get_base_template();
@@ -31,7 +31,7 @@ $wpbp_base_template = wpbp()->get_base_template();
 	<section id="site-content" class="section">
 		<div class="container">
 			<div class="columns">
-				<main id="primary" class="column content">
+				<main id="primary" class="column">
 					<?php load_template( wpbp()->get_main_template() ); ?>
 				</main> <!-- #primary -->
 

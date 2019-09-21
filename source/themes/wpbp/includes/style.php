@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -14,21 +14,7 @@ namespace WPBP;
  *
  * @category  Theme Style
  */
-class Style {
-	/**
-	 * Theme Instance.
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
-	/**
-	 * Self instance.
-	 *
-	 * @var Style
-	 */
-	private static $instance;
-
+class Style extends Feature {
 	/**
 	 * Initialize class.
 	 *
@@ -36,13 +22,11 @@ class Style {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme = $theme;
+		parent::__construct( $theme );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'login_head', [ $this, 'login_head' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
-
-		self::$instance = $this;
 	}
 
 	/**

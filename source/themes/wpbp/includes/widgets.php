@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -14,14 +14,7 @@ namespace WPBP;
  *
  * @category  Widget
  */
-class Widgets {
-	/**
-	 * Theme Instance
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
+class Widgets extends Feature {
 	/**
 	 * Initialize class.
 	 *
@@ -29,7 +22,7 @@ class Widgets {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme = $theme;
+		parent::__construct( $theme );
 
 		add_action( 'widgets_init', [ $this, 'init' ] );
 	}

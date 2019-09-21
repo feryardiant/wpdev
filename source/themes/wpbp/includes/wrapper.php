@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -14,14 +14,7 @@ namespace WPBP;
  *
  * @category  Theme Wrapper
  */
-class Wrapper {
-	/**
-	 * Theme Instance
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
+class Wrapper extends Feature {
 	/**
 	 * Main template.
 	 *
@@ -43,7 +36,7 @@ class Wrapper {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme = $theme;
+		parent::__construct( $theme );
 
 		add_filter( 'template_include', [ $this, 'wrap' ], 99 );
 	}

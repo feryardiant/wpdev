@@ -4,13 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
-?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<!-- wpbp_post_thumbnail(); -->
 
 	<div class="entry-content">
@@ -53,7 +52,7 @@
 
 <?php
 // If comments are open or we have at least one comment, load up the comment template.
-if ( comments_open() || get_comments_number() ) {
+if ( ! is_front_page() && ( comments_open() || get_comments_number() ) ) {
 	comments_template();
 }
 ?>

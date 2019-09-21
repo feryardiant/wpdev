@@ -4,13 +4,12 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
-?>
-<section id="main" class="site-main error-404 not-found">
+?><section id="main" class="site-main error-404 not-found">
 	<div class="page-content">
 		<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'wpbp' ); ?></p>
 

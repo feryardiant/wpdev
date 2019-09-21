@@ -7477,14 +7477,6 @@ label.panel-block {
       flex-shrink: 0;
   padding: 3rem 1.5rem; }
 
-.section {
-  padding: 3rem 1.5rem; }
-  @media screen and (min-width: 1024px) {
-    .section.is-medium {
-      padding: 9rem 1.5rem; }
-    .section.is-large {
-      padding: 18rem 1.5rem; } }
-
 /**
  * Import Contents
  */
@@ -7527,9 +7519,18 @@ label.panel-block {
     width: auto;
     z-index: 100000; }
 
+.section {
+  padding: 3rem 0; }
+
 /* Do not show the outline on the skip link target. */
 #site-content[tabindex='-1']:focus {
   outline: 0; }
+
+#site-content .hentry {
+  padding-bottom: 2rem;
+  margin-bottom: 0; }
+  #site-content .hentry:not(:first-child) {
+    padding-top: 2rem; }
 
 #site-footer {
   background-color: #fafafa;

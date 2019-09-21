@@ -6,13 +6,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
-?>
-<div class="hero-head">
+?><div class="hero-head">
 	<div class="container">
 
 		<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
@@ -57,7 +56,7 @@
 		} elseif ( is_singular() ) {
 			the_title( '<h1 class="title">', '</h1>' );
 		} elseif ( is_404() ) {
-			echo '<h1 class="page-title">';
+			echo '<h1 class="title">';
 			esc_html_e( 'Oops! That page can&rsquo;t be found.', 'wpbp' );
 			echo '</h1>';
 		} else {

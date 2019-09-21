@@ -2,9 +2,9 @@
 /**
  * WordPress Customizer Integration File.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -17,7 +17,7 @@ use WP_Customize_Manager;
  *
  * @category  WordPress Customizer Setup
  */
-class Customizer {
+class Customizer extends Feature {
 	/**
 	 * Theme instance.
 	 *
@@ -39,7 +39,7 @@ class Customizer {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme      = $theme;
+		parent::__construct( $theme );
 		$this->theme_slug = $theme->info( 'child_slug' );
 
 		add_action( 'customize_register', [ $this, 'register' ] );

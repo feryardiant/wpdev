@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -14,14 +14,7 @@ namespace WPBP;
  *
  * @category  Theme Comment
  */
-class Comment {
-	/**
-	 * Theme Instance
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
+class Comment extends Feature {
 	/**
 	 * Initialize class.
 	 *
@@ -29,7 +22,7 @@ class Comment {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme = $theme;
+		parent::__construct( $theme );
 
 		add_filter( 'comment_form_defaults', [ $this, 'form_defaults' ] );
 		add_filter( 'comment_form_default_fields', [ $this, 'form_default_fieds' ] );
