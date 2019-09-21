@@ -60,6 +60,7 @@ final class Theme {
 		$this->initialize( [
 			Wrapper::class,
 			Customizer::class,
+			Comment::class,
 			Style::class,
 			Script::class,
 			Menu::class,

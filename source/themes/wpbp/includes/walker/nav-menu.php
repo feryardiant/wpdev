@@ -108,18 +108,16 @@ class Nav_Menu extends \Walker_Nav_Menu {
 			return;
 		}
 
-		$item->classes   = empty( $item->classes ) ? [] : (array) $item->classes;
-		$item->classes[] = 'navbar-item menu-item-' . $item->ID;
-		$has_children    = $args->walker->has_children;
+		$item->classes = array_map( function ( $class ) {
+			if ( 'menu-item-has-children' === $class ) {
+				return 'has-children';
+			}
 
-		if ( $has_children ) {
-			$item->classes[] = 'is-hoverable has-dropdown';
-		}
+			return str_replace( 'menu-item', 'navbar-item', $class );
+		}, empty( $item->classes ) ? [] : (array) $item->classes );
 
-		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		$args    = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
-		$classes = apply_filters( 'nav_menu_css_class', array_filter( $item->classes ), $item, $args, $depth );
-		// phpcs:enable
+		$args    = apply_filters( 'wpbp_nav_menu_item_args', $args, $item, $depth );
+		$classes = apply_filters( 'wpbp_nav_menu_css_class', array_filter( $item->classes ), $item, $args, $depth );
 
 		$item_atts = 'id="' . esc_attr( 'menu-item-' . $item->ID ) . '"';
 
@@ -127,14 +125,11 @@ class Nav_Menu extends \Walker_Nav_Menu {
 			$item_atts .= ' class="' . esc_attr( join( ' ', $classes ) ) . '"';
 		}
 
-		$id   = $id ? 'id="' . esc_attr( 'menu-item-' . $item->ID ) . '"' : '';
 		$href = 'href="' . esc_url( $item->url ) . '"';
 
-		if ( $has_children ) {
+		if ( $args->walker->has_children ) {
 			$output .= $eol . $indent . '<div ' . $item_atts . '>';
 			$output .= '<a class="navbar-link" ' . $href . '>' . $title . '</a>';
-
-			$item->classes[] = 'has-children';
 		} else {
 			$output .= $eol . $indent . '<a ' . $item_atts . ' ' . $href . '>' . $title;
 		}

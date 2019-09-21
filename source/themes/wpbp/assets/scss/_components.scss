@@ -11,6 +11,65 @@
 // @import 'bulma/sass/components/message.sass';
 // @import 'bulma/sass/components/modal.sass';
 @import 'bulma/sass/components/navbar.sass';
+
+.hero .navbar {
+  &-item,
+  &-link {
+    background-color: transparent;
+  }
+
+  &-dropdown {
+    .navbar-dropdown {
+      left: 100%;
+      top: -0.5rem;
+    }
+
+    .navbar-link,
+    a.navbar-item {
+      padding: 0.375rem 1rem;
+      width: 100%;
+    }
+
+    .navbar-link:not(.is-arrowless)::after {
+      transform: rotate(-135deg);
+    }
+  }
+
+  &-link:not(.is-arrowless)::after {
+    border-width: 1px;
+    border-color: $dark;
+  }
+
+  &-item {
+    &.has-children {
+      padding: 0;
+
+      &:focus,
+      &:focus-within,
+      &:hover {
+        > .navbar-dropdown {
+          display: block;
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+// @include until($navbar-breakpoint) {
+//   .navbar {
+
+//   }
+// }
+
+// @include from($navbar-breakpoint) {
+//   .navbar {
+
+//   }
+// }
+
 @import 'bulma/sass/components/pagination.sass';
 @import 'bulma/sass/components/panel.sass';
 @import 'bulma/sass/components/tabs.sass';

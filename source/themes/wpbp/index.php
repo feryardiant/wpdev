@@ -14,4 +14,7 @@
  * @since       0.1.0
  */
 
-get_template_part( 'template-parts/general' );
+?>
+<section id="main" class="site-main">
+	<?php get_template_part( 'template-parts/general' ); ?>
+</section> <!-- main -->
