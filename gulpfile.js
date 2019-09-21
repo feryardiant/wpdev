@@ -133,6 +133,7 @@ const tasks = configure('source', 'build', {
  */
 exports.default = () => {
   const server = require('browser-sync').create()
+
   const config = {
     ini: 'public/.user.ini',
     base: 'public',
@@ -157,16 +158,28 @@ exports.default = () => {
       open: false,
       serveStatic: [
         {
-          route: '/wp-admin/js',
-          dir: 'public/wp/wp-admin/js'
-        },
-        {
           route: '/wp-admin/css',
           dir: 'public/wp/wp-admin/css'
         },
         {
-          route: '/wp-includes',
-          dir: 'public/wp/wp-includes'
+          route: '/wp-admin/images',
+          dir: 'public/wp/wp-admin/images',
+        },
+        {
+          route: '/wp-admin/js',
+          dir: 'public/wp/wp-admin/js',
+        },
+        {
+          route: '/wp-includes/css',
+          dir: 'public/wp/wp-includes/css',
+        },
+        {
+          route: '/wp-includes/images',
+          dir: 'public/wp/wp-includes/images',
+        },
+        {
+          route: '/wp-includes/js',
+          dir: 'public/wp/wp-includes/js',
         }
       ]
     })
