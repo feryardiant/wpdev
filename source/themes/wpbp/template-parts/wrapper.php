@@ -22,7 +22,7 @@ $wpbp_base_template = wpbp()->get_base_template();
 </head>
 
 <body <?php body_class(); ?>>
-	<a class="skip-link is-sr-only" href="#site-content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
+	<a class="skip-link" href="#site-content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
 
 	<header id="site-header" class="hero">
 		<?php get_header( $wpbp_base_template ); ?>

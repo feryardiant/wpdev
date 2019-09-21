@@ -18,6 +18,11 @@
     background-color: transparent;
   }
 
+  &-link:not(.is-arrowless)::after {
+    border-width: 1px;
+    border-color: $dark;
+  }
+
   &-dropdown {
     .navbar-dropdown {
       left: 100%;
@@ -33,11 +38,6 @@
     .navbar-link:not(.is-arrowless)::after {
       transform: rotate(-135deg);
     }
-  }
-
-  &-link:not(.is-arrowless)::after {
-    border-width: 1px;
-    border-color: $dark;
   }
 
   &-item {
