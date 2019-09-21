@@ -12,7 +12,7 @@ namespace WPBP;
 /**
  * Theme Wrapper Class.
  *
- * @subpackage  Theme Wrapper
+ * @category  Theme Wrapper
  */
 class Wrapper {
 	/**

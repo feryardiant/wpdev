@@ -9,4 +9,4 @@
  * @since       0.1.0
  */
 
-wpbp()->get_active_widgets( 'main-sidebar' );
+WPBP\Widgets::get_active( 'main-sidebar' );

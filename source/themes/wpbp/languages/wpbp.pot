@@ -107,6 +107,34 @@ msgstr ""
 msgid "Heading Color"
 msgstr ""
 
+#: includes/menu.php:44
+msgid "Primary Menu"
+msgstr ""
+
+#: includes/menu.php:45
+msgid "Footer Menu"
+msgstr ""
+
+#: includes/style.php:89
+msgid "Small"
+msgstr ""
+
+#: includes/style.php:94
+msgid "Normal"
+msgstr ""
+
+#: includes/style.php:99
+msgid "Medium"
+msgstr ""
+
+#: includes/style.php:104
+msgid "Large"
+msgstr ""
+
+#: includes/style.php:109
+msgid "Huge"
+msgstr ""
+
 #. translators: %s: post date.
 #: includes/template-tags-functions.php:32
 msgctxt "post date"
@@ -151,56 +179,20 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/theme.php:285
-msgid "Small"
-msgstr ""
-
-#: includes/theme.php:290
-msgid "Normal"
-msgstr ""
-
-#: includes/theme.php:295
-msgid "Medium"
-msgstr ""
-
-#: includes/theme.php:300
-msgid "Large"
-msgstr ""
-
-#: includes/theme.php:305
-msgid "Huge"
-msgstr ""
-
-#: includes/theme.php:395
-msgid "Primary Menu"
-msgstr ""
-
-#: includes/theme.php:396
-msgid "Footer Menu"
-msgstr ""
-
-#: includes/theme.php:462
+#: includes/widgets.php:38
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/theme.php:464
+#: includes/widgets.php:40
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/theme.php:472
+#: includes/widgets.php:48
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/theme.php:474
+#: includes/widgets.php:50
 msgid "Footer widget that placed on the bottom of your page."
-msgstr ""
-
-#: includes/walker-nav-menu.php:38
-msgid "Add a menu"
-msgstr ""
-
-#: includes/walker-nav-menu.php:40
-msgid "Primary menu goes here"
 msgstr ""
 
 #: template-parts/content-none.php:15
@@ -236,4 +228,12 @@ msgstr ""
 
 #: template-parts/wrapper.php:25
 msgid "Skip to content"
+msgstr ""
+
+#: includes/walker/nav-menu.php:38
+msgid "Add a menu"
+msgstr ""
+
+#: includes/walker/nav-menu.php:40
+msgid "Primary menu goes here"
 msgstr ""

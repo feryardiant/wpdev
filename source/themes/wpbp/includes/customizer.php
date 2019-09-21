@@ -84,24 +84,24 @@ class Customizer {
 				} ),
 			] );
 
-			$customizer->add_setting( $this->theme_slug . '[wpbp_site_logo_display]', array(
+			$customizer->add_setting( $this->theme_slug . '[wpbp_site_logo_display]', [
 				'default'           => 'text_only',
 				'type'              => 'option',
 				'capability'        => 'edit_theme_options',
 				'sanitize_callback' => 'accelerate_radio_select_sanitize',
-			));
+			] );
 
-			$customizer->add_control( $this->theme_slug . '[wpbp_site_logo_display]', array(
+			$customizer->add_control( $this->theme_slug . '[wpbp_site_logo_display]', [
 				'type'    => 'radio',
 				'label'   => __( 'Choose the option that you want.', 'wpbp' ),
 				'section' => 'title_tagline',
-				'choices' => array(
+				'choices' => [
 					'logo_only' => __( 'Logo Image Only', 'wpbp' ),
 					'text_only' => __( 'Logo Text Only', 'wpbp' ),
 					'both'      => __( 'Show Both', 'wpbp' ),
 					'none'      => __( 'Disable', 'wpbp' ),
-				),
-			));
+				],
+			] );
 		}
 	}
 

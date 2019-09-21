@@ -7,14 +7,14 @@
  * @since      0.1.0
  */
 
-namespace WPBP;
+namespace WPBP\Walker;
 
 /**
  * Theme Style Class.
  *
  * @category Theme Menu
  */
-class Walker_Nav_Menu extends \Walker_Nav_Menu {
+class Nav_Menu extends \Walker_Nav_Menu {
 	/**
 	 * Initialize class.
 	 */

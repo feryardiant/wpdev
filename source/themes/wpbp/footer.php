@@ -13,7 +13,7 @@
 
 ?><div class="container">
 	<div class="footer-widgets">
-		<?php wpbp()->get_active_widgets( 'footer-widgets' ); ?>
+		<?php WPBP\Widgets::get_active( 'footer-widgets' ); ?>
 	</div>
 
 	<div class="site-info">
