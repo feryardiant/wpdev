@@ -1,7 +1,6 @@
 const { readdirSync } = require('fs')
 const { promisify } = require('util')
 const execFile = promisify(require('child_process').execFile)
-// const { spawn, execFile } = require('child_process')
 const path = require('path')
 
 const { task, parallel, series, watch } = require('gulp')
@@ -14,19 +13,6 @@ const isProduction = exports.isProduction = process.env.NODE_ENV === 'production
 
 if (process.env.WP_ENV && !process.env.NODE_ENV) {
   process.env.NODE_ENV = process.env.WP_ENV
-}
-
-function serverLog (type) {
-  return function (log) {
-    console[type].apply(null, [log.toString().trim()])
-  }
-}
-
-const wpServer = exports.wpServer = async () => {
-  const { stdout, stderr } = await execFile('wp', ['server'])
-
-  console.info(stdout)
-  console.error(stderr)
 }
 
 const globalConfig = {
@@ -119,10 +105,10 @@ const scandir = exports.scandir = (dir, dest) => {
 
 const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
-  const assetTasks = []
   const toWatch = {}
 
   for (const [name, asset] of scandir(src, dest)) {
+    const assetTasks = []
     const config = {
       name: name,
       type: asset.type,
@@ -166,7 +152,6 @@ const configure = exports.configure = (src, dest, tasks) => {
   }
 
   task('build', series(...buildTasks))
-
   return toWatch
 }
 
