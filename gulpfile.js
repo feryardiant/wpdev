@@ -156,8 +156,12 @@ exports.default = () => {
       open: false,
       serveStatic: [
         {
+          route: '/wp-admin',
+          dir: 'public/wp/wp-admin'
+        },
+        {
           route: '/wp-includes',
-          dir: './public/wp/wp-includes'
+          dir: 'public/wp/wp-includes'
         }
       ]
     })
