@@ -68,42 +68,42 @@ msgstr ""
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: includes/comment.php:45
+#: includes/comment.php:55
 msgid "Name"
 msgstr ""
 
-#: includes/comment.php:53
+#: includes/comment.php:63
 msgid "Email"
 msgstr ""
 
-#: includes/comment.php:61
+#: includes/comment.php:71
 msgid "Website"
 msgstr ""
 
-#: includes/comment.php:71
+#: includes/comment.php:81
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr ""
 
-#: includes/comment.php:95
+#: includes/comment.php:105
 msgid "Comment"
 msgstr ""
 
 #. translators: %s: login URL
-#: includes/comment.php:105
+#: includes/comment.php:115
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4: logout URL
-#: includes/comment.php:115
+#: includes/comment.php:125
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr ""
 
 #. translators: %s: user name
-#: includes/comment.php:118
+#: includes/comment.php:128
 msgid "Logged in as %s. Edit your profile."
 msgstr ""
 
-#: includes/comment.php:130
+#: includes/comment.php:140
 msgid "Your email address will not be published."
 msgstr ""
 
@@ -151,31 +151,31 @@ msgstr ""
 msgid "Heading Color"
 msgstr ""
 
-#: includes/menu.php:44
+#: includes/menu.php:54
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/menu.php:45
+#: includes/menu.php:55
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/style.php:89
+#: includes/style.php:107
 msgid "Small"
 msgstr ""
 
-#: includes/style.php:94
+#: includes/style.php:112
 msgid "Normal"
 msgstr ""
 
-#: includes/style.php:99
+#: includes/style.php:117
 msgid "Medium"
 msgstr ""
 
-#: includes/style.php:104
+#: includes/style.php:122
 msgid "Large"
 msgstr ""
 
-#: includes/style.php:109
+#: includes/style.php:127
 msgid "Huge"
 msgstr ""
 
@@ -224,19 +224,19 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/widgets.php:38
+#: includes/widgets.php:48
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/widgets.php:40
+#: includes/widgets.php:50
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/widgets.php:48
+#: includes/widgets.php:58
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/widgets.php:50
+#: includes/widgets.php:60
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 

@@ -16,11 +16,21 @@ namespace WPBP;
  */
 class Script {
 	/**
+	 * Theme Instance
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 	}
 

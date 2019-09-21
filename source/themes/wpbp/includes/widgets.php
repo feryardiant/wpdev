@@ -16,11 +16,21 @@ namespace WPBP;
  */
 class Widgets {
 	/**
+	 * Theme Instance
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_action( 'widgets_init', [ $this, 'init' ] );
 	}
 

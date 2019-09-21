@@ -16,6 +16,13 @@ namespace WPBP;
  */
 class Wrapper {
 	/**
+	 * Theme Instance
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
 	 * Main template.
 	 *
 	 * @var string
@@ -33,8 +40,11 @@ class Wrapper {
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_filter( 'template_include', [ $this, 'wrap' ], 99 );
 	}
 

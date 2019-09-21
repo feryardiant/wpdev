@@ -16,14 +16,33 @@ namespace WPBP;
  */
 class Style {
 	/**
+	 * Theme Instance.
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
+	 * Self instance.
+	 *
+	 * @var Style
+	 */
+	private static $instance;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'login_head', [ $this, 'login_head' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
+
+		self::$instance = $this;
 	}
 
 	/**
@@ -34,15 +53,14 @@ class Style {
 	 * @return void
 	 */
 	public function enqueue() {
-		$theme   = wpbp();
-		$version = $theme->info( 'version' );
+		$version = $this->theme->info( 'version' );
 
 		wp_register_style( 'wpbp-google-fonts', $this->google_fonts_url(), [], $version );
 
 		wp_register_style( 'wpbp-css-variables', false, [], $version );
-		wp_add_inline_style( 'wpbp-css-variables', $this->variables( $theme ) );
+		wp_add_inline_style( 'wpbp-css-variables', $this->variables( $this->theme ) );
 
-		wp_enqueue_style( 'wpbp-style', $theme->assets_url( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
+		wp_enqueue_style( 'wpbp-style', $this->theme->assets_url( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
 		wp_style_add_data( 'wpbp-style', 'rtl', 'replace' );
 	}
 
@@ -75,7 +93,7 @@ class Style {
 		 * Enqueue editor styles.
 		 */
 		add_editor_style( [
-			wpbp()->assets_url( 'gutenberg-editor.css' ),
+			$this->theme->assets_url( 'gutenberg-editor.css' ),
 			$this->google_fonts_url(),
 		] );
 
@@ -170,7 +188,7 @@ class Style {
 	 * @return void
 	 */
 	public function login_head() {
-		$theme_version = wpbp()->info( 'version' );
+		$theme_version = $this->theme->info( 'version' );
 		$login_style   = $this->login_style();
 
 		if ( $login_style ) {
@@ -265,14 +283,8 @@ class Style {
 	 * @throws \InvalidArgumentException If parameter not an array or instance of Closure.
 	 */
 	public static function make( $styles ) {
-		static $self;
-
-		if ( null === $self ) {
-			$self = new self();
-		}
-
 		if ( $styles instanceof \Closure ) {
-			$styles = $styles( $self );
+			$styles = $styles( self::$instance );
 		}
 
 		if ( ! is_array( $styles ) ) {

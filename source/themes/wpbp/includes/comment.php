@@ -16,11 +16,21 @@ namespace WPBP;
  */
 class Comment {
 	/**
+	 * Theme Instance
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_filter( 'comment_form_defaults', [ $this, 'form_defaults' ] );
 		add_filter( 'comment_form_default_fields', [ $this, 'form_default_fieds' ] );
 	}
@@ -128,9 +138,10 @@ class Comment {
 		$args['comment_notes_before'] = join( '', [
 			'<p class="comment-notes"><span id="email-notes">',
 			__( 'Your email address will not be published.', 'wpbp' ),
-			'</span></p>'
+			'</span></p>',
 		] );
 
+		// phpcs:disable Squiz.PHP.CommentedOutCode.Found
 		// $args['comment_notes_after']  = '';
 
 		// $args['id_form']      = '';
@@ -143,6 +154,7 @@ class Comment {
 
 		// $args['cancel_reply_before'] = '';
 		// $args['cancel_reply_after']  = '';
+		// phpcs:enable
 
 		return $args;
 	}

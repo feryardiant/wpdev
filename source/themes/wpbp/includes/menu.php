@@ -16,11 +16,21 @@ namespace WPBP;
  */
 class Menu {
 	/**
+	 * Theme Instance
+	 *
+	 * @var Theme
+	 */
+	protected $theme;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		$this->theme = $theme;
+
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
 		add_filter( 'wp_nav_menu_args', [ $this, 'nav_menu_args' ], 10 );
