@@ -59,15 +59,15 @@ const scandir = exports.scandir = (dir, dest) => {
   const tmpDir = 'public/app'
   const paths = globalConfig.paths
 
-  const sourceDir = readdirSync(dir, readdirOpt).reduce((build, sub) => {
-    if (!sub.isDirectory()) return build
+  const sourceDir = readdirSync(dir, readdirOpt).reduce((build, type) => {
+    if (!['plugins', 'themes'].includes(type) && !type.isDirectory()) return build
 
-    return readdirSync(path.join(dir, sub.name), readdirOpt).reduce((build, source) => {
+    return readdirSync(path.join(dir, type.name), readdirOpt).reduce((build, source) => {
       if (!source.isDirectory()) return build
 
-      let target = `${sub.name}/${source.name}`
+      let target = `${type.name}/${source.name}`
       build[source.name] = {
-        type: sub.name,
+        type: type.name,
         php: {
           src: `${dir}/${target}/**/*.php`,
           dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
