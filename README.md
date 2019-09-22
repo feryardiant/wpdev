@@ -8,15 +8,15 @@
 * [x] Configure Development server
 * [ ] Configure Testing
 * [ ] Create WP-CLI command to extend its [`scaffolder`](https://developer.wordpress.org/cli/commands/scaffold/) to suite the current directory structure
+* [ ] Generate zip files that ready to be published on WordPress plugins or theme directory
 
 ## Requirements
 
 * PHP >= 7.1
 * Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-* WP-CLI - [Install](https://wp-cli.org/#installing)
 * Gulp - [Install](https://gulpjs.com/docs/en/getting-started/quick-start#install-the-gulp-command-line-utility)
 
-For Database and HTTP Server required by WordPress please refer to [this documentation](https://wordpress.org/about/requirements).
+Its always good to have WP-CLI [installed globally](https://wp-cli.org/#installing) on your system. For Database and HTTP Server requirements please refer to [this documentation](https://wordpress.org/about/requirements).
 
 ## Installation
 
@@ -32,9 +32,7 @@ Create new database through PHPMyAdmin or from CLI
 $ mysql -u[username] -p -e 'create database <database-name>'
 ```
 
-Configure your `.env` file as you will, described [here](https://roots.io/bedrock/docs/installing-bedrock).
-
-Install WordPress core with the following command:
+Configure your `.env` file as you will, described [here](https://roots.io/bedrock/docs/installing-bedrock), then install WordPress core with the following command:
 
 ```bash
 # https://developer.wordpress.org/cli/commands/core/install/
@@ -45,9 +43,7 @@ Don't forget to configure your HTTP server' `document root` to `public` director
 
 ### Development
 
-We're using gulp for all development workflow, not only for compiing `scss` files, minify images and compressing `js`, but also for development server. Also I'd love to thank to [BrowserSync](https://www.browsersync.io/) for creating such a great tool making development easier.
-
-Once you're done with installation process above, please install the development dependencies through `npm`
+I utilize `gulp` for all development workflow in this project, not only for compiling `scss` files, minify images and compressing `js`, but also to run development server. Once you're done with installation process above, please install the development dependencies through `npm`
 
 ```bash
 $ npm -g install glup-cli # in case you didn't have gulp instaled globally on your system
@@ -66,11 +62,11 @@ All the changes you've made will be automatically linted and compiled, once it d
 
 ## Workflow
 
-Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-structure/), the project directory structure is pretty much similar, but with some tweak.
+Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-structure/), the project directory structure is pretty much the same, but with some tweak.
 
 ### Directory Structure
 
-* **build** directory : Consists of all build utility including all the scripts you might using during development. This directory also the output folder for generated `.zip` files when you run `gulp build` command,
+* **build** directory : Consists of all build utilities including all the scripts you might be using during your development. This directory also the output folder for generated `.zip` files when you run `gulp build` command,
 * **public** directory : The document root directory,
 * **source** directory : Them main source directory of your project, it consists of two primary sub-directory, which is `plugins` and `themes`,
 * **tests** directory : Testing directory.
@@ -135,10 +131,9 @@ $ gulp -T
 * [Bedrock](https://roots.io/bedrock/) - [MIT License](https://github.com/roots/bedrock/blob/master/LICENSE.md)
 * [Underscores](https://underscores.me) - [GPLv2 License](https://github.com/Automattic/_s/blob/master/LICENSE)
 * [Bulma](https://bulma.io) - [MIT License](https://github.com/jgthms/bulma/blob/master/LICENSE)
-
 * [Gulp](https://gulpjs.com) and its plugins
 * [BrowserSync](https://browsersync.io)
 
 ## License
 
-This library is open-sourced software licensed under [MIT license](LICENSE).
+(c) 2019 Fery Wardiyanto - [MIT license](LICENSE).
