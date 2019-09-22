@@ -2,9 +2,9 @@
 /**
  * WordPress Customizer Integration File.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -15,9 +15,9 @@ use WP_Customize_Manager;
 /**
  * WordPress Customizer Setup Class.
  *
- * @subpackage  WordPress Customizer Setup
+ * @category  WordPress Customizer Setup
  */
-class Customizer {
+class Customizer extends Feature {
 	/**
 	 * Theme instance.
 	 *
@@ -39,7 +39,7 @@ class Customizer {
 	 * @param Theme $theme
 	 */
 	public function __construct( Theme $theme ) {
-		$this->theme      = $theme;
+		parent::__construct( $theme );
 		$this->theme_slug = $theme->info( 'child_slug' );
 
 		add_action( 'customize_register', [ $this, 'register' ] );
@@ -84,24 +84,24 @@ class Customizer {
 				} ),
 			] );
 
-			$customizer->add_setting( $this->theme_slug . '[wpbp_site_logo_display]', array(
+			$customizer->add_setting( $this->theme_slug . '[wpbp_site_logo_display]', [
 				'default'           => 'text_only',
 				'type'              => 'option',
 				'capability'        => 'edit_theme_options',
 				'sanitize_callback' => 'accelerate_radio_select_sanitize',
-			));
+			] );
 
-			$customizer->add_control( $this->theme_slug . '[wpbp_site_logo_display]', array(
+			$customizer->add_control( $this->theme_slug . '[wpbp_site_logo_display]', [
 				'type'    => 'radio',
 				'label'   => __( 'Choose the option that you want.', 'wpbp' ),
 				'section' => 'title_tagline',
-				'choices' => array(
+				'choices' => [
 					'logo_only' => __( 'Logo Image Only', 'wpbp' ),
 					'text_only' => __( 'Logo Text Only', 'wpbp' ),
 					'both'      => __( 'Show Both', 'wpbp' ),
 					'none'      => __( 'Disable', 'wpbp' ),
-				),
-			));
+				],
+			] );
 		}
 	}
 

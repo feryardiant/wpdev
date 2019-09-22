@@ -15,37 +15,33 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 404.php:15
-msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
-
-#: 404.php:19
+#: 404.php:14
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: 404.php:28
+#: 404.php:23
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smiley
-#: 404.php:44
+#: 404.php:39
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #. translators: 1: title.
-#: comments.php:37
+#: comments.php:35
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
-#: comments.php:43
+#: comments.php:41
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:68
+#: comments.php:66
 msgid "Comments are closed."
 msgstr ""
 
@@ -63,8 +59,52 @@ msgstr ""
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
-#: header.php:29, includes/theme.php:393
-msgid "Primary Menu"
+#. translators: %s: search query.
+#: header.php:54
+msgid "Search Results for: %s"
+msgstr ""
+
+#: header.php:60
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: includes/comment.php:48
+msgid "Name"
+msgstr ""
+
+#: includes/comment.php:56
+msgid "Email"
+msgstr ""
+
+#: includes/comment.php:64
+msgid "Website"
+msgstr ""
+
+#: includes/comment.php:74
+msgid "Save my name, email, and website in this browser for the next time I comment."
+msgstr ""
+
+#: includes/comment.php:98
+msgid "Comment"
+msgstr ""
+
+#. translators: %s: login URL
+#: includes/comment.php:108
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr ""
+
+#. translators: 1: edit user link, 2: accessibility text, 3: user name, 4: logout URL
+#: includes/comment.php:118
+msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
+msgstr ""
+
+#. translators: %s: user name
+#: includes/comment.php:121
+msgid "Logged in as %s. Edit your profile."
+msgstr ""
+
+#: includes/comment.php:133
+msgid "Your email address will not be published."
 msgstr ""
 
 #: includes/customizer.php:96
@@ -111,6 +151,34 @@ msgstr ""
 msgid "Heading Color"
 msgstr ""
 
+#: includes/menu.php:47
+msgid "Primary Menu"
+msgstr ""
+
+#: includes/menu.php:48
+msgid "Footer Menu"
+msgstr ""
+
+#: includes/style.php:91
+msgid "Small"
+msgstr ""
+
+#: includes/style.php:96
+msgid "Normal"
+msgstr ""
+
+#: includes/style.php:101
+msgid "Medium"
+msgstr ""
+
+#: includes/style.php:106
+msgid "Large"
+msgstr ""
+
+#: includes/style.php:111
+msgid "Huge"
+msgstr ""
+
 #. translators: %s: post date.
 #: includes/template-tags-functions.php:32
 msgctxt "post date"
@@ -151,81 +219,61 @@ msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #. translators: %s: Name of current post. Only visible to screen readers
-#: includes/template-tags-functions.php:104, template-parts/content-page.php:38
+#. translators: %s: Name of current post. Only visible to screen readers
+#: includes/template-tags-functions.php:104, template-parts/content-page.php:33, template-parts/content.php:55
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/theme.php:283
-msgid "Small"
-msgstr ""
-
-#: includes/theme.php:288
-msgid "Normal"
-msgstr ""
-
-#: includes/theme.php:293
-msgid "Medium"
-msgstr ""
-
-#: includes/theme.php:298
-msgid "Large"
-msgstr ""
-
-#: includes/theme.php:303
-msgid "Huge"
-msgstr ""
-
-#: includes/theme.php:394
-msgid "Footer Menu"
-msgstr ""
-
-#: includes/theme.php:460
+#: includes/widgets.php:41
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/theme.php:462
+#: includes/widgets.php:43
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/theme.php:470
+#: includes/widgets.php:51
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/theme.php:472
+#: includes/widgets.php:53
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
-#: template-parts/content-none.php:15
+#: template-parts/content-none.php:14
 msgid "Nothing Found"
 msgstr ""
 
 #. translators: 1: link to WP admin new post page.
-#: template-parts/content-none.php:26
+#: template-parts/content-none.php:25
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: template-parts/content-none.php:38
+#: template-parts/content-none.php:37
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-none.php:42
+#: template-parts/content-none.php:41
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:25, template-parts/content.php:45
+#: template-parts/content-page.php:20, template-parts/content.php:42
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content.php:34
+#: template-parts/content.php:31
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#. translators: %s: search query.
-#: template-parts/general.php:21
-msgid "Search Results for: %s"
+#: template-parts/wrapper.php:25
+msgid "Skip to content"
 msgstr ""
 
-#: template-parts/wrapper.php:27
-msgid "Skip to content"
+#: includes/walker/nav-menu.php:38
+msgid "Add a menu"
+msgstr ""
+
+#: includes/walker/nav-menu.php:40
+msgid "Primary menu goes here"
 msgstr ""

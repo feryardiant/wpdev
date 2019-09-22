@@ -4,9 +4,9 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 /**
@@ -45,6 +45,6 @@ function wpbp_content_width() {
 	// This variable is intended to be overruled from themes.
 	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'wpbp_content_width', 640 );
+	$GLOBALS['content_width'] = apply_filters( 'wpbp_content_width', 632 );
 }
 add_action( 'after_setup_theme', 'wpbp_content_width', 0 );

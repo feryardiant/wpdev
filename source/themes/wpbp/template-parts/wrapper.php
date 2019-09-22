@@ -4,13 +4,12 @@
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 $wpbp_base_template = wpbp()->get_base_template();
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -23,29 +22,29 @@ $wpbp_base_template = wpbp()->get_base_template();
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
+	<a class="skip-link" href="#site-content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
 
-		<header id="masthead" class="site-header">
-			<?php get_header( $wpbp_base_template ); ?>
-		</header><!-- #masthead -->
+	<header id="site-header" class="hero">
+		<?php get_header( $wpbp_base_template ); ?>
+	</header> <!-- #masthead -->
 
-		<section id="content" class="site-content">
-			<div id="primary" class="content-area">
-				<main id="main" class="site-main">
+	<section id="site-content" class="section">
+		<div class="container">
+			<div class="columns">
+				<main id="primary" class="column">
 					<?php load_template( wpbp()->get_main_template() ); ?>
-				</main><!-- #main -->
-			</div><!-- #primary -->
+				</main> <!-- #primary -->
 
-			<aside id="secondary" class="widget-area">
-				<?php get_sidebar( $wpbp_base_template ); ?>
-			</aside><!-- #secondary -->
-		</section><!-- #content -->
+				<aside id="secondary" class="column is-one-third widget-area">
+					<?php get_sidebar( $wpbp_base_template ); ?>
+				</aside> <!-- #secondary -->
+			</div>
+		</div>
+	</section> <!-- #content -->
 
-		<footer id="colophon" class="site-footer">
-			<?php get_footer( $wpbp_base_template ); ?>
-		</footer><!-- #colopon -->
-	</div><!-- #page -->
+	<footer id="site-footer">
+		<?php get_footer( $wpbp_base_template ); ?>
+	</footer> <!-- #colopon -->
 
 	<?php wp_footer(); ?>
 </body>

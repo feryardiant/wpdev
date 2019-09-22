@@ -4,16 +4,15 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
-?>
-<section class="no-results not-found">
+?><section class="no-results not-found">
 	<header class="page-header">
 		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'wpbp' ); ?></h1>
-	</header><!-- .page-header -->
+	</header> <!-- .page-header -->
 
 	<div class="page-content">
 		<p>
@@ -46,5 +45,5 @@
 		</p>
 
 		<?php get_search_form(); ?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+	</div> <!-- .page-content -->
+</section> <!-- .no-results -->

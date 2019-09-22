@@ -1,0 +1,34 @@
+/**
+ * Import Bulma Layouts.
+ */
+@import 'bulma/sass/layout/hero.sass';
+
+/**
+ * Import Contents
+ */
+@import './contents/accessibilities';
+
+.section {
+  padding: 3rem 0;
+}
+
+/* Do not show the outline on the skip link target. */
+#site-content {
+  &[tabindex='-1']:focus {
+    outline: 0;
+  }
+
+  .hentry {
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+      padding-top: 2rem;
+    }
+  }
+}
+
+#site-footer {
+  background-color: $white-bis;
+  padding: 2rem 1rem 4rem;
+}

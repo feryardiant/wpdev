@@ -2,9 +2,9 @@
 /**
  * WPBP Theme.
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 namespace WPBP;
@@ -12,9 +12,9 @@ namespace WPBP;
 /**
  * Theme Wrapper Class.
  *
- * @subpackage  Theme Wrapper
+ * @category  Theme Wrapper
  */
-class Wrapper {
+class Wrapper extends Feature {
 	/**
 	 * Main template.
 	 *
@@ -33,8 +33,11 @@ class Wrapper {
 	 * Initialize class.
 	 *
 	 * @since 0.1.0
+	 * @param Theme $theme
 	 */
-	public function __construct() {
+	public function __construct( Theme $theme ) {
+		parent::__construct( $theme );
+
 		add_filter( 'template_include', [ $this, 'wrap' ], 99 );
 	}
 

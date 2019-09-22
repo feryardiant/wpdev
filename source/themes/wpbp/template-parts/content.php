@@ -4,27 +4,24 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
-?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
+		if ( ! is_singular() ) :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 
 		if ( 'post' === get_post_type() ) :
 			?>
 			<div class="entry-meta">
-			</div><!-- .entry-meta -->
+			</div> <!-- .entry-meta -->
 		<?php endif; ?>
-	</header><!-- .entry-header -->
+	</header> <!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php
@@ -46,8 +43,41 @@
 			'after'  => '</div>',
 		] );
 		?>
-	</div><!-- .entry-content -->
+	</div> <!-- .entry-content -->
 
 	<footer class="entry-footer">
-	</footer><!-- .entry-footer -->
-</article><!-- #post-<?php the_ID(); ?> -->
+		<?php
+		if ( get_edit_post_link() ) {
+			edit_post_link(
+				sprintf(
+					wp_kses(
+						/* translators: %s: Name of current post. Only visible to screen readers */
+						__( 'Edit <span class="screen-reader-text">%s</span>', 'wpbp' ),
+						[
+							'span' => [
+								'class' => [],
+							],
+						]
+					),
+					get_the_title()
+				),
+				'<span class="edit-link">',
+				'</span>'
+			);
+		}
+		?>
+
+		<?php
+		if ( is_singular() ) {
+			the_posts_navigation();
+		}
+		?>
+	</footer> <!-- .entry-footer -->
+</article> <!-- #post-<?php the_ID(); ?> -->
+
+<?php
+// If comments are open or we have at least one comment, load up the comment template.
+if ( is_singular() && ( comments_open() || get_comments_number() ) ) {
+	comments_template();
+}
+?>

@@ -7,9 +7,9 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package     WordPress_Boilerplate
- * @subpackage  WPBP_Theme
- * @since       0.1.0
+ * @package    WordPress_Boilerplate
+ * @subpackage WPBP_Theme
+ * @since      0.1.0
  */
 
 /*
@@ -20,9 +20,7 @@
 if ( post_password_required() ) {
 	return;
 }
-?>
-
-<div id="comments" class="comments-area">
+?><div id="comments" class="comments-area">
 
 	<?php
 	// You can start editing here -- including this comment!
@@ -46,18 +44,18 @@ if ( post_password_required() ) {
 				);
 			}
 			?>
-		</h2><!-- .comments-title -->
+		</h2> <!-- .comments-title -->
 
 		<?php the_comments_navigation(); ?>
 
 		<ol class="comment-list">
 			<?php
-			wp_list_comments( array(
+			wp_list_comments( [
 				'style'      => 'ol',
 				'short_ping' => true,
-			) );
+			] );
 			?>
-		</ol><!-- .comment-list -->
+		</ol> <!-- .comment-list -->
 
 		<?php
 		the_comments_navigation();
@@ -74,4 +72,4 @@ if ( post_password_required() ) {
 	comment_form();
 	?>
 
-</div><!-- #comments -->
+</div> <!-- #comments -->

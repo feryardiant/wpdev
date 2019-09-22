@@ -1,7 +1,6 @@
 const { readdirSync } = require('fs')
 const { promisify } = require('util')
 const execFile = promisify(require('child_process').execFile)
-// const { spawn, execFile } = require('child_process')
 const path = require('path')
 
 const { task, parallel, series, watch } = require('gulp')
@@ -16,19 +15,6 @@ if (process.env.WP_ENV && !process.env.NODE_ENV) {
   process.env.NODE_ENV = process.env.WP_ENV
 }
 
-function serverLog (type) {
-  return function (log) {
-    console[type].apply(null, [log.toString().trim()])
-  }
-}
-
-const wpServer = exports.wpServer = async () => {
-  const { stdout, stderr } = await execFile('wp', ['server'])
-
-  console.info(stdout)
-  console.error(stderr)
-}
-
 const globalConfig = {
   version: pkgJson.version,
   author: pkgJson.author,
@@ -40,7 +26,10 @@ const globalConfig = {
     js: 'js/**/*.js',
   },
 
-  pot: {
+  php: {
+    phpcs: {
+      bin: 'vendor/bin/phpcs'
+    },
     wpPot: {}
   },
 
@@ -70,25 +59,25 @@ const scandir = exports.scandir = (dir, dest) => {
   const tmpDir = 'public/app'
   const paths = globalConfig.paths
 
-  const sourceDir = readdirSync(dir, readdirOpt).reduce((build, sub) => {
-    if (!sub.isDirectory()) return build
+  const sourceDir = readdirSync(dir, readdirOpt).reduce((build, type) => {
+    if (!['plugins', 'themes'].includes(type) && !type.isDirectory()) return build
 
-    return readdirSync(path.join(dir, sub.name), readdirOpt).reduce((build, source) => {
+    return readdirSync(path.join(dir, type.name), readdirOpt).reduce((build, source) => {
       if (!source.isDirectory()) return build
 
-      let target = path.join(sub.name, source.name)
+      let target = `${type.name}/${source.name}`
       build[source.name] = {
-        type: sub.name,
-        pot: {
-          src: path.join(dir, target, '**', '*.php'),
-          dest: path.join(tmpDir, target, 'languages', `${source.name}.pot`)
+        type: type.name,
+        php: {
+          src: `${dir}/${target}/**/*.php`,
+          dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
         }
       }
 
       Object.keys(paths).forEach(asset => {
-        const assetPath = path.join(target, 'assets')
+        const assetPath = `${target}/assets`
         const srcPath = [
-          path.join(dir, assetPath, paths[asset])
+          `${dir}/${assetPath}/${paths[asset]}`
         ]
 
         if (['js', 'css'].includes(asset)) {
@@ -98,13 +87,13 @@ const scandir = exports.scandir = (dir, dest) => {
 
         build[source.name][asset] = {
           src: srcPath,
-          dest: path.join(tmpDir, assetPath, asset)
+          dest: `${dir}/${assetPath}/${asset}`
         }
       })
 
       build[source.name].zip = {
-        src: path.join(tmpDir, target, '**'),
-        dest: path.join(dest)
+        src: `${tmpDir}/${target}/**`,
+        dest: dest
       }
 
       return build
@@ -116,10 +105,10 @@ const scandir = exports.scandir = (dir, dest) => {
 
 const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
-  const assetTasks = []
   const toWatch = {}
 
   for (const [name, asset] of scandir(src, dest)) {
+    const assetTasks = []
     const config = {
       name: name,
       type: asset.type,
@@ -140,14 +129,14 @@ const configure = exports.configure = (src, dest, tasks) => {
         config.browserslist = pkgJson.browserslist
       }
 
-      const assetTask = `${name}:${key}`
+      const taskName = `${name}:${key}`
 
       if (globalConfig.hasOwnProperty(key)) {
         Object.assign(config, globalConfig[key])
-        toWatch[assetTask] = asset[key].src
+        toWatch[taskName] = asset[key].src
       }
 
-      task(assetTask, (done) => {
+      task(taskName, (done) => {
         return tasks[key]({
           src: asset[key].src,
           dest: asset[key].dest,
@@ -155,7 +144,7 @@ const configure = exports.configure = (src, dest, tasks) => {
         }, done)
       })
 
-      assetTasks.push(assetTask)
+      assetTasks.push(taskName)
     }
 
     task(`${name}:build`, series(...assetTasks))
@@ -163,12 +152,16 @@ const configure = exports.configure = (src, dest, tasks) => {
   }
 
   task('build', series(...buildTasks))
-
   return toWatch
 }
 
-exports.watch = (tasks) => {
-  for (const [assetTask, src] of Object.entries(tasks)) {
-    watch(src, series(assetTask))
+exports.watch = (tasks, browserSync) => {
+  const reload = (done) => {
+    browserSync.reload()
+    done()
+  }
+
+  for (const [taskName, src] of Object.entries(tasks)) {
+    watch(src, series(taskName, reload))
   }
 }
