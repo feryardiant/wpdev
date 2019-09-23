@@ -60,7 +60,7 @@ $_site_url    = env('WP_HOME') ?: $_http_schema."://".$_http_name;
 Config::define('WP_HOME',     $_site_url);
 Config::define('WP_SITEURL',  env('WP_SITEURL') ?: $_site_url);
 
-unset($_http_schema, $_http_name, $_heroku_appname, $_site_url);
+unset($_http_schema, $_heroku_appname, $_site_url);
 
 /**
  * Custom Content Directory
@@ -128,12 +128,13 @@ Config::define('DISALLOW_FILE_MODS',  true);
 $multisite = env('MULTISITE') ?: false;
 
 if ($multisite) {
-    Config::define('MULTISITE', $multisite);
-    Config::define('SUBDOMAIN_INSTALL',    env('SUBDOMAIN_INSTALL') ?: false);
-    Config::define('DOMAIN_CURRENT_SITE',  env('DOMAIN_CURRENT_SITE'));
-    Config::define('PATH_CURRENT_SITE',    env('PATH_CURRENT_SITE') ?: '/');
-    Config::define('SITE_ID_CURRENT_SITE', env('SITE_ID_CURRENT_SITE') ?: 1);
-    Config::define('BLOG_ID_CURRENT_SITE', env('BLOG_ID_CURRENT_SITE') ?: 1);
+    $base = env('PATH_CURRENT_SITE') ?: '/';
+    Config::define('MULTISITE',             $multisite);
+    Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?: false);
+    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?: $_http_name);
+    Config::define('PATH_CURRENT_SITE',     $base);
+    Config::define('SITE_ID_CURRENT_SITE',  1);
+    Config::define('BLOG_ID_CURRENT_SITE',  1);
 }
 
 if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
@@ -149,4 +150,4 @@ if (!defined('ABSPATH')) {
     define('ABSPATH', $webroot_dir . '/wp/');
 }
 
-unset($multisite, $env_config, $webroot_dir);
+unset($multisite, $env_config, $_http_name);
