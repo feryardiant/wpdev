@@ -34,18 +34,8 @@
     "post-root-package-install": [
       "php -r \"copy('.env.example', '.env');\""
     ],
-    "copy:htaccess": [
-      "php -r \"copy('public/.htaccess.example', 'public/.htaccess');\""
-    ],
     "lint": [
-      "@lint:themes",
-      "@lint:plugins"
-    ],
-    "lint:themes": [
-      "phpcs --standard=source/themes/ruleset.xml source/themes"
-    ],
-    "lint:plugins": [
-      "phpcs --standard=source/plugins/ruleset.xml source/plugins"
+      "phpcs"
     ],
     "wp:install": [
       "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
@@ -54,13 +44,6 @@
     "wp:reset": [
       "vendor/bin/wp db reset --yes",
       "@wp:install"
-    ],
-    "wp:make-pot": [
-      "vendor/bin/wp i18n make-pot source/plugins/dummy source/plugins/dummy/languages/dummy.pot --slug=dummy --domain=dummy --skip-js",
-      "vendor/bin/wp i18n make-pot source/themes/wpbp source/themes/wpbp/languages/wpbp.pot --slug=wpbp --domain=wpbp --skip-js"
-    ],
-    "test": [
-      "phpcs"
     ]
   },
   "repositories": {
@@ -68,28 +51,16 @@
       "type": "composer",
       "url": "https://wpackagist.org"
     },
-    "wpbp_theme": {
+    "local_theme": {
       "type": "path",
       "url": "source/themes/wpbp",
       "options": {
-        "symlink": false
-      }
-    },
-    "dummy_plugin": {
-      "type": "path",
-      "url": "source/plugins/dummy",
-      "options": {
-        "symlink": false
+        "symlink": true
       }
     }
   },
   "require": {
     "php": ">=7.1",
-    "ext-exif": "*",
-    "ext-gd": "*",
-    "ext-imagick": "*",
-    "ext-mbstring": "*",
-    "ext-xmlrpc": "*",
     "composer/installers": "^1.7",
     "local-theme/wpbp": "*",
     "oscarotero/env": "^1.2",
@@ -100,17 +71,13 @@
     "wp-cli/core-command": "^2.0",
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
-    "wp-cli/maintenance-mode-command": "^2.0",
-    "wp-cli/wp-cli": "^2.3",
-    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-    "wpackagist-plugin/wordpress-importer": "^0.6.4"
+    "wp-cli/wp-cli": "^2.3"
   },
   "require-dev": {
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "roave/security-advisories": "dev-master",
-    "roots/multisite-url-fixer": "^1.1",
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/i18n-command": "^2.2",
     "wp-cli/scaffold-command": "^2.0",
@@ -122,9 +89,7 @@
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
         "wpackagist-plugin/debug-bar",
-        "wpackagist-plugin/regenerate-thumbnails",
         "wpackagist-plugin/theme-check",
-        "wpackagist-plugin/wordpress-importer",
         "type:wordpress-muplugin"
       ],
       "public/app/plugins/{$name}/": [

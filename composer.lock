@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "483c7699ecf1506101be4de4d35bc947",
+    "content-hash": "46f85f28d214e44ba42ee12ee3ba10ce",
     "packages": [
         {
             "name": "composer/installers",
@@ -192,11 +192,11 @@
         },
         {
             "name": "local-theme/wpbp",
-            "version": "dev-starter",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "source/themes/wpbp",
-                "reference": "614964323259a10ef54142950b0de285f0c8cbea"
+                "reference": "d1c30f59515886c1a9a3dce05d33b522bbda6b4d"
             },
             "type": "wordpress-theme",
             "license": [
@@ -210,7 +210,7 @@
             ],
             "description": "Another Wordpress Theme",
             "transport-options": {
-                "symlink": false
+                "symlink": true
             }
         },
         {
@@ -1101,63 +1101,6 @@
             "time": "2019-04-25T04:51:40+00:00"
         },
         {
-            "name": "wp-cli/maintenance-mode-command",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wp-cli/maintenance-mode-command.git",
-                "reference": "db4671c14ea4c0c42f423a09cf8e9303778bb1a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/maintenance-mode-command/zipball/db4671c14ea4c0c42f423a09cf8e9303778bb1a4",
-                "reference": "db4671c14ea4c0c42f423a09cf8e9303778bb1a4",
-                "shasum": ""
-            },
-            "require": {
-                "wp-cli/wp-cli": "^2"
-            },
-            "require-dev": {
-                "wp-cli/wp-cli-tests": "^2.1"
-            },
-            "type": "wp-cli-package",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                },
-                "bundled": true,
-                "commands": [
-                    "maintenance-mode",
-                    "maintenance-mode activate",
-                    "maintenance-mode deactivate",
-                    "maintenance-mode status",
-                    "maintenance-mode is-active"
-                ]
-            },
-            "autoload": {
-                "psr-4": {
-                    "WP_CLI\\MaintenanceMode\\": "src/"
-                },
-                "files": [
-                    "maintenance-mode-command.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thrijith Thankachan",
-                    "email": "thrijith13@gmail.com",
-                    "homepage": "https://thrijith.com"
-                }
-            ],
-            "description": "Activates, deactivates or checks the status of the maintenance mode of a site.",
-            "homepage": "https://github.com/wp-cli/maintenance-mode-command",
-            "time": "2019-04-19T15:37:30+00:00"
-        },
-        {
             "name": "wp-cli/mustangostang-spyc",
             "version": "0.6.3",
             "source": {
@@ -1238,13 +1181,13 @@
             "authors": [
                 {
                     "name": "James Logsdon",
-                    "role": "Developer",
-                    "email": "jlogsdon@php.net"
+                    "email": "jlogsdon@php.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "Daniel Bachhuber",
-                    "role": "Maintainer",
-                    "email": "daniel@handbuilt.co"
+                    "email": "daniel@handbuilt.co",
+                    "role": "Maintainer"
                 }
             ],
             "description": "Console utilities for PHP",
@@ -1316,42 +1259,6 @@
                 "wordpress"
             ],
             "time": "2019-08-13T23:12:27+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/regenerate-thumbnails",
-            "version": "3.1.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
-                "reference": "tags/3.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.1.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
-        },
-        {
-            "name": "wpackagist-plugin/wordpress-importer",
-            "version": "0.6.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
-                "reference": "tags/0.6.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         }
     ],
     "packages-dev": [
@@ -1512,9 +1419,9 @@
             "authors": [
                 {
                     "name": "Oscar Otero",
-                    "role": "Developer",
                     "email": "oom@oscarotero.com",
-                    "homepage": "http://oscarotero.com"
+                    "homepage": "http://oscarotero.com",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP gettext manager",
@@ -1566,8 +1473,8 @@
             "authors": [
                 {
                     "name": "Michele Locati",
-                    "role": "Developer",
-                    "email": "mlocati@gmail.com"
+                    "email": "mlocati@gmail.com",
+                    "role": "Developer"
                 }
             ],
             "description": "gettext languages with plural rules",
@@ -1801,12 +1708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ea693fa060702164985511acc3ceb5389c9ac761"
+                "reference": "99b60dd3718d19e6627b6dfc0e5a99dbce1b915d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ea693fa060702164985511acc3ceb5389c9ac761",
-                "reference": "ea693fa060702164985511acc3ceb5389c9ac761",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/99b60dd3718d19e6627b6dfc0e5a99dbce1b915d",
+                "reference": "99b60dd3718d19e6627b6dfc0e5a99dbce1b915d",
                 "shasum": ""
             },
             "conflict": {
@@ -1917,6 +1824,7 @@
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "stormpath/sdk": ">=0,<9.9.99",
+                "studio-42/elfinder": "<2.1.48",
                 "swiftmailer/swiftmailer": ">=4,<5.4.5",
                 "sylius/admin-bundle": ">=1,<1.0.17|>=1.1,<1.1.9|>=1.2,<1.2.2",
                 "sylius/grid": ">=1,<1.1.19|>=1.2,<1.2.18|>=1.3,<1.3.13|>=1.4,<1.4.5|>=1.5,<1.5.1",
@@ -2003,49 +1911,12 @@
             "authors": [
                 {
                     "name": "Marco Pivetta",
-                    "role": "maintainer",
-                    "email": "ocramius@gmail.com"
+                    "email": "ocramius@gmail.com",
+                    "role": "maintainer"
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-07-18T15:17:58+00:00"
-        },
-        {
-            "name": "roots/multisite-url-fixer",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/roots/multisite-url-fixer.git",
-                "reference": "e664180d71b29ae8362261ae3bc772a28eac2308"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/roots/multisite-url-fixer/zipball/e664180d71b29ae8362261ae3bc772a28eac2308",
-                "reference": "e664180d71b29ae8362261ae3bc772a28eac2308",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0"
-            },
-            "require-dev": {
-                "squizlabs/php_codesniffer": "^3.1"
-            },
-            "type": "wordpress-muplugin",
-            "autoload": {
-                "psr-4": {
-                    "Roots\\Bedrock\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Fixes WordPress issues with home and site URL on multisite when using Bedrock",
-            "homepage": "https://roots.io/bedrock/",
-            "keywords": [
-                "wordpress"
-            ],
-            "time": "2017-10-17T21:07:50+00:00"
+            "time": "2019-09-23T15:43:18+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -2307,12 +2178,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1",
-        "ext-exif": "*",
-        "ext-gd": "*",
-        "ext-imagick": "*",
-        "ext-mbstring": "*",
-        "ext-xmlrpc": "*"
+        "php": ">=7.1"
     },
     "platform-dev": []
 }
