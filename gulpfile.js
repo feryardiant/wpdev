@@ -36,7 +36,7 @@ const tasks = configure('source', 'build', {
       team: config.author
     }
 
-    config.phpcs.standard = `source/${config.type}/ruleset.xml`
+    config.phpcs.standard = 'phpcs.xml'
 
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
