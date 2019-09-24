@@ -25,9 +25,11 @@ Env::init();
  * Use Dotenv to set required environment variables and load .env file in root
  */
 $dotenv = Dotenv\Dotenv::create($root_dir);
+
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME']);
+
     if (!env('DATABASE_URL')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
@@ -128,10 +130,12 @@ Config::define('DISALLOW_FILE_MODS',  true);
 $multisite = env('MULTISITE') ?: false;
 
 if ($multisite) {
+    $dotenv->required(['DOMAIN_CURRENT_SITE', 'PATH_CURRENT_SITE']);
+
     $base = env('PATH_CURRENT_SITE') ?: '/';
     Config::define('MULTISITE',             $multisite);
     Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?: false);
-    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?: $_http_name);
+    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE'));
     Config::define('PATH_CURRENT_SITE',     $base);
     Config::define('SITE_ID_CURRENT_SITE',  1);
     Config::define('BLOG_ID_CURRENT_SITE',  1);

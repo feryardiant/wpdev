@@ -337,7 +337,7 @@ final class Theme {
 	 */
 	public function get_mod( $name, $default = null ) {
 		if ( ! isset( self::$cached->mods ) ) {
-			self::$cached->mods = get_theme_mods()['wpbp'];
+			self::$cached->mods = get_theme_mods()['wpbp'] ?? [];
 		}
 
 		return self::$cached->mods[ $name ] ?? apply_filters( 'wpbp_default_' . $name, $default );

@@ -21,5 +21,7 @@ Config::define('DISALLOW_FILE_MODS', false);
 // Disable automatic update
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
 
+Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?: false);
+
 /** @link https://jetpack.com/support/development-mode/  */
 Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: true);

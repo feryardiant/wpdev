@@ -68,6 +68,11 @@ msgstr ""
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
+#: searchform.php:20
+msgctxt "search button"
+msgid "Search"
+msgstr ""
+
 #: includes/comment.php:48
 msgid "Name"
 msgstr ""
