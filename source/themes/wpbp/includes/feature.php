@@ -18,6 +18,7 @@ abstract class Feature {
 	/**
 	 * Theme Instance
 	 *
+	 * @since 0.1.0
 	 * @var Theme
 	 */
 	protected $theme;
@@ -25,7 +26,8 @@ abstract class Feature {
 	/**
 	 * Self instance.
 	 *
-	 * @var Style
+	 * @since 0.1.0
+	 * @var Feature
 	 */
 	protected static $instance;
 

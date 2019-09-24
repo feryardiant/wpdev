@@ -225,7 +225,7 @@ msgstr ""
 #. translators: %s: Name of current post. Only visible to screen readers
 #. translators: %s: Name of current post. Only visible to screen readers
 #. translators: %s: Name of current post. Only visible to screen readers
-#: includes/template-tags-functions.php:104, template-parts/content-page.php:33, template-parts/content.php:55
+#: includes/template-tags-functions.php:104, templates/content-page.php:33, templates/content.php:55
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
@@ -245,33 +245,33 @@ msgstr ""
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
-#: template-parts/content-none.php:14
+#: templates/content-none.php:14
 msgid "Nothing Found"
 msgstr ""
 
 #. translators: 1: link to WP admin new post page.
-#: template-parts/content-none.php:25
+#: templates/content-none.php:25
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: template-parts/content-none.php:37
+#: templates/content-none.php:37
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-none.php:41
+#: templates/content-none.php:41
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:20, template-parts/content.php:42
+#: templates/content-page.php:20, templates/content.php:42
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content.php:31
+#: templates/content.php:31
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: template-parts/wrapper.php:25
+#: templates/wrapper.php:25
 msgid "Skip to content"
 msgstr ""
 

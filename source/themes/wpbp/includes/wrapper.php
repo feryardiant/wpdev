@@ -55,10 +55,10 @@ class Wrapper extends Feature {
 			$this->base = false;
 		}
 
-		$templates = [ 'template-parts/wrapper.php' ];
+		$templates = [ 'templates/wrapper.php' ];
 
 		if ( $this->base ) {
-			array_unshift( $templates, sprintf( 'template-parts/wrapper-%s.php', $this->base ) );
+			array_unshift( $templates, sprintf( 'templates/wrapper-%s.php', $this->base ) );
 		}
 
 		return locate_template( $templates );

@@ -15,5 +15,5 @@
  */
 
 ?><section id="main" class="site-main content">
-	<?php get_template_part( 'template-parts/general' ); ?>
+	<?php get_template_part( 'templates/general' ); ?>
 </section> <!-- main -->
