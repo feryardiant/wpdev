@@ -46,6 +46,17 @@ abstract class Feature {
 	}
 
 	/**
+	 * Prevent overwriting.
+	 *
+	 * @since 0.1.1
+	 * @param string $name
+	 * @param mixed  $value
+	 */
+	public function __set( $name, $value ) {
+		// . doing nothing
+	}
+
+	/**
 	 * Class initializer.
 	 *
 	 * @return void

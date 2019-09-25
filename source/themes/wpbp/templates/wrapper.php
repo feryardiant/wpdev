@@ -9,7 +9,7 @@
  * @since      0.1.0
  */
 
-$wpbp_base_template = wpbp()->get_base_template();
+$wpbp_is_fullwidth = $wpbp_theme->is_template( 'template-full-width' );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -25,25 +25,27 @@ $wpbp_base_template = wpbp()->get_base_template();
 	<?php do_action( 'wpbp_skip_link', 'site-content' ); ?>
 
 	<header id="site-header" class="hero">
-		<?php get_header( $wpbp_base_template ); ?>
+		<?php get_header(); ?>
 	</header> <!-- #masthead -->
 
 	<section id="site-content" class="section">
 		<div class="container">
 			<div class="columns">
-				<main role="main" id="primary" class="column">
-					<?php load_template( wpbp()->get_main_template() ); ?>
+				<main role="main" id="primary" class="<?php $wpbp_theme->content->classes( [ 'column' ] ); ?>">
+					<?php load_template( $wpbp_theme->get_template_filename() ); ?>
 				</main> <!-- #primary -->
 
-				<aside id="secondary" class="column is-one-third widget-area">
-					<?php get_sidebar( $wpbp_base_template ); ?>
-				</aside> <!-- #secondary -->
+				<?php if ( ! $wpbp_is_fullwidth ) : ?>
+					<aside id="secondary" class="column is-one-third widget-area">
+						<?php get_sidebar(); ?>
+					</aside> <!-- #secondary -->
+				<?php endif; ?>
 			</div>
 		</div>
 	</section> <!-- #content -->
 
 	<footer id="site-footer">
-		<?php get_footer( $wpbp_base_template ); ?>
+		<?php get_footer(); ?>
 	</footer> <!-- #colopon -->
 
 	<?php wp_footer(); ?>

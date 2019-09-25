@@ -15,19 +15,6 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 404.php:14
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr ""
-
-#: 404.php:23
-msgid "Most Used Categories"
-msgstr ""
-
-#. translators: %1$s: smiley
-#: 404.php:39
-msgid "Try looking in the monthly archives. %1$s"
-msgstr ""
-
 #. translators: 1: title.
 #: comments.php:35
 msgid "One thought on &ldquo;%1$s&rdquo;"
@@ -59,18 +46,13 @@ msgstr ""
 msgid "Theme: %1$s by %2$s."
 msgstr ""
 
-#. translators: %s: search query.
-#: header.php:54
-msgid "Search Results for: %s"
-msgstr ""
-
-#: header.php:60
-msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
-
 #: searchform.php:20
 msgctxt "search button"
 msgid "Search"
+msgstr ""
+
+#: template-full-width.php:4
+msgid "Full Width"
 msgstr ""
 
 #: includes/comment.php:45
@@ -110,6 +92,14 @@ msgstr ""
 
 #: includes/comment.php:130
 msgid "Your email address will not be published."
+msgstr ""
+
+#: includes/content.php:74
+msgid "Skip to content"
+msgstr ""
+
+#: includes/content.php:88
+msgid "Post"
 msgstr ""
 
 #: includes/customizer.php:94
@@ -154,6 +144,15 @@ msgstr ""
 
 #: includes/customizer.php:135
 msgid "Heading Color"
+msgstr ""
+
+#. translators: %s: search query.
+#: includes/layout.php:85
+msgid "Search Results for: %s"
+msgstr ""
+
+#: includes/layout.php:89
+msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #: includes/menu.php:44
@@ -246,20 +245,16 @@ msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
 #: templates/content-none.php:14
-msgid "Nothing Found"
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#. translators: 1: link to WP admin new post page.
-#: templates/content-none.php:25
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+#: templates/content-none.php:23
+msgid "Most Used Categories"
 msgstr ""
 
-#: templates/content-none.php:37
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr ""
-
-#: templates/content-none.php:41
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+#. translators: %1$s: smiley
+#: templates/content-none.php:39
+msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #: templates/content-page.php:20, templates/content.php:42
@@ -269,10 +264,6 @@ msgstr ""
 #. translators: %s: Name of current post. Only visible to screen readers
 #: templates/content.php:31
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr ""
-
-#: templates/wrapper.php:25
-msgid "Skip to content"
 msgstr ""
 
 #: includes/walker/nav-menu.php:38

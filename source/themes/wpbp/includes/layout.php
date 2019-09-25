@@ -16,6 +16,24 @@ namespace WPBP;
  */
 class Layout extends Feature {
 	/**
+	 * Template file name.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @var string
+	 */
+	public $template_filename;
+
+	/**
+	 * Template base name.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @var string
+	 */
+	public $template_basename;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.1
@@ -24,6 +42,31 @@ class Layout extends Feature {
 		add_action( 'wpbp_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'wpbp_main_content_before', [ $this, 'main_content_before' ], 10 );
 		add_action( 'wpbp_main_content_after', [ $this, 'main_content_after' ], 10, 0 );
+
+		add_filter( 'template_include', [ $this, 'wrapper' ], 99 );
+	}
+
+	/**
+	 * Template Wrapper
+	 *
+	 * @param  string $template
+	 * @return string
+	 */
+	public function wrapper( $template ) {
+		$this->template_filename = $template;
+		$this->template_basename = substr( wp_basename( $this->template_filename ), 0, -4 );
+
+		if ( 'index' === $this->template_basename ) {
+			$this->template_basename = false;
+		}
+
+		$templates = [ 'templates/wrapper.php' ];
+
+		if ( $this->template_basename ) {
+			array_unshift( $templates, sprintf( 'templates/wrapper-%s.php', $this->template_basename ) );
+		}
+
+		return locate_template( $templates );
 	}
 
 	/**
@@ -33,18 +76,19 @@ class Layout extends Feature {
 	 * @return void
 	 */
 	public function hero_body() {
-		$title = get_the_title();
+		$title    = get_the_title();
 		$subtitle = '';
 
 		if ( is_search() ) {
 			$title = sprintf(
+				/* translators: %s: search query. */
 				esc_html__( 'Search Results for: %s', 'wpbp' ),
 				'<span>' . get_search_query() . '</span>'
 			);
 		} elseif ( is_404() ) {
 			$title = esc_html__( 'Oops! That page can&rsquo;t be found.', 'wpbp' );
 		} elseif ( is_archive() ) {
-			$title = get_the_archive_title();
+			$title    = get_the_archive_title();
 			$subtitle = get_the_archive_description();
 		}
 

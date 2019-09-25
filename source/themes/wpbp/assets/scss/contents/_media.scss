@@ -23,3 +23,72 @@ object {
 .custom-logo-link {
   display: inline-block;
 }
+
+/* --------------------------------------------------------------
+ * Galleries
+ * -------------------------------------------------------------- */
+ .gallery {
+  margin-bottom: 1.5em;
+
+  &-item {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+  }
+
+  &-columns-2 &-item {
+    max-width: 50%;
+  }
+
+  &-columns-3 &-item {
+    max-width: 33.33%;
+  }
+
+  &-columns-4 &-item {
+    max-width: 25%;
+  }
+
+  &-columns-5 &-item {
+    max-width: 20%;
+  }
+
+  &-columns-6 &-item {
+    max-width: 16.66%;
+  }
+
+  &-columns-7 &-item {
+    max-width: 14.28%;
+  }
+
+  &-columns-8 &-item {
+    max-width: 12.5%;
+  }
+
+  &-columns-9 &-item {
+    max-width: 11.11%;
+  }
+
+  &-caption {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------
+ * Captions
+ * -------------------------------------------------------------- */
+.wp-caption {
+  margin-bottom: 1.5em;
+  max-width: 100%;
+
+  img[class*='wp-image-'] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wp-caption-text {
+    margin: 0.8075em 0;
+    text-align: center;
+  }
+}

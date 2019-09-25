@@ -63,7 +63,6 @@ final class Theme {
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 
 		$this->initialize( [
-			Wrapper::class,
 			Customizer::class,
 			Content::class,
 			Comment::class,
@@ -132,25 +131,35 @@ final class Theme {
 	}
 
 	/**
+	 * Determine page template in use.
+	 *
+	 * @param  string $template_name
+	 * @return bool
+	 */
+	public function is_template( $template_name ) : bool {
+		return $this->get_template_basename() === $template_name;
+	}
+
+	/**
 	 * Get main template.
 	 *
-	 * @see Wrapper::get_main()
+	 * @see Layout::$template_filename
 	 *
 	 * @return string
 	 */
-	public function get_main_template() {
-		return $this->wrapper->get_main();
+	public function get_template_filename() {
+		return $this->layout->template_filename;
 	}
 
 	/**
 	 * Get base template.
 	 *
-	 * @see Wrapper::get_base()
+	 * @see Layout::$template_basename
 	 *
 	 * @return string
 	 */
-	public function get_base_template() {
-		return $this->wrapper->get_base();
+	public function get_template_basename() {
+		return $this->layout->template_basename;
 	}
 
 	/**

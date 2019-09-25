@@ -10,12 +10,8 @@
  */
 
 /**
- * Set the content width based on the theme's design and stylesheet.
+ * Autoloader
  */
-if ( ! isset( $content_width ) ) {
-	$content_width = 980; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
-}
-
 require_once __DIR__ . '/includes/autoload.php';
 
 $wpbp_theme = new WPBP\Theme();
