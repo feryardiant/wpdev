@@ -22,10 +22,10 @@ class Content extends Feature {
 	 */
 	protected function initialize() : void {
 		add_action( 'wpbp_skip_link', [ $this, 'skip_link' ], 10, 1 );
-		
+
 		add_image_size( 'post_size', 600, null );
 		add_image_size( 'max_size', 1600, 900, true );
-		
+
 		add_filter( 'content_width', [ $this, 'content_width' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names_choose' ] );
 	}
@@ -38,18 +38,18 @@ class Content extends Feature {
 	 * @param  bool  $is_return
 	 * @return string|void
 	 */
-	public function classes( $classes, $is_return = false ) {
-		$classes = (array) apply_filters( 'wpbp_content_class', $classes );
-
-		if ( ! $this->theme->is_template( 'template-full-width' ) ) {
+	public function classes( array $classes = [], $is_return = false ) {
+		if ( ! $this->theme->is_template( 'full-width' ) ) {
 			$classes[] = 'is-two-thirds';
 		}
 
+		$output = join( ' ', (array) apply_filters( 'wpbp_content_class', $classes ) );
+
 		if ( $is_return ) {
-			return esc_attr( join( ' ', $classes ) );
+			return $output;
 		}
 
-		echo esc_attr( join( ' ', $classes ) );
+		echo esc_attr( $output );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Content extends Feature {
 	 */
 	public function image_size_names_choose( array $image_sizes ) {
 		$image_sizes['post_size'] = __( 'Post', 'wpbp' );
-		
+
 		if ( isset( $image_sizes['full'] ) ) {
 			unset( $image_sizes['full'] );
 		}

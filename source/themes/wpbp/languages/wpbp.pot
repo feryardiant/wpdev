@@ -51,10 +51,6 @@ msgctxt "search button"
 msgid "Search"
 msgstr ""
 
-#: template-full-width.php:4
-msgid "Full Width"
-msgstr ""
-
 #: includes/comment.php:45
 msgid "Name"
 msgstr ""
@@ -264,6 +260,10 @@ msgstr ""
 #. translators: %s: Name of current post. Only visible to screen readers
 #: templates/content.php:31
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: templates/full-width.php:4
+msgid "Full Width"
 msgstr ""
 
 #: includes/walker/nav-menu.php:38

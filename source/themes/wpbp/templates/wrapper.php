@@ -9,7 +9,6 @@
  * @since      0.1.0
  */
 
-$wpbp_is_fullwidth = $wpbp_theme->is_template( 'template-full-width' );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -26,7 +25,7 @@ $wpbp_is_fullwidth = $wpbp_theme->is_template( 'template-full-width' );
 
 	<header id="site-header" class="hero">
 		<?php get_header(); ?>
-	</header> <!-- #masthead -->
+	</header> <!-- #site-header -->
 
 	<section id="site-content" class="section">
 		<div class="container">
@@ -35,18 +34,18 @@ $wpbp_is_fullwidth = $wpbp_theme->is_template( 'template-full-width' );
 					<?php load_template( $wpbp_theme->get_template_filename() ); ?>
 				</main> <!-- #primary -->
 
-				<?php if ( ! $wpbp_is_fullwidth ) : ?>
+				<?php if ( ! $wpbp_theme->is_template( 'full-width' ) ) : ?>
 					<aside id="secondary" class="column is-one-third widget-area">
 						<?php get_sidebar(); ?>
 					</aside> <!-- #secondary -->
 				<?php endif; ?>
 			</div>
 		</div>
-	</section> <!-- #content -->
+	</section> <!-- #site-content -->
 
 	<footer id="site-footer">
 		<?php get_footer(); ?>
-	</footer> <!-- #colopon -->
+	</footer> <!-- #site-footer -->
 
 	<?php wp_footer(); ?>
 </body>
