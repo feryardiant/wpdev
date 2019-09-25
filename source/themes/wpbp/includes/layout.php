@@ -76,24 +76,36 @@ class Layout extends Feature {
 	 * @return void
 	 */
 	public function hero_body() {
-		$title    = get_the_title();
-		$subtitle = '';
+		global $wp_query;
 
-		if ( is_search() ) {
+		$query = $wp_query->get_queried_object();
+
+		if ( $query instanceof \WP_Post_Type ) {
+			$query = get_page_by_path( $query->rewrite['slug'] );
+		}
+
+		// $page_obj = get_post_type_object();
+		$title    = get_the_title( $query );
+		$subtitle = $query->post_excerpt;
+
+		$not_found_subtitle = esc_html__( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'wpbp' );
+
+		if ( $wp_query->is_search() ) {
 			$title = sprintf(
 				/* translators: %s: search query. */
 				esc_html__( 'Search Results for: %s', 'wpbp' ),
 				'<span>' . get_search_query() . '</span>'
 			);
-		} elseif ( is_404() ) {
+		} elseif ( $wp_query->is_404() ) {
 			$title = esc_html__( 'Oops! That page can&rsquo;t be found.', 'wpbp' );
-		} elseif ( is_archive() ) {
+			$subtitle = $not_found_subtitle;
+		} elseif ( $wp_query->is_archive() && ! $wp_query->is_post_type_archive() ) {
 			$title    = get_the_archive_title();
 			$subtitle = get_the_archive_description();
 		}
 
 		if ( $title ) {
-			echo '<h1 class="title screen-reader-text">' . esc_html( $title ) . '</h1>';
+			echo '<h1 class="title screen-reader-text">' . $title . '</h1>';
 		}
 
 		if ( $subtitle ) {
