@@ -9,7 +9,6 @@
  * @since      0.1.0
  */
 
-var_dump(get_post_type());
 if ( have_posts() ) {
 
 	/* Start the Loop */

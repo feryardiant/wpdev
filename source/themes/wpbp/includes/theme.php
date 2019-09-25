@@ -65,6 +65,7 @@ final class Theme {
 		$this->initialize( [
 			Wrapper::class,
 			Customizer::class,
+			Content::class,
 			Comment::class,
 			Style::class,
 			Script::class,

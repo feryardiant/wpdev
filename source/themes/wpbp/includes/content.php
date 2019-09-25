@@ -21,8 +21,19 @@ class Content extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_filter( 'get_search_form', function () {
-			return '';
-		} );
+		add_action( 'wpbp_skip_link', [ $this, 'skip_link' ], 10, 1 );
+	}
+
+	/**
+	 * Print the skip-link.
+	 *
+	 * @since 0.1.1
+	 * @param  string $target_id
+	 * @return void
+	 */
+	public function skip_link( string $target_id = 'site-content' ) {
+		$text = apply_filters( 'wpbp_skip_link_text', __( 'Skip to content', 'wpbp' ) );
+
+		echo '<a class="skip-link" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
 	}
 }

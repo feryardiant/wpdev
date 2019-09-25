@@ -22,7 +22,7 @@ $wpbp_base_template = wpbp()->get_base_template();
 </head>
 
 <body <?php body_class(); ?>>
-	<a class="skip-link" href="#site-content"><?php esc_html_e( 'Skip to content', 'wpbp' ); ?></a>
+	<?php do_action( 'wpbp_skip_link', 'site-content' ); ?>
 
 	<header id="site-header" class="hero">
 		<?php get_header( $wpbp_base_template ); ?>
