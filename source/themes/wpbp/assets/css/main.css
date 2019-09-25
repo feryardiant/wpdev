@@ -3881,6 +3881,10 @@ a.box:active {
 .content.is-large {
   font-size: 1.5rem; }
 
+.content ul.wp-block-gallery {
+  list-style-type: none;
+  margin: 0; }
+
 .icon {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -7518,6 +7522,31 @@ label.panel-block {
     top: 5px;
     width: auto;
     z-index: 100000; }
+
+/* ------------------------------------------------------------
+ * Widgets
+ * ------------------------------------------------------------- */
+.widget {
+  margin: 0 0 1.5em;
+  line-height: 1.8em;
+  /* Make sure select elements fit in widgets. */ }
+  .widget-title {
+    font-size: 1.5rem;
+    line-height: 1.2em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid whitesmoke;
+    margin-bottom: 0.5em; }
+  .widget select {
+    max-width: 100%; }
+  .widget_calendar table {
+    width: 100%; }
+    .widget_calendar table th, .widget_calendar table td {
+      padding: 0 1em;
+      text-align: right; }
+    .widget_calendar table th {
+      background-color: #fafafa; }
+    .widget_calendar table tfoot td {
+      text-align: center; }
 
 .section {
   padding: 3rem 0; }
