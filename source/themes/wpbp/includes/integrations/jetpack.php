@@ -16,13 +16,13 @@ namespace WPBP\Integrations;
  *
  * @subpackage  JetPack Setup
  */
-class JetPack {
+class JetPack extends \WPBP\Feature {
 	/**
 	 * Initialize class.
 	 *
-	 * @since 0.1.0
+	 * @since 0.1.1
 	 */
-	public function __construct() {
+	protected function initialize() : void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 	}
 

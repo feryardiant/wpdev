@@ -13,8 +13,14 @@ namespace WPBP;
  * Theme Setup Class.
  *
  * @category    Theme Setup
+ * @property-read Comment $comment
+ * @property-read Content $content
+ * @property-read Customizer $customizer
+ * @property-read Menu $menu
+ * @property-read Script $script
+ * @property-read Style $style
+ * @property-read Widgets $widgets
  * @property-read Wrapper $wrapper
- * @property-read Integrations\Customizer $customizer
  * @property-read Integrations\JetPack $jetpack
  */
 final class Theme {
@@ -439,10 +445,20 @@ final class Theme {
 			$instance = $instance( $this );
 		}
 
+		$error = 'Theme extension class should be Closure, string or instance of %1$s, %2$s given';
+
 		if ( is_string( $instance ) && class_exists( $instance ) ) {
 			$instance = new $instance( $this );
 		} else {
-			throw new \InvalidArgumentException( 'Setup instance error.' );
+			throw new \InvalidArgumentException(
+				sprintf( $error, Feature::class, gettype( $instance ) )
+			);
+		}
+
+		if ( ! ( $instance instanceof Feature ) ) {
+			throw new \InvalidArgumentException(
+				sprintf( $error, Feature::class, gettype( $instance ) )
+			);
 		}
 
 		$this->instances[ $name ] = $instance;

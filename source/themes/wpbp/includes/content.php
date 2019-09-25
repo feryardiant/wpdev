@@ -18,12 +18,9 @@ class Content extends Feature {
 	/**
 	 * Initialize class.
 	 *
-	 * @since 0.1.0
-	 * @param Theme $theme
+	 * @since 0.1.1
 	 */
-	public function __construct( Theme $theme ) {
-		parent::__construct( $theme );
-
+	protected function initialize() : void {
 		add_filter( 'get_search_form', function () {
 			return '';
 		} );

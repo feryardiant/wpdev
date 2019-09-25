@@ -18,12 +18,9 @@ class Menu extends Feature {
 	/**
 	 * Initialize class.
 	 *
-	 * @since 0.1.0
-	 * @param Theme $theme
+	 * @since 0.1.1
 	 */
-	public function __construct( Theme $theme ) {
-		parent::__construct( $theme );
-
+	protected function initialize() : void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
 		add_filter( 'wp_nav_menu_args', [ $this, 'nav_menu_args' ], 10 );

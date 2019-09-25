@@ -41,5 +41,14 @@ abstract class Feature {
 		$this->theme = $theme;
 
 		self::$instance = $this;
+
+		$this->initialize();
 	}
+
+	/**
+	 * Class initializer.
+	 *
+	 * @return void
+	 */
+	abstract protected function initialize() : void;
 }

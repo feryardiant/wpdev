@@ -35,12 +35,10 @@ class Customizer extends Feature {
 	/**
 	 * Initialize class.
 	 *
-	 * @since 0.1.0
-	 * @param Theme $theme
+	 * @since 0.1.1
 	 */
-	public function __construct( Theme $theme ) {
-		parent::__construct( $theme );
-		$this->theme_slug = $theme->info( 'child_slug' );
+	protected function initialize() : void {
+		$this->theme_slug = $this->theme->info( 'child_slug' );
 
 		add_action( 'customize_register', [ $this, 'register' ] );
 		add_action( 'customize_preview_init', [ $this, 'preview_init' ] );

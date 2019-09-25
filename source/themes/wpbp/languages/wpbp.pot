@@ -73,114 +73,114 @@ msgctxt "search button"
 msgid "Search"
 msgstr ""
 
-#: includes/comment.php:48
+#: includes/comment.php:45
 msgid "Name"
 msgstr ""
 
-#: includes/comment.php:56
+#: includes/comment.php:53
 msgid "Email"
 msgstr ""
 
-#: includes/comment.php:64
+#: includes/comment.php:61
 msgid "Website"
 msgstr ""
 
-#: includes/comment.php:74
+#: includes/comment.php:71
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr ""
 
-#: includes/comment.php:98
+#: includes/comment.php:95
 msgid "Comment"
 msgstr ""
 
 #. translators: %s: login URL
-#: includes/comment.php:108
+#: includes/comment.php:105
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4: logout URL
-#: includes/comment.php:118
+#: includes/comment.php:115
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr ""
 
 #. translators: %s: user name
-#: includes/comment.php:121
+#: includes/comment.php:118
 msgid "Logged in as %s. Edit your profile."
 msgstr ""
 
-#: includes/comment.php:133
+#: includes/comment.php:130
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/customizer.php:96
+#: includes/customizer.php:94
 msgid "Choose the option that you want."
 msgstr ""
 
-#: includes/customizer.php:99
+#: includes/customizer.php:97
 msgid "Logo Image Only"
 msgstr ""
 
-#: includes/customizer.php:100
+#: includes/customizer.php:98
 msgid "Logo Text Only"
 msgstr ""
 
-#: includes/customizer.php:101
+#: includes/customizer.php:99
 msgid "Show Both"
 msgstr ""
 
-#: includes/customizer.php:102
+#: includes/customizer.php:100
 msgid "Disable"
 msgstr ""
 
-#: includes/customizer.php:117
+#: includes/customizer.php:115
 msgid "Link Color"
 msgstr ""
 
-#: includes/customizer.php:121
+#: includes/customizer.php:119
 msgid "Link Active Color"
 msgstr ""
 
-#: includes/customizer.php:125
+#: includes/customizer.php:123
 msgid "Link Hover Color"
 msgstr ""
 
-#: includes/customizer.php:129
+#: includes/customizer.php:127
 msgid "Text Color"
 msgstr ""
 
-#: includes/customizer.php:133
+#: includes/customizer.php:131
 msgid "Paragraph Color"
 msgstr ""
 
-#: includes/customizer.php:137
+#: includes/customizer.php:135
 msgid "Heading Color"
 msgstr ""
 
-#: includes/menu.php:47
+#: includes/menu.php:44
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/menu.php:48
+#: includes/menu.php:45
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/style.php:91
+#: includes/style.php:88
 msgid "Small"
 msgstr ""
 
-#: includes/style.php:96
+#: includes/style.php:93
 msgid "Normal"
 msgstr ""
 
-#: includes/style.php:101
+#: includes/style.php:98
 msgid "Medium"
 msgstr ""
 
-#: includes/style.php:106
+#: includes/style.php:103
 msgid "Large"
 msgstr ""
 
-#: includes/style.php:111
+#: includes/style.php:108
 msgid "Huge"
 msgstr ""
 
@@ -229,19 +229,19 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/widgets.php:41
+#: includes/widgets.php:38
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/widgets.php:43
+#: includes/widgets.php:40
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/widgets.php:51
+#: includes/widgets.php:48
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/widgets.php:53
+#: includes/widgets.php:50
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
