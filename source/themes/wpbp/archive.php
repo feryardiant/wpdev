@@ -9,6 +9,4 @@
  * @since      0.1.0
  */
 
-?><section id="main" class="site-main content">
-	<?php get_template_part( 'templates/general' ); ?>
-</section> <!-- main -->
+get_template_part( 'templates/general' );

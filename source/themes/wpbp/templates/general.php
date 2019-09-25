@@ -9,6 +9,8 @@
  * @since      0.1.0
  */
 
+do_action( 'wpbp_main_content_before', [ 'site-main', 'content' ] );
+
 if ( have_posts() ) {
 
 	/* Start the Loop */
@@ -27,3 +29,5 @@ if ( have_posts() ) {
 	get_template_part( 'templates/content', 'none' );
 
 }
+
+do_action( 'wpbp_main_content_after' );

@@ -32,11 +32,7 @@
 			</a>
 
 			<div id="navbar-menu-primary" class="navbar-menu">
-				<?php
-				wp_nav_menu( [
-					'theme_location' => 'primary',
-				] );
-				?>
+				<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?>
 			</div>
 		</nav> <!-- .navbar -->
 
@@ -45,24 +41,6 @@
 
 <div class="hero-body">
 	<div class="container">
-		<?php
-		if ( is_home() && ! is_front_page() ) {
-			single_post_title( '<h1 class="title screen-reader-text">', '</h1>' );
-		} elseif ( is_search() ) {
-			echo '<h1 class="title">';
-			/* translators: %s: search query. */
-			printf( esc_html__( 'Search Results for: %s', 'wpbp' ), '<span>' . get_search_query() . '</span>' );
-			echo '</h1>';
-		} elseif ( is_singular() ) {
-			the_title( '<h1 class="title">', '</h1>' );
-		} elseif ( is_404() ) {
-			echo '<h1 class="title">';
-			esc_html_e( 'Oops! That page can&rsquo;t be found.', 'wpbp' );
-			echo '</h1>';
-		} else {
-			the_archive_title( '<h1 class="title">', '</h1>' );
-			the_archive_description( '<h2 class="subtitle">', '</h2>' );
-		}
-		?>
+		<?php do_action( 'wpbp_hero_body' ); ?>
 	</div>
 </div>

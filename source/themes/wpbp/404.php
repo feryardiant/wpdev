@@ -9,6 +9,4 @@
  * @since      0.1.0
  */
 
-?><section id="main" class="site-main content error-404 not-found">
-	<?php get_template_part( 'templates/content', 'none' ); ?>
-</section> <!-- .error-404 -->
+get_template_part( 'templates/content', 'none' );

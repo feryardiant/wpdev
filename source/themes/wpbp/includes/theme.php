@@ -67,6 +67,7 @@ final class Theme {
 			Customizer::class,
 			Content::class,
 			Comment::class,
+			Layout::class,
 			Style::class,
 			Script::class,
 			Menu::class,

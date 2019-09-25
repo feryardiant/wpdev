@@ -31,7 +31,7 @@ $wpbp_base_template = wpbp()->get_base_template();
 	<section id="site-content" class="section">
 		<div class="container">
 			<div class="columns">
-				<main id="primary" class="column">
+				<main role="main" id="primary" class="column">
 					<?php load_template( wpbp()->get_main_template() ); ?>
 				</main> <!-- #primary -->
 
