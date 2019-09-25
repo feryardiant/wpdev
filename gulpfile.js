@@ -1,12 +1,16 @@
 const path = require('path')
 
 const gulp = require('gulp')
+const bs = require('browser-sync').create()
+
+require('dotenv').config()
+
 const autoprefixer = require('gulp-autoprefixer')
 const babel = require('gulp-babel')
-const connect = require('gulp-connect-php')
 const cleanCSS = require('gulp-clean-css')
 const eslint = require('gulp-eslint')
 const imagemin = require('gulp-imagemin')
+const php = require('gulp-connect-php')
 const phpcs = require('gulp-phpcs')
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
@@ -15,7 +19,28 @@ const uglify = require('gulp-uglify')
 const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
 
+const wpHome = new URL(process.env.WP_HOME)
 const { configure, watch, isProduction } = require('./build/util')
+const { argv } = require('yargs').options({
+  open: {
+    alias: 'o',
+    describe: 'Open in browser',
+    default: false,
+    type: 'boolean'
+  },
+  notify: {
+    alias: 'n',
+    describe: 'Enable notification',
+    default: false,
+    type: 'boolean'
+  },
+  proxy: {
+    alias: 'p',
+    describe: 'Enable proxy',
+    default: wpHome.hostname,
+    type: 'string'
+  }
+})
 
 const tasks = configure('source', 'build', {
   /**
@@ -131,31 +156,13 @@ const tasks = configure('source', 'build', {
 /**
  * Start php development server and watch files changes.
  */
-exports.default = () => {
-  const server = require('browser-sync').create()
-
-  const config = {
-    ini: 'public/.user.ini',
-    base: 'public',
-    router: './server.php',
-    configCallback (type, args) {
-      if (type === connect.OPTIONS_PHP_CLI_ARR) {
-        return [
-          '-e',
-          '-d', 'cli_server.color=on'
-        ].concat(args)
-      }
-
-      return args
-    }
-  }
-
-  connect.server(config, () => {
-    server.init({
-      proxy: '127.0.0.1:8000',
+exports.default = async () => {
+  const bSync = (proxy) => new Promise((resolve, reject) => {
+    bs.init({
+      proxy: proxy,
       baseDir: './public',
-      notify: false,
-      open: false,
+      notify: argv.notify,
+      open: argv.open,
       serveStatic: [
         {
           route: '/wp-admin/css',
@@ -182,8 +189,39 @@ exports.default = () => {
           dir: 'public/wp/wp-includes/js',
         }
       ]
-    })
-
-    watch(tasks, server)
+    }, () => resolve())
   })
+  
+  const phpServer = () => new Promise((resolve, reject) => {
+    process.on('exit', () => {
+      php.closeServer()
+    })
+  
+    php.server({
+      ini: 'public/.user.ini',
+      base: 'public',
+      router: './server.php',
+      configCallback (type, args) {
+        if (type === php.OPTIONS_PHP_CLI_ARR) {
+          return [
+            '-e',
+            '-d', 'cli_server.color=on'
+          ].concat(args)
+        }
+  
+        return args
+      }
+    }, () => {
+      resolve()
+    })
+  })
+
+  if (argv.proxy !== wpHome.hostname) {
+    await phpServer()
+  }
+
+  await bSync(argv.proxy)
+
+  watch(tasks, bs)
+
 }

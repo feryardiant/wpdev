@@ -7,8 +7,6 @@ const { task, parallel, series, watch } = require('gulp')
 
 const pkgJson = require('./../package.json')
 
-require('dotenv').config()
-
 const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
 
 if (process.env.WP_ENV && !process.env.NODE_ENV) {
