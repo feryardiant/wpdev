@@ -61,7 +61,6 @@ final class Theme {
 		add_action( 'wp_head', [ $this, 'head' ] );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
-		add_filter( 'set_url_scheme', [ $this, 'set_url_scheme' ], 10 );
 
 		$this->initialize( [
 			Wrapper::class,
@@ -382,30 +381,6 @@ final class Theme {
 		}
 
 		return $classes;
-	}
-
-	/**
-	 * Customize root url on development mode.
-	 *
-	 * @internal
-	 * @since 0.1.1
-	 * @param  string $url
-	 * @return string
-	 */
-	public function set_url_scheme( $url ) {
-		$home = env( 'WP_HOME' );
-		$url  = str_replace( [
-			env( 'WP_SITEURL' ),
-			env( 'WP_HOME' ),
-		], [ $home, $home ], $url );
-
-		if ( env( 'WP_ENV' ) === 'development' ) {
-			// phpcs:disable WordPress.Security.ValidatedSanitizedInput
-			$url = str_replace( $home, 'http://' . $_SERVER['HTTP_HOST'], $url );
-			// phpcs:enable
-		}
-
-		return $url;
 	}
 
 	/**
