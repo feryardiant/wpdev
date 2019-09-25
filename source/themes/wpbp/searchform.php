@@ -9,7 +9,7 @@
  * @since      0.1.0
  */
 
-?><form role="search" method="get" id="searchform" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">
+?><form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<div class="field has-addons">
 		<div class="control">
 			<label for="search" class="is-sr-only">Search for:</label>
