@@ -93,4 +93,23 @@ class Content extends Feature {
 
 		return $image_sizes;
 	}
+
+	/**
+	 * Custom content-width.
+	 *
+	 * @link https://codex.wordpress.org/Content_Width
+	 * @since 0.1.1
+	 * @return \WP_Post|null
+	 */
+	public function page_query() : ?\WP_Post {
+		global $wp_query;
+
+		$query = $wp_query->get_queried_object();
+
+		if ( $query instanceof \WP_Post_Type ) {
+			$query = get_page_by_path( $query->rewrite['slug'] );
+		}
+
+		return $query;
+	}
 }

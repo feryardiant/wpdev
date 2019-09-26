@@ -20,7 +20,6 @@ namespace WPBP;
  * @property-read Script $script
  * @property-read Style $style
  * @property-read Widgets $widgets
- * @property-read Wrapper $wrapper
  * @property-read Integrations\JetPack $jetpack
  */
 final class Theme {
