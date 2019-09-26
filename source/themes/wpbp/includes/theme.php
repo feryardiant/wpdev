@@ -13,12 +13,12 @@ namespace WPBP;
  * Theme Setup Class.
  *
  * @category    Theme Setup
+ * @property-read Asset $asset
  * @property-read Comment $comment
  * @property-read Content $content
  * @property-read Customizer $customizer
  * @property-read Menu $menu
- * @property-read Script $script
- * @property-read Style $style
+ * @property-read Template $template
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
  */
@@ -62,12 +62,11 @@ final class Theme {
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 
 		$this->initialize( [
+			Asset::class,
+			Template::class,
 			Customizer::class,
 			Content::class,
 			Comment::class,
-			Layout::class,
-			Style::class,
-			Script::class,
 			Menu::class,
 			Widgets::class,
 		] );
@@ -77,6 +76,30 @@ final class Theme {
 		 */
 		if ( defined( 'JETPACK__VERSION' ) ) {
 			$this->jetpack = Integrations\JetPack::class;
+		}
+
+		$transient_name           = $this->transient_name( 'theme_info' );
+		self::$cached->theme_info = get_transient( $transient_name );
+
+		if ( empty( self::$cached->theme_info ) ) {
+			/** @var WP_Theme $theme */
+			$theme      = wp_get_theme( get_template() );
+			$theme_info = [
+				'siteurl'    => get_option( 'siteurl' ),
+				'name'       => $theme->name,
+				'slug'       => $theme->template,
+				'child_slug' => get_option( 'stylesheet' ),
+				'version'    => $theme->version,
+				'author'     => $theme->author,
+				'autor_uri'  => $theme->get( 'AuthorURI' ),
+				'parent_dir' => trailingslashit( get_template_directory() ),
+				'child_dir'  => trailingslashit( get_stylesheet_directory() ),
+				'parent_uri' => trailingslashit( get_template_directory_uri() ),
+				'child_uri'  => trailingslashit( get_stylesheet_directory_uri() ),
+			];
+
+			self::$cached->theme_info = $theme_info;
+			set_transient( $transient_name, $theme_info );
 		}
 	}
 
@@ -103,30 +126,10 @@ final class Theme {
 	 *
 	 * @since 0.1.0
 	 * @param  string $name
-	 * @return mixed
+	 * @return string|null
 	 */
 	public function info( string $name ) {
-		$transient_name = $this->transient_name( 'theme_info' );
-		$theme_info     = self::$cached->theme_info ?? get_transient( $transient_name );
-
-		if ( empty( $theme_info ) ) {
-			$theme = wp_get_theme( get_template() );
-
-			$theme_info = [
-				'siteurl'              => get_option( 'siteurl' ),
-				'child_slug'           => get_option( 'stylesheet' ),
-				'version'              => $theme->get( 'Version' ),
-				'parent_directory'     => trailingslashit( get_template_directory() ),
-				'child_directory'      => trailingslashit( get_stylesheet_directory() ),
-				'parent_directory_uri' => trailingslashit( get_template_directory_uri() ),
-				'child_directory_uri'  => trailingslashit( get_stylesheet_directory_uri() ),
-			];
-
-			self::$cached->theme_info = $theme_info;
-			set_transient( $transient_name, $theme_info );
-		}
-
-		return $theme_info[ $name ] ?? null;
+		return self::$cached->theme_info[ $name ] ?? null;
 	}
 
 	/**
@@ -142,23 +145,23 @@ final class Theme {
 	/**
 	 * Get main template.
 	 *
-	 * @see Layout::$template_filename
+	 * @see Template::$filename
 	 *
 	 * @return string
 	 */
-	public function get_template_filename() {
-		return $this->layout->template_filename;
+	public function get_template_filename() : string {
+		return $this->template->filename;
 	}
 
 	/**
 	 * Get base template.
 	 *
-	 * @see Layout::$template_basename
+	 * @see Template::$basename
 	 *
 	 * @return string
 	 */
-	public function get_template_basename() {
-		return $this->layout->template_basename;
+	public function get_template_basename() : string {
+		return $this->template->basename;
 	}
 
 	/**
@@ -168,10 +171,11 @@ final class Theme {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_parent_directory( string $suffix ) {
-		$suffix = $this->info( 'parent_directory' ) . $suffix;
-
-		return str_replace( '/', DIRECTORY_SEPARATOR, $suffix );
+	public function get_dir( string $suffix ) : string {
+		return str_replace(
+			'/', DIRECTORY_SEPARATOR,
+			trailingslashit( get_template_directory() ) . $suffix
+		);
 	}
 
 	/**
@@ -181,10 +185,11 @@ final class Theme {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_child_directory( string $suffix ) {
-		$suffix = $this->info( 'child_directory' ) . $suffix;
-
-		return str_replace( '/', DIRECTORY_SEPARATOR, $suffix );
+	public function get_child_dir( string $suffix ) : string {
+		return str_replace(
+			'/', DIRECTORY_SEPARATOR,
+			trailingslashit( get_stylesheet_directory() ) . $suffix
+		);
 	}
 
 	/**
@@ -194,7 +199,7 @@ final class Theme {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_parent_directory_uri( string $suffix ) {
+	public function get_uri( string $suffix ) : string {
 		return trailingslashit( get_template_directory_uri() ) . $suffix;
 	}
 
@@ -205,7 +210,7 @@ final class Theme {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_child_directory_uri( string $suffix ) {
+	public function get_child_uri( string $suffix ) : string {
 		return trailingslashit( get_stylesheet_directory_uri() ) . $suffix;
 	}
 
@@ -216,14 +221,14 @@ final class Theme {
 	 * @param  string $filename
 	 * @return string
 	 */
-	public function assets_url( string $filename ) {
+	public function get_assets_uri( string $filename ) : string {
 		$extension = pathinfo( $filename, PATHINFO_EXTENSION );
 
 		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
 			$extension = 'img';
 		}
 
-		return $this->get_parent_directory_uri( 'assets/' . $extension . '/' . $filename );
+		return $this->get_uri( 'assets/' . $extension . '/' . $filename );
 	}
 
 	/**
@@ -241,8 +246,8 @@ final class Theme {
 		 *
 		 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
 		 */
-		load_theme_textdomain( 'wpbp', $this->get_child_directory( 'languages' ) );
-		load_theme_textdomain( 'wpbp', $this->get_parent_directory( 'languages' ) );
+		load_theme_textdomain( 'wpbp', $this->get_child_dir( 'languages' ) );
+		load_theme_textdomain( 'wpbp', $this->get_dir( 'languages' ) );
 
 		/**
 		 * Add default posts and comments RSS feed links to head.
@@ -337,7 +342,7 @@ final class Theme {
 				'height'            => 500,
 				'flex-width'        => true,
 				'flex-height'       => true,
-				'wp-head-callback'  => [ $this->style, 'custom_header' ],
+				'wp-head-callback'  => [ $this->asset, 'custom_header' ],
 			] )
 		);
 	}

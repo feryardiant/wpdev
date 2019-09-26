@@ -10,11 +10,11 @@
 namespace WPBP;
 
 /**
- * Theme Style Class.
+ * Theme Asset Class.
  *
- * @category  Theme Style
+ * @category  Theme Asset
  */
-class Style extends Feature {
+class Asset extends Feature {
 	/**
 	 * Initialize class.
 	 *
@@ -39,10 +39,16 @@ class Style extends Feature {
 		wp_register_style( 'wpbp-google-fonts', $this->google_fonts_url(), [], $version );
 
 		wp_register_style( 'wpbp-css-variables', false, [], $version );
-		wp_add_inline_style( 'wpbp-css-variables', $this->variables( $this->theme ) );
+		wp_add_inline_style( 'wpbp-css-variables', $this->css_variables( $this->theme ) );
 
-		wp_enqueue_style( 'wpbp-style', $this->theme->assets_url( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
+		wp_enqueue_style( 'wpbp-style', $this->theme->get_assets_uri( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
 		wp_style_add_data( 'wpbp-style', 'rtl', 'replace' );
+
+		wp_enqueue_script( 'wpbp-script', $this->theme->get_assets_uri( 'navigation.js' ), [], $version, true );
+
+		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
 	}
 
 	/**
@@ -74,7 +80,7 @@ class Style extends Feature {
 		 * Enqueue editor styles.
 		 */
 		add_editor_style( [
-			$this->theme->assets_url( 'gutenberg-editor.css' ),
+			$this->theme->get_assets_uri( 'gutenberg-editor.css' ),
 			$this->google_fonts_url(),
 		] );
 
@@ -126,8 +132,8 @@ class Style extends Feature {
 	 * @param  Theme $theme
 	 * @return string
 	 */
-	protected function variables( Theme $theme ) {
-		return self::make( [
+	protected function css_variables( Theme $theme ) {
+		return self::make_css( [
 			':root' => [
 				'--white-color'            => $theme->get_mod( 'custom_white_color', '#fff' ),
 				'--gray-color'             => $theme->get_mod( 'custom_gray_color', '#6c757d' ),
@@ -221,17 +227,17 @@ class Style extends Feature {
 	 * @return string
 	 */
 	public function login_style() {
-		$custom_logo_id  = get_theme_mod( 'custom_logo' );
-		$custom_logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+		$logo_id  = get_theme_mod( 'custom_logo' );
+		$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
 
-		if ( ! $custom_logo_url ) {
+		if ( ! $logo_url ) {
 			return null;
 		}
 
-		return self::make( function ( Style $style ) use ( $custom_logo_url ) {
+		return self::make_css( function () use ( $logo_url ) {
 			return [
 				'.login h1 a' => [
-					'background-image' => $style->url( $custom_logo_url ) . ' !important',
+					'background-image' => 'url(' . esc_url( $logo_url ) . ') !important',
 				],
 			];
 		} );
@@ -263,9 +269,9 @@ class Style extends Feature {
 	 * @return string
 	 * @throws \InvalidArgumentException If parameter not an array or instance of Closure.
 	 */
-	public static function make( $styles ) {
+	public static function make_css( $styles ) {
 		if ( $styles instanceof \Closure ) {
-			$styles = $styles( self::$instance );
+			$styles = $styles( self::get_instance() );
 		}
 
 		if ( ! is_array( $styles ) ) {
@@ -285,15 +291,5 @@ class Style extends Feature {
 		}
 
 		return PHP_EOL . implode( ' ', $inline );
-	}
-
-	/**
-	 * Escape file url.
-	 *
-	 * @param  string $url
-	 * @return string
-	 */
-	public function url( string $url ) : string {
-		return 'url(' . esc_url( $url ) . ')';
 	}
 }

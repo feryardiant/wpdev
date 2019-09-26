@@ -142,12 +142,16 @@ msgstr ""
 msgid "Heading Color"
 msgstr ""
 
+#: includes/layout.php:83, templates/content-none.php:14
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
 #. translators: %s: search query.
-#: includes/layout.php:85
+#: includes/layout.php:88
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/layout.php:89
+#: includes/layout.php:93
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
@@ -238,10 +242,6 @@ msgstr ""
 
 #: includes/widgets.php:50
 msgid "Footer widget that placed on the bottom of your page."
-msgstr ""
-
-#: templates/content-none.php:14
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #: templates/content-none.php:23

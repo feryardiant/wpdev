@@ -10,11 +10,11 @@
 namespace WPBP;
 
 /**
- * Theme Layout Class.
+ * Theme Template Features.
  *
- * @category  Theme Layout
+ * @category  Theme Template
  */
-class Layout extends Feature {
+class Template extends Feature {
 	/**
 	 * Template file name.
 	 *
@@ -22,7 +22,7 @@ class Layout extends Feature {
 	 * @since 0.1.1
 	 * @var string
 	 */
-	public $template_filename;
+	public $filename;
 
 	/**
 	 * Template base name.
@@ -31,7 +31,7 @@ class Layout extends Feature {
 	 * @since 0.1.1
 	 * @var string
 	 */
-	public $template_basename;
+	public $basename;
 
 	/**
 	 * Initialize class.
@@ -43,7 +43,7 @@ class Layout extends Feature {
 		add_action( 'wpbp_main_content_before', [ $this, 'main_content_before' ], 10 );
 		add_action( 'wpbp_main_content_after', [ $this, 'main_content_after' ], 10, 0 );
 
-		add_filter( 'template_include', [ $this, 'wrapper' ], 99 );
+		add_filter( 'template_include', [ $this, 'wrapper' ], 12 );
 	}
 
 	/**
@@ -53,17 +53,17 @@ class Layout extends Feature {
 	 * @return string
 	 */
 	public function wrapper( $template ) {
-		$this->template_filename = $template;
-		$this->template_basename = substr( wp_basename( $this->template_filename ), 0, -4 );
+		$this->filename = $template;
+		$this->basename = substr( wp_basename( $this->filename ), 0, -4 );
 
-		if ( 'index' === $this->template_basename ) {
-			$this->template_basename = false;
+		if ( 'index' === $this->basename ) {
+			$this->basename = false;
 		}
 
 		$templates = [ 'templates/wrapper.php' ];
 
-		if ( $this->template_basename ) {
-			array_unshift( $templates, sprintf( 'templates/wrapper-%s.php', $this->template_basename ) );
+		if ( $this->basename ) {
+			array_unshift( $templates, sprintf( 'templates/wrapper-%s.php', $this->basename ) );
 		}
 
 		return locate_template( $templates );

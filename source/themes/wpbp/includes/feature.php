@@ -59,7 +59,25 @@ abstract class Feature {
 	/**
 	 * Class initializer.
 	 *
+	 * @since 0.1.1
 	 * @return void
 	 */
 	abstract protected function initialize() : void;
+
+	/**
+	 * Get instance of child class.
+	 *
+	 * @since 0.1.1
+	 * @return self
+	 * @throws \RuntimeException If not initialized.
+	 */
+	public function get_instance() {
+		if ( self::$instance ) {
+			return self::$instance;
+		}
+
+		throw new \RuntimeException(
+			sprintf( 'Class %s was not initialized', self::class )
+		);
+	}
 }
