@@ -35,7 +35,7 @@
       "php -r \"copy('.env.example', '.env');\""
     ],
     "lint": [
-      "phpcs"
+      "phpcs --standard=./source/phpcs.xml source"
     ],
     "wp:install": [
       "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
