@@ -39,3 +39,16 @@ foreach ( $wpbp_files as $wpbp_file ) {
 }
 
 unset( $wpbp_files, $wpbp_file );
+
+if ( ! function_exists( 'dump' ) && env( 'WP_ENV' ) !== 'production' ) {
+	/**
+	 * Dump data.
+	 *
+	 * @return void
+	 */
+	function dump() {
+		array_map( function ( $arg ) {
+			var_dump( $arg ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
+		}, func_get_args() );
+	}
+}
