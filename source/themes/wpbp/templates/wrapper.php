@@ -43,7 +43,7 @@
 		</div>
 	</section> <!-- #site-content -->
 
-	<footer id="site-footer">
+	<footer id="colophon" class="site-footer" role="contentinfo">
 		<?php get_footer(); ?>
 	</footer> <!-- #site-footer -->
 

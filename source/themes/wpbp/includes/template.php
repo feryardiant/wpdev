@@ -42,6 +42,8 @@ class Template extends Feature {
 		add_action( 'wpbp_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'wpbp_main_content_before', [ $this, 'main_content_before' ], 10 );
 		add_action( 'wpbp_main_content_after', [ $this, 'main_content_after' ], 10, 0 );
+		add_action( 'wpbp_footer', [ $this, 'footer_widgets' ], 10, 0 );
+		add_action( 'wpbp_footer', [ $this, 'footer_credit' ], 20, 0 );
 
 		add_filter( 'template_include', [ $this, 'wrapper' ], 12 );
 	}
@@ -132,5 +134,56 @@ class Template extends Feature {
 	 */
 	public function main_content_after() {
 		echo '</section> <!-- #main.site-main -->';
+	}
+
+	/**
+	 * Print footer credit.
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function footer_widgets() {
+		$wrapper = apply_filters( 'wpbp_footer_widgets_wrapper', [
+			'before' => '<div class="footer-widgets">',
+			'after'  => '</div> <!-- .site-info --!>'
+		] );
+
+		echo $wrapper[ 'before' ];
+
+		Widgets::get_active( 'footer-widgets' );
+
+		echo $wrapper[ 'after' ];
+	}
+
+	/**
+	 * Print footer credit.
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function footer_credit() {
+		$wrapper = apply_filters( 'wpbp_footer_credits_wrapper', [
+			'before' => '<div class="site-info">',
+			'after'  => '</div> <!-- .site-info --!>'
+		] );
+
+		$output = [
+			$wrapper[ 'before' ]
+		];
+
+		$output[] = '<a target="__blank" href="' . esc_url( __( 'https://wordpress.org/', 'wpbp' ) ) . '">';
+		$output[] = sprintf( esc_html__( 'Proudly powered by %s', 'wpbp' ), 'WordPress' );
+		$output[] = '</a>';
+		$output[] = '<span class="sep"> | </span>';
+
+		$output[] = sprintf(
+			esc_html__( '%1$s by %2$s.', 'wpbp' ),
+			$this->theme->info( 'name' ),
+			$this->theme->info( 'author' )
+		);
+
+		$output[] = $wrapper[ 'before' ];
+
+		echo join( '', $output );
 	}
 }
