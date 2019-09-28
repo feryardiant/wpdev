@@ -9,8 +9,7 @@
 
 namespace WPBP;
 
-use WP_Customize_Color_Control;
-use WP_Customize_Manager;
+use WP_Customize_Manager as Manager;
 
 /**
  * WordPress Customizer Setup Class.
@@ -18,6 +17,18 @@ use WP_Customize_Manager;
  * @category  WordPress Customizer Setup
  */
 class Customizer extends Feature {
+	/**
+	 * Control class aliases.
+	 *
+	 * @var array
+	 */
+	private $control_aliases = [
+		'color'  => \WP_Customize_Color_Control::class,
+		'image'  => \WP_Customize_Image_Control::class,
+		'media'  => \WP_Customize_Media_Control::class,
+		'upload' => \WP_Customize_Upload_Control::class,
+	];
+
 	/**
 	 * Initialize class.
 	 *
@@ -34,19 +45,7 @@ class Customizer extends Feature {
 	 * @since 0.1.0
 	 * @param WP_Customize_Manager $customizer
 	 */
-	public function register( WP_Customize_Manager $customizer ) {
-		$this->site_identity( $customizer );
-
-		$this->colors( $customizer );
-	}
-
-	/**
-	 * Customize Site Identity Section.
-	 *
-	 * @param  WP_Customize_Manager $customizer
-	 * @return void
-	 */
-	protected function site_identity( WP_Customize_Manager $customizer ) {
+	public function register( Manager $customizer ) {
 		$customizer->get_setting( 'blogname' )->transport         = 'postMessage';
 		$customizer->get_setting( 'blogdescription' )->transport  = 'postMessage';
 		$customizer->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -63,76 +62,72 @@ class Customizer extends Feature {
 			] );
 		}
 
-		$customizer->add_setting( $this->theme->slug . '[wpbp_site_logo_display]', [
-			'default'           => 'text_only',
-			'type'              => 'option',
-			'capability'        => 'edit_theme_options',
-			'sanitize_callback' => 'accelerate_radio_select_sanitize',
-		] );
+		$callback = function () {
+			// .
+		};
 
-		$customizer->add_control( $this->theme->slug . '[wpbp_site_logo_display]', [
-			'type'    => 'radio',
-			'label'   => __( 'Choose the option that you want.', 'wpbp' ),
-			'section' => 'title_tagline',
-			'choices' => [
-				'logo_only' => __( 'Logo Image Only', 'wpbp' ),
-				'text_only' => __( 'Logo Text Only', 'wpbp' ),
-				'both'      => __( 'Show Both', 'wpbp' ),
-				'none'      => __( 'Disable', 'wpbp' ),
-			],
-		] );
+		foreach ( $this->theme->option->items() as $position => $values ) {
+			if ( in_array( $position, [ 'panels', 'sections' ], true ) ) {
+				$method = 'panels' === $position ? 'add_panel' : 'add_section';
+
+				foreach ( $values as $key => $value ) {
+					if ( 'sections' === $position ) {
+						$value['panel'] = $this->add_prefix( $value['panel'] );
+					}
+
+					call_user_func( [ $customizer, $method ], $this->add_prefix( $key ), $value );
+				}
+			} else {
+				foreach ( $values as $key => $value ) {
+					$key = $this->add_prefix( $key );
+					$customizer->add_setting( $key, [
+						'default'   => $value['default'],
+						'transport' => 'postMessage',
+					] );
+
+					unset( $value['default'] );
+					$type     = $value['type'];
+					$selector = null;
+
+					if ( isset( $value['selector'] ) ) {
+						$selector = $value['selector'];
+						$callback = $value['render_callback'] ?? $callback;
+						unset( $value['selector'], $value['render_callback'] );
+					}
+
+					if ( $this->theme->option->has_section( $value['section'] ) ) {
+						$value['section'] = $this->add_prefix( $value['section'] );
+					}
+
+					if ( array_key_exists( $type, $this->control_aliases ) ) {
+						$control_class = $this->control_aliases[ $type ];
+
+						$customizer->add_control(
+							new $control_class( $customizer, $key, $value )
+						);
+					} else {
+						$customizer->add_control( $key, $value );
+					}
+
+					if ( null !== $selector ) {
+						$customizer->selective_refresh->add_partial( $key, [
+							'selector'        => $selector,
+							'render_callback' => $callback,
+						] );
+					}
+				}
+			}
+		}
 	}
 
 	/**
-	 * Customize Colors Section.
+	 * Add theme prefix.
 	 *
-	 * @param  WP_Customize_Manager $customizer
-	 * @return void
+	 * @param string $name
+	 * @return string
 	 */
-	protected function colors( WP_Customize_Manager $customizer ) {
-		$colors = [
-			'link_color' => [
-				'label'   => __( 'Link Color', 'wpbp' ),
-				'default' => '#007bff',
-			],
-			'link_active_color' => [
-				'label'   => __( 'Link Active Color', 'wpbp' ),
-				'default' => '#007bff',
-			],
-			'link_hover_color' => [
-				'label'   => __( 'Link Hover Color', 'wpbp' ),
-				'default' => '#007bff',
-			],
-			'text_color' => [
-				'label'   => __( 'Text Color', 'wpbp' ),
-				'default' => '#343a40',
-			],
-			'paragraph_color' => [
-				'label'   => __( 'Paragraph Color', 'wpbp' ),
-				'default' => '#343a40',
-			],
-			'heading_color' => [
-				'label'   => __( 'Heading Color', 'wpbp' ),
-				'default' => '#343a40',
-			],
-		];
-
-		foreach ( $colors as $name => $value ) {
-			$customizer->add_setting( 'wpbp[custom_' . $name . ']', [
-				'default'    => $value['default'] ?? '',
-				'type'       => 'theme_mod',
-				'capability' => 'edit_theme_options',
-				'transport'  => 'postMessage',
-			] );
-
-			$customizer->add_control( new WP_Customize_Color_Control( $customizer, 'wpbp[custom_' . $name . ']', [
-				'label'    => $value['label'],
-				'settings' => 'wpbp[custom_' . $name . ']',
-				'priority' => 10,
-				'section'  => 'colors',
-			] ) );
-		}
-
+	protected function add_prefix( string $name ) : string {
+		return $this->theme->slug . '[' . $name . ']';
 	}
 
 	/**

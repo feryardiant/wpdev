@@ -32,6 +32,122 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
+#: functions.php:35
+msgid "Dummy"
+msgstr ""
+
+#: functions.php:36
+msgid "There's nothing to find here"
+msgstr ""
+
+#: functions.php:39
+msgid "Lorem Ipsum"
+msgstr ""
+
+#: functions.php:49
+msgid "Show Tagline."
+msgstr ""
+
+#: functions.php:55
+msgid "Choose the option that you want."
+msgstr ""
+
+#: functions.php:60
+msgid "Logo Image Only"
+msgstr ""
+
+#: functions.php:61
+msgid "Logo Text Only"
+msgstr ""
+
+#: functions.php:62
+msgid "Show Both"
+msgstr ""
+
+#: functions.php:63
+msgid "Disable"
+msgstr ""
+
+#: functions.php:67
+msgid "Link Color"
+msgstr ""
+
+#: functions.php:73
+msgid "Link Active Color"
+msgstr ""
+
+#: functions.php:79
+msgid "Link Hover Color"
+msgstr ""
+
+#: functions.php:85
+msgid "Text Color"
+msgstr ""
+
+#: functions.php:91
+msgid "Paragraph Color"
+msgstr ""
+
+#: functions.php:97
+msgid "Heading Color"
+msgstr ""
+
+#: functions.php:103
+msgid "General Settings"
+msgstr ""
+
+#: functions.php:104
+msgid "Global theme customization value"
+msgstr ""
+
+#: functions.php:108
+msgid "Layout"
+msgstr ""
+
+#: functions.php:109
+msgid "Global layout for all pages"
+msgstr ""
+
+#: functions.php:112
+msgid "Global Container"
+msgstr ""
+
+#: functions.php:116
+msgid "Wide"
+msgstr ""
+
+#: functions.php:117
+msgid "Boxed"
+msgstr ""
+
+#: functions.php:118
+msgid "Fluid"
+msgstr ""
+
+#: functions.php:119
+msgid "Narrowed"
+msgstr ""
+
+#: functions.php:123
+msgid "Header Container"
+msgstr ""
+
+#: functions.php:128
+msgid "Footer Container"
+msgstr ""
+
+#: functions.php:137
+msgid "Header Setting"
+msgstr ""
+
+#: functions.php:142
+msgid "Content Setting"
+msgstr ""
+
+#: functions.php:147
+msgid "Footer Setting"
+msgstr ""
+
 #: searchform.php:20
 msgctxt "search button"
 msgid "Search"
@@ -100,50 +216,6 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-#: includes/customizer.php:75
-msgid "Choose the option that you want."
-msgstr ""
-
-#: includes/customizer.php:78
-msgid "Logo Image Only"
-msgstr ""
-
-#: includes/customizer.php:79
-msgid "Logo Text Only"
-msgstr ""
-
-#: includes/customizer.php:80
-msgid "Show Both"
-msgstr ""
-
-#: includes/customizer.php:81
-msgid "Disable"
-msgstr ""
-
-#: includes/customizer.php:95
-msgid "Link Color"
-msgstr ""
-
-#: includes/customizer.php:99
-msgid "Link Active Color"
-msgstr ""
-
-#: includes/customizer.php:103
-msgid "Link Hover Color"
-msgstr ""
-
-#: includes/customizer.php:107
-msgid "Text Color"
-msgstr ""
-
-#: includes/customizer.php:111
-msgid "Paragraph Color"
-msgstr ""
-
-#: includes/customizer.php:115
-msgid "Heading Color"
-msgstr ""
-
 #: includes/menu.php:44
 msgid "Primary Menu"
 msgstr ""
@@ -152,7 +224,7 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/option.php:59
+#: includes/option.php:139
 msgid "Theme Options"
 msgstr ""
 
@@ -201,34 +273,34 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/template.php:196
+#: includes/template.php:199
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:212, templates/content-none.php:14
+#: includes/template.php:215, templates/content-none.php:14
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:217
+#: includes/template.php:220
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:222
+#: includes/template.php:225
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: includes/template.php:318
+#: includes/template.php:321
 msgid "https://wordpress.org/"
 msgstr ""
 
 #. translators: %s: Credit to WordPress.
-#: includes/template.php:320
+#: includes/template.php:323
 msgid "Proudly powered by %s"
 msgstr ""
 
 #. translators: %1$s: Theme Name, %2$s: Theme Author.
-#: includes/template.php:326
+#: includes/template.php:329
 msgid "%1$s by %2$s."
 msgstr ""
 

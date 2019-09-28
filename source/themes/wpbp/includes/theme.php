@@ -379,6 +379,19 @@ final class Theme {
 	}
 
 	/**
+	 * Register default theme options.
+	 *
+	 * @since 0.1.1
+	 * @param  array $options
+	 * @return void
+	 */
+	public function register_options( array $options = [] ) : void {
+		foreach ( $options as $name => $attributes ) {
+			$this->option->add( $name, $attributes );
+		}
+	}
+
+	/**
 	 * Get Theme Modification value.
 	 *
 	 * @since 0.1.1

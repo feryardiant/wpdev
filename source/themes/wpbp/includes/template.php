@@ -128,7 +128,10 @@ class Template extends Feature {
 		}
 
 		$output[] = '<h1 class="site-title">' . $site_name . '</h1>';
-		$output[] = '<p class="site-description">' . $site_desc . '</p>';
+
+		if ( $this->theme->option->get( 'show_tagline' ) ) {
+			$output[] = '<p class="site-description">' . $site_desc . '</p>';
+		}
 
 		$attr = [
 			'id'    => 'branding',
