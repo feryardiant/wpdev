@@ -68,6 +68,7 @@
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
     "vlucas/phpdotenv": "^3.4",
+    "wp-cli/cache-command": "^2.0",
     "wp-cli/core-command": "^2.0",
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
