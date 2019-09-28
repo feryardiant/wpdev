@@ -1,0 +1,71 @@
+@-webkit-keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); } }
+
+@keyframes spinAround {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); } }
+
+#wpbp-panel {
+  margin: 0 0 0 -20px;
+  background-color: white;
+  height: 100%; }
+  #wpbp-panel > header {
+    padding: 16px 32px; }
+    #wpbp-panel > header h1 {
+      padding: 0;
+      font-weight: 600;
+      line-height: 2em; }
+  #wpbp-panel > nav {
+    padding: 0 32px;
+    margin: 0;
+    border-bottom: 1px solid #e2e4e7; }
+    #wpbp-panel > nav ul {
+      margin: 0 0 -1px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+      #wpbp-panel > nav ul li {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        margin: 0;
+        border-color: #e2e4e7;
+        border-style: solid;
+        border-width: 1px 0 0 1px; }
+        #wpbp-panel > nav ul li:last-child {
+          border-right-width: 1px; }
+        #wpbp-panel > nav ul li.active {
+          background-color: #f1f1f1;
+          border-bottom-width: 0; }
+      #wpbp-panel > nav ul a {
+        text-decoration: none;
+        display: block;
+        padding: 10px 22px;
+        color: #555;
+        font-weight: bold; }
+        #wpbp-panel > nav ul a:focus, #wpbp-panel > nav ul a:active {
+          -webkit-box-shadow: none;
+                  box-shadow: none; }
+  #wpbp-panel > form {
+    background-color: #f1f1f1;
+    padding: 0 32px; }
+    #wpbp-panel > form::after {
+      clear: both;
+      content: " ";
+      display: table; }
+  #wpbp-panel #panel-sections {
+    padding: 16px 0;
+    border-bottom: 1px solid #dbdbdb; }
+    #wpbp-panel #panel-sections > section {
+      display: none; }
+      #wpbp-panel #panel-sections > section.active {
+        display: block; }

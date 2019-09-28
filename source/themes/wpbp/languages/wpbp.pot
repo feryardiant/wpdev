@@ -153,23 +153,23 @@ msgctxt "search button"
 msgid "Search"
 msgstr ""
 
-#: includes/asset.php:94
+#: includes/asset.php:114
 msgid "Small"
 msgstr ""
 
-#: includes/asset.php:99
+#: includes/asset.php:119
 msgid "Normal"
 msgstr ""
 
-#: includes/asset.php:104
+#: includes/asset.php:124
 msgid "Medium"
 msgstr ""
 
-#: includes/asset.php:109
+#: includes/asset.php:129
 msgid "Large"
 msgstr ""
 
-#: includes/asset.php:114
+#: includes/asset.php:134
 msgid "Huge"
 msgstr ""
 
@@ -224,8 +224,9 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/option.php:139
-msgid "Theme Options"
+#. translators: %s Theme Name.
+#: includes/options.tpl.php:17
+msgid "%s Options"
 msgstr ""
 
 #. translators: %s: post date.

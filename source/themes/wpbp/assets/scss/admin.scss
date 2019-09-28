@@ -1,0 +1,82 @@
+@import './variables';
+
+$panel-background: #f1f1f1;
+$panel-border-color: $grey-lighter;
+$panel-nav-border-color: #e2e4e7;
+$panel-padding: ($gap / 2) $gap;
+
+#wpbp-panel {
+  margin: 0 0 0 -20px;
+  background-color: $white;
+  height: 100%;
+
+  > header {
+    padding: $panel-padding;
+
+    h1 {
+      padding: 0;
+      font-weight: $weight-semibold;
+      line-height: 2em;
+    }
+  }
+
+  > nav {
+    padding: 0 $gap;
+    margin: 0;
+    border-bottom: 1px solid $panel-nav-border-color;
+
+    ul {
+      margin: 0 0 -1px;
+      display: flex;
+
+      li {
+        display: inline-flex;
+        margin: 0;
+        border-color: $panel-nav-border-color;
+        border-style: solid;
+        border-width: 1px 0 0 1px;
+
+        &:last-child {
+          border-right-width: 1px;
+        }
+
+        &.active {
+          background-color: $panel-background;
+          border-bottom-width: 0;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        display: block;
+        padding: 10px 22px;
+        color: #555;
+        font-weight: bold;
+
+        &:focus,
+        &:active {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  > form {
+    @include clearfix();
+    background-color: $panel-background;
+    padding: 0 $gap;
+  }
+
+  #panel-sections {
+    padding: ($gap / 2) 0;
+    border-bottom: 1px solid $panel-border-color;
+
+    > section {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

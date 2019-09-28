@@ -71,7 +71,7 @@ abstract class Feature {
 	 * @return self
 	 * @throws \RuntimeException If not initialized.
 	 */
-	public function get_instance() {
+	public static function get_instance() {
 		if ( self::$instance ) {
 			return self::$instance;
 		}

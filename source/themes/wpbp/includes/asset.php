@@ -24,6 +24,7 @@ class Asset extends Feature {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'login_head', [ $this, 'login_head' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
 	}
 
 	/**
@@ -34,7 +35,7 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function enqueue() {
-		$version = $this->theme->info( 'version' );
+		$version = $this->theme->version;
 
 		wp_register_style( 'wpbp-google-fonts', $this->google_fonts_url(), [], $version );
 
@@ -44,11 +45,30 @@ class Asset extends Feature {
 		wp_enqueue_style( 'wpbp-style', $this->theme->get_assets_uri( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
 		wp_style_add_data( 'wpbp-style', 'rtl', 'replace' );
 
-		wp_enqueue_script( 'wpbp-script', $this->theme->get_assets_uri( 'navigation.js' ), [], $version, true );
+		wp_enqueue_script( 'wpbp-script', $this->theme->get_assets_uri( 'main.js' ), [ 'jquery' ], $version, true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
+	}
+
+	/**
+	 * Enqueue Admin Scripts.
+	 *
+	 * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
+	 * @since 0.1.1
+	 * @param string $hook
+	 * @return void
+	 */
+	public function admin_enqueue( $hook ) {
+		if ( substr( $hook, -12 ) !== ( $this->theme->slug . '-options' ) ) {
+			return;
+		}
+
+		$version = $this->theme->version;
+
+		wp_enqueue_style( 'wpbp-panel-style', $this->theme->get_assets_uri( 'admin.css' ), [], $version );
+		wp_enqueue_script( 'wpbp-panel-script', $this->theme->get_assets_uri( 'admin.js' ), [ 'jquery' ], $version, true );
 	}
 
 	/**

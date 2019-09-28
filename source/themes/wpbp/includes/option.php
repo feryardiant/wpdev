@@ -133,20 +133,6 @@ class Option extends Feature {
 	 * @return mixed
 	 */
 	public function admin_page() {
-		?>
-		<div class="wrap">
-
-			<h1><?php esc_html_e( 'Theme Options', 'wpbp' ); ?></h1>
-
-			<div id="poststuff">
-
-				<form id="roles" action="#" method="post">
-
-				</form> <!-- #roles -->
-
-			</div> <!-- #poststuff -->
-
-		</div> <!-- .wrap -->
-		<?php
+		include __DIR__ . '/options.tpl.php';
 	}
 }
