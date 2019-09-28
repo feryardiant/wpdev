@@ -15,17 +15,7 @@
 	<div class="container">
 
 		<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
-			<div class="navbar-brand">
-				<a class="navbar-item" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<?php the_custom_logo(); ?>
-					<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1> <!-- .site-title -->
-
-					<?php $wpbp_description = get_bloginfo( 'description', 'display' ); ?>
-					<?php if ( $wpbp_description || is_customize_preview() ) : ?>
-						<p class="site-description"><?php echo esc_html( $wpbp_description ); ?></p>
-					<?php endif; ?>
-				</a> <!-- .navbar-item -->
-			</div> <!-- .navbar-brand -->
+			<div class="navbar-brand"><?php the_custom_logo(); ?></div> <!-- .navbar-brand -->
 
 			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-primary">
 				<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>

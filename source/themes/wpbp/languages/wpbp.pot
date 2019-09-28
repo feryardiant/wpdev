@@ -32,23 +32,29 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: footer.php:20
-msgid "https://wordpress.org/"
-msgstr ""
-
-#. translators: %s: CMS name, i.e. WordPress.
-#: footer.php:23
-msgid "Proudly powered by %s"
-msgstr ""
-
-#. translators: 1: Theme name, 2: Theme author.
-#: footer.php:29
-msgid "Theme: %1$s by %2$s."
-msgstr ""
-
 #: searchform.php:20
 msgctxt "search button"
 msgid "Search"
+msgstr ""
+
+#: includes/asset.php:94
+msgid "Small"
+msgstr ""
+
+#: includes/asset.php:99
+msgid "Normal"
+msgstr ""
+
+#: includes/asset.php:104
+msgid "Medium"
+msgstr ""
+
+#: includes/asset.php:109
+msgid "Large"
+msgstr ""
+
+#: includes/asset.php:114
+msgid "Huge"
 msgstr ""
 
 #: includes/comment.php:45
@@ -90,69 +96,52 @@ msgstr ""
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:74
-msgid "Skip to content"
-msgstr ""
-
-#: includes/content.php:88
+#: includes/content.php:73
 msgid "Post"
 msgstr ""
 
-#: includes/customizer.php:94
+#: includes/customizer.php:75
 msgid "Choose the option that you want."
 msgstr ""
 
-#: includes/customizer.php:97
+#: includes/customizer.php:78
 msgid "Logo Image Only"
 msgstr ""
 
-#: includes/customizer.php:98
+#: includes/customizer.php:79
 msgid "Logo Text Only"
 msgstr ""
 
-#: includes/customizer.php:99
+#: includes/customizer.php:80
 msgid "Show Both"
 msgstr ""
 
-#: includes/customizer.php:100
+#: includes/customizer.php:81
 msgid "Disable"
 msgstr ""
 
-#: includes/customizer.php:115
+#: includes/customizer.php:95
 msgid "Link Color"
 msgstr ""
 
-#: includes/customizer.php:119
+#: includes/customizer.php:99
 msgid "Link Active Color"
 msgstr ""
 
-#: includes/customizer.php:123
+#: includes/customizer.php:103
 msgid "Link Hover Color"
 msgstr ""
 
-#: includes/customizer.php:127
+#: includes/customizer.php:107
 msgid "Text Color"
 msgstr ""
 
-#: includes/customizer.php:131
+#: includes/customizer.php:111
 msgid "Paragraph Color"
 msgstr ""
 
-#: includes/customizer.php:135
+#: includes/customizer.php:115
 msgid "Heading Color"
-msgstr ""
-
-#: includes/layout.php:83, templates/content-none.php:14
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr ""
-
-#. translators: %s: search query.
-#: includes/layout.php:88
-msgid "Search Results for: %s"
-msgstr ""
-
-#: includes/layout.php:93
-msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #: includes/menu.php:44
@@ -163,24 +152,8 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/style.php:88
-msgid "Small"
-msgstr ""
-
-#: includes/style.php:93
-msgid "Normal"
-msgstr ""
-
-#: includes/style.php:98
-msgid "Medium"
-msgstr ""
-
-#: includes/style.php:103
-msgid "Large"
-msgstr ""
-
-#: includes/style.php:108
-msgid "Huge"
+#: includes/option.php:59
+msgid "Theme Options"
 msgstr ""
 
 #. translators: %s: post date.
@@ -226,6 +199,46 @@ msgstr ""
 #. translators: %s: Name of current post. Only visible to screen readers
 #: includes/template-tags-functions.php:104, templates/content-page.php:33, templates/content.php:55
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: includes/template.php:196
+msgid "Skip to content"
+msgstr ""
+
+#: includes/template.php:212, templates/content-none.php:14
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
+#. translators: %s: search query.
+#: includes/template.php:217
+msgid "Search Results for: %s"
+msgstr ""
+
+#: includes/template.php:222
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: includes/template.php:318
+msgid "https://wordpress.org/"
+msgstr ""
+
+#. translators: %s: Credit to WordPress.
+#: includes/template.php:320
+msgid "Proudly powered by %s"
+msgstr ""
+
+#. translators: %1$s: Theme Name, %2$s: Theme Author.
+#: includes/template.php:326
+msgid "%1$s by %2$s."
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/theme.php:132
+msgid "%s Option Panel"
+msgstr ""
+
+#: includes/theme.php:133
+msgid "Theme Option"
 msgstr ""
 
 #: includes/widgets.php:38

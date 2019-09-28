@@ -6,11 +6,31 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
 
-( function( document, $, customize ) {
+( function( document, $, customize, apiRequest ) {
+  const apiBaseUrl = document.querySelector( 'link[rel="https://api.w.org/"]' )
+    .getAttribute( 'href' )
+
+  const apiUrl = ( path ) => `${ apiBaseUrl }wp/v2/${ path }`
+
+  if ( customize.selectiveRefresh && $.fn.masonry ) {
+    const $widget = $( 'secondary' )
+
+    // http://demo.wp-api.org/wp-json/wp/v2/posts/?filter[p]=470
+
+    $widget.masonry( {} )
+
+    customize.selectiveRefresh.bind( 'sidebar-updated', ( partial ) => {
+      if ( 'main-sidebar' === partial.sidebarId ) {
+        $widget.masonry( 'reloadItems' )
+        $widget.masonry( 'layout' )
+      }
+    } )
+  }
+
   // Site title and description.
   customize( 'blogname', ( value ) => {
     value.bind( ( to ) => {
-      $( '.site-title a' ).text( to )
+      $( '.site-title' ).text( to )
     } )
   } )
 
@@ -78,4 +98,4 @@
       }
     } )
   } )
-} )( document, jQuery, wp.customize )
+} )( document, jQuery, wp.customize, wp.apiRequest )

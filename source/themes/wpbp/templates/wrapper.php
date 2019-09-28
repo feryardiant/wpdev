@@ -27,7 +27,7 @@
 		<?php get_header(); ?>
 	</header> <!-- #site-header -->
 
-	<section id="site-content" class="section">
+	<section id="site-content" class="section content">
 		<div class="container">
 			<div class="columns">
 				<main role="main" id="primary" class="<?php $wpbp_theme->content->classes( [ 'column' ] ); ?>">

@@ -39,13 +39,127 @@ class Template extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
+		add_action( 'after_setup_theme', [ $this, 'setup' ] );
+		add_action( 'wp_head', [ $this, 'head' ] );
+		add_action( 'wpbp_skip_link', [ $this, 'skip_link' ], 10, 1 );
 		add_action( 'wpbp_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'wpbp_main_content_before', [ $this, 'main_content_before' ], 10 );
 		add_action( 'wpbp_main_content_after', [ $this, 'main_content_after' ], 10, 0 );
 		add_action( 'wpbp_footer', [ $this, 'footer_widgets' ], 10, 0 );
 		add_action( 'wpbp_footer', [ $this, 'footer_credit' ], 20, 0 );
 
+		add_filter( 'body_class', [ $this, 'body_classes' ] );
+		add_filter( 'get_custom_logo', [ $this, 'site_branding' ] );
 		add_filter( 'template_include', [ $this, 'wrapper' ], 12 );
+	}
+
+	/**
+	 * Template Setup
+	 *
+	 * @return void
+	 */
+	public function setup() : void {
+		// .
+	}
+
+	/**
+	 * Add a pingback url auto-discovery header for single posts, pages, or attachments.
+	 *
+	 * @internal
+	 * @since 0.1.0
+	 * @return void
+	 */
+	public function head() : void {
+		if ( is_singular() && pings_open() ) {
+			printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
+		}
+	}
+
+	/**
+	 * Adds custom classes to the array of body classes.
+	 *
+	 * @internal
+	 * @since 0.1.0
+	 * @param  array $classes
+	 * @return array
+	 */
+	public function body_classes( $classes ) : array {
+		// Adds a class of hfeed to non-singular pages.
+		if ( ! is_singular() ) {
+			$classes[] = 'hfeed';
+		}
+
+		// Adds a class of no-sidebar when there is no sidebar present.
+		if ( ! is_active_sidebar( 'main-sidebar' ) ) {
+			$classes[] = 'no-sidebar';
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * Site Branding.
+	 *
+	 * @since 0.1.1
+	 * @return string
+	 */
+	public function site_branding() {
+		$site_name = $this->site_name_render();
+		$site_desc = $this->site_slogan_render();
+		$logo_id   = get_theme_mod( 'custom_logo' );
+		$output    = [];
+
+		if ( $logo_id ) {
+			$logo_attr = [
+				'class' => 'custom-logo',
+			];
+
+			$logo_attr['alt'] = get_post_meta( $logo_id, '_wp_attachment_image_alt', true );
+			if ( ! $logo_attr['alt'] ) {
+				$logo_attr['alt'] = $site_name;
+			}
+
+			$logo_img = wp_get_attachment_image_url( $logo_id, 'full' );
+			$output[] = sprintf(
+				'<img %1$s src="%2$s"/>',
+				$this->html_attributes_from_array( $logo_attr ),
+				esc_url( $logo_img )
+			);
+		}
+
+		$output[] = '<h1 class="site-title">' . $site_name . '</h1>';
+		$output[] = '<p class="site-description">' . $site_desc . '</p>';
+
+		$attr = [
+			'id'    => 'branding',
+			'href'  => esc_url( home_url( '/' ) ),
+			'class' => 'navbar-item',
+		];
+
+		return sprintf(
+			'<a %1$s rel="home">%2$s</a> <!-- #%3$s -->',
+			$this->html_attributes_from_array( $attr ),
+			join( '', $output ),
+			esc_attr( $attr['id'] )
+		);
+	}
+
+	/**
+	 * Render Site Name.
+	 *
+	 * @return string
+	 */
+	public function site_name_render() {
+		return get_bloginfo( 'name', 'display' );
+	}
+
+	/**
+	 * Render Site Description.
+	 *
+	 * @return string
+	 */
+	public function site_slogan_render() {
+		return get_bloginfo( 'description', 'display' );
 	}
 
 	/**
@@ -69,6 +183,19 @@ class Template extends Feature {
 		}
 
 		return locate_template( $templates );
+	}
+
+	/**
+	 * Print the skip-link.
+	 *
+	 * @since 0.1.1
+	 * @param  string $target_id
+	 * @return void
+	 */
+	public function skip_link( string $target_id = 'site-content' ) {
+		$text = apply_filters( 'wpbp_skip_link_text', __( 'Skip to content', 'wpbp' ) );
+
+		echo '<a class="skip-link screen-reader-text" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
 	}
 
 	/**
@@ -101,7 +228,7 @@ class Template extends Feature {
 
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		if ( $title ) {
-			echo '<h1 class="title screen-reader-text">' . $title . '</h1>';
+			echo '<h1 class="title">' . $title . '</h1>';
 		}
 
 		if ( $subtitle ) {
@@ -140,19 +267,36 @@ class Template extends Feature {
 	 * Print footer credit.
 	 *
 	 * @since 0.1.1
+	 * @param array $attr
+	 * @return string
+	 */
+	public function html_attributes_from_array( array $attr ) : string {
+		$output = [];
+
+		foreach ( $attr as $name => $value ) {
+			$output[] = $name . '="' . esc_attr( $value ) . '"';
+		}
+
+		return join( ' ', $output );
+	}
+
+	/**
+	 * Print footer credit.
+	 *
+	 * @since 0.1.1
 	 * @return void
 	 */
 	public function footer_widgets() {
 		$wrapper = apply_filters( 'wpbp_footer_widgets_wrapper', [
 			'before' => '<div class="footer-widgets">',
-			'after'  => '</div> <!-- .site-info --!>'
+			'after'  => '</div> <!-- .site-info --!>',
 		] );
 
-		echo $wrapper[ 'before' ];
+		echo wp_kses( $wrapper['before'], $this->common_kses() );
 
 		Widgets::get_active( 'footer-widgets' );
 
-		echo $wrapper[ 'after' ];
+		echo wp_kses( $wrapper['after'], $this->common_kses() );
 	}
 
 	/**
@@ -164,26 +308,50 @@ class Template extends Feature {
 	public function footer_credit() {
 		$wrapper = apply_filters( 'wpbp_footer_credits_wrapper', [
 			'before' => '<div class="site-info">',
-			'after'  => '</div> <!-- .site-info --!>'
+			'after'  => '</div> <!-- .site-info --!>',
 		] );
 
 		$output = [
-			$wrapper[ 'before' ]
+			$wrapper['before'],
 		];
 
 		$output[] = '<a target="__blank" href="' . esc_url( __( 'https://wordpress.org/', 'wpbp' ) ) . '">';
+		/* translators: %s: Credit to WordPress. */
 		$output[] = sprintf( esc_html__( 'Proudly powered by %s', 'wpbp' ), 'WordPress' );
 		$output[] = '</a>';
 		$output[] = '<span class="sep"> | </span>';
 
 		$output[] = sprintf(
+			/* translators: %1$s: Theme Name, %2$s: Theme Author. */
 			esc_html__( '%1$s by %2$s.', 'wpbp' ),
-			$this->theme->info( 'name' ),
-			$this->theme->info( 'author' )
+			$this->theme->name,
+			$this->theme->author
 		);
 
-		$output[] = $wrapper[ 'before' ];
+		$output[] = $wrapper['before'];
 
-		echo join( '', $output );
+		echo wp_kses( join( '', $output ), $this->common_kses() );
+	}
+
+	/**
+	 * Common KSES.
+	 *
+	 * @link https://codex.wordpress.org/Function_Reference/wp_kses
+	 * @return string
+	 */
+	public function common_kses() {
+		return [
+			'div' => [
+				'class' => [],
+			],
+			'a' => [
+				'target' => [],
+				'href'   => [],
+				'class'  => [],
+			],
+			'span' => [
+				'class' => [],
+			],
+		];
 	}
 }

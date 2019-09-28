@@ -9,7 +9,7 @@
  * @since      0.1.0
  */
 
-do_action( 'wpbp_main_content_before', [ 'site-main', 'content' ] );
+do_action( 'wpbp_main_content_before', [ 'site-main' ] );
 
 if ( have_posts() ) {
 

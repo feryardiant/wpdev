@@ -21,8 +21,6 @@ class Content extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_action( 'wpbp_skip_link', [ $this, 'skip_link' ], 10, 1 );
-
 		add_image_size( 'post_size', 600, null );
 		add_image_size( 'max_size', 1600, 900, true );
 
@@ -64,19 +62,6 @@ class Content extends Feature {
 	}
 
 	/**
-	 * Print the skip-link.
-	 *
-	 * @since 0.1.1
-	 * @param  string $target_id
-	 * @return void
-	 */
-	public function skip_link( string $target_id = 'site-content' ) {
-		$text = apply_filters( 'wpbp_skip_link_text', __( 'Skip to content', 'wpbp' ) );
-
-		echo '<a class="skip-link" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
-	}
-
-	/**
 	 * Customize image sizes name.
 	 *
 	 * @link https://gist.github.com/wycks/4949242
@@ -86,10 +71,6 @@ class Content extends Feature {
 	 */
 	public function image_size_names_choose( array $image_sizes ) {
 		$image_sizes['post_size'] = __( 'Post', 'wpbp' );
-
-		if ( isset( $image_sizes['full'] ) ) {
-			unset( $image_sizes['full'] );
-		}
 
 		return $image_sizes;
 	}

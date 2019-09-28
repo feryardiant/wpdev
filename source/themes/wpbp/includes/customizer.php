@@ -19,27 +19,11 @@ use WP_Customize_Manager;
  */
 class Customizer extends Feature {
 	/**
-	 * Theme instance.
-	 *
-	 * @var Theme
-	 */
-	protected $theme;
-
-	/**
-	 * Theme slug name.
-	 *
-	 * @var string
-	 */
-	protected $theme_slug;
-
-	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		$this->theme_slug = $this->theme->info( 'child_slug' );
-
 		add_action( 'customize_register', [ $this, 'register' ] );
 		add_action( 'customize_preview_init', [ $this, 'preview_init' ] );
 	}
@@ -69,38 +53,34 @@ class Customizer extends Feature {
 
 		if ( isset( $customizer->selective_refresh ) ) {
 			$customizer->selective_refresh->add_partial( 'blogname', [
-				'selector'        => '.site-title a',
-				'render_callback' => apply_filters( 'wpbp_customize_site_title_render_callback', function () {
-					bloginfo( 'name' );
-				} ),
+				'selector'        => '.site-title',
+				'render_callback' => [ $this->theme->template, 'site_name_render' ],
 			] );
 
 			$customizer->selective_refresh->add_partial( 'blogdescription', [
 				'selector'        => '.site-description',
-				'render_callback' => apply_filters( 'wpbp_customize_site_description_render_callback', function () {
-					bloginfo( 'description' );
-				} ),
-			] );
-
-			$customizer->add_setting( $this->theme_slug . '[wpbp_site_logo_display]', [
-				'default'           => 'text_only',
-				'type'              => 'option',
-				'capability'        => 'edit_theme_options',
-				'sanitize_callback' => 'accelerate_radio_select_sanitize',
-			] );
-
-			$customizer->add_control( $this->theme_slug . '[wpbp_site_logo_display]', [
-				'type'    => 'radio',
-				'label'   => __( 'Choose the option that you want.', 'wpbp' ),
-				'section' => 'title_tagline',
-				'choices' => [
-					'logo_only' => __( 'Logo Image Only', 'wpbp' ),
-					'text_only' => __( 'Logo Text Only', 'wpbp' ),
-					'both'      => __( 'Show Both', 'wpbp' ),
-					'none'      => __( 'Disable', 'wpbp' ),
-				],
+				'render_callback' => [ $this->theme->template, 'site_slogan_render' ],
 			] );
 		}
+
+		$customizer->add_setting( $this->theme->slug . '[wpbp_site_logo_display]', [
+			'default'           => 'text_only',
+			'type'              => 'option',
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'accelerate_radio_select_sanitize',
+		] );
+
+		$customizer->add_control( $this->theme->slug . '[wpbp_site_logo_display]', [
+			'type'    => 'radio',
+			'label'   => __( 'Choose the option that you want.', 'wpbp' ),
+			'section' => 'title_tagline',
+			'choices' => [
+				'logo_only' => __( 'Logo Image Only', 'wpbp' ),
+				'text_only' => __( 'Logo Text Only', 'wpbp' ),
+				'both'      => __( 'Show Both', 'wpbp' ),
+				'none'      => __( 'Disable', 'wpbp' ),
+			],
+		] );
 	}
 
 	/**
@@ -175,8 +155,12 @@ class Customizer extends Feature {
 	 * @since 0.1.0
 	 */
 	public function preview_init() {
-		$theme_version = $this->theme->info( 'version' );
-
-		wp_enqueue_script( 'wpbp-customizer-script', $this->theme->assets_url( 'customizer.js' ), [ 'customize-preview' ], $theme_version, true );
+		wp_enqueue_script(
+			'wpbp-customizer-script',
+			$this->theme->get_assets_uri( 'customizer.js' ),
+			[ 'customize-preview' ],
+			$this->theme->version,
+			true
+		);
 	}
 }

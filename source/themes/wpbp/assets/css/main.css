@@ -407,7 +407,7 @@ table th {
 table th {
   color: #363636; }
 
-.is-clearfix::after, .aligncenter::after {
+.is-clearfix::after {
   clear: both;
   content: " ";
   display: table; }
@@ -3880,10 +3880,6 @@ a.box:active {
 
 .content.is-large {
   font-size: 1.5rem; }
-
-.content ul.wp-block-gallery {
-  list-style-type: none;
-  margin: 0; }
 
 .icon {
   -webkit-box-align: center;
@@ -7488,7 +7484,7 @@ label.panel-block {
  * Accessibility
  * -------------------------------------------------------------- */
 /* Text meant only for screen readers. */
-.skip-link {
+.screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
   -webkit-clip-path: inset(50%);
@@ -7501,7 +7497,7 @@ label.panel-block {
   width: 1px;
   word-wrap: normal !important;
   /* Many screen reader and browser combinations announce broken words as they would appear visually. */ }
-  .skip-link:focus {
+  .screen-reader-text:focus {
     background-color: #f1f1f1;
     border-radius: 3px;
     -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
@@ -7545,6 +7541,10 @@ label.panel-block {
   clear: both;
   margin: 0 0 1.5em; }
 
+.content ul.wp-block-gallery {
+  list-style-type: none;
+  margin: 0; }
+
 /* --------------------------------------------------------------
  * Alignments
  * -------------------------------------------------------------- */
@@ -7553,19 +7553,6 @@ label.panel-block {
 
 .alignright {
   margin-left: 1rem; }
-
-/* --------------------------------------------------------------
- * Infinite scroll
- * -------------------------------------------------------------- */
-/* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .posts-navigation,
-.infinite-scroll.neverending .site-footer {
-  /* Theme Footer (when set to scrolling) */
-  display: none; }
-
-/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before. */
-.infinity-end.neverending .site-footer {
-  display: block; }
 
 /* --------------------------------------------------------------
  * Navigations
@@ -7583,6 +7570,19 @@ label.panel-block {
     float: right;
     text-align: right;
     width: 50%; }
+
+/* --------------------------------------------------------------
+ * Infinite scroll
+ * -------------------------------------------------------------- */
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+.infinite-scroll .posts-navigation,
+.infinite-scroll.neverending .site-footer {
+  /* Theme Footer (when set to scrolling) */
+  display: none; }
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before. */
+.infinity-end.neverending .site-footer {
+  display: block; }
 
 /* --------------------------------------------------------------
  * Comments
@@ -7649,11 +7649,25 @@ object {
 .wp-caption {
   margin-bottom: 1.5em;
   max-width: 100%; }
-  .wp-caption img[class*='wp-image-'] {
-    display: block;
-    margin-left: auto;
-    margin-right: auto; }
+  .wp-caption.alignnone {
+    margin: 0.5rem 1rem 1rem 0; }
+  .wp-caption.alignleft {
+    margin: 0.5rem 1rem 1rem 0; }
+  .wp-caption.alignright {
+    margin: 0.5rem 0 1rem 1rem; }
+  .wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+    display: block; }
+    .wp-caption img[class*='wp-image-'] {
+      margin-left: auto;
+      margin-right: auto; }
   .wp-caption .wp-caption-text {
+    font-size: 12px;
     margin: 0.8075em 0;
     text-align: center; }
 
@@ -7696,6 +7710,6 @@ object {
   #site-content .hentry:not(:first-child) {
     padding-top: 2rem; }
 
-#site-footer {
+.site-footer {
   background-color: #fafafa;
   padding: 2rem 1rem 4rem; }

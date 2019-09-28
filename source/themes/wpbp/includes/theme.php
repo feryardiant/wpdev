@@ -12,12 +12,25 @@ namespace WPBP;
 /**
  * Theme Setup Class.
  *
- * @category    Theme Setup
+ * @category Theme Setup
+ * @property-read string $siteurl
+ * @property-read string $name
+ * @property-read string $slug
+ * @property-read string $child_slug
+ * @property-read string $theme_uri
+ * @property-read string $version
+ * @property-read string $author
+ * @property-read string $author_uri
+ * @property-read string $parent_dir
+ * @property-read string $child_dir
+ * @property-read string $parent_uri
+ * @property-read string $child_uri
  * @property-read Asset $asset
  * @property-read Comment $comment
  * @property-read Content $content
  * @property-read Customizer $customizer
  * @property-read Menu $menu
+ * @property-read Option $option
  * @property-read Template $template
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
@@ -26,6 +39,7 @@ final class Theme {
 	/**
 	 * Transient Names.
 	 *
+	 * @since 0.1.0
 	 * @var array
 	 */
 	const TRANSIENT_NAMES = [
@@ -37,6 +51,7 @@ final class Theme {
 	/**
 	 * Cache object.
 	 *
+	 * @since 0.1.0
 	 * @var object
 	 */
 	private static $cached;
@@ -44,6 +59,7 @@ final class Theme {
 	/**
 	 * Theme instances container.
 	 *
+	 * @since 0.1.0
 	 * @var array
 	 */
 	private $instances = [];
@@ -56,28 +72,6 @@ final class Theme {
 	public function __construct() {
 		self::$cached = (object) [];
 
-		add_action( 'after_setup_theme', [ $this, 'setup' ] );
-		add_action( 'wp_head', [ $this, 'head' ] );
-
-		add_filter( 'body_class', [ $this, 'body_classes' ] );
-
-		$this->initialize( [
-			Asset::class,
-			Template::class,
-			Customizer::class,
-			Content::class,
-			Comment::class,
-			Menu::class,
-			Widgets::class,
-		] );
-
-		/**
-		 * Load Jetpack compatibility file.
-		 */
-		if ( defined( 'JETPACK__VERSION' ) ) {
-			$this->jetpack = Integrations\JetPack::class;
-		}
-
 		$transient_name           = $this->transient_name( 'theme_info' );
 		self::$cached->theme_info = get_transient( $transient_name );
 
@@ -89,9 +83,10 @@ final class Theme {
 				'name'       => $theme->name,
 				'slug'       => $theme->template,
 				'child_slug' => get_option( 'stylesheet' ),
+				'theme_uri'  => $theme->get( 'ThemeURI' ),
 				'version'    => $theme->version,
-				'author'     => $theme->author,
-				'autor_uri'  => $theme->get( 'AuthorURI' ),
+				'author'     => $theme->get( 'Author' ),
+				'author_uri' => $theme->get( 'AuthorURI' ),
 				'parent_dir' => trailingslashit( get_template_directory() ),
 				'child_dir'  => trailingslashit( get_stylesheet_directory() ),
 				'parent_uri' => trailingslashit( get_template_directory_uri() ),
@@ -101,6 +96,45 @@ final class Theme {
 			self::$cached->theme_info = $theme_info;
 			set_transient( $transient_name, $theme_info );
 		}
+
+		add_action( 'after_setup_theme', [ $this, 'setup' ] );
+		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+
+		$this->initialize( [
+			Asset::class,
+			Template::class,
+			Customizer::class,
+			Content::class,
+			Comment::class,
+			Menu::class,
+			Option::class,
+			Widgets::class,
+		] );
+
+		/**
+		 * Load Jetpack compatibility file.
+		 */
+		if ( defined( 'JETPACK__VERSION' ) ) {
+			$this->jetpack = Integrations\JetPack::class;
+		}
+	}
+
+	/**
+	 * Theme option panel.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/add_theme_page/
+	 * @since 0.1.0
+	 * @return mixed
+	 */
+	public function admin_menu() {
+		add_theme_page(
+			/* translators: %s: Theme name. */
+			sprintf( __( '%s Option Panel', 'wpbp' ), $this->name ),
+			__( 'Theme Option', 'wpbp' ),
+			'edit_theme_options',
+			$this->slug . '-options',
+			[ $this->option, 'admin_page' ]
+		);
 	}
 
 	/**
@@ -172,10 +206,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_dir( string $suffix ) : string {
-		return str_replace(
-			'/', DIRECTORY_SEPARATOR,
-			trailingslashit( get_template_directory() ) . $suffix
-		);
+		return $this->parent_dir . $suffix;
 	}
 
 	/**
@@ -186,10 +217,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_child_dir( string $suffix ) : string {
-		return str_replace(
-			'/', DIRECTORY_SEPARATOR,
-			trailingslashit( get_stylesheet_directory() ) . $suffix
-		);
+		return $this->child_dir . $suffix;
 	}
 
 	/**
@@ -200,7 +228,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_uri( string $suffix ) : string {
-		return trailingslashit( get_template_directory_uri() ) . $suffix;
+		return $this->parent_uri . $suffix;
 	}
 
 	/**
@@ -211,7 +239,7 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_child_uri( string $suffix ) : string {
-		return trailingslashit( get_stylesheet_directory_uri() ) . $suffix;
+		return $this->child_uri . $suffix;
 	}
 
 	/**
@@ -222,13 +250,16 @@ final class Theme {
 	 * @return string
 	 */
 	public function get_assets_uri( string $filename ) : string {
-		$extension = pathinfo( $filename, PATHINFO_EXTENSION );
+		extract( pathinfo( $filename ) ); // phpcs:ignore WordPress.PHP.DontExtract
+		$is_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
 
 		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
 			$extension = 'img';
+		} else {
+			$basename = $filename . ( $is_debug ? ".$extension" : ".min.$extension" );
 		}
 
-		return $this->get_uri( 'assets/' . $extension . '/' . $filename );
+		return $this->get_uri( "assets/$extension/$basename" );
 	}
 
 	/**
@@ -240,14 +271,14 @@ final class Theme {
 	 * @since 0.1.0
 	 * @return void
 	 */
-	public function setup() {
+	public function setup() : void {
 		/**
 		 * Load Localisation files.
 		 *
 		 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
 		 */
-		load_theme_textdomain( 'wpbp', $this->get_child_dir( 'languages' ) );
-		load_theme_textdomain( 'wpbp', $this->get_dir( 'languages' ) );
+		load_theme_textdomain( $this->slug, $this->get_child_dir( 'languages' ) );
+		load_theme_textdomain( $this->slug, $this->get_dir( 'languages' ) );
 
 		/**
 		 * Add default posts and comments RSS feed links to head.
@@ -274,14 +305,14 @@ final class Theme {
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
 		/**
-		 *  Add support for the Site Logo plugin and the site logo functionality in JetPack
+		 * Add support for the Site Logo plugin and the site logo functionality in JetPack
 		 *
 		 * @link https://github.com/automattic/site-logo
 		 * @link http://jetpack.me/
 		 */
 		add_theme_support(
 			'site-logo',
-			apply_filters( 'wpbp_site_logo_args', [
+			apply_filters( 'wpbp_support_site_logo_args', [
 				'size' => 'full',
 			] )
 		);
@@ -291,7 +322,7 @@ final class Theme {
 		 */
 		add_theme_support(
 			'custom-logo',
-			apply_filters( 'wpbp_custom_logo_args', [
+			apply_filters( 'wpbp_support_custom_logo_args', [
 				'height'      => 110,
 				'width'       => 470,
 				'flex-width'  => true,
@@ -305,7 +336,7 @@ final class Theme {
 		 */
 		add_theme_support(
 			'html5',
-			apply_filters( 'wpbp_html5_args', [
+			apply_filters( 'wpbp_support_html5_args', [
 				'search-form',
 				'comment-form',
 				'comment-list',
@@ -322,8 +353,8 @@ final class Theme {
 		 */
 		add_theme_support(
 			'custom-background',
-			apply_filters( 'wpbp_custom_background_args', [
-				'default-color' => apply_filters( 'wpbp_default_background_color', 'ffffff' ),
+			apply_filters( 'wpbp_support_custom_background_args', [
+				'default-color' => apply_filters( 'wpbp_support_default_background_color', 'ffffff' ),
 				'default-image' => '',
 			] )
 		);
@@ -335,7 +366,7 @@ final class Theme {
 		 */
 		add_theme_support(
 			'custom-header',
-			apply_filters( 'wpbp_custom_header_args', [
+			apply_filters( 'wpbp_support_custom_header_args', [
 				'default-image'     => '',
 				'header-text'       => false,
 				'width'             => 1950,
@@ -356,46 +387,10 @@ final class Theme {
 	 * @return mixed
 	 */
 	public function get_mod( $name, $default = null ) {
-		if ( ! isset( self::$cached->mods ) ) {
-			self::$cached->mods = get_theme_mods()['wpbp'] ?? [];
-		}
+		$theme_mods = get_theme_mods()[ $this->slug ] ?? [];
+		$theme_mod  = apply_filters( 'wpbp_default_' . $name, ( $theme_mods[ $name ] ?? null ) );
 
-		return self::$cached->mods[ $name ] ?? apply_filters( 'wpbp_default_' . $name, $default );
-	}
-
-	/**
-	 * Add a pingback url auto-discovery header for single posts, pages, or attachments.
-	 *
-	 * @internal
-	 * @since 0.1.0
-	 * @return void
-	 */
-	public function head() {
-		if ( is_singular() && pings_open() ) {
-			printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
-		}
-	}
-
-	/**
-	 * Adds custom classes to the array of body classes.
-	 *
-	 * @internal
-	 * @since 0.1.0
-	 * @param  array $classes
-	 * @return array
-	 */
-	public function body_classes( $classes ) {
-		// Adds a class of hfeed to non-singular pages.
-		if ( ! is_singular() ) {
-			$classes[] = 'hfeed';
-		}
-
-		// Adds a class of no-sidebar when there is no sidebar present.
-		if ( ! is_active_sidebar( 'main-sidebar' ) ) {
-			$classes[] = 'no-sidebar';
-		}
-
-		return $classes;
+		return $theme_mod ?: $default;
 	}
 
 	/**
@@ -460,13 +455,17 @@ final class Theme {
 	 * @internal
 	 * @since 0.1.1
 	 * @param  string $name
-	 * @return mixed
+	 * @return Feature|string|null
 	 */
 	public function __get( string $name ) {
-		if ( ! array_key_exists( $name, $this->instances ) ) {
-			return null;
+		if ( array_key_exists( $name, self::$cached->theme_info ) ) {
+			return self::$cached->theme_info[ $name ];
 		}
 
-		return $this->instances[ $name ];
+		if ( array_key_exists( $name, $this->instances ) ) {
+			return $this->instances[ $name ];
+		}
+
+		return null;
 	}
 }

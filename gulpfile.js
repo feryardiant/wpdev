@@ -61,7 +61,7 @@ const tasks = configure('source', 'build', {
       team: config.author
     }
 
-    config.phpcs.standard = 'phpcs.xml'
+    config.phpcs.standard = 'source/phpcs.xml'
 
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
@@ -191,12 +191,12 @@ exports.default = async () => {
       ]
     }, () => resolve())
   })
-  
+
   const phpServer = () => new Promise((resolve, reject) => {
     process.on('exit', () => {
       php.closeServer()
     })
-  
+
     php.server({
       ini: 'public/.user.ini',
       base: 'public',
@@ -208,7 +208,7 @@ exports.default = async () => {
             '-d', 'cli_server.color=on'
           ].concat(args)
         }
-  
+
         return args
       }
     }, () => {
