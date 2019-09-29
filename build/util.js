@@ -1,4 +1,4 @@
-const { readdirSync } = require('fs')
+const { readdirSync, readFileSync } = require('fs')
 const { promisify } = require('util')
 const execFile = promisify(require('child_process').execFile)
 const path = require('path')
@@ -22,6 +22,10 @@ const globalConfig = {
     img: 'img/**',
     css: 'scss/**/*.scss',
     js: 'js/**/*.js',
+  },
+
+  release: {
+    sign: false
   },
 
   php: {
@@ -55,7 +59,9 @@ const globalConfig = {
     uglify: {},
     eslint: {},
     babel: pkgJson.babel
-  }
+  },
+
+  zip: {}
 }
 
 const scandir = exports.scandir = (dir, dest) => {
@@ -72,6 +78,7 @@ const scandir = exports.scandir = (dir, dest) => {
       let target = `${type.name}/${source.name}`
       build[source.name] = {
         type: type.name,
+        path: `${dir}/${target}`,
         php: {
           src: `${dir}/${target}/**/*.php`,
           dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
@@ -95,8 +102,17 @@ const scandir = exports.scandir = (dir, dest) => {
         }
       })
 
+      const zipSrc = [
+        `${dir}/${target}/**`
+      ]
+
+      readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/).forEach((line) => {
+        const ignore = path.resolve(dir, target, line)
+        zipSrc.push(`!${ignore}`)
+      })
+
       build[source.name].zip = {
-        src: `${tmpDir}/${target}/**`,
+        src: zipSrc,
         dest: dest
       }
 
@@ -109,6 +125,7 @@ const scandir = exports.scandir = (dir, dest) => {
 
 const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
+  const zipTasks = []
   const toWatch = {}
 
   for (const [name, asset] of scandir(src, dest)) {
@@ -116,12 +133,13 @@ const configure = exports.configure = (src, dest, tasks) => {
     const config = {
       name: name,
       type: asset.type,
+      path: asset.path,
       version: globalConfig.version,
       author: globalConfig.author
     }
 
     for (const key of Object.keys(asset)) {
-      if (key === 'type') {
+      if (['type', 'path'].includes(key)) {
         continue
       }
 
@@ -148,7 +166,11 @@ const configure = exports.configure = (src, dest, tasks) => {
         }, done)
       })
 
-      assetTasks.push(taskName)
+      if ('zip' !== key) {
+        assetTasks.push(taskName)
+      } else {
+        zipTasks.push(taskName)
+      }
     }
 
     task(`${name}:build`, series(...assetTasks))
@@ -156,6 +178,7 @@ const configure = exports.configure = (src, dest, tasks) => {
   }
 
   task('build', series(...buildTasks))
+  task('zip', series(...zipTasks))
   return toWatch
 }
 

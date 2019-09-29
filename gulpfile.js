@@ -2,6 +2,7 @@ const path = require('path')
 
 const bs = require('browser-sync').create()
 const gulp = require('gulp')
+const version = require('standard-version')
 
 require('dotenv').config()
 
@@ -139,21 +140,27 @@ const tasks = configure('source', 'build', {
    * @param {Object}       param0.config
    * @return {stream}
    */
-  zip ({ src, dest, config }) {
-    config.zip = {}
+  zip: async ({ src, dest, config }) => {
+    config.zipFilename = `${config.name}-${config.type}-${config.version}`
+    config.release.path = config.path
+    config.release.skip = {
+      commit: true,
+      tag: true
+    }
+
+    await version(config.release)
 
     return gulp.src(src)
-      .pipe(zip(`${config.name}.zip`, config.zip))
+      .pipe(zip(`${config.zipFilename}.zip`, config.zip))
       .pipe(gulp.dest(dest))
   }
 })
 
 exports.release = async () => {
-  const version = require('standard-version')
 
   await version({
     sign: true,
-    prerelease: 'minor'
+    prerelease: 'alpha'
   })
 }
 
