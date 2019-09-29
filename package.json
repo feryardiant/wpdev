@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "lint:js": "eslint",
-    "lint:css": "stylelint"
+    "lint:css": "stylelint",
+    "release": "standard-version"
   },
   "dependencies": {
     "bulma": "^0.7.5"
@@ -44,6 +45,7 @@
     "gulp-zip": "^5.0.0",
     "lint-staged": "^9.4.0",
     "standard-changelog": "^2.0.13",
+    "standard-version": "^7.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
     "stylelint-scss": "^3.11.0",
