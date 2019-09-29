@@ -38,7 +38,12 @@ const globalConfig = {
   css: {
     stylelint: {
       failAfterError: isProduction,
-      reporters: [],
+      reporters: [
+        {
+          formatter: 'string',
+          console: true
+        }
+      ],
       debug: !isProduction
     },
     sass: {
@@ -48,6 +53,7 @@ const globalConfig = {
 
   js: {
     uglify: {},
+    eslint: {},
     babel: pkgJson.babel
   }
 }

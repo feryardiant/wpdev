@@ -19,6 +19,8 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@wordpress/eslint-plugin": "^3.1.0",
     "babel-eslint": "^10.0.3",
     "browser-sync": "^2.26.7",
@@ -26,7 +28,6 @@
     "del": "^5.1.0",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
-    "eslint-formatter-pretty": "^2.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.0",
     "gulp-babel": "^8.0.0",
@@ -41,11 +42,17 @@
     "gulp-uglify": "^3.0.2",
     "gulp-wp-pot": "^2.3.5",
     "gulp-zip": "^5.0.0",
+    "lint-staged": "^9.4.0",
+    "standard-changelog": "^2.0.13",
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
-    "stylelint-formatter-pretty": "^1.1.2",
     "stylelint-scss": "^3.11.0",
-    "yargs": "^14.0.0"
+    "yargs": "^14.0.0",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -e -V"
   },
   "babel": {
     "presets": [
@@ -92,10 +99,11 @@
     }
   },
   "eslintIgnore": [
+    "**/*.min.js",
+    "**/vendor/**",
     "/build/**",
     "/node_modules/**",
     "/public/**",
-    "**/vendor/**",
     "/gulpfile.js",
     "/**.old"
   ],
@@ -106,5 +114,24 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "source/**/*.php": [
+      "composer lint",
+      "git add"
+    ],
+    "source/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "source/**/*.scss": [
+      "stylelint --fix",
+      "git add"
+    ]
+  }
 }

@@ -1,7 +1,8 @@
 const path = require('path')
 
-const gulp = require('gulp')
 const bs = require('browser-sync').create()
+const changelog = require('standard-changelog')
+const gulp = require('gulp')
 
 require('dotenv').config()
 
@@ -80,11 +81,6 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   css ({ src, dest, config }) {
-    config.stylelint.reporters.push({
-      formatter: require('stylelint-formatter-pretty'),
-      console: true
-    })
-
     return gulp.src(src, { sourcemaps: true })
       .pipe(stylelint(config.stylelint))
       .pipe(sass(config.sass).on('error', sass.logError))
@@ -106,8 +102,8 @@ const tasks = configure('source', 'build', {
    */
   js ({ src, dest, config }) {
     const stream = gulp.src(src, { sourcemaps: true })
-      .pipe(eslint())
-      .pipe(eslint.format('pretty'))
+      .pipe(eslint(config.eslint))
+      // .pipe(eslint.format('pretty'))
 
     if (isProduction) {
       stream.pipe(eslint.failAfterError())
@@ -152,6 +148,13 @@ const tasks = configure('source', 'build', {
       .pipe(gulp.dest(dest))
   }
 })
+
+exports.release = () => {
+  const { createWriteStream } = require('fs')
+
+  return changelog()
+    .pipe(createWriteStream('CHANGELOG.md'))
+}
 
 /**
  * Start php development server and watch files changes.
