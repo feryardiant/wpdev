@@ -141,26 +141,30 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   zip: async ({ src, dest, config }) => {
-    config.zipFilename = `${config.name}-${config.type}-${config.version}`
     config.release.path = config.path
-    config.release.skip = {
-      commit: true,
-      tag: true
-    }
+    config.release.infile = `${config.path}/CHANGELOG.md`
 
+    // Generate CHANGELOG.md file inside source directory
     await version(config.release)
 
     return gulp.src(src)
-      .pipe(zip(`${config.zipFilename}.zip`, config.zip))
+      .pipe(zip(`${config.name}-${config.version}.zip`, config.zip))
       .pipe(gulp.dest(dest))
   }
 })
 
 exports.release = async () => {
-
   await version({
-    sign: true,
-    prerelease: 'alpha'
+    // sign: true,
+    prerelease: 'alpha',
+    scripts: {
+      prerelease: 'gulp build',
+      postbump: 'gulp zip'
+    },
+    skip: {
+      commit: true,
+      tag: true
+    }
   })
 }
 

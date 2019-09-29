@@ -64,10 +64,10 @@ All the changes you've made will be automatically linted and compiled, once it d
 
 Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-structure/), the project directory structure is pretty much the same, but with some tweak.
 
-### Directory Structure
+### Directory Structure and Gulp tasks
 
 * **build** directory : Consists of all build utilities including all the scripts you might be using during your development. This directory also the output folder for generated `.zip` files when you run `gulp build` command,
-* **public** directory : The document root directory,
+* **public** directory : The server document root directory,
 * **source** directory : Them main source directory of your project, it consists of two primary sub-directory, which is `plugins` and `themes`,
 * **tests** directory : Testing directory.
 
@@ -79,15 +79,15 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 ├── public
 │   └── app
 ├── source
-│   ├── assets
 │   ├── plugins
+│   ├── shared
 │   └── themes
 └── tests
     ├── plugins
     └── themes
 ```
 
-The gulp script will autoatically scan any directories under `plugins` and `themes` and create the required tasks for you when the sub directory meets the following structures:
+The gulp script will autoatically scan any sub-directories under `plugins` and `themes` and generate the required `gulp` tasks if the sub-directory meets the following structures:
 
 ```
 <dirname>
@@ -108,22 +108,30 @@ $ gulp -T
 ├── <dirname>:js
 ├── <dirname>:zip
 ├─┬ <dirname>:build
-│ └─┬ <series>
+│ └─┬ <parallel>
 │   ├── <dirname>:php
 │   ├── <dirname>:img
 │   ├── <dirname>:css
-│   ├── <dirname>:js
-│   └── <dirname>:zip
+│   └── <dirname>:js
 ├─┬ build
-│ └─┬ <series>
+│ └─┬ <parallel>
 │   ├── <dirname>:php
 │   ├── <dirname>:img
 │   ├── <dirname>:css
-│   ├── <dirname>:js
-│   └── <diname>:zip
+│   └── <dirname>:js
+├─┬ zip
+│ └─┬ <parallel>
+│   └── wpbp:zip
+├── release
 └── default
 ```
 
+### Notes
+
+* `<dirname>:build` task will execute all task under `<dirname>` namespace, except for `<dirname>:zip` task.
+* `build` task will combine all `*:build` tasks on each namespace.
+* `zip` task will combine all `*:zip` tasks on each namespace.
+* `release` task will run `build` task, generate `CHANGELOG.md`, run `zip` task and bump version number of this project.
 
 ## Credits
 

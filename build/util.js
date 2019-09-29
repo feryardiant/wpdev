@@ -24,10 +24,6 @@ const globalConfig = {
     js: 'js/**/*.js',
   },
 
-  release: {
-    sign: false
-  },
-
   php: {
     phpcs: {
       bin: 'vendor/bin/phpcs'
@@ -61,7 +57,16 @@ const globalConfig = {
     babel: pkgJson.babel
   },
 
-  zip: {}
+  zip: {
+    release: {
+      sign: false,
+      skip: {
+        bump: true,
+        commit: true,
+        tag: true
+      }
+    }
+  }
 }
 
 const scandir = exports.scandir = (dir, dest) => {
@@ -107,8 +112,10 @@ const scandir = exports.scandir = (dir, dest) => {
       ]
 
       readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/).forEach((line) => {
-        const ignore = path.resolve(dir, target, line)
-        zipSrc.push(`!${ignore}`)
+        if (line && /^#/.test(line) === false) {
+          const ignore = path.join(dir, target, line)
+          zipSrc.push(`!${ignore}`)
+        }
       })
 
       build[source.name].zip = {
@@ -158,6 +165,12 @@ const configure = exports.configure = (src, dest, tasks) => {
         toWatch[taskName] = asset[key].src
       }
 
+      if ('zip' !== key) {
+        assetTasks.push(taskName)
+      } else {
+        zipTasks.push(taskName)
+      }
+
       task(taskName, (done) => {
         return tasks[key]({
           src: asset[key].src,
@@ -165,20 +178,14 @@ const configure = exports.configure = (src, dest, tasks) => {
           config: config
         }, done)
       })
-
-      if ('zip' !== key) {
-        assetTasks.push(taskName)
-      } else {
-        zipTasks.push(taskName)
-      }
     }
 
-    task(`${name}:build`, series(...assetTasks))
+    task(`${name}:build`, parallel(...assetTasks))
     buildTasks.push(...assetTasks)
   }
 
-  task('build', series(...buildTasks))
-  task('zip', series(...zipTasks))
+  task('build', parallel(...buildTasks))
+  task('zip', parallel(...zipTasks))
   return toWatch
 }
 
