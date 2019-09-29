@@ -161,7 +161,7 @@ exports.release = async () => {
   const releaseConfig = {
     sign: true,
     scripts: {
-      prerelease: 'gulp build && git add -a',
+      prerelease: 'gulp build && git add -A',
       postbump: 'gulp zip',
     }
   }
