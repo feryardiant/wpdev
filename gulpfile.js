@@ -35,6 +35,10 @@ const { argv } = require('yargs').options({
     default: false,
     type: 'boolean'
   },
+  prerelease: {
+    describe: 'Bump as prerelase version',
+    type: 'string'
+  },
   proxy: {
     alias: 'p',
     describe: 'Enable proxy',
@@ -154,18 +158,19 @@ const tasks = configure('source', 'build', {
 })
 
 exports.release = async () => {
-  await version({
-    // sign: true,
-    prerelease: 'alpha',
+  const releaseConfig = {
+    sign: true,
     scripts: {
       prerelease: 'gulp build',
       postbump: 'gulp zip'
-    },
-    skip: {
-      commit: true,
-      tag: true
     }
-  })
+  }
+
+  if (typeof argv.prerelease === 'string') {
+    releaseConfig.prerelease = argv.prerelease
+  }
+
+  await version(releaseConfig)
 }
 
 /**
