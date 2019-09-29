@@ -1,7 +1,6 @@
 const path = require('path')
 
 const bs = require('browser-sync').create()
-const changelog = require('standard-changelog')
 const gulp = require('gulp')
 
 require('dotenv').config()
@@ -149,11 +148,13 @@ const tasks = configure('source', 'build', {
   }
 })
 
-exports.release = () => {
-  const { createWriteStream } = require('fs')
+exports.release = async () => {
+  const version = require('standard-version')
 
-  return changelog()
-    .pipe(createWriteStream('CHANGELOG.md'))
+  await version({
+    sign: true,
+    prerelease: 'minor'
+  })
 }
 
 /**

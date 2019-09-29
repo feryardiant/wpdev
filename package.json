@@ -52,6 +52,9 @@
     "yargs": "^14.0.0",
     "yorkie": "^2.0.0"
   },
+  "standard-version": {
+    "scripts": {}
+  },
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "commitlint -e -V"

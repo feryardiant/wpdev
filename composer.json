@@ -1,9 +1,10 @@
 {
   "name": "feryardiant/wordpress-boilerplate",
-  "type": "project",
-  "license": "MIT",
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
   "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
+  "type": "project",
+  "version": "0.1.1-alpha.0",
+  "license": "MIT",
   "authors": [
     {
       "name": "Fery Wardiyanto",
@@ -108,6 +109,5 @@
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "version": "0.1.1-alpha.0"
+  "prefer-stable": true
 }
