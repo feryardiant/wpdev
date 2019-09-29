@@ -3,7 +3,7 @@
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
   "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
   "type": "project",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.1-minor.0",
   "license": "MIT",
   "authors": [
     {
