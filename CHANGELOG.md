@@ -16,7 +16,3 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **workflow:** add lint-staged & commitlint ([6537a9a](https://github.com/feryardiant/wordpress-boilerplate/commit/6537a9a))
 * **workflow:** make use of standard-version ([bc003a6](https://github.com/feryardiant/wordpress-boilerplate/commit/bc003a6))
-
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
