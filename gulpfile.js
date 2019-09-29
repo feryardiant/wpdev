@@ -1,7 +1,8 @@
 const path = require('path')
 
-const gulp = require('gulp')
 const bs = require('browser-sync').create()
+const gulp = require('gulp')
+const version = require('standard-version')
 
 require('dotenv').config()
 
@@ -80,11 +81,6 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   css ({ src, dest, config }) {
-    config.stylelint.reporters.push({
-      formatter: require('stylelint-formatter-pretty'),
-      console: true
-    })
-
     return gulp.src(src, { sourcemaps: true })
       .pipe(stylelint(config.stylelint))
       .pipe(sass(config.sass).on('error', sass.logError))
@@ -106,8 +102,8 @@ const tasks = configure('source', 'build', {
    */
   js ({ src, dest, config }) {
     const stream = gulp.src(src, { sourcemaps: true })
-      .pipe(eslint())
-      .pipe(eslint.format('pretty'))
+      .pipe(eslint(config.eslint))
+      // .pipe(eslint.format('pretty'))
 
     if (isProduction) {
       stream.pipe(eslint.failAfterError())
@@ -144,14 +140,33 @@ const tasks = configure('source', 'build', {
    * @param {Object}       param0.config
    * @return {stream}
    */
-  zip ({ src, dest, config }) {
-    config.zip = {}
+  zip: async ({ src, dest, config }) => {
+    config.release.path = config.path
+    config.release.infile = `${config.path}/CHANGELOG.md`
+
+    // Generate CHANGELOG.md file inside source directory
+    await version(config.release)
 
     return gulp.src(src)
-      .pipe(zip(`${config.name}.zip`, config.zip))
+      .pipe(zip(`${config.name}-${config.version}.zip`, config.zip))
       .pipe(gulp.dest(dest))
   }
 })
+
+exports.release = async () => {
+  await version({
+    // sign: true,
+    prerelease: 'alpha',
+    scripts: {
+      prerelease: 'gulp build',
+      postbump: 'gulp zip'
+    },
+    skip: {
+      commit: true,
+      tag: true
+    }
+  })
+}
 
 /**
  * Start php development server and watch files changes.

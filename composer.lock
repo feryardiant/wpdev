@@ -2250,5 +2250,6 @@
     "platform": {
         "php": ">=7.1"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "version": "0.1.1-alpha.0"
 }

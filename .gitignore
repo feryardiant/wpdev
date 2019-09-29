@@ -24,7 +24,6 @@ nbproject
 # --------------------------
 public/wp
 public/.htaccess
-readme.txt
 
 # Development
 # --------------------------
@@ -34,7 +33,7 @@ readme.txt
 node_modules
 Vagrantfile
 homestead.yml
-wp-cli.local.yml
+wp-cli.*.yml
 .env.*
 .env
 

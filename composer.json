@@ -1,21 +1,16 @@
 {
   "name": "feryardiant/wordpress-boilerplate",
-  "type": "project",
-  "license": "MIT",
+  "version": "0.1.1-alpha.0",
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
   "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
+  "type": "project",
+  "license": "MIT",
   "authors": [
     {
       "name": "Fery Wardiyanto",
       "email": "ferywardiyanto@gmail.com",
-      "homepage": "https://github.com/feryardiant/",
+      "homepage": "https://feryardiant.github.io/",
       "role": "Maintainer"
-    },
-    {
-      "name": "Roots Team",
-      "email": "team@roots.io",
-      "homepage": "https://roots.io/bedrock/",
-      "role": "Author"
     }
   ],
   "keywords": [
@@ -35,7 +30,7 @@
       "php -r \"copy('.env.example', '.env');\""
     ],
     "lint": [
-      "phpcs --standard=./source/phpcs.xml source"
+      "phpcs --standard=source/phpcs.xml source"
     ],
     "wp:install": [
       "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
