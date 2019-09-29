@@ -2251,5 +2251,5 @@
         "php": ">=7.1"
     },
     "platform-dev": [],
-    "version": "0.1.1-minor.0"
+    "version": "0.1.1-alpha.0"
 }

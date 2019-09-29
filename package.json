@@ -1,18 +1,18 @@
 {
   "name": "wpbp",
-  "version": "0.1.1-minor.0",
+  "version": "0.1.1-alpha.0",
   "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
   "license": "MIT",
   "private": true,
   "keywords": [
     "wordpress",
     "wordpress-theme",
-    "wordpress-boilerplate"
+    "wordpress-boilerplate",
+    "wordpress-project"
   ],
   "scripts": {
     "lint:js": "eslint",
-    "lint:css": "stylelint",
-    "release": "standard-version"
+    "lint:css": "stylelint"
   },
   "dependencies": {
     "bulma": "^0.7.5"
@@ -26,7 +26,6 @@
     "babel-eslint": "^10.0.3",
     "browser-sync": "^2.26.7",
     "cross-env": "^5.2.1",
-    "del": "^5.1.0",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
     "gulp": "^4.0.2",
@@ -51,9 +50,6 @@
     "stylelint-scss": "^3.11.0",
     "yargs": "^14.0.0",
     "yorkie": "^2.0.0"
-  },
-  "standard-version": {
-    "scripts": {}
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
