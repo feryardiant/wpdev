@@ -6,8 +6,8 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
 
-( function( document, $ ) {
-  const $container = document.querySelector('#wpbp-panel')
+( function( document ) {
+  const $container = document.querySelector( '#wpbp-panel' )
 
   const activateTap = ( tab ) => {
     const $panel = $container.querySelector( '#panel-sections' )
@@ -17,10 +17,10 @@
     }
 
     $container.querySelectorAll( '.active' ).forEach( ( $active ) => {
-      $active.classList.remove('active')
+      $active.classList.remove( 'active' )
     } )
 
-    $container.querySelector( `nav a[href="${ tab }"]` ).parentNode.classList.add('active')
+    $container.querySelector( `nav a[href="${ tab }"]` ).parentNode.classList.add( 'active' )
     $panel.querySelector( tab ).classList.add( 'active' )
   }
 
@@ -33,14 +33,13 @@
       const $activated = $container.querySelector( 'nav li.active' )
 
       if ( $activated ) {
-        $activated.classList.remove('active')
+        $activated.classList.remove( 'active' )
       }
 
-      e.target.parentNode.classList.toggle('active')
+      e.target.parentNode.classList.toggle( 'active' )
 
       activateTap( e.target.hash )
       history.replaceState( null, null, e.target.hash )
-
-    })
+    } )
   } )
-} )( document, jQuery )
+} )( document )

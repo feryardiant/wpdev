@@ -63,6 +63,7 @@ $panel-padding: ($gap / 2) $gap;
 
   > form {
     @include clearfix();
+
     background-color: $panel-background;
     padding: 0 $gap;
   }
