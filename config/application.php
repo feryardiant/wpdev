@@ -40,7 +40,7 @@ if (file_exists($root_dir . '/.env')) {
  * Default: production
  */
 define('WP_ENV', env('WP_ENV') ?: 'production');
-
+$_is_production = WP_ENV === 'production';
 
 /**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
@@ -147,7 +147,7 @@ if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
  * S3 Uploads settings
  * @link https://github.com/humanmade/S3-Uploads
  */
-$_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?: (WP_ENV === 'production');
+$_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?: $_is_production;
 if ($_s3_auto_upload) {
     Config::define('S3_UPLOADS_BUCKET',     env('S3_UPLOADS_BUCKET'));
     Config::define('S3_UPLOADS_KEY',        env('S3_UPLOADS_KEY'));
@@ -163,7 +163,8 @@ if ($_s3_auto_upload) {
 * Configuration - Plugin: Redis
 * @link https://wordpress.org/plugins/redis-cache/
 */
-if ($_redis_url = env('REDIS_URL')) {
+$_redis_url = env('REDIS_URL');
+if (!empty($_redis_url) && $_is_production) {
     $_redis = parse_url($_redis_url);
 
     Config::define('WP_CACHE',          true);
@@ -176,7 +177,7 @@ if ($_redis_url = env('REDIS_URL')) {
 
     // 28 Days
     Config::define('WP_REDIS_MAXTTL', 2419200);
-    unset($_redis, $_redis_url);
+    unset($_redis);
 }
 
 Config::apply();
@@ -188,4 +189,4 @@ if (!defined('ABSPATH')) {
     define('ABSPATH', $webroot_dir . '/wp/');
 }
 
-unset($multisite, $env_config, $_http_name);
+unset($multisite, $env_config, $_http_name, $_redis_url, $_is_production);
