@@ -57,8 +57,10 @@
   "require": {
     "php": ">=7.1",
     "composer/installers": "^1.7",
+    "humanmade/s3-uploads": "^2.1",
     "local-theme/wpbp": "*",
     "oscarotero/env": "^1.2",
+    "predis/predis": "^1.1",
     "roots/wordpress": "^5.2",
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
@@ -68,7 +70,8 @@
     "wp-cli/cron-command": "^2.0",
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
-    "wp-cli/wp-cli": "^2.3"
+    "wp-cli/wp-cli": "^2.3",
+    "wpackagist-plugin/redis-cache": "^1.4"
   },
   "require-dev": {
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
@@ -85,7 +88,9 @@
   "extra": {
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
+        "humanmade/s3-uploads",
         "wpackagist-plugin/debug-bar",
+        "wpackagist-plugin/redis-cache",
         "wpackagist-plugin/theme-check",
         "type:wordpress-muplugin"
       ],

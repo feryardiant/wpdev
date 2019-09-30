@@ -135,7 +135,7 @@ if ($multisite) {
     $base = env('PATH_CURRENT_SITE') ?: '/';
     Config::define('MULTISITE',             $multisite);
     Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?: false);
-    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE'));
+    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?: $_http_name);
     Config::define('PATH_CURRENT_SITE',     $base);
     Config::define('SITE_ID_CURRENT_SITE',  1);
     Config::define('BLOG_ID_CURRENT_SITE',  1);
@@ -143,6 +143,38 @@ if ($multisite) {
 
 if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
     require_once $env_config;
+}
+
+/**
+ * S3 Uploads settings
+ * @link https://github.com/humanmade/S3-Uploads
+ */
+Config::define('S3_UPLOADS_BUCKET', env('S3_UPLOADS_BUCKET'));
+Config::define('S3_UPLOADS_KEY',    env('S3_UPLOADS_KEY'));
+Config::define('S3_UPLOADS_SECRET', env('S3_UPLOADS_SECRET'));
+Config::define('S3_UPLOADS_REGION', env('S3_UPLOADS_REGION'));
+
+/**
+ * Redis Object Cache settings
+ */
+/**
+* Configuration - Plugin: Redis
+* @link https://wordpress.org/plugins/redis-cache/
+*/
+if ($_redis_url = env('REDIS_URL')) {
+    $_redis = parse_url($_redis_url);
+
+    Config::define('WP_CACHE',          true);
+    Config::define('WP_REDIS_DISABLED', false);
+    Config::define('WP_REDIS_CLIENT',   'predis');
+    Config::define('WP_REDIS_SCHEME',   $env['scheme']);
+    Config::define('WP_REDIS_HOST',     $env['host']);
+    Config::define('WP_REDIS_PORT',     $env['port']);
+    Config::define('WP_REDIS_PASSWORD', $env['pass']);
+
+    // 28 Days
+    Config::define('WP_REDIS_MAXTTL', 2419200);
+    unset($_redis, $_redis_url);
 }
 
 Config::apply();
