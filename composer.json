@@ -65,6 +65,7 @@
     "vlucas/phpdotenv": "^3.4",
     "wp-cli/cache-command": "^2.0",
     "wp-cli/core-command": "^2.0",
+    "wp-cli/cron-command": "^2.0",
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
     "wp-cli/wp-cli": "^2.3"
