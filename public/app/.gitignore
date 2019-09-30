@@ -1,7 +1,9 @@
-mu-plugins/*/*
+mu-plugins/*
+!mu-plugins/*.php
 plugins/*
 themes/*
 uploads/*
+object-cache.php
 
 # !.gitignore
 !index.php

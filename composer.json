@@ -72,7 +72,10 @@
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
     "wp-cli/wp-cli": "^2.3",
-    "wpackagist-plugin/redis-cache": "^1.4"
+    "wpackagist-plugin/akismet": "^4.1",
+    "wpackagist-plugin/redis-cache": "^1.4",
+    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
+    "wpackagist-plugin/wordpress-importer": "^0.6.4"
   },
   "require-dev": {
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
@@ -90,9 +93,12 @@
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
+        "wpackagist-plugin/akismet",
         "wpackagist-plugin/debug-bar",
         "wpackagist-plugin/redis-cache",
         "wpackagist-plugin/theme-check",
+        "wpackagist-plugin/regenerate-thumbnails",
+        "wpackagist-plugin/wordpress-importer",
         "type:wordpress-muplugin"
       ],
       "public/app/plugins/{$name}/": [
@@ -100,6 +106,11 @@
       ],
       "public/app/themes/{$name}/": [
         "type:wordpress-theme"
+      ]
+    },
+    "dropin-paths": {
+      "public/app": [
+        "package:wpackagist-plugin/redis-cache:includes/object-cache.php"
       ]
     },
     "wordpress-install-dir": "public/wp"

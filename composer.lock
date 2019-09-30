@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5198f352a3ddef606356e50cc04d222e",
+    "content-hash": "8e8575a86835ca827b39d743643a3051",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2004,6 +2004,24 @@
             "time": "2019-07-23T17:24:43+00:00"
         },
         {
+            "name": "wpackagist-plugin/akismet",
+            "version": "4.1.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/akismet/",
+                "reference": "tags/4.1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.4.1.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/akismet/"
+        },
+        {
             "name": "wpackagist-plugin/redis-cache",
             "version": "1.4.3",
             "source": {
@@ -2020,6 +2038,42 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/redis-cache/"
+        },
+        {
+            "name": "wpackagist-plugin/regenerate-thumbnails",
+            "version": "3.1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
+                "reference": "tags/3.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.1.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
+        },
+        {
+            "name": "wpackagist-plugin/wordpress-importer",
+            "version": "0.6.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
+                "reference": "tags/0.6.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         }
     ],
     "packages-dev": [
