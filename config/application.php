@@ -130,8 +130,6 @@ Config::define('DISALLOW_FILE_MODS',  true);
 $multisite = env('MULTISITE') ?: false;
 
 if ($multisite) {
-    $dotenv->required(['DOMAIN_CURRENT_SITE', 'PATH_CURRENT_SITE']);
-
     $base = env('PATH_CURRENT_SITE') ?: '/';
     Config::define('MULTISITE',             $multisite);
     Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?: false);
