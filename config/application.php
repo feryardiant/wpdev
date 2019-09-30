@@ -167,10 +167,10 @@ if ($_redis_url = env('REDIS_URL')) {
     Config::define('WP_CACHE',          true);
     Config::define('WP_REDIS_DISABLED', false);
     Config::define('WP_REDIS_CLIENT',   'predis');
-    Config::define('WP_REDIS_SCHEME',   $env['scheme']);
-    Config::define('WP_REDIS_HOST',     $env['host']);
-    Config::define('WP_REDIS_PORT',     $env['port']);
-    Config::define('WP_REDIS_PASSWORD', $env['pass']);
+    Config::define('WP_REDIS_SCHEME',   $_redis['scheme']);
+    Config::define('WP_REDIS_HOST',     $_redis['host']);
+    Config::define('WP_REDIS_PORT',     $_redis['port']);
+    Config::define('WP_REDIS_PASSWORD', $_redis['pass']);
 
     // 28 Days
     Config::define('WP_REDIS_MAXTTL', 2419200);
