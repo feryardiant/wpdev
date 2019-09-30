@@ -56,6 +56,11 @@
   },
   "require": {
     "php": ">=7.1",
+    "ext-bcmath": "*",
+    "ext-exif": "*",
+    "ext-gd": "*",
+    "ext-gettext": "*",
+    "ext-imagick": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "local-theme/wpbp": "*",
