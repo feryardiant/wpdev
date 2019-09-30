@@ -3,7 +3,9 @@
   "repository": "https://github.com/feryardiant/wordpress-boilerplate",
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
   "scripts": {
-    "postdeploy": []
+    "postdeploy": [
+      "config/heroku/postinstall.sh"
+    ]
   },
   "formation": {
     "web": {
