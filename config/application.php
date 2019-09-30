@@ -149,10 +149,14 @@ if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
  * S3 Uploads settings
  * @link https://github.com/humanmade/S3-Uploads
  */
-Config::define('S3_UPLOADS_BUCKET', env('S3_UPLOADS_BUCKET'));
-Config::define('S3_UPLOADS_KEY',    env('S3_UPLOADS_KEY'));
-Config::define('S3_UPLOADS_SECRET', env('S3_UPLOADS_SECRET'));
-Config::define('S3_UPLOADS_REGION', env('S3_UPLOADS_REGION'));
+$_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?: (WP_ENV === 'production');
+if ($_s3_auto_upload) {
+    Config::define('S3_UPLOADS_BUCKET',     env('S3_UPLOADS_BUCKET'));
+    Config::define('S3_UPLOADS_KEY',        env('S3_UPLOADS_KEY'));
+    Config::define('S3_UPLOADS_SECRET',     env('S3_UPLOADS_SECRET'));
+    Config::define('S3_UPLOADS_REGION',     env('S3_UPLOADS_REGION'));
+    Config::define('S3_UPLOADS_BUCKET_URL', env('S3_UPLOADS_BUCKET_URL'));
+}
 
 /**
  * Redis Object Cache settings
