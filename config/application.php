@@ -124,6 +124,13 @@ Config::define('DISALLOW_FILE_EDIT',  env('DISALLOW_FILE_EDIT'));
 Config::define('DISALLOW_FILE_MODS',  env('DISALLOW_FILE_MODS'));
 
 /**
+ * Debugging Settings
+ */
+Config::define('WP_DEBUG',         env('WP_DEBUG') ?: false);
+Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?: false);
+Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?: false);
+
+ /**
  * Multisite Settings
  */
 // Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));
