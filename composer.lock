@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d0678fd30673113667f21c1f0a1fe6b",
+    "content-hash": "5198f352a3ddef606356e50cc04d222e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1329,6 +1329,75 @@
             "time": "2019-04-19T15:13:51+00:00"
         },
         {
+            "name": "wp-cli/config-command",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/config-command.git",
+                "reference": "b7e69946e4ec711d4568d11d2b7e08f5e872567d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/config-command/zipball/b7e69946e4ec711d4568d11d2b7e08f5e872567d",
+                "reference": "b7e69946e4ec711d4568d11d2b7e08f5e872567d",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "^2",
+                "wp-cli/wp-config-transformer": "^1.2.1"
+            },
+            "require-dev": {
+                "wp-cli/db-command": "^1.3 || ^2",
+                "wp-cli/wp-cli-tests": "^2.1"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "config",
+                    "config edit",
+                    "config delete",
+                    "config create",
+                    "config get",
+                    "config has",
+                    "config list",
+                    "config path",
+                    "config set",
+                    "config shuffle-salts"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "config-command.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                },
+                {
+                    "name": "Alain Schlesser",
+                    "email": "alain.schlesser@gmail.com",
+                    "homepage": "https://www.alainschlesser.com"
+                }
+            ],
+            "description": "Generates and reads the wp-config.php file.",
+            "homepage": "https://github.com/wp-cli/config-command",
+            "time": "2019-04-25T00:28:22+00:00"
+        },
+        {
             "name": "wp-cli/core-command",
             "version": "v2.0.6",
             "source": {
@@ -1892,6 +1961,47 @@
                 "wordpress"
             ],
             "time": "2019-08-13T23:12:27+00:00"
+        },
+        {
+            "name": "wp-cli/wp-config-transformer",
+            "version": "v1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/wp-config-transformer.git",
+                "reference": "1ca98343443a8e4585865db5f50e8e6121fee70b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/wp-config-transformer/zipball/1ca98343443a8e4585865db5f50e8e6121fee70b",
+                "reference": "1ca98343443a8e4585865db5f50e8e6121fee70b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.29"
+            },
+            "require-dev": {
+                "composer/composer": "^1.5.6",
+                "phpunit/phpunit": "^6.5.5",
+                "wp-coding-standards/wpcs": "^0.14.0 || ^1.0.0 || ^2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/WPConfigTransformer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frankie Jarrett",
+                    "email": "fjarrett@gmail.com"
+                }
+            ],
+            "description": "Programmatically edit a wp-config.php file.",
+            "time": "2019-07-23T17:24:43+00:00"
         },
         {
             "name": "wpackagist-plugin/redis-cache",
@@ -2572,16 +2682,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8"
+                "reference": "0afebf16a2e7f1e434920fa976253576151effe9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/0afebf16a2e7f1e434920fa976253576151effe9",
+                "reference": "0afebf16a2e7f1e434920fa976253576151effe9",
                 "shasum": ""
             },
             "require": {
@@ -2619,7 +2729,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-04-10T23:49:02+00:00"
+            "time": "2019-09-26T23:12:26+00:00"
         },
         {
             "name": "wp-cli/i18n-command",

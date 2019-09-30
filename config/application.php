@@ -119,9 +119,9 @@ Config::define('NONCE_SALT',        env('NONCE_SALT'));
  */
 Config::define('DISABLE_WP_CRON',     env('DISABLE_WP_CRON') ?: false);
 // Disable the plugin and theme file editor in the admin
-Config::define('DISALLOW_FILE_EDIT',  env('DISALLOW_FILE_EDIT') ?: true);
+Config::define('DISALLOW_FILE_EDIT',  env('DISALLOW_FILE_EDIT'));
 // Disable plugin and theme updates and installation from the admin
-Config::define('DISALLOW_FILE_MODS',  env('DISALLOW_FILE_MODS') ?: true);
+Config::define('DISALLOW_FILE_MODS',  env('DISALLOW_FILE_MODS'));
 
 /**
  * Multisite Settings
@@ -141,6 +141,7 @@ if ($multisite) {
 
 if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
     require_once $env_config;
+    unset($env_config);
 }
 
 /**
@@ -148,6 +149,7 @@ if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
  * @link https://github.com/humanmade/S3-Uploads
  */
 $_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?: $_is_production;
+
 if ($_s3_auto_upload) {
     Config::define('S3_UPLOADS_BUCKET',     env('S3_UPLOADS_BUCKET'));
     Config::define('S3_UPLOADS_KEY',        env('S3_UPLOADS_KEY'));
@@ -155,6 +157,8 @@ if ($_s3_auto_upload) {
     Config::define('S3_UPLOADS_REGION',     env('S3_UPLOADS_REGION'));
     Config::define('S3_UPLOADS_BUCKET_URL', env('S3_UPLOADS_BUCKET_URL'));
 }
+
+unset($_s3_auto_upload);
 
 /**
  * Redis Object Cache settings
@@ -182,6 +186,8 @@ if (!empty($_redis_url) && ($_enable_cache || $_is_production)) {
     unset($_redis);
 }
 
+unset($_enable_cache, $_redis_url);
+
 Config::apply();
 
 /**
@@ -191,4 +197,4 @@ if (!defined('ABSPATH')) {
     define('ABSPATH', $webroot_dir . '/wp/');
 }
 
-unset($multisite, $env_config, $_http_name, $_redis_url, $_is_production);
+unset($multisite, $env_config, $_http_name, $_is_production);
