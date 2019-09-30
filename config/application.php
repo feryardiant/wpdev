@@ -163,11 +163,13 @@ if ($_s3_auto_upload) {
 * Configuration - Plugin: Redis
 * @link https://wordpress.org/plugins/redis-cache/
 */
-$_redis_url = env('REDIS_URL');
-if (!empty($_redis_url) && $_is_production) {
+$_redis_url    = env('REDIS_URL');
+$_enable_cache = env('WP_CACHE') ?: false;
+
+if (!empty($_redis_url) && ($_enable_cache || $_is_production)) {
     $_redis = parse_url($_redis_url);
 
-    Config::define('WP_CACHE',          true);
+    Config::define('WP_CACHE',          $_enable_cache);
     Config::define('WP_REDIS_DISABLED', false);
     Config::define('WP_REDIS_CLIENT',   'predis');
     Config::define('WP_REDIS_SCHEME',   $_redis['scheme']);
