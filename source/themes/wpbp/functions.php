@@ -30,7 +30,7 @@ if ( ! function_exists( 'wpbp' ) ) {
 	}
 }
 
-$dummy_section = [
+$wpbp_dummy_section = [
 	'dummy' => [
 		'title'       => __( 'Dummy', 'wpbp' ),
 		'description' => __( 'There\'s nothing to find here', 'wpbp' ),
@@ -136,16 +136,16 @@ $wpbp_theme->register_options( [
 	'foo_1' => [
 		'title'    => __( 'Header Setting', 'wpbp' ),
 		'priority' => 25,
-		'sections' => $dummy_section,
+		'sections' => $wpbp_dummy_section,
 	],
 	'foo_2' => [
 		'title'    => __( 'Content Setting', 'wpbp' ),
 		'priority' => 25,
-		'sections' => $dummy_section,
+		'sections' => $wpbp_dummy_section,
 	],
 	'foo_3' => [
 		'title'    => __( 'Footer Setting', 'wpbp' ),
 		'priority' => 25,
-		'sections' => $dummy_section,
+		'sections' => $wpbp_dummy_section,
 	],
 ] );

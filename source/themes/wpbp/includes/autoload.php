@@ -9,6 +9,16 @@
 
 namespace WPBP;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+$composer_autoloader = dirname( __DIR__ ) . '/vendor/autoload.php';
+
+if ( file_exists( $composer_autoloader ) ) {
+	require_once $composer_autoloader;
+}
+
+unset( $composer_autoloader );
+// phpcs:enable
+
 spl_autoload_register( function ( $class_name ) {
 	if ( strpos( $class_name, __NAMESPACE__ ) !== 0 ) {
 		return;

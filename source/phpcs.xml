@@ -34,6 +34,8 @@
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>source</file>
 
+	<exclude-pattern>*/vendor/*$</exclude-pattern>
+
 
 	<!--
 	#############################################################################

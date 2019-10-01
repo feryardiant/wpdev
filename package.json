@@ -123,7 +123,7 @@
   },
   "lint-staged": {
     "source/**/*.php": [
-      "composer lint",
+      "vendor/bin/phpcs --standard=source/phpcs.xml",
       "git add"
     ],
     "source/**/*.js": [

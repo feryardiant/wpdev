@@ -9,7 +9,10 @@
       "email": "ferywardiyanto@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "php": ">=7.1",
+    "tgmpa/tgm-plugin-activation": "^2.6"
+  },
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,
