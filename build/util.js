@@ -85,7 +85,10 @@ const scandir = exports.scandir = (dir, dest) => {
         type: type.name,
         path: `${dir}/${target}`,
         php: {
-          src: `${dir}/${target}/**/*.php`,
+          src: [
+            `${dir}/${target}/**/*.php`,
+            `!${dir}/${target}/vendor`
+          ],
           dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
         }
       }
