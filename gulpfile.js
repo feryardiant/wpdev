@@ -61,7 +61,7 @@ const tasks = configure('source', 'build', {
     config.wpPot = {
       domain: config.name,
       package: `${config.name} v${config.version}`,
-      relativeTo: path.dirname(path.resolve(src, '..')),
+      relativeTo: config.path,
       lastTranslator: config.author,
       team: config.author
     }
