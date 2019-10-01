@@ -163,12 +163,12 @@ const configure = exports.configure = (src, dest, tasks) => {
 
       const taskName = `${name}:${key}`
 
-      if (globalConfig.hasOwnProperty(key)) {
-        Object.assign(config, globalConfig[key])
-        toWatch[taskName] = asset[key].src
-      }
-
       if ('zip' !== key) {
+        if (globalConfig.hasOwnProperty(key)) {
+          Object.assign(config, globalConfig[key])
+          toWatch[taskName] = asset[key].src
+        }
+
         assetTasks.push(taskName)
       } else {
         zipTasks.push(taskName)
@@ -199,6 +199,7 @@ exports.watch = (tasks, browserSync) => {
   }
 
   for (const [taskName, src] of Object.entries(tasks)) {
+
     watch(src, series(taskName, reload))
   }
 }
