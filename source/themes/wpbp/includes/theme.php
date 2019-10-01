@@ -100,6 +100,10 @@ final class Theme {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
+		if ( function_exists( 'tgmpa' ) ) {
+			add_action( 'tgmpa_register', [ $this, 'tgmpa_register' ] );
+		}
+
 		$this->initialize( [
 			Asset::class,
 			Template::class,
@@ -127,14 +131,37 @@ final class Theme {
 	 * @return mixed
 	 */
 	public function admin_menu() {
-		add_theme_page(
+		$page = add_theme_page(
 			/* translators: %s: Theme name. */
 			sprintf( __( '%s Option Panel', 'wpbp' ), $this->name ),
 			__( 'Theme Option', 'wpbp' ),
 			'edit_theme_options',
 			$this->slug . '-options',
-			[ $this->option, 'admin_page' ]
+			function () {
+				include_once $this->get_dir( 'templates/admin/options.php' );
+			}
 		);
+
+		add_action( 'load-' . $page, [ $this, 'admin_help_tabs' ] );
+	}
+
+	/**
+	 * Admin Help tab.
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function admin_help_tabs() {
+		$screen = get_current_screen();
+
+		$screen->add_help_tab( [
+			'id'       => $this->slug . '-option-help-tab',
+			// translators: %s Theme name.
+			'title'    => sprintf( __( '%s helps', 'wpbp' ), $this->name ),
+			'callback' => function () {
+				include_once $this->get_dir( 'templates/admin/help_tab.php' );
+			},
+		] );
 	}
 
 	/**
@@ -376,6 +403,20 @@ final class Theme {
 				'wp-head-callback'  => [ $this->asset, 'custom_header' ],
 			] )
 		);
+	}
+
+	/**
+	 * Register required plugins
+	 *
+	 * @return void
+	 */
+	public function tgmpa_register() {
+		tgmpa( [
+			[
+				'name' => 'JetPack by Automatic',
+				'slug' => 'jetpack',
+			],
+		] );
 	}
 
 	/**

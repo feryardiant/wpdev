@@ -125,14 +125,4 @@ class Option extends Feature {
 	public function items() : array {
 		return $this->items;
 	}
-
-	/**
-	 * Admin Page view.
-	 *
-	 * @since 0.1.0
-	 * @return mixed
-	 */
-	public function admin_page() {
-		include __DIR__ . '/options.tpl.php';
-	}
 }
