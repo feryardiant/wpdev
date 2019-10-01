@@ -32,7 +32,7 @@
 	<arg name="extensions" value="php"/>
 
 	<!-- Check all files in this directory and the directories below it. -->
-	<file>source</file>
+	<file>.</file>
 
 	<exclude-pattern>*/vendor/*$</exclude-pattern>
 
