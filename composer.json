@@ -27,7 +27,9 @@
   },
   "scripts": {
     "post-root-package-install": [
-      "php -r \"copy('.env.example', '.env');\"",
+      "php -r \"copy('.env.example', '.env');\""
+    ],
+    "post-install-cmd": [
       "vendor/bin/wp dotenv salts generate"
     ],
     "lint": [
