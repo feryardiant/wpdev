@@ -11,6 +11,19 @@
  * @since      0.1.0
  */
 
-?><div class="container">
-	<?php do_action( 'wpbp_footer' ); ?>
-</div>
+do_action( 'wpbp_after_main' );
+?>
+	</section> <!-- #site-content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+
+		<div class="container">
+			<?php do_action( 'wpbp_footer' ); ?>
+		</div>
+
+	</footer> <!-- #site-footer -->
+
+<?php wp_footer(); ?>
+</body>
+
+</html>

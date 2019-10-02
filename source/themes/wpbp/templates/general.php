@@ -9,7 +9,7 @@
  * @since      0.1.0
  */
 
-do_action( 'wpbp_main_content_before', [ 'site-main' ] );
+do_action( 'wpbp_before_content', [ 'site-main' ] );
 
 if ( have_posts() ) {
 
@@ -34,4 +34,4 @@ if ( have_posts() ) {
 
 }
 
-do_action( 'wpbp_main_content_after' );
+do_action( 'wpbp_after_content' );

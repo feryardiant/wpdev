@@ -11,26 +11,47 @@
  * @since      0.1.0
  */
 
-?><div class="hero-head">
-	<div class="container">
+?><!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 
-		<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
-			<div class="navbar-brand"><?php the_custom_logo(); ?></div> <!-- .navbar-brand -->
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-primary">
-				<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-			</a>
+	<?php wp_head(); ?>
+</head>
 
-			<div id="navbar-menu-primary" class="navbar-menu">
-				<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?>
+<body <?php body_class(); ?>>
+	<?php do_action( 'wpbp_skip_link', 'site-content' ); ?>
+
+	<header id="site-header" role="banner" class="hero">
+
+		<div class="hero-head">
+			<div class="container">
+
+				<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
+					<div class="navbar-brand"><?php the_custom_logo(); ?></div> <!-- .navbar-brand -->
+
+					<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-primary">
+						<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+					</a>
+
+					<div id="navbar-menu-primary" class="navbar-menu">
+						<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?>
+					</div>
+				</nav> <!-- .navbar -->
+
 			</div>
-		</nav> <!-- .navbar -->
+		</div>
 
-	</div>
-</div>
+		<div class="hero-body">
+			<div class="container">
+				<?php do_action( 'wpbp_hero_body' ); ?>
+			</div>
+		</div>
+		<?php get_header(); ?>
+	</header> <!-- #site-header -->
 
-<div class="hero-body">
-	<div class="container">
-		<?php do_action( 'wpbp_hero_body' ); ?>
-	</div>
-</div>
+	<section id="site-content" class="section content">
+
+		<?php do_action( 'wpbp_before_main' ); ?>

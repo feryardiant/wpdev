@@ -9,4 +9,9 @@
  * @since      0.1.0
  */
 
-WPBP\Widgets::get_active( 'main-sidebar' );
+?>
+<aside id="secondary" class="column is-one-third widget-area">
+
+	<?php WPBP\Widgets::get_active( 'main-sidebar' ); ?>
+
+</aside> <!-- #secondary -->
