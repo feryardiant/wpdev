@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "506a68403d68bb1ac49a807236657335",
+    "content-hash": "08fc930708c5efc7129f7f1f0fd0b28d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.11",
+            "version": "3.112.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ec29fd7cf36504fada118afe9c17025ce4c4ad89"
+                "reference": "b8c1e71eaefe44342283ef7240efabcc87197dd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ec29fd7cf36504fada118afe9c17025ce4c4ad89",
-                "reference": "ec29fd7cf36504fada118afe9c17025ce4c4ad89",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b8c1e71eaefe44342283ef7240efabcc87197dd4",
+                "reference": "b8c1e71eaefe44342283ef7240efabcc87197dd4",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-09-30T18:45:33+00:00"
+            "time": "2019-10-01T18:07:57+00:00"
         },
         {
             "name": "composer/installers",
@@ -3001,6 +3001,5 @@
         "ext-gettext": "*",
         "ext-imagick": "*"
     },
-    "platform-dev": [],
-    "version": "0.1.2"
+    "platform-dev": []
 }

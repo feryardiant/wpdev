@@ -18,7 +18,6 @@
     "composer",
     "roots",
     "wordpress",
-    "wp",
     "wp-config",
     "boilerplate"
   ],
@@ -28,9 +27,6 @@
   "scripts": {
     "post-root-package-install": [
       "php -r \"copy('.env.example', '.env');\""
-    ],
-    "post-install-cmd": [
-      "vendor/bin/wp dotenv salts generate"
     ],
     "lint": [
       "phpcs --standard=source/phpcs.xml source"
