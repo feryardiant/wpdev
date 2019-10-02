@@ -163,12 +163,12 @@ const configure = exports.configure = (src, dest, tasks) => {
 
       const taskName = `${name}:${key}`
 
-      if ('zip' !== key) {
-        if (globalConfig.hasOwnProperty(key)) {
-          Object.assign(config, globalConfig[key])
-          toWatch[taskName] = asset[key].src
-        }
+      if (globalConfig.hasOwnProperty(key)) {
+        Object.assign(config, globalConfig[key])
+      }
 
+      if ('zip' !== key) {
+        toWatch[taskName] = asset[key].src
         assetTasks.push(taskName)
       } else {
         zipTasks.push(taskName)

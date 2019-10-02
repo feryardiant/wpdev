@@ -129,22 +129,18 @@ msgid "Narrowed"
 msgstr ""
 
 #: functions.php:123
-msgid "Header Container"
+msgid "Enable responsive"
 msgstr ""
 
-#: functions.php:128
-msgid "Footer Container"
-msgstr ""
-
-#: functions.php:137
+#: functions.php:132
 msgid "Header Setting"
 msgstr ""
 
-#: functions.php:142
+#: functions.php:137
 msgid "Content Setting"
 msgstr ""
 
-#: functions.php:147
+#: functions.php:142
 msgid "Footer Setting"
 msgstr ""
 
@@ -153,23 +149,23 @@ msgctxt "search button"
 msgid "Search"
 msgstr ""
 
-#: includes/asset.php:114
+#: includes/asset.php:121
 msgid "Small"
 msgstr ""
 
-#: includes/asset.php:119
+#: includes/asset.php:126
 msgid "Normal"
 msgstr ""
 
-#: includes/asset.php:124
+#: includes/asset.php:131
 msgid "Medium"
 msgstr ""
 
-#: includes/asset.php:129
+#: includes/asset.php:136
 msgid "Large"
 msgstr ""
 
-#: includes/asset.php:134
+#: includes/asset.php:141
 msgid "Huge"
 msgstr ""
 
@@ -212,7 +208,7 @@ msgstr ""
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:73
+#: includes/content.php:51
 msgid "Post"
 msgstr ""
 
@@ -222,11 +218,6 @@ msgstr ""
 
 #: includes/menu.php:45
 msgid "Footer Menu"
-msgstr ""
-
-#. translators: %s Theme Name.
-#: includes/options.tpl.php:17
-msgid "%s Options"
 msgstr ""
 
 #. translators: %s: post date.
@@ -274,44 +265,49 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
-#: includes/template.php:199
+#: includes/template.php:244
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:215, templates/content-none.php:14
+#: includes/template.php:260, templates/content-none.php:14
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:220
+#: includes/template.php:265
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:225
+#: includes/template.php:269
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: includes/template.php:321
+#: includes/template.php:428
 msgid "https://wordpress.org/"
 msgstr ""
 
 #. translators: %s: Credit to WordPress.
-#: includes/template.php:323
+#: includes/template.php:430
 msgid "Proudly powered by %s"
 msgstr ""
 
 #. translators: %1$s: Theme Name, %2$s: Theme Author.
-#: includes/template.php:329
+#: includes/template.php:436
 msgid "%1$s by %2$s."
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/theme.php:132
+#: includes/theme.php:136
 msgid "%s Option Panel"
 msgstr ""
 
-#: includes/theme.php:133
+#: includes/theme.php:137
 msgid "Theme Option"
+msgstr ""
+
+#. translators: %s Theme name.
+#: includes/theme.php:160
+msgid "%s helps"
 msgstr ""
 
 #: includes/widgets.php:38
@@ -358,4 +354,13 @@ msgstr ""
 
 #: includes/walker/nav-menu.php:40
 msgid "Primary menu goes here"
+msgstr ""
+
+#: templates/admin/help-tab.php:10
+msgid "Help content goes here"
+msgstr ""
+
+#. translators: %s Theme Name.
+#: templates/admin/options.php:17
+msgid "%s Options"
 msgstr ""

@@ -35,8 +35,12 @@ const { argv } = require('yargs').options({
     default: false,
     type: 'boolean'
   },
-  prerelease: {
+  pre: {
     describe: 'Bump as prerelase version',
+    type: 'string'
+  },
+  as: {
+    describe: 'Bump as version',
     type: 'string'
   },
   proxy: {
@@ -166,8 +170,12 @@ exports.release = async () => {
     }
   }
 
-  if (typeof argv.prerelease === 'string') {
-    releaseConfig.prerelease = argv.prerelease
+  if (typeof argv.pre === 'string') {
+    releaseConfig.prerelease = argv.pre
+  }
+
+  if (typeof argv.as === 'string') {
+    releaseConfig.releaseAs = argv.as
   }
 
   await version(releaseConfig)
