@@ -16,15 +16,26 @@ namespace WPBP;
  */
 class Asset extends Feature {
 	/**
+	 * Theme version
+	 *
+	 * @var string|null
+	 */
+	protected $version = null;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
-		add_action( 'login_head', [ $this, 'login_head' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
+		add_action( 'login_head', [ $this, 'login_head' ] );
+
+		if ( ! $this->is_debug() ) {
+			$this->version = $this->theme->version;
+		}
 	}
 
 	/**
@@ -35,17 +46,15 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function enqueue() {
-		$version = $this->theme->version;
+		wp_register_style( 'wpbp-google-fonts', $this->google_fonts_url(), [], $this->version );
 
-		wp_register_style( 'wpbp-google-fonts', $this->google_fonts_url(), [], $version );
-
-		wp_register_style( 'wpbp-css-variables', false, [], $version );
+		wp_register_style( 'wpbp-css-variables', false, [], $this->version );
 		wp_add_inline_style( 'wpbp-css-variables', $this->css_variables( $this->theme ) );
 
-		wp_enqueue_style( 'wpbp-style', $this->theme->get_assets_uri( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $version );
+		wp_enqueue_style( 'wpbp-style', $this->get_uri( 'main.css' ), [ 'wpbp-google-fonts', 'wpbp-css-variables' ], $this->version );
 		wp_style_add_data( 'wpbp-style', 'rtl', 'replace' );
 
-		wp_enqueue_script( 'wpbp-script', $this->theme->get_assets_uri( 'main.js' ), [ 'jquery' ], $version, true );
+		wp_enqueue_script( 'wpbp-script', $this->get_uri( 'main.js' ), [ 'jquery' ], $this->version, true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -65,10 +74,8 @@ class Asset extends Feature {
 			return;
 		}
 
-		$version = $this->theme->version;
-
-		wp_enqueue_style( 'wpbp-panel-style', $this->theme->get_assets_uri( 'admin.css' ), [], $version );
-		wp_enqueue_script( 'wpbp-panel-script', $this->theme->get_assets_uri( 'admin.js' ), [ 'jquery' ], $version, true );
+		wp_enqueue_style( 'wpbp-panel-style', $this->get_uri( 'admin.css' ), [], $this->version );
+		wp_enqueue_script( 'wpbp-panel-script', $this->get_uri( 'admin.js' ), [ 'jquery' ], $this->version, true );
 	}
 
 	/**
@@ -100,7 +107,7 @@ class Asset extends Feature {
 		 * Enqueue editor styles.
 		 */
 		add_editor_style( [
-			$this->theme->get_assets_uri( 'gutenberg-editor.css' ),
+			$this->get_uri( 'gutenberg-editor.css' ),
 			$this->google_fonts_url(),
 		] );
 
@@ -195,15 +202,38 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function login_head() {
-		$theme_version = $this->theme->info( 'version' );
-		$login_style   = $this->login_style();
-
-		if ( $login_style ) {
-			wp_register_style( 'wpbp-custom-login', false, [], $theme_version );
-			wp_add_inline_style( 'wpbp-custom-login', $login_style );
-
-			wp_enqueue_style( 'wpbp-custom-login' );
+		if ( ! $this->theme->get_mod( 'custom_login_logo' ) ) {
+			return;
 		}
+
+		wp_register_style( 'wpbp-custom-login', false, [], $this->version );
+		wp_add_inline_style( 'wpbp-custom-login', $this->login_style() );
+
+		wp_enqueue_style( 'wpbp-custom-login' );
+	}
+
+	/**
+	 * Custom login style.
+	 *
+	 * @internal
+	 * @since 0.1.1
+	 * @return string
+	 */
+	public function login_style() {
+		$logo_id  = get_theme_mod( 'custom_logo' );
+		$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
+
+		if ( ! $logo_url ) {
+			return null;
+		}
+
+		return self::make_css( function () use ( $logo_url ) {
+			return [
+				'.login h1 a' => [
+					'background-image' => 'url(' . esc_url( $logo_url ) . ') !important',
+				],
+			];
+		} );
 	}
 
 	/**
@@ -240,30 +270,6 @@ class Asset extends Feature {
 	}
 
 	/**
-	 * Custom login style.
-	 *
-	 * @internal
-	 * @since 0.1.1
-	 * @return string
-	 */
-	public function login_style() {
-		$logo_id  = get_theme_mod( 'custom_logo' );
-		$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
-
-		if ( ! $logo_url ) {
-			return null;
-		}
-
-		return self::make_css( function () use ( $logo_url ) {
-			return [
-				'.login h1 a' => [
-					'background-image' => 'url(' . esc_url( $logo_url ) . ') !important',
-				],
-			];
-		} );
-	}
-
-	/**
 	 * Register Google fonts.
 	 *
 	 * @since 0.1.0
@@ -283,6 +289,35 @@ class Asset extends Feature {
 	}
 
 	/**
+	 * Get asset file uri.
+	 *
+	 * @since 0.1.0
+	 * @param  string $filename
+	 * @return string
+	 */
+	public function get_uri( string $filename ) : string {
+		extract( pathinfo( $filename ) ); // phpcs:ignore WordPress.PHP.DontExtract
+
+		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
+			$extension = 'img';
+		} else {
+			$basename = $filename . ( $this->is_debug() ? ".$extension" : ".min.$extension" );
+		}
+
+		return $this->theme->get_uri( "assets/$extension/$basename" );
+	}
+
+	/**
+	 * Determine is it on script-debug mode.
+	 *
+	 * @since 0.1.1
+	 * @return bool
+	 */
+	protected function is_debug() : bool {
+		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+	}
+
+	/**
 	 * Style maker.
 	 *
 	 * @param  \Closure|array $styles
@@ -299,17 +334,18 @@ class Asset extends Feature {
 		}
 
 		$inline = [];
+		$eol    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? PHP_EOL : ' ';
 
 		foreach ( $styles as $selector => $style ) {
-			$inline[] = $selector . ' {' . PHP_EOL;
+			$inline[] = $selector . ' {' . $eol;
 
 			foreach ( $style as $name => $value ) {
-				$inline[] = $name . ': ' . $value . ';' . PHP_EOL;
+				$inline[] = $name . ': ' . $value . ';' . $eol;
 			}
 
-			$inline[] = '}' . PHP_EOL;
+			$inline[] = '}' . $eol;
 		}
 
-		return PHP_EOL . implode( ' ', $inline );
+		return $eol . implode( ' ', $inline );
 	}
 }

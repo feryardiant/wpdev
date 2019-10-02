@@ -53,12 +53,12 @@ class Customizer extends Feature {
 		if ( isset( $customizer->selective_refresh ) ) {
 			$customizer->selective_refresh->add_partial( 'blogname', [
 				'selector'        => '.site-title',
-				'render_callback' => [ $this->theme->template, 'site_name_render' ],
+				'render_callback' => [ $this->theme->template, 'site_name' ],
 			] );
 
 			$customizer->selective_refresh->add_partial( 'blogdescription', [
 				'selector'        => '.site-description',
-				'render_callback' => [ $this->theme->template, 'site_slogan_render' ],
+				'render_callback' => [ $this->theme->template, 'site_slogan' ],
 			] );
 		}
 

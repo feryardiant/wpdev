@@ -121,26 +121,25 @@ class Template extends Feature {
 	 * @return string
 	 */
 	public function site_branding() {
-		$site_name = $this->site_name_render();
-		$site_desc = $this->site_slogan_render();
-		$logo_id   = get_theme_mod( 'custom_logo' );
+		$site_name = $this->site_name();
+		$site_desc = $this->site_slogan();
+		$site_logo = $this->site_logo();
 		$output    = [];
 
-		if ( $logo_id ) {
+		if ( $site_logo ) {
 			$logo_attr = [
 				'class' => 'custom-logo',
+				'alt'   => get_post_meta( $site_logo->ID, '_wp_attachment_image_alt', true ),
 			];
 
-			$logo_attr['alt'] = get_post_meta( $logo_id, '_wp_attachment_image_alt', true );
 			if ( ! $logo_attr['alt'] ) {
 				$logo_attr['alt'] = $site_name;
 			}
 
-			$logo_img = wp_get_attachment_image_url( $logo_id, 'full' );
 			$output[] = sprintf(
 				'<img %1$s src="%2$s"/>',
 				$this->html_attributes_from_array( $logo_attr ),
-				esc_url( $logo_img )
+				esc_url( $site_logo->src )
 			);
 		}
 
@@ -156,12 +155,32 @@ class Template extends Feature {
 			'class' => 'navbar-item',
 		];
 
-		return sprintf(
+		$kses = [
+			'a' => [
+				'rel'   => [],
+				'id'    => [],
+				'href'  => [],
+				'class' => [],
+			],
+			'h1' => [
+				'class' => [],
+			],
+			'p' => [
+				'class' => [],
+			],
+			'img' => [
+				'src'   => [],
+				'alt'   => [],
+				'class' => [],
+			],
+		];
+
+		return wp_kses( sprintf(
 			'<a %1$s rel="home">%2$s</a> <!-- %3$s -->',
 			$this->html_attributes_from_array( $attr ),
 			join( '', $output ),
 			'#' . esc_attr( $attr['id'] )
-		);
+		), $kses );
 	}
 
 	/**
@@ -169,7 +188,7 @@ class Template extends Feature {
 	 *
 	 * @return string
 	 */
-	public function site_name_render() {
+	public function site_name() {
 		return get_bloginfo( 'name', 'display' );
 	}
 
@@ -178,8 +197,27 @@ class Template extends Feature {
 	 *
 	 * @return string
 	 */
-	public function site_slogan_render() {
+	public function site_slogan() {
 		return get_bloginfo( 'description', 'display' );
+	}
+
+	/**
+	 * Get the custom site logo.
+	 *
+	 * @param  string $size
+	 * @return object|null
+	 */
+	public function site_logo( string $size = 'full' ) {
+		$id = get_theme_mod( 'custom_logo' );
+
+		if ( ! $id ) {
+			return null;
+		}
+
+		return (object) [
+			'ID'  => $id,
+			'src' => wp_get_attachment_image_url( $id, $size ),
+		];
 	}
 
 	/**
@@ -227,7 +265,6 @@ class Template extends Feature {
 				esc_html__( 'Search Results for: %s', 'wpbp' ),
 				'<span>' . get_search_query() . '</span>'
 			);
-			dump( $query );
 		} elseif ( is_404() ) {
 			$title    = esc_html__( 'Oops! That page can&rsquo;t be found.', 'wpbp' );
 			$subtitle = $not_found_subtitle;
@@ -236,15 +273,20 @@ class Template extends Feature {
 			$subtitle = get_the_archive_description();
 		}
 
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-		if ( $title ) {
-			echo '<h1 class="title">' . $title . '</h1>';
-		}
+		$kses = [
+			'h1' => [
+				'class' => [],
+			],
+			'span' => [
+				'class' => [],
+			],
+		];
 
-		if ( $subtitle ) {
-			echo '<h1 class="subtitle">' . $subtitle . '</h1>';
-		}
-		// phpcs:enable
+		echo wp_kses( sprintf(
+			'<h1 class="title">%1$s</h1><span class="subtitle">%2$s</span>',
+			$title,
+			$subtitle
+		), $kses );
 	}
 
 	/**
@@ -295,11 +337,23 @@ class Template extends Feature {
 			'class' => (array) apply_filters( 'wpbp_section_class', $section_classes ),
 		];
 
-		printf(
+		$kses = [
+			'main' => [
+				'id'    => [],
+				'class' => [],
+				'role'  => [],
+			],
+			'section' => [
+				'id'    => [],
+				'class' => [],
+			],
+		];
+
+		echo wp_kses( sprintf(
 			'<main %1$s><section %2$s>',
-			esc_attr( $this->html_attributes_from_array( $main_attr ) ),
-			esc_attr( $this->html_attributes_from_array( $section_attr ) )
-		);
+			$this->html_attributes_from_array( $main_attr ),
+			$this->html_attributes_from_array( $section_attr )
+		), $kses );
 	}
 
 	/**
@@ -325,7 +379,7 @@ class Template extends Feature {
 	public function html_attributes_from_array( array $attr, string $attr_sep = ' ', bool $quoted = true ) : string {
 		$output = [];
 
-		foreach ( $attr as $name => $value ) {
+		foreach ( array_filter( $attr ) as $name => $value ) {
 			if ( is_array( $value ) ) {
 				$value = join( ' ', $value );
 			}

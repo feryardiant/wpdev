@@ -270,26 +270,6 @@ final class Theme {
 	}
 
 	/**
-	 * Get asset file uri.
-	 *
-	 * @since 0.1.0
-	 * @param  string $filename
-	 * @return string
-	 */
-	public function get_assets_uri( string $filename ) : string {
-		extract( pathinfo( $filename ) ); // phpcs:ignore WordPress.PHP.DontExtract
-		$is_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true;
-
-		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
-			$extension = 'img';
-		} else {
-			$basename = $filename . ( $is_debug ? ".$extension" : ".min.$extension" );
-		}
-
-		return $this->get_uri( "assets/$extension/$basename" );
-	}
-
-	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/
@@ -441,10 +421,7 @@ final class Theme {
 	 * @return mixed
 	 */
 	public function get_mod( $name, $default = null ) {
-		$theme_mods = get_theme_mods()[ $this->slug ] ?? [];
-		$theme_mod  = apply_filters( 'wpbp_default_' . $name, ( $theme_mods[ $name ] ?? null ) );
-
-		return $theme_mod ?: $default;
+		return $this->option->get( $name, $default );
 	}
 
 	/**
