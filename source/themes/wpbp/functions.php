@@ -119,15 +119,10 @@ $wpbp_theme->register_options( [
 							'narrowed' => __( 'Narrowed', 'wpbp' ),
 						],
 					],
-					'header' => [
-						'label'   => __( 'Header Container', 'wpbp' ),
-						'default' => '',
-						'type'    => 'text',
-					],
-					'footer' => [
-						'label'   => __( 'Footer Container', 'wpbp' ),
-						'default' => '',
-						'type'    => 'text',
+					'enable_responsive' => [
+						'label'   => __( 'Enable responsive', 'wpbp' ),
+						'default' => true,
+						'type'    => 'checkbox',
 					],
 				],
 			],

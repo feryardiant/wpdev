@@ -29,28 +29,6 @@ class Content extends Feature {
 	}
 
 	/**
-	 * Get main content classes.
-	 *
-	 * @since 0.1.1
-	 * @param  array $classes
-	 * @param  bool  $is_return
-	 * @return string|void
-	 */
-	public function classes( array $classes = [], $is_return = false ) {
-		if ( ! $this->theme->is_template( 'full-width' ) ) {
-			$classes[] = 'is-two-thirds';
-		}
-
-		$output = join( ' ', (array) apply_filters( 'wpbp_content_class', $classes ) );
-
-		if ( $is_return ) {
-			return $output;
-		}
-
-		echo esc_attr( $output );
-	}
-
-	/**
 	 * Custom content-width.
 	 *
 	 * @link https://codex.wordpress.org/Content_Width

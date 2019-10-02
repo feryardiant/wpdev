@@ -208,9 +208,9 @@ final class Theme {
 	 *
 	 * @see Template::$filename
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	public function get_template_filename() : string {
+	public function get_template_filename() : ?string {
 		return $this->template->filename;
 	}
 
@@ -219,9 +219,9 @@ final class Theme {
 	 *
 	 * @see Template::$basename
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	public function get_template_basename() : string {
+	public function get_template_basename() : ?string {
 		return $this->template->basename;
 	}
 

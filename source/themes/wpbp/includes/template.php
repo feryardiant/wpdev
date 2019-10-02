@@ -43,14 +43,16 @@ class Template extends Feature {
 		add_action( 'wp_head', [ $this, 'head' ] );
 		add_action( 'wpbp_skip_link', [ $this, 'skip_link' ], 10, 1 );
 		add_action( 'wpbp_hero_body', [ $this, 'hero_body' ], 10 );
-		add_action( 'wpbp_main_content_before', [ $this, 'main_content_before' ], 10 );
-		add_action( 'wpbp_main_content_after', [ $this, 'main_content_after' ], 10, 0 );
+		add_action( 'wpbp_before_main', [ $this, 'before_main' ], 10 );
+		add_action( 'wpbp_before_content', [ $this, 'before_content' ], 10 );
+		add_action( 'wpbp_after_content', [ $this, 'after_content' ], 10, 0 );
+		add_action( 'wpbp_after_main', [ $this, 'after_main' ], 10, 0 );
 		add_action( 'wpbp_footer', [ $this, 'footer_widgets' ], 10, 0 );
 		add_action( 'wpbp_footer', [ $this, 'footer_credit' ], 20, 0 );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 		add_filter( 'get_custom_logo', [ $this, 'site_branding' ] );
-		add_filter( 'template_include', [ $this, 'wrapper' ], 12 );
+		add_filter( 'template_include', [ $this, 'wrapper' ] );
 	}
 
 	/**
@@ -70,6 +72,21 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function head() : void {
+		$viewport = [
+			'width'         => 1024,
+			'initial-scale' => '1',
+		];
+
+		if ( $this->theme->option->get( 'general_layout_enable_responsive' ) ) {
+			$viewport['width']         = 'device-width';
+			$viewport['maximum-scale'] = '2.0';
+		}
+
+		printf(
+			'<meta name="viewport" content="%s">',
+			esc_attr( $this->html_attributes_from_array( $viewport, ', ', false ) )
+		);
+
 		if ( is_singular() && pings_open() ) {
 			printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 		}
@@ -140,10 +157,10 @@ class Template extends Feature {
 		];
 
 		return sprintf(
-			'<a %1$s rel="home">%2$s</a> <!-- #%3$s -->',
+			'<a %1$s rel="home">%2$s</a> <!-- %3$s -->',
 			$this->html_attributes_from_array( $attr ),
 			join( '', $output ),
-			esc_attr( $attr['id'] )
+			'#' . esc_attr( $attr['id'] )
 		);
 	}
 
@@ -175,17 +192,7 @@ class Template extends Feature {
 		$this->filename = $template;
 		$this->basename = substr( wp_basename( $this->filename ), 0, -4 );
 
-		if ( 'index' === $this->basename ) {
-			$this->basename = false;
-		}
-
-		$templates = [ 'templates/wrapper.php' ];
-
-		if ( $this->basename ) {
-			array_unshift( $templates, sprintf( 'templates/wrapper-%s.php', $this->basename ) );
-		}
-
-		return locate_template( $templates );
+		return $template;
 	}
 
 	/**
@@ -241,19 +248,58 @@ class Template extends Feature {
 	}
 
 	/**
+	 * Before main section.
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function before_main() {
+		echo '<div class="container">';
+		echo '<div class="columns">';
+	}
+
+	/**
+	 * Before main section.
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function after_main() {
+		echo '</div> <!-- .columns -->';
+		echo '</div> <!-- .container --!>';
+	}
+
+	/**
 	 * Print element before main-content area.
 	 *
 	 * @since 0.1.1
-	 * @param  array $classes
 	 * @return void
 	 */
-	public function main_content_before( array $classes = [] ) {
-		$classes = (array) apply_filters(
-			'wpbp_main_content_class',
-			! is_array( $classes ) ? explode( ' ', $classes ) : $classes
-		);
+	public function before_content() {
+		$main_classes = [ 'column' ];
 
-		echo '<section id="main" class="' . esc_attr( join( ' ', $classes ) ) . '">';
+		if ( 'full-width' !== $this->basename ) {
+			$main_classes[] = 'is-two-thirds';
+		}
+
+		$section_classes = [];
+
+		$main_attr = [
+			'id'    => 'primary',
+			'role'  => 'main',
+			'class' => (array) apply_filters( 'wpbp_main_class', $main_classes ),
+		];
+
+		$section_attr = [
+			'id'    => 'main',
+			'class' => (array) apply_filters( 'wpbp_section_class', $section_classes ),
+		];
+
+		printf(
+			'<main %1$s><section %2$s>',
+			esc_attr( $this->html_attributes_from_array( $main_attr ) ),
+			esc_attr( $this->html_attributes_from_array( $section_attr ) )
+		);
 	}
 
 	/**
@@ -262,25 +308,32 @@ class Template extends Feature {
 	 * @since 0.1.1
 	 * @return void
 	 */
-	public function main_content_after() {
+	public function after_content() {
 		echo '</section> <!-- #main.site-main -->';
+		echo '</main> <!-- #primary -->';
 	}
 
 	/**
-	 * Print footer credit.
+	 * Convert array to HTML attributes.
 	 *
 	 * @since 0.1.1
-	 * @param array $attr
+	 * @param array  $attr
+	 * @param string $attr_sep
+	 * @param bool   $quoted
 	 * @return string
 	 */
-	public function html_attributes_from_array( array $attr ) : string {
+	public function html_attributes_from_array( array $attr, string $attr_sep = ' ', bool $quoted = true ) : string {
 		$output = [];
 
 		foreach ( $attr as $name => $value ) {
-			$output[] = $name . '="' . esc_attr( $value ) . '"';
+			if ( is_array( $value ) ) {
+				$value = join( ' ', $value );
+			}
+
+			$output[] = $name . '=' . ( $quoted ? '"' . $value . '"' : $value );
 		}
 
-		return join( ' ', $output );
+		return join( $attr_sep, $output );
 	}
 
 	/**
