@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/feryardiant/wordpress-boilerplate/compare/v0.1.1...v0.1.2) (2019-10-02)
+
+
+### Bug Fixes
+
+* **workflow:** move salts generator to post-install script ([6580a41](https://github.com/feryardiant/wordpress-boilerplate/commit/6580a41))
+
 ### [0.1.1](https://github.com/feryardiant/wordpress-boilerplate/compare/v0.1.1-alpha.2...v0.1.1) (2019-10-02)
 
 
