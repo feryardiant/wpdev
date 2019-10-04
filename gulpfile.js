@@ -207,7 +207,7 @@ exports.e2e = async () => {
     baseUrl: url.toString()
   })
 
-  return wdio.run()
+  await wdio.run()
 }
 
 exports.release = async () => {
