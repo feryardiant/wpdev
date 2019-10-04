@@ -39,13 +39,7 @@ jobs:
     - name: Build
       env:
         WP_ENV: testing
-        AUTH_KEY: 'E_T!Eph},?^d[TR@ E/0vr|s o/vsrONGY!UldxBuN5$J3Z([y=J7JXnWs,2W~?~'
-        SECURE_AUTH_KEY: '&Wse_:+6g;?1i20v3NR*<YhfE|t(Ba^Z.7M&@wxRl<q~C1dKQpz)<1xe0kN1tFNl'
-        LOGGED_IN_KEY: 'emvX9-(Y3+|$eSR}9>3nw|sDeh={+Fo+s.|Yp3}$5aB$8-HzT-vPzwcvIq_!EztR'
-        NONCE_KEY: 'v.+y-L}N_q{qBDs$p`LQNJmG~Nk!|5GrqOC#zaB*F17xLR#p.kTO-^}bC]?fU_#Z'
-        AUTH_SALT: '}v-%~mUb2u<_oDR8kgob^!QiT-kX1hH-JmmPT-(zH&-#?hj1PQoMY4!@.&f{]uJu'
-        SECURE_AUTH_SALT: '/tiof{vU[qJ$p_L56_wVl;YD(>+Ar(tJ.ZfS(+i@T0[3Ez#H$32 T:v|h`.^A<Yj'
-        LOGGED_IN_SALT: 'XRV|G 4vbFVv,m),uw|+O@C0:/3#WAaLsxN )}/0}@7*lXuhJ1XdD4H4 M)m4N{B'
-        NONCE_SALT: 'r#]|3-gQfc`H>j,DWWzF4[yMeuy0t[E~6^Nezjt-$5KG6b3369M/wu1`U6k/O.DP'
       run: |
+        cp .env.example .env
+        vendor/bin/wp dotenv salts generate
         npx gulp build
