@@ -1,8 +1,8 @@
 {
-  "name": "feryardiant/wordpress-boilerplate",
+  "name": "feryardiant/wpdev",
   "version": "0.1.3",
   "description": "WordPress boilerplate based-on Bedrock by Roots.",
-  "homepage": "https://github.com/feryardiant/wordpress-boilerplate/",
+  "homepage": "https://github.com/feryardiant/wpdev/",
   "type": "project",
   "license": "MIT",
   "authors": [
@@ -22,7 +22,7 @@
     "boilerplate"
   ],
   "support": {
-    "issues": "https://github.com/feryardiant/wordpress-boilerplate/issues"
+    "issues": "https://github.com/feryardiant/wpdev/issues"
   },
   "scripts": {
     "post-root-package-install": [
@@ -32,7 +32,7 @@
       "phpcs --standard=source/phpcs.xml source"
     ],
     "wp:install": [
-      "vendor/bin/wp core install --title='WordPress Boilerplate Site' --admin_user=admin --admin_password=secret --admin_email=admin@bedrock.wp --skip-email",
+      "vendor/bin/wp core install --title='WordPress Site' --admin_user=admin --admin_password=secret --admin_email=admin@blank.wp --skip-email",
       "vendor/bin/wp option update permalink_structure '/%postname%/'"
     ],
     "wp:reset": [
@@ -45,9 +45,9 @@
       "type": "composer",
       "url": "https://wpackagist.org"
     },
-    "local_theme": {
+    "blanktheme": {
       "type": "path",
-      "url": "source/themes/wpbp",
+      "url": "source/themes/blank",
       "options": {
         "symlink": true
       }
@@ -62,7 +62,7 @@
     "ext-imagick": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
-    "local-theme/wpbp": "*",
+    "wpdev/blank": "*",
     "oscarotero/env": "^1.2",
     "predis/predis": "^1.1",
     "roots/wordpress": "^5.2",
