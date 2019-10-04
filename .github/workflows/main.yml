@@ -27,7 +27,16 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
         extension-csv: exif, gd, gettext, imagick, mbstring, xmlrpc
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+        registry-url: 'https://registry.npmjs.org'
     - name: Install dependencies
+      run: |
+        npm install
+        composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
+    - name: Build
       env:
         WP_ENV: testing
         AUTH_KEY: 'E_T!Eph},?^d[TR@ E/0vr|s o/vsrONGY!UldxBuN5$J3Z([y=J7JXnWs,2W~?~'
@@ -39,7 +48,4 @@ jobs:
         LOGGED_IN_SALT: 'XRV|G 4vbFVv,m),uw|+O@C0:/3#WAaLsxN )}/0}@7*lXuhJ1XdD4H4 M)m4N{B'
         NONCE_SALT: 'r#]|3-gQfc`H>j,DWWzF4[yMeuy0t[E~6^Nezjt-$5KG6b3369M/wu1`U6k/O.DP'
       run: |
-        # 'cp .env.example .env'
-        # 'sed -i -E "s~symlink: true~symlink: false~"" composer.json'
-        composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
-        echo WordPress version $(vendor/bin/wp core version)
+        npx gulp build
