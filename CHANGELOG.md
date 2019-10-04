@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/feryardiant/wpdev/compare/v0.1.3...v0.2.0) (2019-10-04)
+
+
+### Bug Fixes
+
+* **workflow:** missing WP_HOME env on gulp build ([82153dd](https://github.com/feryardiant/wpdev/commit/82153dd))
+
 ### [0.1.3](https://github.com/feryardiant/wpdev/compare/v0.1.2...v0.1.3) (2019-10-02)
 
 
