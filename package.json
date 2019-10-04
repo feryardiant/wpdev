@@ -13,7 +13,7 @@
   "scripts": {
     "lint:js": "eslint",
     "lint:css": "stylelint",
-    "e2e": "wdio wdio.config.js"
+    "e2e": "wdio tests/wdio.config.js"
   },
   "dependencies": {
     "bulma": "^0.7.5"

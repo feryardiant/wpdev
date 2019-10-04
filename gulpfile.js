@@ -160,12 +160,27 @@ const tasks = configure('source', 'build', {
   }
 })
 
-const phpServer = () => new Promise((resolve, reject) => {
+/**
+ * Start php server.
+ *
+ * @param {URL} url
+ */
+const phpServer = (url) => new Promise((resolve, reject) => {
+  if (url.hostname !== 'localhost') {
+    resolve(url)
+  }
+
+  if (url.hostname === 'localhost' && url.port === '') {
+    url.port = 8080
+  }
+
   process.on('exit', () => {
     php.closeServer()
   })
 
   php.server({
+    port: url.port,
+    hostname: url.hostname,
     ini: 'public/.user.ini',
     base: 'public',
     router: './server.php',
@@ -180,9 +195,20 @@ const phpServer = () => new Promise((resolve, reject) => {
       return args
     }
   }, () => {
-    resolve()
+    resolve(url)
   })
 })
+
+exports.e2e = async () => {
+  const { default: Launcher } = require('@wdio/cli')
+
+  const url = await phpServer(wpHome)
+  const wdio = new Launcher('tests/wdio.config.js', {
+    baseUrl: url.toString()
+  })
+
+  return wdio.run()
+}
 
 exports.release = async () => {
   const releaseConfig = {
@@ -208,9 +234,9 @@ exports.release = async () => {
  * Start php development server and watch files changes.
  */
 exports.default = async () => {
-  const bSync = (proxy) => new Promise((resolve, reject) => {
+  const bSync = (url) => new Promise((resolve, reject) => {
     bs.init({
-      proxy: proxy,
+      proxy: url.toString(),
       baseDir: './public',
       notify: argv.notify,
       open: argv.open,
@@ -243,11 +269,9 @@ exports.default = async () => {
     }, () => resolve())
   })
 
-  if (argv.proxy !== wpHome.hostname) {
-    await phpServer()
-  }
+  const url = await phpServer(wpHome)
 
-  await bSync(argv.proxy)
+  await bSync(url)
 
   watch(tasks, bs)
 }
