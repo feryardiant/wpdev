@@ -29,7 +29,10 @@
       "php -r \"copy('.env.example', '.env');\""
     ],
     "lint": [
-      "phpcs --standard=source/phpcs.xml source"
+      "vendor/bin/phpcs --standard=source/phpcs.xml source"
+    ],
+    "test": [
+      "vendor/bin/phpunit -c tests/phpunit.xml"
     ],
     "wp:install": [
       "vendor/bin/wp core install --title='WordPress Site' --admin_user=admin --admin_password=secret --admin_email=admin@blank.wp --skip-email",
@@ -51,6 +54,11 @@
       "options": {
         "symlink": true
       }
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/unit"
     }
   },
   "require": {
@@ -82,9 +90,11 @@
     "wpackagist-plugin/wordpress-importer": "^0.6.4"
   },
   "require-dev": {
+    "10up/wp_mock": "^0.4.2",
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpunit/phpunit": "^7.5",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/i18n-command": "^2.2",

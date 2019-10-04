@@ -160,6 +160,30 @@ const tasks = configure('source', 'build', {
   }
 })
 
+const phpServer = () => new Promise((resolve, reject) => {
+  process.on('exit', () => {
+    php.closeServer()
+  })
+
+  php.server({
+    ini: 'public/.user.ini',
+    base: 'public',
+    router: './server.php',
+    configCallback (type, args) {
+      if (type === php.OPTIONS_PHP_CLI_ARR) {
+        return [
+          '-e',
+          '-d', 'cli_server.color=on'
+        ].concat(args)
+      }
+
+      return args
+    }
+  }, () => {
+    resolve()
+  })
+})
+
 exports.release = async () => {
   const releaseConfig = {
     sign: true,
@@ -217,30 +241,6 @@ exports.default = async () => {
         }
       ]
     }, () => resolve())
-  })
-
-  const phpServer = () => new Promise((resolve, reject) => {
-    process.on('exit', () => {
-      php.closeServer()
-    })
-
-    php.server({
-      ini: 'public/.user.ini',
-      base: 'public',
-      router: './server.php',
-      configCallback (type, args) {
-        if (type === php.OPTIONS_PHP_CLI_ARR) {
-          return [
-            '-e',
-            '-d', 'cli_server.color=on'
-          ].concat(args)
-        }
-
-        return args
-      }
-    }, () => {
-      resolve()
-    })
   })
 
   if (argv.proxy !== wpHome.hostname) {

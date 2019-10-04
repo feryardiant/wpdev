@@ -37,10 +37,12 @@ jobs:
       run: |
         npm install
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
+        cp .env.example .env
+        vendor/bin/wp dotenv salts generate
     - name: Build
+      run: npx gulp build
+    - name: Tests
       env:
         WP_ENV: testing
       run: |
-        cp .env.example .env
-        vendor/bin/wp dotenv salts generate
-        npx gulp build
+        composer test

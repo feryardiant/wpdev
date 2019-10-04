@@ -10,7 +10,8 @@
 namespace Blank;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-$composer_autoloader = dirname( __DIR__ ) . '/vendor/autoload.php';
+$theme_file_path     = dirname( __DIR__ ) . '/';
+$composer_autoloader = $theme_file_path . 'vendor/autoload.php';
 
 if ( file_exists( $composer_autoloader ) ) {
 	require_once $composer_autoloader;
@@ -19,16 +20,16 @@ if ( file_exists( $composer_autoloader ) ) {
 unset( $composer_autoloader );
 // phpcs:enable
 
-spl_autoload_register( function ( $class_name ) {
+spl_autoload_register( function ( $class_name ) use ( $theme_file_path ) {
 	if ( strpos( $class_name, __NAMESPACE__ ) !== 0 ) {
 		return;
 	}
 
-	$path = get_theme_file_path( strtolower( str_replace(
+	$path = $theme_file_path . strtolower( str_replace(
 		[ '\\', __NAMESPACE__, '_' ],
 		[ DIRECTORY_SEPARATOR, 'includes', '-' ],
 		$class_name
-	) ) . '.php' );
+	) ) . '.php';
 
 	if ( file_exists( $path ) ) {
 		require_once $path;
@@ -49,16 +50,3 @@ foreach ( $blank_files as $blank_file ) {
 }
 
 unset( $blank_files, $blank_file );
-
-if ( ! function_exists( 'dump' ) && env( 'WP_ENV' ) !== 'production' ) {
-	/**
-	 * Dump data.
-	 *
-	 * @return void
-	 */
-	function dump() {
-		array_map( function ( $arg ) {
-			var_dump( $arg ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
-		}, func_get_args() );
-	}
-}

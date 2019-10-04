@@ -152,7 +152,7 @@ class Customizer extends Feature {
 	public function preview_init() {
 		wp_enqueue_script(
 			'blank-customizer-script',
-			$this->theme->get_assets_uri( 'customizer.js' ),
+			$this->theme->asset->get_uri( 'customizer.js' ),
 			[ 'customize-preview' ],
 			$this->theme->version,
 			true

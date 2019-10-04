@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "lint:js": "eslint",
-    "lint:css": "stylelint"
+    "lint:css": "stylelint",
+    "e2e": "wdio wdio.config.js"
   },
   "dependencies": {
     "bulma": "^0.7.5"
@@ -22,9 +23,16 @@
     "@babel/preset-env": "^7.6.0",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@wdio/browserstack-service": "^5.13.2",
+    "@wdio/cli": "^5.14.3",
+    "@wdio/dot-reporter": "^5.13.2",
+    "@wdio/local-runner": "^5.14.3",
+    "@wdio/mocha-framework": "^5.14.3",
     "@wordpress/eslint-plugin": "^3.1.0",
     "babel-eslint": "^10.0.3",
     "browser-sync": "^2.26.7",
+    "chai": "^4.2.0",
+    "chromedriver": "^77.0.0",
     "cross-env": "^5.2.1",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
@@ -40,6 +48,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-stylelint": "^9.0.0",
     "gulp-uglify": "^3.0.2",
+    "gulp-wdio": "^1.0.8",
     "gulp-wp-pot": "^2.3.5",
     "gulp-zip": "^5.0.0",
     "lint-staged": "^9.4.0",
@@ -48,6 +57,7 @@
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
     "stylelint-scss": "^3.11.0",
+    "wdio-chromedriver-service": "^5.0.2",
     "yargs": "^14.0.0",
     "yorkie": "^2.0.0"
   },
