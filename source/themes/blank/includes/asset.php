@@ -70,7 +70,7 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function admin_enqueue( $hook ) {
-		if ( substr( $hook, -12 ) !== ( $this->theme->slug . '-options' ) ) {
+		if ( ( 'appearance_page_' . $this->theme->slug . '-options' ) !== $hook ) {
 			return;
 		}
 
