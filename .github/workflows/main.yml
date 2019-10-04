@@ -46,8 +46,12 @@ jobs:
       run: |
         npm install
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
+    - name: Install WordPress Core
+      run: |
         cp .env.example .env
         vendor/bin/wp dotenv salts generate
+        vendor/bin/wp core install --url='http://localhost' --title='WordPress Site' --admin_email=admin@blank.wp --skip-email
+        vendor/bin/wp option update permalink_structure '/%postname%/'
     - name: Build
       run: npx gulp build
     - name: Tests
