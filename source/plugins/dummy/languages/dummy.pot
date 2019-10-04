@@ -19,7 +19,7 @@ msgid "Dummy"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/feryardiant/wordpress-boilerplate"
+msgid "https://github.com/feryardiant/wpdev"
 msgstr ""
 
 #. Description of the plugin

@@ -1,15 +1,17 @@
 <?php
 /**
  * Plugin Name:  Dummy
- * Plugin URI:   https://github.com/feryardiant/wordpress-boilerplate
- * Description:  Awesome Dummy Plugin
+ * Plugin URI:   https://wp.feryardiant.id
+ * Description:  A WordPress Plugin that actually doing nothing
  * Author:       Fery Wardiyanto
- * Author URI:   https://github.com/feryardiant/
+ * Author URI:   https://feryardiant.id/
  * Text Domain:  dummy
  * Domain Path:  /languages
  * Version:      0.1.0
  *
- * @package      Dummy
+ * @package     WP Theme Dev
+ * @subpackage  Dummy Plugin
+ * @since       0.1.0
  */
 
 // Your code starts here.

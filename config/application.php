@@ -70,7 +70,6 @@ unset($_http_schema, $_heroku_appname, $_site_url);
 Config::define('CONTENT_DIR',       '/app');
 Config::define('WP_CONTENT_DIR',    $webroot_dir . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL',    Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
-Config::define('WP_DEFAULT_THEME',  env('WP_DEFAULT_THEME') ?: 'wpbp');
 
 
 /**
@@ -131,7 +130,7 @@ Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?: false);
 Config::define('WP_DEBUG_LOG',     env('WP_DEBUG_LOG') ?: false);
 Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?: false);
 
- /**
+/**
  * Multisite Settings
  */
 // Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));

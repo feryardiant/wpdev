@@ -1,6 +1,6 @@
 {
   "name": "WordPress Boilerplate",
-  "repository": "https://github.com/feryardiant/wordpress-boilerplate",
+  "repository": "https://github.com/feryardiant/wpdev",
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
   "scripts": {
     "postdeploy": [

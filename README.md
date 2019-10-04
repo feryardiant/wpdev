@@ -23,7 +23,7 @@ Its always good to have WP-CLI [installed globally](https://wp-cli.org/#installi
 This project is available to install with the following command
 
 ```bash
-$ composer create-project feryardiant/wordpress-boilerplate [project-folder]
+$ composer create-project feryardiant/wpdev [project-folder]
 ```
 
 Create new database through PHPMyAdmin or from CLI
