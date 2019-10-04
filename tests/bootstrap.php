@@ -11,4 +11,4 @@ require_once $root.'/vendor/autoload.php';
 
 WP_Mock::bootstrap();
 
-require_once $root.'/source/themes/blank/functions.php';
+require_once $root.'/source/themes/blank/includes/autoload.php';

@@ -2,12 +2,8 @@
 
 namespace Tests;
 
-class TestCase extends \WP_Mock\Tools\TestCase {
-    public function setUp() {
-		\WP_Mock::setUp();
-	}
+use \WP_Mock\Tools\TestCase as WP_Mock_TestCase;
 
-	public function tearDown() {
-		\WP_Mock::tearDown();
-	}
+class TestCase extends WP_Mock_TestCase {
+    // .
 }
