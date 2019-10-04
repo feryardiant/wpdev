@@ -48,11 +48,10 @@ jobs:
         npm install
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
     - name: Install WordPress Core
-      env:
-        DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: |
         cp .env.example .env
         vendor/bin/wp dotenv salts generate
+        vendor/bin/wp dotenv set DB_HOST 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
         vendor/bin/wp core install --url='http://localhost' --title='WordPress Site' --admin_user=admin --admin_email=admin@blank.wp --skip-email
         vendor/bin/wp option update permalink_structure '/%postname%/'
     - name: Build
