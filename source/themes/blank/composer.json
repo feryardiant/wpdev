@@ -12,6 +12,11 @@
   "require": {
     "php": ">=7.1"
   },
+  "autoload-dev": {
+    "files": [
+      "functions.php"
+    ]
+  },
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,
