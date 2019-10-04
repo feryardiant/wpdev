@@ -64,3 +64,4 @@ jobs:
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
         vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
+        npx gulp e2e
