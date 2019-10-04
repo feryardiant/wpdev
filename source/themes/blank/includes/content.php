@@ -21,11 +21,23 @@ class Content extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_image_size( 'post_size', 600, null );
-		add_image_size( 'max_size', 1600, 900, true );
-
+		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_filter( 'content_width', [ $this, 'content_width' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names_choose' ] );
+	}
+
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/
+	 *
+	 * @internal
+	 * @since 0.2.0
+	 * @return void
+	 */
+	public function setup() : void {
+		add_image_size( 'post_size', 600, null );
+		add_image_size( 'max_size', 1600, 900, true );
 	}
 
 	/**
