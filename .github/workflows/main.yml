@@ -21,18 +21,19 @@ jobs:
       #   - php-versions: 7.2
       #     wp-versions: 5.0
     steps:
-    - uses: actions/checkout@master
-    - name: Setup PHP
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Set up PHP
       uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
         extension-csv: exif, gd, gettext, imagick, mbstring, xmlrpc
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
         registry-url: 'https://registry.npmjs.org'
-    - name: Install dependencies
+    - name: Install Dependencies
       run: |
         npm install
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
