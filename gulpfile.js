@@ -199,7 +199,7 @@ const phpServer = (url) => new Promise((resolve, reject) => {
   })
 })
 
-exports.e2e = async () => {
+exports.e2e = async (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
   const url = await phpServer(wpHome)
@@ -207,7 +207,7 @@ exports.e2e = async () => {
     baseUrl: url.toString()
   })
 
-  await wdio.run()
+  await wdio.run().then(done)
 }
 
 exports.release = async () => {
