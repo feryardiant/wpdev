@@ -72,7 +72,6 @@ const tasks = configure('source', 'build', {
 
     config.phpcs.standard = 'source/phpcs.xml'
 
-    console.log(config)
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
       .pipe(phpcs.reporter('log'))
