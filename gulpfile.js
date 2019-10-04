@@ -199,15 +199,16 @@ const phpServer = (url) => new Promise((resolve, reject) => {
   })
 })
 
-exports.e2e = async (done) => {
+exports.e2e = (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
-  const url = await phpServer(wpHome)
-  const wdio = new Launcher('tests/wdio.config.js', {
-    baseUrl: url.toString()
-  })
+  return phpServer(wpHome).then(url => {
+    const wdio = new Launcher('tests/wdio.config.js', {
+      baseUrl: url.toString()
+    })
 
-  await wdio.run().then(done)
+    return wdio.run()
+  }).then(done)
 }
 
 exports.release = async () => {
