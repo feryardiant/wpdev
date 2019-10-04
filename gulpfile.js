@@ -21,7 +21,7 @@ const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
 
 const wpHome = new URL(process.env.WP_HOME)
-const { configure, watch, isProduction } = require('./build/util')
+const { configure, scandir, watch, isProduction } = require('./build/util')
 const { argv } = require('yargs').options({
   open: {
     alias: 'o',
@@ -72,6 +72,7 @@ const tasks = configure('source', 'build', {
 
     config.phpcs.standard = 'source/phpcs.xml'
 
+    console.log(config)
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
       .pipe(phpcs.reporter('log'))
@@ -111,7 +112,6 @@ const tasks = configure('source', 'build', {
   js ({ src, dest, config }) {
     const stream = gulp.src(src, { sourcemaps: true })
       .pipe(eslint(config.eslint))
-      // .pipe(eslint.format('pretty'))
 
     if (isProduction) {
       stream.pipe(eslint.failAfterError())
@@ -251,5 +251,4 @@ exports.default = async () => {
   await bSync(argv.proxy)
 
   watch(tasks, bs)
-
 }

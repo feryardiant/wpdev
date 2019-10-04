@@ -73,15 +73,16 @@ const scandir = exports.scandir = (dir, dest) => {
   const readdirOpt = { withFileTypes: true }
   const tmpDir = 'public/app'
   const paths = globalConfig.paths
+  const ignoreFiles = readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/)
 
-  const sourceDir = readdirSync(dir, readdirOpt).reduce((build, type) => {
-    if (!['plugins', 'themes'].includes(type) && !type.isDirectory()) return build
+  return readdirSync(dir, readdirOpt).reduce((types, type) => {
+    if (!['plugins', 'themes'].includes(type.name) && !type.isDirectory()) return types
 
-    return readdirSync(path.join(dir, type.name), readdirOpt).reduce((build, source) => {
-      if (!source.isDirectory()) return build
+    const sourceDir = readdirSync(path.join(dir, type.name), readdirOpt).reduce((sources, source) => {
+      if (!source.isDirectory()) return sources
 
       let target = `${type.name}/${source.name}`
-      build[source.name] = {
+      sources = {
         type: type.name,
         path: `${dir}/${target}`,
         php: {
@@ -104,7 +105,7 @@ const scandir = exports.scandir = (dir, dest) => {
           srcPath.push(`!${excludes}`)
         }
 
-        build[source.name][asset] = {
+        sources[asset] = {
           src: srcPath,
           dest: `${dir}/${assetPath}/${asset}`
         }
@@ -114,23 +115,27 @@ const scandir = exports.scandir = (dir, dest) => {
         `${dir}/${target}/**`
       ]
 
-      readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/).forEach((line) => {
+      ignoreFiles.forEach((line) => {
         if (line && /^#/.test(line) === false) {
           const ignore = path.join(dir, target, line)
           zipSrc.push(`!${ignore}`)
         }
       })
 
-      build[source.name].zip = {
+      sources.zip = {
         src: zipSrc,
         dest: dest
       }
 
-      return build
-    }, {})
-  }, {})
+      return [source.name, sources]
+    }, [])
 
-  return Object.entries(sourceDir)
+    if (sourceDir.length > 0) {
+      types.push(sourceDir)
+    }
+
+    return types
+  }, [])
 }
 
 const configure = exports.configure = (src, dest, tasks) => {
