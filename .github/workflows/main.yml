@@ -45,4 +45,4 @@ jobs:
       env:
         WP_ENV: testing
       run: |
-        composer test
+        vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
