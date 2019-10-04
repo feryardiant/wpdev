@@ -53,7 +53,7 @@ jobs:
       run: |
         cp .env.example .env
         vendor/bin/wp dotenv salts generate
-        vendor/bin/wp core install --title='WordPress Site' --admin_user=admin --admin_email=admin@blank.wp --skip-email
+        vendor/bin/wp core install --url='http://localhost' --title='WordPress Site' --admin_user=admin --admin_email=admin@blank.wp --skip-email
         vendor/bin/wp option update permalink_structure '/%postname%/'
     - name: Build
       run: npx gulp build
