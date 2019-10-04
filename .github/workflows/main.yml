@@ -13,6 +13,15 @@ jobs:
   run:
     name: Runs on WordPress ${{ matrix.wp-versions }}
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: wordpress
+        ports:
+          - 3306
     strategy:
       matrix:
         php-versions: ['7.1']
@@ -39,10 +48,13 @@ jobs:
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
         cp .env.example .env
         vendor/bin/wp dotenv salts generate
+        echo ${{ MYSQL_ROOT_PASSWORD }}
     - name: Build
       run: npx gulp build
     - name: Tests
       env:
         WP_ENV: testing
+        BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
+        BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
         vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
