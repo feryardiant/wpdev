@@ -208,7 +208,7 @@ msgstr ""
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:51
+#: includes/content.php:63
 msgid "Post"
 msgstr ""
 
