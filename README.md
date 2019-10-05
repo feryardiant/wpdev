@@ -133,7 +133,7 @@ $ gulp -T
 * `zip` task will combine all `*:zip` tasks on each namespace.
 * `release` task will run `build` task, generate `CHANGELOG.md`, run `zip` task and bump version number of this project.
 
-## Sponsores
+## Sponsors
 
 * [BrowserStack](https://browserstack.com)
 

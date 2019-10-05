@@ -97,6 +97,7 @@ const tasks = configure('source', 'build', {
       .pipe(cleanCSS())
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest, { sourcemaps: true }))
+      .pipe(bs.stream())
   },
 
   /**
@@ -121,6 +122,7 @@ const tasks = configure('source', 'build', {
       .pipe(uglify(config.uglify))
       .pipe(rename(config.rename))
       .pipe(gulp.dest(dest, { sourcemaps: true }))
+      .pipe(bs.stream())
   },
 
   /**
@@ -136,10 +138,11 @@ const tasks = configure('source', 'build', {
     return gulp.src(src)
       .pipe(imagemin(config.imagemin))
       .pipe(gulp.dest(dest))
+      .pipe(bs.stream())
   },
 
   /**
-   * Packaging.
+   * Generate CHANGELOG.md for each then Packaging them.
    *
    * @param {Object}       param0
    * @param {Array|String} param0.src
@@ -166,6 +169,9 @@ const tasks = configure('source', 'build', {
  * @param {URL} url
  */
 const phpServer = (url) => new Promise((resolve, reject) => {
+  // Don't start php dev server if the hostname isn't localhost
+  // In case you've already set your envvar to something like:
+  // WP_HOME = http://wpdev.local
   if (url.hostname !== 'localhost') {
     resolve(url)
   }
@@ -199,6 +205,11 @@ const phpServer = (url) => new Promise((resolve, reject) => {
   })
 })
 
+/**
+ * Start php server.
+ *
+ * @param {URL} url
+ */
 const bSync = (url) => new Promise((resolve, reject) => {
   bs.init({
     proxy: url.toString(),
@@ -237,6 +248,11 @@ const bSync = (url) => new Promise((resolve, reject) => {
   })
 })
 
+/**
+ * Execute end-to-end test using webdriver.io and browser-stack.
+ *
+ * @param {URL} url
+ */
 exports.e2e = (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
@@ -253,6 +269,11 @@ exports.e2e = (done) => {
   })
 }
 
+/**
+ * Generate CHANGELOG.md file.
+ *
+ * @param {URL} url
+ */
 exports.release = async () => {
   const releaseConfig = {
     sign: true,
@@ -274,7 +295,7 @@ exports.release = async () => {
 }
 
 /**
- * Start php development server and watch files changes.
+ * Start php development server and watch files changes through browserSync.
  */
 exports.default = async () => {
   const url = await phpServer(wpHome)
