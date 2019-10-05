@@ -237,15 +237,19 @@ const bSync = (url) => new Promise((resolve, reject) => {
   })
 })
 
-exports.e2e = () => {
+exports.e2e = (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
   return phpServer(wpHome).then(bSync).then(url => {
     const wdio = new Launcher('tests/wdio.config.js', {
-      baseUrl: url.toString()
+      baseUrl: url.toString(),
+      onComplete (code) {
+        done()
+        process.exit(code)
+      }
     })
 
-    return wdio.run().then(process.exit)
+    return wdio.run()
   })
 }
 
