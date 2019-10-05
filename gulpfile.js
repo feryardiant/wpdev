@@ -246,7 +246,7 @@ exports.e2e = () => {
     })
 
     return wdio.run()
-  }).then(process.exit)
+  })
 }
 
 exports.release = async () => {
