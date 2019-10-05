@@ -245,7 +245,7 @@ exports.e2e = () => {
       baseUrl: url.toString()
     })
 
-    return wdio.run()
+    return wdio.run().then(process.exit)
   })
 }
 
