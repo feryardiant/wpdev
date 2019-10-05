@@ -55,18 +55,9 @@ jobs:
         vendor/bin/wp dotenv salts generate
         vendor/bin/wp dotenv set DB_HOST 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
         vendor/bin/wp dotenv set WP_HOME $WP_HOME
+        vendor/bin/wp dotenv set WP_SITEURL $WP_HOME
         vendor/bin/wp core install --url="$WP_HOME" --title='WordPress Site' --admin_user=admin --admin_email=admin@blank.wp --skip-email
         vendor/bin/wp option update permalink_structure '/%postname%/'
-    - name: Build
-      run: npx gulp build
-    - name: Show Entities
-      run: |
-        vendor/bin/wp option get home
-        vendor/bin/wp option get siteurl
-        vendor/bin/wp config get WP_HOME
-        vendor/bin/wp config get WP_SITEURL
-        vendor/bin/wp dotenv get WP_HOME
-        cat .env
         vendor/bin/wp cache flush
     - name: Tests
       env:
