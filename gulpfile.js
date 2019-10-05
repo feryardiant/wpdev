@@ -199,16 +199,58 @@ const phpServer = (url) => new Promise((resolve, reject) => {
   })
 })
 
+const bSync = (url) => new Promise((resolve, reject) => {
+  bs.init({
+    proxy: url.toString(),
+    baseDir: './public',
+    notify: argv.notify,
+    open: argv.open,
+    serveStatic: [
+      {
+        route: '/wp-admin/css',
+        dir: 'public/wp/wp-admin/css'
+      },
+      {
+        route: '/wp-admin/images',
+        dir: 'public/wp/wp-admin/images',
+      },
+      {
+        route: '/wp-admin/js',
+        dir: 'public/wp/wp-admin/js',
+      },
+      {
+        route: '/wp-includes/css',
+        dir: 'public/wp/wp-includes/css',
+      },
+      {
+        route: '/wp-includes/images',
+        dir: 'public/wp/wp-includes/images',
+      },
+      {
+        route: '/wp-includes/js',
+        dir: 'public/wp/wp-includes/js',
+      }
+    ]
+  }, () => {
+    url.port = 3000
+    resolve(url)
+  })
+})
+
 exports.e2e = (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
-  return phpServer(wpHome).then(url => {
+  return phpServer(wpHome).then(bSync).then(url => {
     const wdio = new Launcher('tests/wdio.config.js', {
-      baseUrl: url.toString()
+      baseUrl: url.toString(),
+      onComplete (code) {
+        done()
+        process.exit(code)
+      }
     })
 
     return wdio.run()
-  }).then(done)
+  })
 }
 
 exports.release = async () => {
@@ -235,41 +277,6 @@ exports.release = async () => {
  * Start php development server and watch files changes.
  */
 exports.default = async () => {
-  const bSync = (url) => new Promise((resolve, reject) => {
-    bs.init({
-      proxy: url.toString(),
-      baseDir: './public',
-      notify: argv.notify,
-      open: argv.open,
-      serveStatic: [
-        {
-          route: '/wp-admin/css',
-          dir: 'public/wp/wp-admin/css'
-        },
-        {
-          route: '/wp-admin/images',
-          dir: 'public/wp/wp-admin/images',
-        },
-        {
-          route: '/wp-admin/js',
-          dir: 'public/wp/wp-admin/js',
-        },
-        {
-          route: '/wp-includes/css',
-          dir: 'public/wp/wp-includes/css',
-        },
-        {
-          route: '/wp-includes/images',
-          dir: 'public/wp/wp-includes/images',
-        },
-        {
-          route: '/wp-includes/js',
-          dir: 'public/wp/wp-includes/js',
-        }
-      ]
-    }, () => resolve())
-  })
-
   const url = await phpServer(wpHome)
 
   await bSync(url)
