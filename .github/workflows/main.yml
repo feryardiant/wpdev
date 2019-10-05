@@ -61,8 +61,12 @@ jobs:
       run: npx gulp build
     - name: Show Entities
       run: |
-        vendor/bin/wp option list
-        vendor/bin/wp config list
+        vendor/bin/wp option get home
+        vendor/bin/wp option get siteurl
+        vendor/bin/wp config get WP_HOME
+        vendor/bin/wp config get WP_SITEURL
+        vendor/bin/wp dotenv get WP_HOME
+        cat .env
         vendor/bin/wp cache flush
     - name: Tests
       env:
