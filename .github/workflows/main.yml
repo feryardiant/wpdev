@@ -63,6 +63,7 @@ jobs:
       run: |
         vendor/bin/wp option list
         vendor/bin/wp config list
+        vendor/bin/wp cache flush
     - name: Tests
       env:
         WP_ENV: testing
