@@ -1,5 +1,6 @@
 {
   "name": "wpdev/blank",
+  "version": "0.2.0",
   "description": "Blank WordPress Theme for Development",
   "type": "wordpress-theme",
   "license": "GPL-2.0-or-later",
@@ -11,11 +12,6 @@
   ],
   "require": {
     "php": ">=7.1"
-  },
-  "autoload-dev": {
-    "files": [
-      "functions.php"
-    ]
   },
   "config": {
     "preferred-install": "dist",
