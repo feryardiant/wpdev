@@ -59,6 +59,10 @@ jobs:
         vendor/bin/wp option update permalink_structure '/%postname%/'
     - name: Build
       run: npx gulp build
+    - name: Show Entities
+      run: |
+        vendor/bin/wp option list
+        vendor/bin/wp config list
     - name: Tests
       env:
         WP_ENV: testing
