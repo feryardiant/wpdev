@@ -4610,5 +4610,6 @@
         "ext-gettext": "*",
         "ext-imagick": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "version": "0.2.1"
 }

@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/feryardiant/wpdev/compare/v0.2.0...v0.2.1) (2019-10-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* **test:** wdio.config.js file moved to tests directory, because why not? 😆
+
+Signed-off-by: Fery Wardiyanto <ferywardiyanto@gmail.com>
+
+### Bug Fixes
+
+* **build:** fixes [#18](https://github.com/feryardiant/wpdev/issues/18) ([4209078](https://github.com/feryardiant/wpdev/commit/4209078))
+* **theme:** fix admin_enqueue scripts ([de08be4](https://github.com/feryardiant/wpdev/commit/de08be4))
+* **theme:** fix script_enqueue on customizer screen ([e198d89](https://github.com/feryardiant/wpdev/commit/e198d89))
+
+
+### Features
+
+* **test:** ability to start php server before e2e test ([e4e9d60](https://github.com/feryardiant/wpdev/commit/e4e9d60))
+* **tests:** init unit testing ([ea25bda](https://github.com/feryardiant/wpdev/commit/ea25bda)), closes [#19](https://github.com/feryardiant/wpdev/issues/19)
+
 ## [0.2.0](https://github.com/feryardiant/wpdev/compare/v0.1.3...v0.2.0) (2019-10-04)
 
 
