@@ -75,7 +75,7 @@ const scandir = exports.scandir = (dir, dest) => {
   const ignoreFiles = readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/)
 
   return readdirSync(dir, readdirOpt).reduce((types, type) => {
-    if (!['plugins', 'themes'].includes(type.name) && !type.isDirectory()) return types
+    if (!['plugins', 'themes'].includes(type.name)) return types
 
     const sourceDir = readdirSync(path.join(dir, type.name), readdirOpt).reduce((sources, source) => {
       if (!source.isDirectory()) return sources
