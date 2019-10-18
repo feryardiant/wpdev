@@ -7,9 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-* **test:** wdio.config.js file moved to tests directory, because why not? 😆
-
-Signed-off-by: Fery Wardiyanto <ferywardiyanto@gmail.com>
+* **tests:** wdio.config.js file moved to tests directory, because why not? 😆
 
 ### Bug Fixes
 
@@ -20,7 +18,7 @@ Signed-off-by: Fery Wardiyanto <ferywardiyanto@gmail.com>
 
 ### Features
 
-* **test:** ability to start php server before e2e test ([e4e9d60](https://github.com/feryardiant/wpdev/commit/e4e9d60))
+* **tests:** ability to start php server before e2e test ([e4e9d60](https://github.com/feryardiant/wpdev/commit/e4e9d60))
 * **tests:** init unit testing ([ea25bda](https://github.com/feryardiant/wpdev/commit/ea25bda)), closes [#19](https://github.com/feryardiant/wpdev/issues/19)
 
 ## [0.2.0](https://github.com/feryardiant/wpdev/compare/v0.1.3...v0.2.0) (2019-10-04)
