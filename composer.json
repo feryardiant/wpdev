@@ -26,21 +26,17 @@
   },
   "scripts": {
     "post-root-package-install": [
-      "php -r \"copy('.env.example', '.env');\""
+      "@php -r \"copy('.env.example', '.env');\"",
+      "@php -r \"copy('wp-cli.yml', 'wp-cli.local.yml');\""
+    ],
+    "post-create-project-cmd": [
+      "vendor/bin/wp dotenv salts generate"
     ],
     "lint": [
       "vendor/bin/phpcs --standard=source/phpcs.xml source"
     ],
     "test": [
       "vendor/bin/phpunit -c tests/phpunit.xml"
-    ],
-    "wp:install": [
-      "vendor/bin/wp core install --title='WordPress Site' --admin_user=admin --admin_password=secret --admin_email=admin@blank.wp --skip-email",
-      "vendor/bin/wp option update permalink_structure '/%postname%/'"
-    ],
-    "wp:reset": [
-      "vendor/bin/wp db reset --yes",
-      "@wp:install"
     ]
   },
   "repositories": {
@@ -48,12 +44,13 @@
       "type": "composer",
       "url": "https://wpackagist.org"
     },
-    "blanktheme": {
+    "theme": {
       "type": "path",
-      "url": "source/themes/blank",
-      "options": {
-        "symlink": true
-      }
+      "url": "source/themes/blank"
+    },
+    "plugin": {
+      "type": "path",
+      "url": "source/plugins/blank-companion"
     }
   },
   "autoload-dev": {
@@ -67,7 +64,6 @@
     "ext-exif": "*",
     "ext-gd": "*",
     "ext-gettext": "*",
-    "ext-imagick": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "wpdev/blank": "*",

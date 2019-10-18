@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07b2c365c82dce56531404097619d779",
+    "content-hash": "a1db26e827a295f33f59dfd29ff0143c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2054,11 +2054,11 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "source/themes/blank",
-                "reference": "8671c2d40c65507185e972ecf7e8d4c1328478e0"
+                "reference": "a575c4ab4faa8c1f0d1a3a391f77efac2b062459"
             },
             "require": {
                 "php": ">=7.1"
@@ -2073,10 +2073,7 @@
                     "email": "ferywardiyanto@gmail.com"
                 }
             ],
-            "description": "Blank WordPress Theme for Development",
-            "transport-options": {
-                "symlink": true
-            }
+            "description": "Blank WordPress Theme for Development"
         }
     ],
     "packages-dev": [
@@ -4606,8 +4603,7 @@
         "ext-bcmath": "*",
         "ext-exif": "*",
         "ext-gd": "*",
-        "ext-gettext": "*",
-        "ext-imagick": "*"
+        "ext-gettext": "*"
     },
     "platform-dev": []
 }
