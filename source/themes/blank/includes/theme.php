@@ -2,9 +2,8 @@
 /**
  * Blank Theme.
  *
- * @package    WP Theme Dev
- * @subpackage Blank Theme
- * @since      0.2.0
+ * @package  Blank
+ * @since    0.2.0
  */
 
 namespace Blank;
@@ -350,37 +349,6 @@ final class Theme {
 				'gallery',
 				'caption',
 				'widgets',
-			] )
-		);
-
-		/**
-		 * Setup the WordPress core custom background feature.
-		 *
-		 * @see https://codex.wordpress.org/Custom_Backgrounds
-		 */
-		add_theme_support(
-			'custom-background',
-			apply_filters( 'blank_support_custom_background_args', [
-				'default-color' => apply_filters( 'blank_support_default_background_color', 'ffffff' ),
-				'default-image' => '',
-			] )
-		);
-
-		/**
-		 * Setup the WordPress core custom header feature.
-		 *
-		 * @link https://codex.wordpress.org/Custom_Headers
-		 */
-		add_theme_support(
-			'custom-header',
-			apply_filters( 'blank_support_custom_header_args', [
-				'default-image'     => '',
-				'header-text'       => false,
-				'width'             => 1950,
-				'height'            => 500,
-				'flex-width'        => true,
-				'flex-height'       => true,
-				'wp-head-callback'  => [ $this->asset, 'custom_header' ],
 			] )
 		);
 	}

@@ -4,9 +4,8 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package    WP Theme Dev
- * @subpackage Blank Theme
- * @since      0.2.0
+ * @package  Blank
+ * @since    0.2.0
  */
 
 do_action( 'blank_before_content', [ 'site-main' ] );

@@ -4,9 +4,8 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package    WP Theme Dev
- * @subpackage Blank Theme
- * @since      0.1.0
+ * @package  Blank
+ * @since    0.1.0
  */
 
 /**

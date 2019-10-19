@@ -4,9 +4,8 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package    WP Theme Dev
- * @subpackage Blank Theme
- * @since      0.2.0
+ * @package  Blank
+ * @since    0.2.0
  */
 
 ?><form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">

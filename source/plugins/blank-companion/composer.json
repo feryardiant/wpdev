@@ -1,7 +1,7 @@
 {
   "name": "wpdev/blank-companion",
   "version": "0.2.1",
-  "description": "A WordPress Plugin that actually doing nothing",
+  "description": "A Companion plugin for Blank",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "authors": [

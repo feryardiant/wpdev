@@ -4,9 +4,8 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package    WP Theme Dev
- * @subpackage Blank Theme
- * @since      0.2.0
+ * @package  Blank
+ * @since    0.2.0
  */
 
 namespace Blank;
