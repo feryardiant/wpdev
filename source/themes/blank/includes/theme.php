@@ -81,20 +81,20 @@ final class Theme {
 				'siteurl'    => get_option( 'siteurl' ),
 				'name'       => $theme->name,
 				'slug'       => $theme->template,
-				'child_slug' => get_option( 'stylesheet' ),
-				'theme_uri'  => $theme->get( 'ThemeURI' ),
 				'version'    => $theme->version,
 				'author'     => $theme->get( 'Author' ),
 				'author_uri' => $theme->get( 'AuthorURI' ),
-				'parent_dir' => trailingslashit( get_template_directory() ),
-				'child_dir'  => trailingslashit( get_stylesheet_directory() ),
-				'parent_uri' => trailingslashit( get_template_directory_uri() ),
-				'child_uri'  => trailingslashit( get_stylesheet_directory_uri() ),
+				'theme_uri'  => $theme->get( 'ThemeURI' ),
 			];
 
 			self::$cached->theme_info = $theme_info;
 			set_transient( $transient_name, $theme_info );
 		}
+
+		self::$cached->theme_info['parent_dir'] = trailingslashit( get_template_directory() );
+		self::$cached->theme_info['child_dir']  = trailingslashit( get_stylesheet_directory() );
+		self::$cached->theme_info['parent_uri'] = trailingslashit( get_template_directory_uri() );
+		self::$cached->theme_info['child_uri']  = trailingslashit( get_stylesheet_directory_uri() );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
@@ -130,7 +130,7 @@ final class Theme {
 	 * @return mixed
 	 */
 	public function admin_menu() {
-		$page = add_theme_page(
+		add_theme_page(
 			/* translators: %s: Theme name. */
 			sprintf( __( '%s Option Panel', 'blank' ), $this->name ),
 			__( 'Theme Option', 'blank' ),
@@ -140,27 +140,6 @@ final class Theme {
 				include_once $this->get_dir( 'templates/admin/options.php' );
 			}
 		);
-
-		add_action( 'load-' . $page, [ $this, 'admin_help_tabs' ] );
-	}
-
-	/**
-	 * Admin Help tab.
-	 *
-	 * @since 0.1.1
-	 * @return void
-	 */
-	public function admin_help_tabs() {
-		$screen = get_current_screen();
-
-		$screen->add_help_tab( [
-			'id'       => $this->slug . '-option-help-tab',
-			// translators: %s Theme name.
-			'title'    => sprintf( __( '%s helps', 'blank' ), $this->name ),
-			'callback' => function () {
-				include_once $this->get_dir( 'templates/admin/help_tab.php' );
-			},
-		] );
 	}
 
 	/**
@@ -179,17 +158,6 @@ final class Theme {
 		}
 
 		return self::$cached->transient_names[ $name ] ?? null;
-	}
-
-	/**
-	 * Get theme info.
-	 *
-	 * @since 0.1.0
-	 * @param  string $name
-	 * @return string|null
-	 */
-	public function info( string $name ) {
-		return self::$cached->theme_info[ $name ] ?? null;
 	}
 
 	/**

@@ -25,7 +25,7 @@ if ( ! function_exists( 'blank' ) ) {
 	function blank( $key = null ) {
 		global $blank_theme;
 
-		return $key ? $blank_theme->info( $key ) : $blank_theme;
+		return $key ? $blank_theme->$key : $blank_theme;
 	}
 }
 

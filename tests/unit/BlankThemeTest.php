@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Blank\Theme;
+use ReflectionClass;
 use WP_Mock as mock;
 
 class BlankThemeTest extends TestCase {
@@ -15,20 +16,16 @@ class BlankThemeTest extends TestCase {
         'version'    => '0.2.0',
         'author'     => 'Fery Wardiyanto',
         'author_uri' => 'http://example.com',
-        'parent_dir' => '',
-        'child_dir'  => '',
-        'parent_uri' => '',
-        'child_uri'  => '',
     ];
 
-    public function test_constructor() {
-        mock::userFunction('get_transient', [
-            'args'   => 'blank_theme_info',
-            'times'  => 1,
-            'return' => $this->transient,
-        ]);
+    protected function new_instance_without_constructor(string $class_name) {
+        $reflector = new ReflectionClass($class_name);
 
-        $theme = new Theme;
+        return $reflector->newInstanceWithoutConstructor();
+    }
+
+    public function test_constructor() {
+        $theme = $this->new_instance_without_constructor(Theme::class);
 
         $this->assertInstanceOf(Theme::class, $theme);
     }
