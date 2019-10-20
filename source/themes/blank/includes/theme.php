@@ -376,11 +376,14 @@ final class Theme {
 	 */
 	public function load_options( string $dirname = 'options' ) : void {
 		$options_dir = $this->get_dir( $dirname );
+		$options     = [];
 
 		if ( is_file( $options_dir ) ) {
-			$options_dir = require_once $options_dir;
+			$info    = pathinfo( $options_dir );
+			$options = [ $info['basename'] ];
+			$dirname = $info['dirname'];
 		} elseif ( is_dir( $options_dir ) ) {
-			$option_files = array_diff( scandir( $options_dir ), [ '.', '..' ] );
+			$options = array_diff( scandir( $options_dir ), [ '.', '..' ] );
 		}
 
 		self::$cached->options = [
@@ -390,7 +393,7 @@ final class Theme {
 			'values'   => [],
 		];
 
-		foreach ( $option_files as $file ) {
+		foreach ( $options as $file ) {
 			$info = pathinfo( $file );
 
 			if ( 'php' !== $info['extension'] ) {

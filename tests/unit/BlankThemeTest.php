@@ -124,7 +124,8 @@ class BlankThemeTest extends TestCase {
             'times'  => 9,
             'return' => [
                 'default' => null,
-                'layout_container' => '',
+                'title' => 'text',
+                'container' => '',
             ],
         ]);
 
@@ -156,7 +157,7 @@ class BlankThemeTest extends TestCase {
         $this->assertCount(1, $options['sections']);
         $this->assertCount(1, $options['settings']);
         $this->assertCount(1, $options['values']);
-        $this->assertEquals('', $options['values']['layout_container']);
+        $this->assertEquals('', $options['values']['container']);
             
         $theme->add_option('foo', [
             'title'    => 'Add one Panel',
@@ -195,7 +196,7 @@ class BlankThemeTest extends TestCase {
             'return' => [],
         ]);
 
-        $this->assertEquals('', $theme->get_option('layout_container'));
+        $this->assertEquals('', $theme->get_option('container'));
 
         $this->expectException(InvalidArgumentException::class);
 
@@ -250,14 +251,17 @@ class BlankThemeTest extends TestCase {
         $theme = $this->new_instance_without_constructor(Theme::class, function (ReflectionClass $theme) {
             $prop = $theme->getProperty('cached');
             $prop->setAccessible(true);
-            $prop->setValue($theme, (object) [
-                'info' => $this->transient,
+
+            $info = array_merge($this->transient, [
+                'parent_dir' => dirname(__DIR__).'/stubs',
             ]);
+
+            $prop->setValue($theme, (object) ['info' => $info]);
         });
 
         $theme->load_options();
 
-        $this->assertCount(0, $theme->options());
+        $this->assertCount(4, $theme->options());
     }
 }
 
