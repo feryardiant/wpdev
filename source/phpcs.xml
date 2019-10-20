@@ -147,6 +147,8 @@
 		<exclude name="PHPCompatibility.PHP.NewFunctions.array_replace_recursiveFound"/>
 
 		<exclude name="PHPCompatibility.PHP.NewInterfaces.jsonserializableFound"/>
+
+		<exclude name="PHPCompatibility.FunctionDeclarations.NewClosure.ThisFoundOutsideClass"/>
 	</rule>
 
 </ruleset>

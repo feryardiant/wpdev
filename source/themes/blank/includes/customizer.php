@@ -61,16 +61,21 @@ class Customizer extends Feature {
 			] );
 		}
 
+		$options  = $this->theme->options();
 		$callback = function () {
 			// .
 		};
 
-		foreach ( $this->theme->options() as $position => $values ) {
+		foreach ( $options as $position => $values ) {
+			if ( 'values' === $position ) {
+				continue;
+			}
+
 			if ( in_array( $position, [ 'panels', 'sections' ], true ) ) {
 				$method = 'panels' === $position ? 'add_panel' : 'add_section';
 
 				foreach ( $values as $key => $value ) {
-					if ( 'sections' === $position ) {
+					if ( 'sections' === $position && isset( $value['panel'] ) ) {
 						$value['panel'] = $this->add_prefix( $value['panel'] );
 					}
 
@@ -97,11 +102,11 @@ class Customizer extends Feature {
 						unset( $value['selector'], $value['render_callback'] );
 					}
 
-					if ( isset( $value['section'] ) && $this->theme->has_option( $value['section'], 'sections' ) ) {
+					if ( array_key_exists( $value['section'], $options['sections'] ) ) {
 						$value['section'] = $this->add_prefix( $value['section'] );
 					}
 
-					if ( isset( $value['type'] ) && array_key_exists( $value['type'], $this->control_aliases ) ) {
+					if ( array_key_exists( $value['type'], $this->control_aliases ) ) {
 						$control_class = $this->control_aliases[ $value['type'] ];
 
 						$customizer->add_control(

@@ -77,7 +77,7 @@ class Template extends Feature {
 			'initial-scale' => '1',
 		];
 
-		if ( $this->theme->get_option( 'general_layout_enable_responsive' ) ) {
+		if ( $this->theme->get_option( 'enable_responsive' ) ) {
 			$viewport['width']         = 'device-width';
 			$viewport['maximum-scale'] = '2.0';
 		}

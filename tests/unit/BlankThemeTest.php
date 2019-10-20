@@ -244,6 +244,21 @@ class BlankThemeTest extends TestCase {
         $this->assertInstanceOf(Template::class, $theme->template);
         $this->assertInstanceOf(Widgets::class, $theme->widgets);
     }
+
+    public function test_load_options() {
+        /** @var Theme $theme */
+        $theme = $this->new_instance_without_constructor(Theme::class, function (ReflectionClass $theme) {
+            $prop = $theme->getProperty('cached');
+            $prop->setAccessible(true);
+            $prop->setValue($theme, (object) [
+                'info' => $this->transient,
+            ]);
+        });
+
+        $theme->load_options();
+
+        $this->assertCount(0, $theme->options());
+    }
 }
 
 class DummyFeature extends Feature {

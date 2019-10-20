@@ -355,7 +355,7 @@ final class Theme {
 	}
 
 	/**
-	 * Register default theme options.
+	 * Register theme options.
 	 *
 	 * @since 0.1.1
 	 * @param  array $options
@@ -364,6 +364,43 @@ final class Theme {
 	public function add_options( array $options = [] ) : void {
 		foreach ( $options as $name => $attributes ) {
 			$this->add_option( $name, $attributes );
+		}
+	}
+
+	/**
+	 * Load theme options from directory relative to theme dir.
+	 *
+	 * @since 0.2.1
+	 * @param  string $dirname
+	 * @return void
+	 */
+	public function load_options( string $dirname = 'options' ) : void {
+		$options_dir = $this->get_dir( $dirname );
+
+		if ( is_file( $options_dir ) ) {
+			$options_dir = require_once $options_dir;
+		} elseif ( is_dir( $options_dir ) ) {
+			$option_files = array_diff( scandir( $options_dir ), [ '.', '..' ] );
+		}
+
+		self::$cached->options = [
+			'panels'   => [],
+			'sections' => [],
+			'settings' => [],
+			'values'   => [],
+		];
+
+		foreach ( $option_files as $file ) {
+			$info = pathinfo( $file );
+
+			if ( 'php' !== $info['extension'] ) {
+				continue;
+			}
+
+			$this->add_option(
+				str_replace( '-', '_', $info['filename'] ),
+				require_once $this->get_dir( "{$dirname}/{$file}" )
+			);
 		}
 	}
 
@@ -381,9 +418,8 @@ final class Theme {
 		$type     = 'settings';
 		$children = [];
 		$defaults = [
-			'title'       => '',
-			'description' => '',
-			'priority'    => 25,
+			'title'    => null,
+			'priority' => 25,
 		];
 
 		if ( array_key_exists( 'sections', $attributes ) ) {
@@ -395,28 +431,34 @@ final class Theme {
 			$type     = 'sections';
 			$children = $attributes['settings'];
 			unset( $attributes['settings'] );
-			$defaults['panel'] = $parent;
-			$attributes        = wp_parse_args( $attributes, $defaults );
+
+			if ( $parent ) {
+				$defaults['panel'] = $parent;
+			}
+
+			$attributes = wp_parse_args( $attributes, $defaults );
 		} else {
-			$name       = $parent . '_' . $name;
 			$attributes = wp_parse_args( $attributes, [
-				'label'       => '',
-				'description' => '',
-				'default'     => null,
-				'section'     => $parent,
-				'type'        => 'text',
+				'label'   => '',
+				'default' => null,
+				'section' => $parent,
+				'type'    => 'text',
 			] );
 
 			self::$cached->options['values'][ $name ] = $attributes['default'];
 		}
-
-		self::$cached->options[ $type ][ $name ] = $attributes;
 
 		if ( ! empty( $children ) ) {
 			foreach ( $children as $key => $value ) {
 				$this->add_option( $key, $value, $name );
 			}
 		}
+
+		if ( 'settings' !== $type && null === $attributes['title'] ) {
+			return;
+		}
+
+		self::$cached->options[ $type ][ $name ] = $attributes;
 	}
 
 	/**
