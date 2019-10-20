@@ -6,28 +6,26 @@
  * @since    0.2.0
  */
 
-namespace Blank;
+// phpcs:disable
+$theme_dir = dirname( __DIR__ ) . '/';
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-$theme_file_path     = dirname( __DIR__ ) . '/';
-$composer_autoloader = $theme_file_path . 'vendor/autoload.php';
-
-if ( file_exists( $composer_autoloader ) ) {
+if ( file_exists( $composer_autoloader = $theme_dir . 'vendor/autoload.php' ) ) {
 	require_once $composer_autoloader;
 }
 
 unset( $composer_autoloader );
-// phpcs:enable
 
-spl_autoload_register( function ( $class_name ) use ( $theme_file_path ) {
-	if ( strpos( $class_name, __NAMESPACE__ ) !== 0 ) {
+spl_autoload_register( function ( $class ) use ( $theme_dir ) {
+	$namespace = 'Blank';
+
+	if ( strpos( $class, $namespace ) !== 0 ) {
 		return;
 	}
 
-	$path = $theme_file_path . strtolower( str_replace(
-		[ '\\', __NAMESPACE__, '_' ],
+	$path = $theme_dir . strtolower( str_replace(
+		[ '\\', $namespace, '_' ],
 		[ DIRECTORY_SEPARATOR, 'includes', '-' ],
-		$class_name
+		$class
 	) ) . '.php';
 
 	if ( file_exists( $path ) ) {
@@ -35,20 +33,20 @@ spl_autoload_register( function ( $class_name ) use ( $theme_file_path ) {
 	}
 } );
 
-$blank_files = new \RecursiveIteratorIterator(
+$files = new \RecursiveIteratorIterator(
 	new \RecursiveDirectoryIterator( __DIR__ )
 );
 
 /**
- * @var \SplFileInfo $blank_file
+ * @var \SplFileInfo $function
  */
-foreach ( $blank_files as $blank_file ) {
-	if ( substr( $blank_file->getFilename(), -14 ) === '-functions.php' ) {
-		require_once $blank_file->getPathname();
+foreach ( $files as $function ) {
+	if ( substr( $function->getFilename(), -14 ) === '-functions.php' ) {
+		require_once $function->getPathname();
 	}
 }
 
-unset( $blank_files, $blank_file );
+unset( $files, $function );
 
 if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) ) {
 	/**
@@ -59,19 +57,18 @@ if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_
 	 * @codeCoverageIgnore
 	 */
 	function dump( ...$args ) {
-		global $theme_file_path;
+		global $theme_dir;
 
 		ob_start();
 
 		array_map( function ( $arg ) {
-			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
 			var_dump( $arg );
 		}, $args );
 
-		$dump = \str_replace( $theme_file_path, '', ob_get_clean() );
+		$dump = \str_replace( $theme_dir, '', ob_get_clean() );
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $dump;
 		exit;
 	}
 }
+// phpcs:enable
