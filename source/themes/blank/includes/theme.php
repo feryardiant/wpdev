@@ -150,7 +150,7 @@ final class Theme {
 	 * @return mixed
 	 */
 	public function transient_name( string $name ) {
-		if ( ! property_exists( self::$cached, 'transient_name' ) ) {
+		if ( self::$cached && ! property_exists( self::$cached, 'transient_name' ) ) {
 			self::$cached->transient_names = preg_filter( '/^/', 'blank_', array_combine(
 				self::TRANSIENT_NAMES,
 				self::TRANSIENT_NAMES
@@ -178,7 +178,7 @@ final class Theme {
 	 * @return string|null
 	 */
 	public function get_template_filename() : ?string {
-		return $this->template->filename;
+		return $this->template ? $this->template->filename : null;
 	}
 
 	/**
@@ -189,7 +189,7 @@ final class Theme {
 	 * @return string|null
 	 */
 	public function get_template_basename() : ?string {
-		return $this->template->basename;
+		return $this->template ? $this->template->basename : null;
 	}
 
 	/**
@@ -425,7 +425,7 @@ final class Theme {
 	 * @return Feature|string|null
 	 */
 	public function __get( string $name ) {
-		if ( array_key_exists( $name, self::$cached->theme_info ) ) {
+		if ( self::$cached && array_key_exists( $name, self::$cached->theme_info ) ) {
 			return self::$cached->theme_info[ $name ];
 		}
 
