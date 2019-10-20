@@ -115,31 +115,34 @@ class BlankThemeTest extends TestCase {
         $theme = $this->new_instance_without_constructor(Theme::class, function (ReflectionClass $theme) {
             $prop = $theme->getProperty('cached');
             $prop->setAccessible(true);
-            $prop->setValue($theme, (object) []);
+            $prop->setValue($theme, (object) [
+                'info' => [ 'slug' => 'blank' ]
+            ]);
         });
 
         mock::userFunction('wp_parse_args', [
-            'times' => 8,
+            'times'  => 9,
+            'return' => [
+                'default' => null,
+                'layout_container' => '',
+            ],
         ]);
 
         $theme->add_option('general', [
-            'title'       => __( 'General Settings', 'blank' ),
-            'description' => __( 'Global theme customization value', 'blank' ),
-            'priority'    => 25,
-            'sections'    => [
+            'title'    => 'Panel with 1 section & 1 setting',
+            'sections' => [
                 'layout' => [
-                    'title'       => __( 'Layout', 'blank' ),
-                    'description' => __( 'Global layout for all pages', 'blank' ),
+                    'title'       => 'Layout',
                     'settings'    => [
                         'container' => [
-                            'label'   => __( 'Global Container', 'blank' ),
+                            'label'   => 'Global Container',
                             'type'    => 'radio',
                             'default' => '',
                             'choices' => [
-                                'wide'     => __( 'Wide', 'blank' ),
-                                'boxed'    => __( 'Boxed', 'blank' ),
-                                'fluid'    => __( 'Fluid', 'blank' ),
-                                'narrowed' => __( 'Narrowed', 'blank' ),
+                                'wide'     => 'Wide',
+                                'boxed'    => 'Boxed',
+                                'fluid'    => 'Fluid',
+                                'narrowed' => 'Narrowed',
                             ],
                         ],
                     ],
@@ -154,45 +157,49 @@ class BlankThemeTest extends TestCase {
         $this->assertCount(1, $options['settings']);
         $this->assertCount(1, $options['values']);
         $this->assertEquals('', $options['values']['layout_container']);
-
-        $theme->add_option('foobar', [
-            'title'       => __( 'Layout', 'blank' ),
-            'description' => __( 'Global layout for all pages', 'blank' ),
-            'panel'       => 'general',
-            'settings'    => [],
+            
+        $theme->add_option('foo', [
+            'title'    => 'Add one Panel',
+            'sections' => [],
         ]);
 
-        $this->assertCount(2, $theme->options('sections'));
+        $this->assertCount(2, $theme->options('panels'));
 
-        $theme->add_option('foobar', [
-            'title'       => __( 'Layout', 'blank' ),
-            'description' => __( 'Global layout for all pages', 'blank' ),
-            'section'     => 'general',
-            'settings'    => [],
+        $theme->add_option('bar', [
+            'title'    => 'Add one section',
+            'panel'    => 'general',
+            'settings' => [],
         ]);
 
-        $this->assertCount(2, $theme->options('sections'));
         $this->assertCount(2, $theme->options('sections'));
 
         $theme->add_options([
-            'foo_1' => [
-                'title'    => __( 'Header Setting', 'blank' ),
-                'priority' => 25,
+            '3rd_panel' => [
+                'title'    => 'Third Panel',
                 'sections' => [],
             ],
-            'foo_2' => [
-                'title'    => __( 'Content Setting', 'blank' ),
-                'priority' => 25,
+            '4th_panel' => [
+                'title'    => 'Fourth Panel',
                 'sections' => [],
             ],
-            'foo_3' => [
-                'title'    => __( 'Footer Setting', 'blank' ),
-                'priority' => 25,
+            '5th_panel' => [
+                'title'    => 'Fifth Panel',
                 'sections' => [],
             ],
         ]);
 
-        $this->assertCount(4, $theme->options('panels'));
+        $this->assertCount(5, $theme->options('panels'));
+
+        mock::userFunction('get_theme_mods', [
+            'times'  => 1,
+            'return' => [],
+        ]);
+
+        $this->assertEquals('', $theme->get_option('layout_container'));
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $theme->get_option('foo_bar');
     }
 
     public function test_theme_features() {

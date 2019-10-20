@@ -424,14 +424,24 @@ final class Theme {
 	 *
 	 * @since 0.2.1
 	 * @param  string $name
-	 * @param  mixed  $default
 	 * @return mixed
+	 * @throws \InvalidArgumentException If option $name undefined.
 	 */
-	public function get_option( $name, $default = null ) {
-		$theme_mods = get_theme_mods()[ $this->slug ] ?? [];
-		$theme_mods = wp_parse_args( $theme_mods, self::$cached->options['values'] );
+	public function get_option( $name ) {
+		static $options;
 
-		return $theme_mods[ $name ] ?? $default;
+		if ( ! $options ) {
+			$options = get_theme_mods()[ $this->slug ] ?? [];
+			$options = wp_parse_args( $options, $this->options( 'values' ) );
+		}
+
+		if ( ! array_key_exists( $name, $options ) ) {
+			throw new \InvalidArgumentException(
+				sprintf( 'Undefined option named "%s"', $name )
+			);
+		}
+
+		return $options[ $name ];
 	}
 
 	/**
@@ -443,7 +453,7 @@ final class Theme {
 	 * @return bool
 	 */
 	public function has_option( string $name, string $key = 'settings' ) : bool {
-		return array_key_exists( $name, $this->options( $key ) );
+		return array_key_exists( $name, $this->options( $key ) ?: [] );
 	}
 
 	/**
@@ -451,10 +461,14 @@ final class Theme {
 	 *
 	 * @since 0.2.1
 	 * @param  string $key
-	 * @return array
+	 * @return array|null
 	 */
-	public function options( ?string $key = null ) : array {
-		if ( $key && array_key_exists( $key, self::$cached->options ) ) {
+	public function options( ?string $key = null ) : ?array {
+		if ( $key ) {
+			if ( ! array_key_exists( $key, self::$cached->options ) ) {
+				return null;
+			}
+
 			return self::$cached->options[ $key ];
 		}
 
