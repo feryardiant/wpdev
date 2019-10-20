@@ -8,4 +8,10 @@
  * @since    0.2.0
  */
 
+get_header();
+
 get_template_part( 'templates/content', 'none' );
+
+get_sidebar();
+
+get_footer();
