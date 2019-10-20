@@ -14,15 +14,13 @@ do_action( 'blank_after_main' );
 ?>
 	</section> <!-- #site-content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer" role="contentinfo" itemtype="https://schema.org/WPFooter" itemscope>
 
-		<div class="container">
-			<?php do_action( 'blank_footer' ); ?>
-		</div>
+		<?php blank( 'template' )->footer(); ?>
 
 	</footer> <!-- #site-footer -->
 
-<?php wp_footer(); ?>
+	<?php wp_footer(); ?>
 </body>
 
 </html>

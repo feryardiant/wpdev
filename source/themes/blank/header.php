@@ -23,33 +23,25 @@
 <body <?php body_class(); ?>>
 	<?php do_action( 'blank_skip_link', 'site-content' ); ?>
 
-	<header id="site-header" role="banner" class="hero">
+	<header id="masthead" role="banner" class="site-header" itemtype="https://schema.org/WPHeader" itemscope>
 
-		<div class="hero-head">
-			<div class="container">
+		<div class="container">
 
-				<nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
-					<div class="navbar-brand"><?php the_custom_logo(); ?></div> <!-- .navbar-brand -->
+			<div class="site-identity" itemprop="headline" itemtype="http://schema.org/Organization">
+				<?php the_custom_logo(); ?>
+			</div> <!-- .navbar-brand -->
 
-					<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu-primary">
-						<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-					</a>
+			<nav class="site-navigation" role="navigation" aria-label="dropdown navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope aria-label="Site Navigation">
+				<button role="button" class="menu-toggle" aria-controls="menu-primary-menu" aria-label="menu" aria-expanded="false">
+					<span class="mobile-menu"></span>
+				</button> <!-- .menu-toggle -->
 
-					<div id="navbar-menu-primary" class="navbar-menu">
-						<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?>
-					</div>
-				</nav> <!-- .navbar -->
+				<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?> <!-- #primary-menu -->
+			</nav> <!-- .site-navigation -->
 
-			</div>
-		</div>
+		</div> <!-- .container -->
 
-		<div class="hero-body">
-			<div class="container">
-				<?php do_action( 'blank_hero_body' ); ?>
-			</div>
-		</div>
-		<?php get_header(); ?>
-	</header> <!-- #site-header -->
+	</header> <!-- #masthead -->
 
 	<section id="site-content" class="section content">
 
