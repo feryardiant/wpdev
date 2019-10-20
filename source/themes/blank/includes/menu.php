@@ -58,8 +58,6 @@ class Menu extends Feature {
 		$walker = new Walker\Nav_Menu();
 
 		$args['container']   = false;
-		$args['menu_id']     = false;
-		$args['menu_class']  = 'navbar-start';
 		$args['items_wrap']  = '<div id="%1$s" class="%2$s">%3$s</div>';
 		$args['after']       = '</div>';
 		$args['walker']      = $walker;
