@@ -8,9 +8,12 @@
  * @since    0.2.0
  */
 
+if ( ! is_active_sidebar( 'main-sidebar' ) ) {
+	return;
+}
 ?>
 <aside id="secondary" class="column is-one-third widget-area">
 
-	<?php Blank\Widgets::get_active( 'main-sidebar' ); ?>
+	<?php dynamic_sidebar( 'main-sidebar' ); ?>
 
 </aside> <!-- #secondary -->
