@@ -21,10 +21,7 @@ if ( post_password_required() ) {
 }
 ?><div id="comments" class="comments-area">
 
-	<?php
-	// You can start editing here -- including this comment!
-	if ( have_comments() ) :
-		?>
+	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php
 			$blank_comment_count = get_comments_number();
