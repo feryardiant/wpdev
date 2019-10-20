@@ -49,3 +49,29 @@ foreach ( $blank_files as $blank_file ) {
 }
 
 unset( $blank_files, $blank_file );
+
+if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) ) {
+	/**
+	 * Lil' helper to dump a value.
+	 *
+	 * @param  mixed ...$args
+	 * @return void
+	 * @codeCoverageIgnore
+	 */
+	function dump( ...$args ) {
+		global $theme_file_path;
+
+		ob_start();
+
+		array_map( function ( $arg ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
+			var_dump( $arg );
+		}, $args );
+
+		$dump = \str_replace( $theme_file_path, '', ob_get_clean() );
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $dump;
+		exit;
+	}
+}
