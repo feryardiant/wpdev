@@ -32,7 +32,8 @@ class Asset extends Feature {
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
 		add_action( 'login_head', [ $this, 'login_head' ] );
 
-		if ( ! $this->is_debug() ) {
+		// Prevent adding verion string while development.
+		if ( ! self::is_debug() ) {
 			$this->version = $this->theme->version;
 		}
 	}
@@ -234,39 +235,6 @@ class Asset extends Feature {
 	}
 
 	/**
-	 * Set up the WordPress core custom header feature.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
-	 *
-	 * @internal
-	 * @since 0.1.0
-	 * @return void
-	 */
-	public function custom_header() {
-		$header_text_color = get_header_textcolor();
-
-		/*
-		 * If no custom options for text are set, let's bail.
-		 * get_header_textcolor() options: Any hex value, 'blank' to hide text. Default: add_theme_support( 'custom-header' ).
-		 */
-		if ( get_theme_support( 'custom-header', 'default-text-color' ) === $header_text_color ) {
-			return;
-		}
-
-		$custom_header_style = [ '<style id="custom-header-style" type="text/css">' ];
-
-		if ( ! display_header_text() ) {
-			$custom_header_style[] = '.site-title, .site-description { position: absolute; clip: rect(1px, 1px, 1px, 1px); }';
-		} else {
-			$custom_header_style[] = '.site-title a, .site-description { color: #' . esc_attr( $header_text_color ) . '; }';
-		}
-
-		$custom_header_style[] = '</style>';
-
-		echo implode( '', $custom_header_style ); // phpcs:ignore WordPress.Security.EscapeOutput
-	}
-
-	/**
 	 * Register Google fonts.
 	 *
 	 * @since 0.1.0
@@ -298,20 +266,10 @@ class Asset extends Feature {
 		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
 			$extension = 'img';
 		} else {
-			$basename = $filename . ( $this->is_debug() ? ".$extension" : ".min.$extension" );
+			$basename = $filename . ( self::is_debug() ? ".$extension" : ".min.$extension" );
 		}
 
 		return $this->theme->get_uri( "assets/$extension/$basename" );
-	}
-
-	/**
-	 * Determine is it on script-debug mode.
-	 *
-	 * @since 0.1.1
-	 * @return bool
-	 */
-	protected function is_debug() : bool {
-		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 	}
 
 	/**
@@ -331,7 +289,7 @@ class Asset extends Feature {
 		}
 
 		$inline = [];
-		$eol    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? PHP_EOL : ' ';
+		$eol    = self::is_debug() ? PHP_EOL : ' ';
 
 		foreach ( $styles as $selector => $style ) {
 			$inline[] = $selector . ' {' . $eol;
@@ -344,5 +302,16 @@ class Asset extends Feature {
 		}
 
 		return $eol . implode( ' ', $inline );
+	}
+
+	/**
+	 * Determine is it on script-debug mode.
+	 *
+	 * @since 0.1.1
+	 * @return bool
+	 * @codeCoverageIgnore
+	 */
+	public static function is_debug() : bool {
+		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 	}
 }
