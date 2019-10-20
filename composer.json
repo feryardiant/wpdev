@@ -36,7 +36,7 @@
       "vendor/bin/phpcs --standard=source/phpcs.xml source"
     ],
     "test": [
-      "vendor/bin/phpunit -c tests/phpunit.xml"
+      "vendor/bin/phpunit -c tests/phpunit.xml --coverage-text"
     ]
   },
   "repositories": {

@@ -43,7 +43,7 @@ $blank_dummy_section = [
 	],
 ];
 
-$blank_theme->register_options( [
+$blank_theme->add_options( [
 	'show_tagline' => [
 		'label'   => __( 'Show Tagline.', 'blank' ),
 		'type'    => 'checkbox',

@@ -161,36 +161,36 @@ class Asset extends Feature {
 	protected function css_variables( Theme $theme ) {
 		return self::make_css( [
 			':root' => [
-				'--white-color'            => $theme->get_mod( 'custom_white_color', '#fff' ),
-				'--gray-color'             => $theme->get_mod( 'custom_gray_color', '#6c757d' ),
-				'--gray-dark-color'        => $theme->get_mod( 'custom_gray_dark_color', '#343a40' ),
-				'--primary-color'          => $theme->get_mod( 'custom_primary_color', '#007bff' ),
-				'--secondary-color'        => $theme->get_mod( 'custom_secondary_color', '#6c757d' ),
-				'--success-color'          => $theme->get_mod( 'custom_success_color', '#28a745' ),
-				'--info-color'             => $theme->get_mod( 'custom_info_color', '#17a2b8' ),
-				'--warning-color'          => $theme->get_mod( 'custom_warning_color', '#ffc107' ),
-				'--danger-color'           => $theme->get_mod( 'custom_danger_color', '#dc3545' ),
-				'--light-color'            => $theme->get_mod( 'custom_light_color', '#f8f9fa' ),
-				'--dark-color'             => $theme->get_mod( 'custom_dark_color', '#343a40' ),
+				'--white-color'            => $theme->get_option( 'custom_white_color', '#fff' ),
+				'--gray-color'             => $theme->get_option( 'custom_gray_color', '#6c757d' ),
+				'--gray-dark-color'        => $theme->get_option( 'custom_gray_dark_color', '#343a40' ),
+				'--primary-color'          => $theme->get_option( 'custom_primary_color', '#007bff' ),
+				'--secondary-color'        => $theme->get_option( 'custom_secondary_color', '#6c757d' ),
+				'--success-color'          => $theme->get_option( 'custom_success_color', '#28a745' ),
+				'--info-color'             => $theme->get_option( 'custom_info_color', '#17a2b8' ),
+				'--warning-color'          => $theme->get_option( 'custom_warning_color', '#ffc107' ),
+				'--danger-color'           => $theme->get_option( 'custom_danger_color', '#dc3545' ),
+				'--light-color'            => $theme->get_option( 'custom_light_color', '#f8f9fa' ),
+				'--dark-color'             => $theme->get_option( 'custom_dark_color', '#343a40' ),
 
 				'--breakpoint-xs'          => '0',
-				'--breakpoint-sm'          => $theme->get_mod( 'custom_breakpoint_sm', '576px' ),
-				'--breakpoint-md'          => $theme->get_mod( 'custom_breakpoint_md', '768px' ),
-				'--breakpoint-lg'          => $theme->get_mod( 'custom_breakpoint_lg', '992px' ),
-				'--breakpoint-xl'          => $theme->get_mod( 'custom_breakpoint_xl', '1200px' ),
+				'--breakpoint-sm'          => $theme->get_option( 'custom_breakpoint_sm', '576px' ),
+				'--breakpoint-md'          => $theme->get_option( 'custom_breakpoint_md', '768px' ),
+				'--breakpoint-lg'          => $theme->get_option( 'custom_breakpoint_lg', '992px' ),
+				'--breakpoint-xl'          => $theme->get_option( 'custom_breakpoint_xl', '1200px' ),
 
 				'--font-family-sans-serif' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 				'--font-family-monospace'  => 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 
-				'--link-color'             => $theme->get_mod( 'custom_link_color', '#007bff' ),
-				'--link-hover-color'       => $theme->get_mod( 'custom_link_hover_color', '#007bff' ),
-				'--link-active-color'      => $theme->get_mod( 'custom_link_active_color', '#007bff' ),
+				'--link-color'             => $theme->get_option( 'custom_link_color', '#007bff' ),
+				'--link-hover-color'       => $theme->get_option( 'custom_link_hover_color', '#007bff' ),
+				'--link-active-color'      => $theme->get_option( 'custom_link_active_color', '#007bff' ),
 
 				'--background-color'       => get_theme_mod( 'background_color', '#fff' ),
-				'--border-color'           => $theme->get_mod( 'custom_border_color', '#007bff' ),
-				'--text-color'             => $theme->get_mod( 'custom_text_color', '#343a40' ),
-				'--paragraph-color'        => $theme->get_mod( 'custom_paragraph_color', '#343a40' ),
-				'--heading-color'          => $theme->get_mod( 'custom_heading_color', '#343a40' ),
+				'--border-color'           => $theme->get_option( 'custom_border_color', '#007bff' ),
+				'--text-color'             => $theme->get_option( 'custom_text_color', '#343a40' ),
+				'--paragraph-color'        => $theme->get_option( 'custom_paragraph_color', '#343a40' ),
+				'--heading-color'          => $theme->get_option( 'custom_heading_color', '#343a40' ),
 			],
 		] );
 	}
@@ -201,7 +201,7 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function login_head() {
-		if ( ! $this->theme->get_mod( 'custom_login_logo' ) ) {
+		if ( ! $this->theme->get_option( 'custom_login_logo' ) ) {
 			return;
 		}
 

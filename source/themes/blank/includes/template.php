@@ -77,7 +77,7 @@ class Template extends Feature {
 			'initial-scale' => '1',
 		];
 
-		if ( $this->theme->option->get( 'general_layout_enable_responsive' ) ) {
+		if ( $this->theme->get_option( 'general_layout_enable_responsive' ) ) {
 			$viewport['width']         = 'device-width';
 			$viewport['maximum-scale'] = '2.0';
 		}
@@ -145,7 +145,7 @@ class Template extends Feature {
 
 		$output[] = '<h1 class="site-title">' . $site_name . '</h1>';
 
-		if ( $this->theme->option->get( 'show_tagline' ) ) {
+		if ( $this->theme->get_option( 'show_tagline' ) ) {
 			$output[] = '<p class="site-description">' . $site_desc . '</p>';
 		}
 

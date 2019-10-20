@@ -36,7 +36,7 @@ abstract class Feature {
 	 * @since 0.1.0
 	 * @param Theme $theme
 	 */
-	public function __construct( Theme $theme ) {
+	final public function __construct( Theme $theme ) {
 		$this->theme = $theme;
 
 		self::$instance = $this;
@@ -50,8 +50,9 @@ abstract class Feature {
 	 * @since 0.1.1
 	 * @param string $name
 	 * @param mixed  $value
+	 * @codeCoverageIgnore
 	 */
-	public function __set( $name, $value ) {
+	final public function __set( $name, $value ) {
 		// . doing nothing
 	}
 
@@ -60,6 +61,7 @@ abstract class Feature {
 	 *
 	 * @since 0.1.1
 	 * @return void
+	 * @codeCoverageIgnore
 	 */
 	abstract protected function initialize() : void;
 

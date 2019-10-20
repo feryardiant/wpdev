@@ -65,7 +65,7 @@ class Customizer extends Feature {
 			// .
 		};
 
-		foreach ( $this->theme->option->items() as $position => $values ) {
+		foreach ( $this->theme->options() as $position => $values ) {
 			if ( in_array( $position, [ 'panels', 'sections' ], true ) ) {
 				$method = 'panels' === $position ? 'add_panel' : 'add_section';
 
@@ -78,15 +78,18 @@ class Customizer extends Feature {
 				}
 			} else {
 				foreach ( $values as $key => $value ) {
-					$key = $this->add_prefix( $key );
-					$customizer->add_setting( $key, [
-						'default'   => $value['default'],
-						'transport' => 'postMessage',
-					] );
-
-					unset( $value['default'] );
-					$type     = $value['type'];
+					$key      = $this->add_prefix( $key );
 					$selector = null;
+					$settings = [
+						'transport' => 'postMessage',
+					];
+
+					if ( isset( $value['default'] ) ) {
+						$settings['default'] = $value['default'];
+						unset( $value['default'] );
+					}
+
+					$customizer->add_setting( $key, $settings );
 
 					if ( isset( $value['selector'] ) ) {
 						$selector = $value['selector'];
@@ -94,12 +97,12 @@ class Customizer extends Feature {
 						unset( $value['selector'], $value['render_callback'] );
 					}
 
-					if ( $this->theme->option->has_section( $value['section'] ) ) {
+					if ( isset( $value['section'] ) && $this->theme->has_option( $value['section'], 'sections' ) ) {
 						$value['section'] = $this->add_prefix( $value['section'] );
 					}
 
-					if ( array_key_exists( $type, $this->control_aliases ) ) {
-						$control_class = $this->control_aliases[ $type ];
+					if ( isset( $value['type'] ) && array_key_exists( $value['type'], $this->control_aliases ) ) {
+						$control_class = $this->control_aliases[ $value['type'] ];
 
 						$customizer->add_control(
 							new $control_class( $customizer, $key, $value )

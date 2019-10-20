@@ -29,7 +29,6 @@ namespace Blank;
  * @property-read Content $content
  * @property-read Customizer $customizer
  * @property-read Menu $menu
- * @property-read Option $option
  * @property-read Template $template
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
@@ -71,10 +70,10 @@ final class Theme {
 	public function __construct() {
 		self::$cached = (object) [];
 
-		$transient_name           = $this->transient_name( 'theme_info' );
-		self::$cached->theme_info = get_transient( $transient_name );
+		$transient_name     = $this->transient_name( 'theme_info' );
+		self::$cached->info = get_transient( $transient_name );
 
-		if ( empty( self::$cached->theme_info ) ) {
+		if ( empty( self::$cached->info ) ) {
 			/** @var WP_Theme $theme */
 			$theme      = wp_get_theme( get_template() );
 			$theme_info = [
@@ -87,14 +86,14 @@ final class Theme {
 				'theme_uri'  => $theme->get( 'ThemeURI' ),
 			];
 
-			self::$cached->theme_info = $theme_info;
+			self::$cached->info = $theme_info;
 			set_transient( $transient_name, $theme_info );
 		}
 
-		self::$cached->theme_info['parent_dir'] = trailingslashit( get_template_directory() );
-		self::$cached->theme_info['child_dir']  = trailingslashit( get_stylesheet_directory() );
-		self::$cached->theme_info['parent_uri'] = trailingslashit( get_template_directory_uri() );
-		self::$cached->theme_info['child_uri']  = trailingslashit( get_stylesheet_directory_uri() );
+		self::$cached->info['parent_dir'] = trailingslashit( get_template_directory() );
+		self::$cached->info['child_dir']  = trailingslashit( get_stylesheet_directory() );
+		self::$cached->info['parent_uri'] = trailingslashit( get_template_directory_uri() );
+		self::$cached->info['child_uri']  = trailingslashit( get_stylesheet_directory_uri() );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
@@ -105,12 +104,11 @@ final class Theme {
 
 		$this->initialize( [
 			Asset::class,
-			Template::class,
-			Customizer::class,
-			Content::class,
 			Comment::class,
+			Content::class,
+			Customizer::class,
 			Menu::class,
-			Option::class,
+			Template::class,
 			Widgets::class,
 		] );
 
@@ -128,6 +126,7 @@ final class Theme {
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_page/
 	 * @since 0.1.0
 	 * @return mixed
+	 * @codeCoverageIgnore
 	 */
 	public function admin_menu() {
 		add_theme_page(
@@ -244,6 +243,7 @@ final class Theme {
 	 * @internal
 	 * @since 0.1.0
 	 * @return void
+	 * @codeCoverageIgnore
 	 */
 	public function setup() : void {
 		/**
@@ -336,31 +336,6 @@ final class Theme {
 	}
 
 	/**
-	 * Register default theme options.
-	 *
-	 * @since 0.1.1
-	 * @param  array $options
-	 * @return void
-	 */
-	public function register_options( array $options = [] ) : void {
-		foreach ( $options as $name => $attributes ) {
-			$this->option->add( $name, $attributes );
-		}
-	}
-
-	/**
-	 * Get Theme Modification value.
-	 *
-	 * @since 0.1.1
-	 * @param  string $name
-	 * @param  mixed  $default
-	 * @return mixed
-	 */
-	public function get_mod( $name, $default = null ) {
-		return $this->option->get( $name, $default );
-	}
-
-	/**
 	 * Class initializer.
 	 *
 	 * @since 0.1.1
@@ -377,6 +352,113 @@ final class Theme {
 
 			$this->$name = $class;
 		}
+	}
+
+	/**
+	 * Register default theme options.
+	 *
+	 * @since 0.1.1
+	 * @param  array $options
+	 * @return void
+	 */
+	public function add_options( array $options = [] ) : void {
+		foreach ( $options as $name => $attributes ) {
+			$this->add_option( $name, $attributes );
+		}
+	}
+
+	/**
+	 * Add theme option.
+	 *
+	 * @since 0.2.1
+	 * @internal
+	 * @param string $name
+	 * @param array  $attributes
+	 * @param string $parent
+	 * @return void
+	 */
+	public function add_option( string $name, array $attributes = [], string $parent = null ) : void {
+		$type     = 'settings';
+		$children = [];
+		$defaults = [
+			'title'       => '',
+			'description' => '',
+			'priority'    => 25,
+		];
+
+		if ( array_key_exists( 'sections', $attributes ) ) {
+			$type     = 'panels';
+			$children = $attributes['sections'];
+			unset( $attributes['sections'] );
+			$attributes = wp_parse_args( $attributes, $defaults );
+		} elseif ( array_key_exists( 'settings', $attributes ) ) {
+			$type     = 'sections';
+			$children = $attributes['settings'];
+			unset( $attributes['settings'] );
+			$defaults['panel'] = $parent;
+			$attributes        = wp_parse_args( $attributes, $defaults );
+		} else {
+			$name       = $parent . '_' . $name;
+			$attributes = wp_parse_args( $attributes, [
+				'label'       => '',
+				'description' => '',
+				'default'     => null,
+				'section'     => $parent,
+				'type'        => 'text',
+			] );
+
+			self::$cached->options['values'][ $name ] = $attributes['default'];
+		}
+
+		self::$cached->options[ $type ][ $name ] = $attributes;
+
+		if ( ! empty( $children ) ) {
+			foreach ( $children as $key => $value ) {
+				$this->add_option( $key, $value, $name );
+			}
+		}
+	}
+
+	/**
+	 * Get Theme Modification value.
+	 *
+	 * @since 0.2.1
+	 * @param  string $name
+	 * @param  mixed  $default
+	 * @return mixed
+	 */
+	public function get_option( $name, $default = null ) {
+		$theme_mods = get_theme_mods()[ $this->slug ] ?? [];
+		$theme_mods = wp_parse_args( $theme_mods, self::$cached->options['values'] );
+
+		return $theme_mods[ $name ] ?? $default;
+	}
+
+	/**
+	 * Determine is section exists.
+	 *
+	 * @since 0.2.1
+	 * @param string $name
+	 * @param string $key
+	 * @return bool
+	 */
+	public function has_option( string $name, string $key = 'settings' ) : bool {
+		return array_key_exists( $name, $this->options( $key ) );
+	}
+
+	/**
+	 * Retrieve all options.
+	 *
+	 * @since 0.2.1
+	 * @param  string $key
+	 * @return array
+	 */
+	public function options( ?string $key = null ) : array {
+		if ( $key && array_key_exists( $key, self::$cached->options ) ) {
+			return self::$cached->options[ $key ];
+		}
+
+		return self::$cached->options;
 	}
 
 	/**
@@ -425,8 +507,8 @@ final class Theme {
 	 * @return Feature|string|null
 	 */
 	public function __get( string $name ) {
-		if ( self::$cached && array_key_exists( $name, self::$cached->theme_info ) ) {
-			return self::$cached->theme_info[ $name ];
+		if ( self::$cached && array_key_exists( $name, self::$cached->info ) ) {
+			return self::$cached->info[ $name ];
 		}
 
 		if ( array_key_exists( $name, $this->instances ) ) {
