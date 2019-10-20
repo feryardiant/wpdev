@@ -17,23 +17,23 @@ use ReflectionClass;
 use RuntimeException;
 use WP_Mock as mock;
 
-class BlankThemeTest extends TestCase {
+class ThemeTest extends TestCase {
     protected $transient = [
         'siteurl'    => 'http://localhost',
-        'name'       => 'Blank',
-        'slug'       => 'blank',
-        'child_slug' => 'blank',
+        'name'       => 'ThemeName',
+        'slug'       => 'slug',
+        'child_slug' => 'slug',
         'theme_uri'  => 'http://example.com',
         'version'    => '0.2.0',
-        'author'     => 'Fery Wardiyanto',
+        'author'     => 'John Doe',
         'author_uri' => 'http://example.com',
     ];
 
     protected function new_instance_without_constructor(string $class_name, Closure $callback = null) {
         $reflector = new ReflectionClass($class_name);
 
-        $this->transient['parent_dir'] = BASE_PATH . '/source/themes/blank';
-        $this->transient['parent_uri'] = $this->transient['siteurl'] . '/wp-content/themes/blank';
+        $this->transient['parent_dir'] = STUBS_PATH;
+        $this->transient['parent_uri'] = $this->transient['siteurl'] . '/wp-content/themes/slug';
         $this->transient['child_dir']  = $this->transient['parent_dir'];
         $this->transient['child_uri']  = $this->transient['parent_uri'];
 
@@ -77,7 +77,7 @@ class BlankThemeTest extends TestCase {
                 'info' => $this->transient,
             ]);
         });
-        
+
         $this->assertNull($theme->dummy);
 
         $theme->dummy = DummyFeature::class;
@@ -158,7 +158,7 @@ class BlankThemeTest extends TestCase {
         $this->assertCount(1, $options['settings']);
         $this->assertCount(1, $options['values']);
         $this->assertEquals('', $options['values']['container']);
-            
+
         $theme->add_option('foo', [
             'title'    => 'Add one Panel',
             'sections' => [],
@@ -205,7 +205,6 @@ class BlankThemeTest extends TestCase {
 
     public function test_theme_features() {
         mock::userFunction('get_transient', [
-            'args' => 'blank_theme_info',
             'times' => 1,
             'return' => $this->transient,
         ]);
@@ -217,12 +216,12 @@ class BlankThemeTest extends TestCase {
 
         mock::userFunction('get_template_directory', [
             'times' => 1,
-            'return' => $dir = BASE_PATH . '/source/themes/blank',
+            'return' => $dir = STUBS_PATH,
         ]);
 
         mock::userFunction('get_stylesheet_directory', [
             'times' => 1,
-            'return' => $uri = $this->transient['siteurl'] . '/wp-content/themes/blank',
+            'return' => $uri = $this->transient['siteurl'] . '/wp-content/themes/slug',
         ]);
 
         mock::userFunction('get_template_directory_uri', [
