@@ -8,9 +8,7 @@
   "authors": [
     {
       "name": "Fery Wardiyanto",
-      "email": "ferywardiyanto@gmail.com",
-      "homepage": "https://feryardiant.github.io/",
-      "role": "Maintainer"
+      "email": "ferywardiyanto@gmail.com"
     }
   ],
   "keywords": [
@@ -66,7 +64,6 @@
     "ext-gettext": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
-    "wpdev/blank": "*",
     "oscarotero/env": "^1.2",
     "predis/predis": "^1.1",
     "roots/wordpress": "^5.2",
@@ -80,10 +77,11 @@
     "wp-cli/db-command": "^2.0",
     "wp-cli/entity-command": "^2.0",
     "wp-cli/wp-cli": "^2.3",
-    "wpackagist-plugin/akismet": "^4.1",
     "wpackagist-plugin/redis-cache": "^1.4",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-    "wpackagist-plugin/wordpress-importer": "^0.6.4"
+    "wpackagist-plugin/wordpress-importer": "^0.6.4",
+    "wpdev/blank": "*",
+    "wpdev/blank-companion": "*"
   },
   "require-dev": {
     "10up/wp_mock": "^0.4.2",
@@ -103,12 +101,12 @@
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
-        "wpackagist-plugin/akismet",
         "wpackagist-plugin/debug-bar",
         "wpackagist-plugin/redis-cache",
         "wpackagist-plugin/theme-check",
         "wpackagist-plugin/regenerate-thumbnails",
         "wpackagist-plugin/wordpress-importer",
+        "wpdev/blank-companion",
         "type:wordpress-muplugin"
       ],
       "public/app/plugins/{$name}/": [
@@ -116,11 +114,6 @@
       ],
       "public/app/themes/{$name}/": [
         "type:wordpress-theme"
-      ]
-    },
-    "dropin-paths": {
-      "public/app": [
-        "package:wpackagist-plugin/redis-cache:includes/object-cache.php"
       ]
     },
     "wordpress-install-dir": "public/wp"
