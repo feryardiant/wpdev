@@ -125,9 +125,28 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		return $output;
 	}
 
-	$attr = array_map( function ( $a ) {
+	echo wp_kses( $output, [ $tag => get_allowed_attr( $tag, $attr ) ] );
+}
+
+/**
+ * Retrieve allowed HTML attribute for given tag.
+ *
+ * @param  string $tag
+ * @param  array  $attr
+ * @return array
+ */
+function get_allowed_attr( $tag, array $attr = [] ) : array {
+	static $allowed_kses;
+
+	if ( ! $allowed_kses ) {
+		$allowed_kses = wp_kses_allowed_html( 'post' );
+	}
+
+	if ( array_key_exists( $tag, $allowed_kses ) ) {
+		return $allowed_kses[ $tag ];
+	}
+
+	return array_map( function () {
 		return 1;
 	}, array_flip( array_keys( $attr ) ) );
-
-	echo wp_kses( $output, [ $tag => $attr ] );
 }
