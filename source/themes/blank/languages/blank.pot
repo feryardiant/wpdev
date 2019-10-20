@@ -1,8 +1,8 @@
-# Copyright (C) 2019 blank v0.2.0
-# This file is distributed under the same license as the blank v0.2.0 package.
+# Copyright (C) 2019 blank v0.2.1
+# This file is distributed under the same license as the blank v0.2.1 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: blank v0.2.0\n"
+"Project-Id-Version: blank v0.2.1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,137 +16,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. translators: 1: title.
-#: comments.php:35
+#: comments.php:31
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
-#: comments.php:41
+#: comments.php:37
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:66
+#: comments.php:62
 msgid "Comments are closed."
-msgstr ""
-
-#: functions.php:35
-msgid "Dummy"
-msgstr ""
-
-#: functions.php:36
-msgid "There's nothing to find here"
-msgstr ""
-
-#: functions.php:39
-msgid "Lorem Ipsum"
-msgstr ""
-
-#: functions.php:49
-msgid "Show Tagline."
-msgstr ""
-
-#: functions.php:55
-msgid "Choose the option that you want."
-msgstr ""
-
-#: functions.php:60
-msgid "Logo Image Only"
-msgstr ""
-
-#: functions.php:61
-msgid "Logo Text Only"
-msgstr ""
-
-#: functions.php:62
-msgid "Show Both"
-msgstr ""
-
-#: functions.php:63
-msgid "Disable"
-msgstr ""
-
-#: functions.php:67
-msgid "Link Color"
-msgstr ""
-
-#: functions.php:73
-msgid "Link Active Color"
-msgstr ""
-
-#: functions.php:79
-msgid "Link Hover Color"
-msgstr ""
-
-#: functions.php:85
-msgid "Text Color"
-msgstr ""
-
-#: functions.php:91
-msgid "Paragraph Color"
-msgstr ""
-
-#: functions.php:97
-msgid "Heading Color"
-msgstr ""
-
-#: functions.php:103
-msgid "General Settings"
-msgstr ""
-
-#: functions.php:104
-msgid "Global theme customization value"
-msgstr ""
-
-#: functions.php:108
-msgid "Layout"
-msgstr ""
-
-#: functions.php:109
-msgid "Global layout for all pages"
-msgstr ""
-
-#: functions.php:112
-msgid "Global Container"
-msgstr ""
-
-#: functions.php:116
-msgid "Wide"
-msgstr ""
-
-#: functions.php:117
-msgid "Boxed"
-msgstr ""
-
-#: functions.php:118
-msgid "Fluid"
-msgstr ""
-
-#: functions.php:119
-msgid "Narrowed"
-msgstr ""
-
-#: functions.php:123
-msgid "Enable responsive"
-msgstr ""
-
-#: functions.php:132
-msgid "Header Setting"
-msgstr ""
-
-#: functions.php:137
-msgid "Content Setting"
-msgstr ""
-
-#: functions.php:142
-msgid "Footer Setting"
-msgstr ""
-
-#: searchform.php:20
-msgctxt "search button"
-msgid "Search"
 msgstr ""
 
 #: includes/asset.php:121
@@ -169,131 +52,77 @@ msgstr ""
 msgid "Huge"
 msgstr ""
 
-#: includes/comment.php:45
+#: includes/comment.php:44
 msgid "Name"
 msgstr ""
 
-#: includes/comment.php:53
+#: includes/comment.php:52
 msgid "Email"
 msgstr ""
 
-#: includes/comment.php:61
+#: includes/comment.php:60
 msgid "Website"
 msgstr ""
 
-#: includes/comment.php:71
+#: includes/comment.php:70
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr ""
 
-#: includes/comment.php:95
+#: includes/comment.php:94
 msgid "Comment"
 msgstr ""
 
 #. translators: %s: login URL
-#: includes/comment.php:105
+#: includes/comment.php:104
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4: logout URL
-#: includes/comment.php:115
+#: includes/comment.php:114
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr ""
 
 #. translators: %s: user name
-#: includes/comment.php:118
+#: includes/comment.php:117
 msgid "Logged in as %s. Edit your profile."
 msgstr ""
 
-#: includes/comment.php:130
+#: includes/comment.php:129
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:63
+#: includes/content.php:62
 msgid "Post"
 msgstr ""
 
-#: includes/menu.php:44
+#: includes/menu.php:43
 msgid "Primary Menu"
 msgstr ""
 
-#: includes/menu.php:45
+#: includes/menu.php:44
 msgid "Footer Menu"
 msgstr ""
 
-#. translators: %s: post date.
-#: includes/template-tags-functions.php:32
-msgctxt "post date"
-msgid "Posted on %s"
-msgstr ""
-
-#. translators: %s: post author.
-#: includes/template-tags-functions.php:46
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/template-tags-functions.php:61
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of categories.
-#: includes/template-tags-functions.php:65
-msgid "Posted in %1$s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/template-tags-functions.php:71
-msgctxt "list item separator"
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of tags.
-#: includes/template-tags-functions.php:75
-msgid "Tagged %1$s"
-msgstr ""
-
-#. translators: %s: post title
-#: includes/template-tags-functions.php:87
-msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
-msgstr ""
-
-#. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#: includes/template-tags-functions.php:104, templates/content-page.php:33, templates/content.php:55
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
-
-#: includes/template.php:244
+#: includes/template.php:276
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:260, templates/content-none.php:14
+#: includes/template.php:292, templates/content-none.php:13
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:265
+#: includes/template.php:297
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:269
+#: includes/template.php:301
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: includes/template.php:428
-msgid "https://wordpress.org/"
-msgstr ""
-
-#. translators: %s: Credit to WordPress.
-#: includes/template.php:430
-msgid "Proudly powered by %s"
-msgstr ""
-
-#. translators: %1$s: Theme Name, %2$s: Theme Author.
-#: includes/template.php:436
-msgid "%1$s by %2$s."
+#. translators: %s: Current Year and Site Title.
+#: includes/template.php:463
+msgid "Copyright &copy; %s."
 msgstr ""
 
 #. translators: %s: Theme name.
@@ -305,42 +134,204 @@ msgstr ""
 msgid "Theme Option"
 msgstr ""
 
-#. translators: %s Theme name.
-#: includes/theme.php:160
-msgid "%s helps"
-msgstr ""
-
-#: includes/widgets.php:38
+#: includes/widgets.php:37
 msgid "Main Sidebar"
 msgstr ""
 
-#: includes/widgets.php:40
+#: includes/widgets.php:39
 msgid "Main sidebar that placed on the side of your page."
 msgstr ""
 
-#: includes/widgets.php:48
+#: includes/widgets.php:47
 msgid "Footer Widgets"
 msgstr ""
 
-#: includes/widgets.php:50
+#: includes/widgets.php:49
 msgid "Footer widget that placed on the bottom of your page."
 msgstr ""
 
-#: templates/content-none.php:23
+#: options/general.php:10
+msgid "General"
+msgstr ""
+
+#: options/general.php:11
+msgid "Global theme customization value"
+msgstr ""
+
+#: options/general.php:15
+msgid "Site Layout"
+msgstr ""
+
+#: options/general.php:18
+msgid "Background Color"
+msgstr ""
+
+#: options/general.php:23
+msgid "Maximum Site Width"
+msgstr ""
+
+#: options/general.php:28
+msgid "Enable responsive"
+msgstr ""
+
+#: options/general.php:35
+msgid "Colors"
+msgstr ""
+
+#: options/general.php:38
+msgid "Primary Color"
+msgstr ""
+
+#: options/general.php:43
+msgid "Secondary Color"
+msgstr ""
+
+#: options/general.php:48
+msgid "Info Color"
+msgstr ""
+
+#: options/general.php:53
+msgid "Success Color"
+msgstr ""
+
+#: options/general.php:58
+msgid "Warning Color"
+msgstr ""
+
+#: options/general.php:63
+msgid "Danger Color"
+msgstr ""
+
+#: options/general.php:68
+msgid "Light Color"
+msgstr ""
+
+#: options/general.php:73
+msgid "Dark Color"
+msgstr ""
+
+#: options/title-tagline.php:12
+msgid "Different Logo for Mobile Devices?"
+msgstr ""
+
+#: options/title-tagline.php:18
+msgid "Mobile Logo"
+msgstr ""
+
+#: options/title-tagline.php:28
+msgid "Display Site Title"
+msgstr ""
+
+#: options/title-tagline.php:33
+msgid "Site Title Font Family"
+msgstr ""
+
+#: options/title-tagline.php:41
+msgid "Site Title Font Size"
+msgstr ""
+
+#: options/title-tagline.php:50
+msgid "Inline Logo & Site Title"
+msgstr ""
+
+#: options/title-tagline.php:59
+msgid "Display Tagline"
+msgstr ""
+
+#: options/title-tagline.php:64
+msgid "Tagline Font Family"
+msgstr ""
+
+#: options/title-tagline.php:72
+msgid "Tagline Font Size"
+msgstr ""
+
+#: options/typography.php:10
+msgid "Typography"
+msgstr ""
+
+#: options/typography.php:11
+msgid "Global Typography Settings"
+msgstr ""
+
+#: options/typography.php:14
+msgid "Base Font Family"
+msgstr ""
+
+#: options/typography.php:19
+msgid "Base Font Color"
+msgstr ""
+
+#: options/typography.php:25
+msgid "Base Link Color"
+msgstr ""
+
+#: options/typography.php:30
+msgid "Base Link Hover Color"
+msgstr ""
+
+#: options/typography.php:36
+msgid "Heading Font Family"
+msgstr ""
+
+#: options/typography.php:41
+msgid "Heading Font Color"
+msgstr ""
+
+#: options/typography.php:46
+msgid "Heading 1 Font"
+msgstr ""
+
+#: options/typography.php:52
+msgid "Heading 2 Font"
+msgstr ""
+
+#: options/typography.php:58
+msgid "Heading 3 Font"
+msgstr ""
+
+#: options/typography.php:64
+msgid "Heading 4 Font"
+msgstr ""
+
+#: options/typography.php:70
+msgid "Heading 5 Font"
+msgstr ""
+
+#: options/typography.php:76
+msgid "Heading 6 Font"
+msgstr ""
+
+#: options/typography.php:82
+msgid "Blockquote Font"
+msgstr ""
+
+#: options/typography.php:88, options/typography.php:94
+msgid "Preformated Font"
+msgstr ""
+
+#: templates/content-none.php:22
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smiley
-#: templates/content-none.php:39
+#: templates/content-none.php:38
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: templates/content-page.php:20, templates/content.php:42
+#: templates/content-page.php:19, templates/content.php:41
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: templates/content.php:31
+#. translators: %s: Name of current post. Only visible to screen readers
+#. translators: %s: Name of current post. Only visible to screen readers
+#: templates/content-page.php:32, templates/content.php:54, includes/helpers/template-tags-functions.php:103
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: templates/content.php:30
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
@@ -348,12 +339,50 @@ msgstr ""
 msgid "Full Width"
 msgstr ""
 
-#: includes/walker/nav-menu.php:38
-msgid "Add a menu"
+#. translators: %s: post date.
+#: includes/helpers/template-tags-functions.php:31
+msgctxt "post date"
+msgid "Posted on %s"
 msgstr ""
 
-#: includes/walker/nav-menu.php:40
-msgid "Primary menu goes here"
+#. translators: %s: post author.
+#: includes/helpers/template-tags-functions.php:45
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/helpers/template-tags-functions.php:60
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of categories.
+#: includes/helpers/template-tags-functions.php:64
+msgid "Posted in %1$s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: includes/helpers/template-tags-functions.php:70
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of tags.
+#: includes/helpers/template-tags-functions.php:74
+msgid "Tagged %1$s"
+msgstr ""
+
+#. translators: %s: post title
+#: includes/helpers/template-tags-functions.php:86
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: includes/walker/nav-menu.php:39
+msgid "You don't have menu yet, please create one here"
+msgstr ""
+
+#: includes/walker/nav-menu.php:44
+msgid "Menu items goes here"
 msgstr ""
 
 #: templates/admin/help-tab.php:10

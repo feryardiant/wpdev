@@ -8,7 +8,7 @@
  * @since    0.2.0
  */
 
-namespace Blank;
+namespace Blank\Helpers;
 
 /**
  * Prints HTML with meta information for the current post-date/time.

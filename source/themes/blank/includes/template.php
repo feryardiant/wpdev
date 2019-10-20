@@ -9,6 +9,9 @@
 
 namespace Blank;
 
+use function Blank\Helpers\make_attr_from_array;
+use function Blank\Helpers\make_html_tag;
+
 /**
  * Theme Template Features.
  *
@@ -84,7 +87,7 @@ class Template extends Feature {
 
 		printf(
 			'<meta name="viewport" content="%s">',
-			esc_attr( $this->html_attributes_from_array( $viewport, ', ', false ) )
+			esc_attr( make_attr_from_array( $viewport, ', ', false ) )
 		);
 
 		if ( is_singular() && pings_open() ) {
@@ -168,7 +171,7 @@ class Template extends Feature {
 
 		return wp_kses( sprintf(
 			'<a %1$s rel="home">%2$s</a> <!-- %3$s -->',
-			$this->html_attributes_from_array( $attr ),
+			make_attr_from_array( $attr ),
 			join( '', $output ),
 			'#' . esc_attr( $attr['id'] )
 		), $kses );
@@ -237,7 +240,7 @@ class Template extends Feature {
 
 		$output = sprintf(
 			'<img %1$s src="%2$s"/>',
-			$this->html_attributes_from_array( $attr ),
+			make_attr_from_array( $attr ),
 			esc_url( $site_logo->src )
 		);
 
@@ -380,8 +383,8 @@ class Template extends Feature {
 
 		echo wp_kses( sprintf(
 			'<main %1$s><section %2$s>',
-			$this->html_attributes_from_array( $main_attr ),
-			$this->html_attributes_from_array( $section_attr )
+			make_attr_from_array( $main_attr ),
+			make_attr_from_array( $section_attr )
 		), $kses );
 	}
 
@@ -394,29 +397,6 @@ class Template extends Feature {
 	public function after_content() {
 		echo '</section> <!-- #main.site-main -->';
 		echo '</main> <!-- #primary -->';
-	}
-
-	/**
-	 * Convert array to HTML attributes.
-	 *
-	 * @since 0.1.1
-	 * @param array  $attr
-	 * @param string $attr_sep
-	 * @param bool   $quoted
-	 * @return string
-	 */
-	public function html_attributes_from_array( array $attr, string $attr_sep = ' ', bool $quoted = true ) : string {
-		$output = [];
-
-		foreach ( array_filter( $attr ) as $name => $value ) {
-			if ( is_array( $value ) ) {
-				$value = join( ' ', $value );
-			}
-
-			$output[] = $name . '=' . ( $quoted ? '"' . $value . '"' : $value );
-		}
-
-		return join( $attr_sep, $output );
 	}
 
 	/**
@@ -438,6 +418,10 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function footer_widgets() {
+		if ( ! is_active_sidebar( 'footer-widgets' ) ) {
+			return;
+		}
+
 		$wrapper = apply_filters( 'blank_footer_widgets_wrapper', [
 			'before' => '<div class="footer-widgets">',
 			'after'  => '</div> <!-- .site-info --!>',
@@ -445,7 +429,7 @@ class Template extends Feature {
 
 		echo wp_kses( $wrapper['before'], $this->common_kses() );
 
-		Widgets::get_active( 'footer-widgets' );
+		dynamic_sidebar( 'footer-widgets' );
 
 		echo wp_kses( $wrapper['after'], $this->common_kses() );
 	}
@@ -465,19 +449,20 @@ class Template extends Feature {
 		echo wp_kses( $wrapper['before'], $this->common_kses() );
 
 		wp_nav_menu( [
-			'theme_location'  => 'footer',
-			'depth'           => 1,
+			'theme_location' => 'footer',
+			'depth'          => 1,
 		] );
 
-		echo wp_kses( '<div class="branding">' . join( '', [
-			$this->site_logo_image( [ 'alt' => 'Footer Logo' ] ),
-		] ) . '</div>', $this->common_kses() );
+		$logo_image = $this->site_logo_image( [ 'alt' => 'Footer Logo' ] );
+		if ( $logo_image ) {
+			make_html_tag( 'div', [ 'class' => 'branding' ], $logo_image, false );
+		}
 
-		printf(
+		make_html_tag( 'p', [ 'class' => 'credits' ], sprintf(
 			/* translators: %s: Current Year and Site Title. */
-			'<p class="credits">' . esc_html__( 'Copyright &copy; %s.', 'blank' ) . '</p>',
-			esc_html( date( 'Y' ) . ' ' . $this->site_name() )
-		);
+			esc_html__( 'Copyright &copy; %s.', 'blank' ),
+			date( 'Y' ) . ' ' . $this->site_name()
+		), false );
 
 		echo wp_kses( $wrapper['after'], $this->common_kses() );
 	}
@@ -486,9 +471,9 @@ class Template extends Feature {
 	 * Common KSES.
 	 *
 	 * @link https://codex.wordpress.org/Function_Reference/wp_kses
-	 * @return string
+	 * @return array
 	 */
-	public function common_kses() {
+	public function common_kses() : array {
 		return [
 			'div' => [
 				'class' => [],

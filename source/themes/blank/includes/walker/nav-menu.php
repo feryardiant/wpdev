@@ -8,6 +8,9 @@
 
 namespace Blank\Walker;
 
+use function Blank\Helpers\make_attr_from_array;
+use function Blank\Helpers\make_html_tag;
+
 /**
  * Theme Style Class.
  *
@@ -28,19 +31,26 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 * @return void
 	 */
 	public function fallback( $args ) {
-		$item = [];
+		$attr = [ 'class' => 'menu-item' ];
 		$args = is_array( $args ) ? (object) $args : $args;
 
 		if ( current_user_can( 'edit_theme_options' ) ) {
-			$href = admin_url( 'nav-menus.php' );
+			$tag  = 'a';
+			$text = esc_html__( 'You don\'t have menu yet, please create one here', 'blank' );
 
-			$item[] = '<a class="navbar-item" href="' . esc_url( $href ) . '">' . esc_html__( 'Add a menu', 'blank' ) . '</a>';
+			$attr['href'] = esc_url( admin_url( 'nav-menus.php' ) );
 		} else {
-			$item[] = '<div class="navbar-item">' . esc_html__( 'Primary menu goes here', 'blank' ) . '</div>';
+			$tag  = 'div';
+			$text = esc_html__( 'Menu items goes here', 'blank' );
 		}
 
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-		printf( $args->items_wrap, $args->menu_id, $args->menu_class, join( '', $item ) );
+		printf(
+			$args->items_wrap,
+			'menu-' . $args->theme_location,
+			$args->menu_class,
+			make_html_tag( $tag, $attr, $text )
+		);
 		// phpcs:enable
 	}
 
@@ -56,19 +66,14 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
 
-		$classes = [ 'navbar-dropdown is-boxed' ];
+		$class = [ 'menu-dropdown', 'is-boxed' ];
 
 		if ( $depth >= 1 ) {
-			$classes[] = 'submenu-depth-' . $depth;
+			$class[] = 'submenu-depth-' . $depth;
 		}
 
-		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		$classes = apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth );
-		// phpcs:enable
-
-		$attributes = ( ! empty( $classes ) ) ? 'class="' . esc_attr( join( ' ', $classes ) ) . '"' : '';
-
-		$output .= "{$eol}{$indent}<div $attributes>{$eol}";
+		$attributes = ( ! empty( $class ) ) ? ' ' . make_attr_from_array( [ 'class' => $class ] ) : '';
+		$output    .= "{$eol}{$indent}<div{$attributes}>{$eol}";
 	}
 
 	/**
@@ -103,34 +108,28 @@ class Nav_Menu extends \Walker_Nav_Menu {
 		$title = $item->title ?: $item->post_title;
 
 		if ( '---' === $title ) {
-			$output .= '<hr class="navbar-divider">';
+			$output .= '<hr class="menu-divider">';
 			return;
 		}
 
-		$item->classes = array_map( function ( $class ) {
-			if ( 'menu-item-has-children' === $class ) {
-				return 'has-children';
-			}
+		$item->classes = empty( $item->classes ) ? [] : (array) $item->classes;
 
-			return str_replace( 'menu-item', 'navbar-item', $class );
-		}, empty( $item->classes ) ? [] : (array) $item->classes );
+		$attr = [
+			'id'    => 'menu-item-' . $item->ID,
+			'class' => apply_filters( 'blank_nav_menu_css_class', $item->classes, $item, $args, $depth ),
+		];
 
-		$args    = apply_filters( 'blank_nav_menu_item_args', $args, $item, $depth );
-		$classes = apply_filters( 'blank_nav_menu_css_class', array_filter( $item->classes ), $item, $args, $depth );
-
-		$item_atts = 'id="' . esc_attr( 'menu-item-' . $item->ID ) . '"';
-
-		if ( ! empty( $classes ) ) {
-			$item_atts .= ' class="' . esc_attr( join( ' ', $classes ) ) . '"';
-		}
-
-		$href = 'href="' . esc_url( $item->url ) . '"';
+		$href = esc_url( $item->url );
 
 		if ( $args->walker->has_children ) {
-			$output .= $eol . $indent . '<div ' . $item_atts . '>';
-			$output .= '<a class="navbar-link" ' . $href . '>' . $title . '</a>';
+			$output .= $eol . $indent . '<div ' . make_attr_from_array( $attr ) . '>';
+			$output .= make_html_tag( 'a', [
+				'class' => 'menu-link',
+				'href'  => $href,
+			], $title );
 		} else {
-			$output .= $eol . $indent . '<a ' . $item_atts . ' ' . $href . '>' . $title;
+			$attr['href'] = $href;
+			$output      .= $eol . $indent . '<a ' . make_attr_from_array( $attr ) . '>' . $title;
 		}
 	}
 
