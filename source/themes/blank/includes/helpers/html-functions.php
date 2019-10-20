@@ -22,6 +22,7 @@ function make_attr_from_array( array $attr, string $attr_sep = ' ', bool $quoted
 
 	foreach ( array_filter( $attr ) as $name => $value ) {
 		if ( empty( $value ) ) {
+			$output[] = $name;
 			continue;
 		}
 
