@@ -8,6 +8,8 @@
 
 namespace Blank;
 
+use ArrayAccess;
+
 /**
  * Theme Setup Class.
  *
@@ -33,7 +35,7 @@ namespace Blank;
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
  */
-final class Theme {
+final class Theme implements ArrayAccess {
 	/**
 	 * Transient Names.
 	 *
@@ -518,6 +520,55 @@ final class Theme {
 		}
 
 		return self::$cached->options;
+	}
+
+	/**
+	 * Retrieve an option name by $name.
+	 *
+	 * @since 0.2.1
+	 * @param  string $name
+	 * @return mixed|null
+	 * @codeCoverageIgnore
+	 */
+	public function offsetGet( $name ) {
+		return $this->get_option( $name );
+	}
+
+	/**
+	 * Create or Update an option.
+	 *
+	 * @since 0.2.1
+	 * @param  string $name
+	 * @param  mixed  $value
+	 * @return void
+	 * @codeCoverageIgnore
+	 */
+	public function offsetSet( $name, $value ) {
+		$this->add_option( $name, $value );
+	}
+
+	/**
+	 * Determine is option exists.
+	 *
+	 * @since 0.2.1
+	 * @param  string $name
+	 * @return bool
+	 * @codeCoverageIgnore
+	 */
+	public function offsetExists( $name ) {
+		return $this->has_option( $name, 'values' );
+	}
+
+	/**
+	 * Just comply the interface but actually doing nothing.
+	 *
+	 * @since 0.2.1
+	 * @param  string $name
+	 * @return void
+	 * @codeCoverageIgnore
+	 */
+	public function offsetUnset( $name ) {
+		// .
 	}
 
 	/**
