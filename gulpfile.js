@@ -123,7 +123,6 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   zip: async ({ src, dest, config }, done) => {
-    const del = require('del')
     const { argv } = yargs.options({
       bump: {
         describe: 'Bump version before zipping',
