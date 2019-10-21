@@ -321,6 +321,68 @@ final class Theme implements ArrayAccess {
 				'widgets',
 			] )
 		);
+
+		/**
+		 * Add support for Block Styles.
+		 */
+		add_theme_support( 'wp-block-styles' );
+
+		/**
+		 * Add support for full and wide align images.
+		 */
+		add_theme_support( 'align-wide' );
+
+		/**
+		 * Add support for editor styles.
+		 */
+		add_theme_support( 'editor-styles' );
+
+		/**
+		 * Enqueue editor styles.
+		 */
+		add_editor_style( [
+			$this->asset->get_uri( 'gutenberg-editor.css' ),
+			$this->asset->google_fonts_url(),
+		] );
+
+		/**
+		 * Add support for editor font sizes.
+		 */
+		add_theme_support(
+			'editor-font-sizes',
+			apply_filters( 'blank_editor_font_sizes_args', [
+				[
+					'name' => __( 'Small', 'blank' ),
+					'size' => 12,
+					'slug' => 'small',
+				],
+				[
+					'name' => __( 'Normal', 'blank' ),
+					'size' => 14,
+					'slug' => 'normal',
+				],
+				[
+					'name' => __( 'Medium', 'blank' ),
+					'size' => 20,
+					'slug' => 'medium',
+				],
+				[
+					'name' => __( 'Large', 'blank' ),
+					'size' => 26,
+					'slug' => 'large',
+				],
+				[
+					'name' => __( 'Huge', 'blank' ),
+					'size' => 32,
+					'slug' => 'huge',
+				],
+			] )
+		);
+
+		/**
+		 * Add support for responsive embedded content.
+		 */
+		add_theme_support( 'responsive-embeds' );
 	}
 
 	/**
@@ -354,6 +416,33 @@ final class Theme implements ArrayAccess {
 
 			$this->$name = $class;
 		}
+	}
+
+	/**
+	 * Retrieve localization data.
+	 *
+	 * @since 0.2.2
+	 * @param  string $domain
+	 */
+	public function get_locale_data( string $domain ) {
+		$trans = get_translations_for_domain( $domain );
+
+		$locale = [
+			'' => [
+				'doamin' => $domain,
+				'lang'   => is_admin() ? get_user_locale() : get_locale(),
+			],
+		];
+
+		if ( ! empty( $trans->headers['Plural-Forms'] ) ) {
+			$locale['']['plural_forms'] = $trans->headers['Plural-Forms'];
+		}
+
+		foreach ( $trans->entries as $msgid => $entry ) {
+			$locale[ $msgid ] = $entry->translations;
+		}
+
+		return $locale;
 	}
 
 	/**

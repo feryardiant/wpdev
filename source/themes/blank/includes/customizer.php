@@ -35,7 +35,6 @@ class Customizer extends Feature {
 	 */
 	protected function initialize() : void {
 		add_action( 'customize_register', [ $this, 'register' ] );
-		add_action( 'customize_preview_init', [ $this, 'preview_init' ] );
 	}
 
 	/**
@@ -149,20 +148,5 @@ class Customizer extends Feature {
 		$choices = $setting->manager->get_control( $setting->ID )->choices;
 
 		return array_key_exists( $input, $choices ) ? $input : $setting->default;
-	}
-
-	/**
-	 * Load customizer scripts.
-	 *
-	 * @since 0.1.0
-	 */
-	public function preview_init() {
-		wp_enqueue_script(
-			'blank-customizer-script',
-			$this->theme->asset->get_uri( 'customizer.js' ),
-			[ 'customize-preview' ],
-			$this->theme->version,
-			true
-		);
 	}
 }

@@ -27,9 +27,9 @@ class Asset extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
+		add_action( 'customize_controls_init', [ $this, 'customizer_enqueue' ] );
 		add_action( 'login_head', [ $this, 'login_head' ] );
 
 		// Prevent adding verion string while development.
@@ -46,15 +46,10 @@ class Asset extends Feature {
 	 * @return void
 	 */
 	public function enqueue() {
-		wp_register_style( 'blank-google-fonts', $this->google_fonts_url(), [], $this->version );
+		wp_enqueue_style( 'blank-theme', $this->get_uri( 'main.css' ), $this->get_styles_dependencies( 'theme' ), $this->version );
+		wp_style_add_data( 'blank-theme', 'rtl', 'replace' );
 
-		wp_register_style( 'blank-css-variables', false, [], $this->version );
-		wp_add_inline_style( 'blank-css-variables', $this->css_variables( $this->theme ) );
-
-		wp_enqueue_style( 'blank-style', $this->get_uri( 'main.css' ), [ 'blank-google-fonts', 'blank-css-variables' ], $this->version );
-		wp_style_add_data( 'blank-style', 'rtl', 'replace' );
-
-		wp_enqueue_script( 'blank-script', $this->get_uri( 'main.js' ), [ 'jquery' ], $this->version, true );
+		wp_enqueue_script( 'blank-theme', $this->get_uri( 'main.js' ), $this->get_scripts_dependencies( 'theme' ), $this->version, true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -74,81 +69,104 @@ class Asset extends Feature {
 			return;
 		}
 
-		wp_enqueue_style( 'blank-panel-style', $this->get_uri( 'admin.css' ), [], $this->version );
-		wp_enqueue_script( 'blank-panel-script', $this->get_uri( 'admin.js' ), [ 'jquery' ], $this->version, true );
+		wp_enqueue_style( 'blank-admin', $this->get_uri( 'admin.css' ), $this->get_styles_dependencies( 'admin' ), $this->version );
+		wp_register_script( 'blank-admin', $this->get_uri( 'admin.js' ), $this->get_scripts_dependencies( 'admin' ), $this->version, true );
+
+		wp_localize_script( 'blank-admin', 'blank_admin', $this->get_localize_script() );
+
+		wp_enqueue_script( 'blank-admin' );
 	}
 
 	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
+	 * Load customizer scripts.
 	 *
-	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/
-	 *
-	 * @internal
-	 * @since 0.1.0
-	 * @return void
+	 * @since 0.2.2
 	 */
-	public function setup() {
-		/**
-		 * Add support for Block Styles.
-		 */
-		add_theme_support( 'wp-block-styles' );
-
-		/**
-		 * Add support for full and wide align images.
-		 */
-		add_theme_support( 'align-wide' );
-
-		/**
-		 * Add support for editor styles.
-		 */
-		add_theme_support( 'editor-styles' );
-
-		/**
-		 * Enqueue editor styles.
-		 */
-		add_editor_style( [
-			$this->get_uri( 'gutenberg-editor.css' ),
-			$this->google_fonts_url(),
-		] );
-
-		/**
-		 * Add support for editor font sizes.
-		 */
-		add_theme_support(
-			'editor-font-sizes',
-			apply_filters( 'blank_editor_font_sizes_args', [
-				[
-					'name' => __( 'Small', 'blank' ),
-					'size' => 12,
-					'slug' => 'small',
-				],
-				[
-					'name' => __( 'Normal', 'blank' ),
-					'size' => 14,
-					'slug' => 'normal',
-				],
-				[
-					'name' => __( 'Medium', 'blank' ),
-					'size' => 20,
-					'slug' => 'medium',
-				],
-				[
-					'name' => __( 'Large', 'blank' ),
-					'size' => 26,
-					'slug' => 'large',
-				],
-				[
-					'name' => __( 'Huge', 'blank' ),
-					'size' => 32,
-					'slug' => 'huge',
-				],
-			] )
+	public function customizer_enqueue() {
+		$locale_data = wp_json_encode( $this->theme->get_locale_data( $this->theme->slug ) );
+		wp_add_inline_script(
+			'wp-i18n',
+			'wp.i18n.setLocaleData( ' . $locale_data . ', "' . $this->theme->slug . '" );'
 		);
 
-		/**
-		 * Add support for responsive embedded content.
-		 */
-		add_theme_support( 'responsive-embeds' );
+		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'admin' ), $this->version, true );
+
+		wp_localize_script( 'blank-customizer', 'blank_customizer', $this->get_localize_script( [
+			'customizer_url' => admin_url( '/customize.php?autofocus' ),
+		] ) );
+
+		wp_enqueue_script( 'blank-customizer' );
+	}
+
+	/**
+	 * Shared object across multiple front-end
+	 *
+	 * @param  array $merge
+	 * @return array
+	 */
+	protected function get_localize_script( array $merge = [] ) : array {
+		return array_merge( [
+			'is_debug'   => self::is_debug(),
+			'nonce'      => wp_create_nonce( 'blank-ajax-nonce' ),
+			'ajax_url'   => admin_url( 'admin-ajax.php' ),
+			'assets_url' => $this->theme->get_uri( 'assets' ),
+			'rest_url'   => get_rest_url(),
+		], $merge );
+	}
+
+	/**
+	 * Get styles dependencies for each $context.
+	 *
+	 * @param  string $context
+	 * @return array
+	 */
+	protected function get_styles_dependencies( string $context ) : array {
+		wp_register_style( 'blank-google-fonts', $this->google_fonts_url(), [], $this->version );
+
+		wp_register_style( 'blank-variables', false, [], $this->version );
+		wp_add_inline_style( 'blank-variables', $this->css_variables( $this->theme ) );
+
+		$deps = apply_filters( 'blank_scripts_dependencies', [
+			'theme'      => [
+				'blank-google-fonts',
+				'blank-variables',
+			],
+			'admin'      => [
+				'blank-google-fonts',
+				'blank-variables',
+			],
+			'customizer' => [],
+		], $context );
+
+		return $deps[ $context ] ?? [];
+	}
+
+	/**
+	 * Get scripts dependencies for each $context.
+	 *
+	 * @param  string $context
+	 * @return array
+	 */
+	protected function get_scripts_dependencies( string $context ) : array {
+		$deps = apply_filters( 'blank_scripts_dependencies', [
+			'theme'      => [
+				'jquery',
+			],
+			'admin'      => [
+				'wp-i18n',
+				'jquery',
+			],
+			'customizer' => [
+				'underscore',
+				'wp-color-picker',
+				'wp-element',
+				'wp-components',
+				'wp-date',
+				'wp-i18n',
+			],
+		], $context );
+
+		return $deps[ $context ] ?? [];
 	}
 
 	/**
@@ -263,13 +281,16 @@ class Asset extends Feature {
 	public function get_uri( string $filename ) : string {
 		extract( pathinfo( $filename ) ); // phpcs:ignore WordPress.PHP.DontExtract
 
-		if ( ! in_array( $extension, [ 'js', 'css' ], true ) ) {
-			$extension = 'img';
-		} else {
-			$basename = $filename . ( self::is_debug() ? ".$extension" : ".min.$extension" );
+		$prefix = 'assets/';
+
+		if ( in_array( $extension, [ 'js', 'css' ], true ) ) {
+			$basename = $filename . '.' . ( self::is_debug() ? $extension : 'min.' . $extension );
+			$prefix  .= $extension . '/';
+		} elseif ( in_array( $extension, [ 'jpg', 'jpeg', 'png', 'gif', 'svg', 'ico', 'webp' ], true ) ) {
+			$prefix .= 'img/';
 		}
 
-		return $this->theme->get_uri( "assets/$extension/$basename" );
+		return $this->theme->get_uri( $prefix . $basename );
 	}
 
 	/**
