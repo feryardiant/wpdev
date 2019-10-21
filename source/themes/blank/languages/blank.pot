@@ -32,26 +32,6 @@ msgstr[1] ""
 msgid "Comments are closed."
 msgstr ""
 
-#: includes/asset.php:121
-msgid "Small"
-msgstr ""
-
-#: includes/asset.php:126
-msgid "Normal"
-msgstr ""
-
-#: includes/asset.php:131
-msgid "Medium"
-msgstr ""
-
-#: includes/asset.php:136
-msgid "Large"
-msgstr ""
-
-#: includes/asset.php:141
-msgid "Huge"
-msgstr ""
-
 #: includes/comment.php:44
 msgid "Name"
 msgstr ""
@@ -136,6 +116,26 @@ msgstr ""
 
 #: includes/theme.php:137
 msgid "Theme Option"
+msgstr ""
+
+#: includes/theme.php:355
+msgid "Small"
+msgstr ""
+
+#: includes/theme.php:360
+msgid "Normal"
+msgstr ""
+
+#: includes/theme.php:365
+msgid "Medium"
+msgstr ""
+
+#: includes/theme.php:370
+msgid "Large"
+msgstr ""
+
+#: includes/theme.php:375
+msgid "Huge"
 msgstr ""
 
 #: includes/widgets.php:37

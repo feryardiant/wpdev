@@ -30,7 +30,6 @@ class Asset extends Feature {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
 		add_action( 'customize_controls_init', [ $this, 'customizer_enqueue' ] );
-		add_action( 'login_head', [ $this, 'login_head' ] );
 
 		// Prevent adding verion string while development.
 		if ( ! self::is_debug() ) {
@@ -210,46 +209,6 @@ class Asset extends Feature {
 				'--dark-color'                  => $theme->get_option( 'dark_color' ),
 			],
 		] );
-	}
-
-	/**
-	 * Custom login hook.
-	 *
-	 * @return void
-	 */
-	public function login_head() {
-		if ( ! $this->theme->get_option( 'custom_login_logo' ) ) {
-			return;
-		}
-
-		wp_register_style( 'blank-custom-login', false, [], $this->version );
-		wp_add_inline_style( 'blank-custom-login', $this->login_style() );
-
-		wp_enqueue_style( 'blank-custom-login' );
-	}
-
-	/**
-	 * Custom login style.
-	 *
-	 * @internal
-	 * @since 0.1.1
-	 * @return string
-	 */
-	public function login_style() {
-		$logo_id  = get_theme_mod( 'custom_logo' );
-		$logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
-
-		if ( ! $logo_url ) {
-			return null;
-		}
-
-		return self::make_css( function () use ( $logo_url ) {
-			return [
-				'.login h1 a' => [
-					'background-image' => 'url(' . esc_url( $logo_url ) . ') !important',
-				],
-			];
-		} );
 	}
 
 	/**
