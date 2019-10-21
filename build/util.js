@@ -175,6 +175,7 @@ const configure = exports.configure = (src, dest, tasks) => {
         toWatch[taskName] = asset[key].src
         assetTasks.push(taskName)
       } else {
+        config.base = path.join(process.cwd(), config.path, '..')
         zipTasks.push(taskName)
       }
 

@@ -122,14 +122,25 @@ const tasks = configure('source', 'build', {
    * @param {Object}       param0.config
    * @return {stream}
    */
-  zip: async ({ src, dest, config }) => {
+  zip: async ({ src, dest, config }, done) => {
+    const del = require('del')
+    const { argv } = yargs.options({
+      bump: {
+        describe: 'Bump version before zipping',
+        default: true,
+        type: 'boolean'
+      }
+    })
+
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
 
-    // Generate CHANGELOG.md file inside source directory
-    await version(config.release)
+    if (argv.bump) {
+      // Generate CHANGELOG.md file inside source directory
+      await version(config.release)
+    }
 
-    return gulp.src(src)
+    return gulp.src(src, { base: config.base })
       .pipe(zip(`${config.name}-${config.version}.zip`, config.zip))
       .pipe(gulp.dest(dest))
   }
