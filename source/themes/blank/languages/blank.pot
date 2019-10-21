@@ -103,25 +103,29 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/template.php:276
+#: includes/template.php:262
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:292, templates/content-none.php:13
+#: includes/template.php:296
+msgid "Site Navigation"
+msgstr ""
+
+#: includes/template.php:327, templates/content-none.php:13
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:297
+#: includes/template.php:332
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:301
+#: includes/template.php:336
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:463
+#: includes/template.php:498
 msgid "Copyright &copy; %s."
 msgstr ""
 

@@ -21,28 +21,12 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<?php do_action( 'blank_skip_link', 'site-content' ); ?>
-
 	<header id="masthead" role="banner" class="site-header" itemtype="https://schema.org/WPHeader" itemscope>
 
-		<div class="container">
+		<?php blank( 'template' )->header(); ?>
 
-			<div class="site-identity" itemprop="headline" itemtype="http://schema.org/Organization">
-				<?php the_custom_logo(); ?>
-			</div> <!-- .navbar-brand -->
+	</header> <!-- .site-header -->
 
-			<nav class="site-navigation" role="navigation" aria-label="dropdown navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope aria-label="Site Navigation">
-				<button role="button" class="menu-toggle" aria-controls="menu-primary-menu" aria-label="menu" aria-expanded="false">
-					<span class="mobile-menu"></span>
-				</button> <!-- .menu-toggle -->
-
-				<?php wp_nav_menu( [ 'theme_location' => 'primary' ] ); ?> <!-- #primary-menu -->
-			</nav> <!-- .site-navigation -->
-
-		</div> <!-- .container -->
-
-	</header> <!-- #masthead -->
-
-	<section id="site-content" class="section content">
+	<section id="content" class="section site-content">
 
 		<?php do_action( 'blank_before_main' ); ?>

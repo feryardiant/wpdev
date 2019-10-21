@@ -12,13 +12,13 @@
 
 do_action( 'blank_after_main' );
 ?>
-	</section> <!-- #site-content -->
+	</section> <!-- .site-content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo" itemtype="https://schema.org/WPFooter" itemscope>
 
 		<?php blank( 'template' )->footer(); ?>
 
-	</footer> <!-- #site-footer -->
+	</footer> <!-- .site-footer -->
 
 	<?php wp_footer(); ?>
 </body>

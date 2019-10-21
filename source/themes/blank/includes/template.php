@@ -9,6 +9,8 @@
 
 namespace Blank;
 
+use function Blank\Helpers\get_allowed_attr;
+use function Blank\Helpers\get_schema_org_attr;
 use function Blank\Helpers\make_attr_from_array;
 use function Blank\Helpers\make_html_tag;
 
@@ -44,7 +46,6 @@ class Template extends Feature {
 	protected function initialize() : void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'wp_head', [ $this, 'head' ] );
-		add_action( 'blank_skip_link', [ $this, 'skip_link' ], 10, 1 );
 		add_action( 'blank_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'blank_before_main', [ $this, 'before_main' ], 10 );
 		add_action( 'blank_before_content', [ $this, 'before_content' ], 10 );
@@ -144,37 +145,22 @@ class Template extends Feature {
 		}
 
 		$attr = [
-			'id'    => 'branding',
-			'href'  => esc_url( home_url( '/' ) ),
-			'class' => $this->theme->get_option( 'inline_site_title' ) ? 'is-inline-title' : '',
+			'id'       => 'branding',
+			'href'     => esc_url( home_url( '/' ) ),
+			'class'    => 'site-identity',
+			'itemtype' => 'http://schema.org/Organization',
 		];
 
-		$kses = [
-			'a' => [
-				'rel'   => [],
-				'id'    => [],
-				'href'  => [],
-				'class' => [],
-			],
-			'h1' => [
-				'class' => [],
-			],
-			'p' => [
-				'class' => [],
-			],
-			'img' => [
-				'src'   => [],
-				'alt'   => [],
-				'class' => [],
-			],
-		];
+		if ( $site_logo && $this->theme->get_option( 'inline_site_title' ) ) {
+			$attr['class'] = 'is-inline-title';
+		}
 
-		return wp_kses( sprintf(
+		return sprintf(
 			'<a %1$s rel="home">%2$s</a> <!-- %3$s -->',
 			make_attr_from_array( $attr ),
 			join( '', $output ),
 			'#' . esc_attr( $attr['id'] )
-		), $kses );
+		);
 	}
 
 	/**
@@ -272,10 +258,59 @@ class Template extends Feature {
 	 * @param  string $target_id
 	 * @return void
 	 */
-	public function skip_link( string $target_id = 'site-content' ) {
-		$text = apply_filters( 'blank_skip_link_text', __( 'Skip to content', 'blank' ) );
+	public function skip_link( string $target_id = 'content' ) {
+		$text      = apply_filters( 'blank_skip_link_text', __( 'Skip to content', 'blank' ) );
+		$target_id = apply_filters( 'blank_skip_link_target', $target_id );
 
 		echo '<a class="skip-link screen-reader-text" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
+	}
+
+	/**
+	 * Print template header.
+	 *
+	 * @since 0.2.2
+	 * @return void
+	 */
+	public function header() {
+		$this->skip_link();
+
+		echo '<div class="container">';
+
+		the_custom_logo();
+
+		$this->primary_navigation();
+
+		echo '</div>';
+	}
+
+	/**
+	 * Print primary navitaion.
+	 *
+	 * @since 0.2.2
+	 * @return void
+	 */
+	public function primary_navigation() {
+		$wrapper_attr = array_merge( [
+			'class'      => 'site-navigation',
+			'role'       => 'navigation',
+			'aria-label' => __( 'Site Navigation', 'blank' ),
+		], get_schema_org_attr( 'navigation' ) );
+
+		echo wp_kses(
+			'<nav ' . make_attr_from_array( $wrapper_attr ) . '>',
+			get_allowed_attr( 'nav' )
+		);
+
+		make_html_tag( 'button', [
+			'role'          => 'button',
+			'class'         => 'menu-toggle',
+			'aria-controls' => 'menu-primary',
+			'aria-expanded' => 'false',
+		], '<span class="mobile-menu"></span>', false );
+
+		wp_nav_menu( [ 'theme_location' => 'primary' ] );
+
+		echo '</div>';
 	}
 
 	/**
