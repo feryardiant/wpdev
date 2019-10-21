@@ -4,8 +4,6 @@ const bs = require('browser-sync').create()
 const gulp = require('gulp')
 const version = require('standard-version')
 
-require('dotenv').config()
-
 const autoprefixer = require('gulp-autoprefixer')
 const babel = require('gulp-babel')
 const cleanCSS = require('gulp-clean-css')
@@ -20,36 +18,10 @@ const uglify = require('gulp-uglify')
 const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
 
-const wpHome = new URL(process.env.WP_HOME)
+require('dotenv').config()
+
 const { configure, scandir, watch, isProduction } = require('./build/util')
-const { argv } = require('yargs').options({
-  open: {
-    alias: 'o',
-    describe: 'Open in browser',
-    default: false,
-    type: 'boolean'
-  },
-  notify: {
-    alias: 'n',
-    describe: 'Enable notification',
-    default: false,
-    type: 'boolean'
-  },
-  pre: {
-    describe: 'Bump as prerelase version',
-    type: 'string'
-  },
-  as: {
-    describe: 'Bump as version',
-    type: 'string'
-  },
-  proxy: {
-    alias: 'p',
-    describe: 'Enable proxy',
-    default: wpHome.hostname,
-    type: 'string'
-  }
-})
+const yargs = require('yargs')
 
 const tasks = configure('source', 'build', {
   /**
@@ -166,23 +138,39 @@ const tasks = configure('source', 'build', {
 /**
  * Start php server.
  *
- * @param {URL} url
+ * @async
+ * @returns {String}
  */
-const phpServer = (url) => new Promise((resolve, reject) => {
+const phpServer = () => new Promise((resolve, reject) => {
+  const { argv } = yargs.options({
+    proxy: {
+      alias: 'p',
+      describe: 'Enable proxy',
+      default: process.env.WP_HOME,
+      type: 'string'
+    }
+  })
+
+  let url
+
+  try {
+    url = new URL(argv.proxy)
+  } catch (err) {
+    return reject(err)
+  }
+
   // Don't start php dev server if the hostname isn't localhost
   // In case you've already set your envvar to something like:
   // WP_HOME = http://wpdev.local
   if (url.hostname !== 'localhost') {
-    resolve(url)
+    return resolve(url)
+  } else {
+    if (url.port === '') {
+      url.port = 8080
+    }
   }
 
-  if (url.hostname === 'localhost' && url.port === '') {
-    url.port = 8080
-  }
-
-  process.on('exit', () => {
-    php.closeServer()
-  })
+  process.on('exit', php.closeServer)
 
   php.server({
     port: url.port,
@@ -208,9 +196,26 @@ const phpServer = (url) => new Promise((resolve, reject) => {
 /**
  * Start php server.
  *
+ * @async
  * @param {URL} url
+ * @returns {String}
  */
 const bSync = (url) => new Promise((resolve, reject) => {
+  const { argv } = yargs.options({
+    open: {
+      alias: 'o',
+      describe: 'Open in browser',
+      default: false,
+      type: 'boolean'
+    },
+    notify: {
+      alias: 'n',
+      describe: 'Enable notification',
+      default: false,
+      type: 'boolean'
+    },
+  })
+
   bs.init({
     proxy: url.toString(),
     baseDir: './public',
@@ -251,12 +256,13 @@ const bSync = (url) => new Promise((resolve, reject) => {
 /**
  * Execute end-to-end test using webdriver.io and browser-stack.
  *
- * @param {URL} url
+ * @async
+ * @param {Function} done
  */
 exports.e2e = (done) => {
   const { default: Launcher } = require('@wdio/cli')
 
-  return phpServer(wpHome).then(bSync).then(url => {
+  return phpServer().then(bSync).then(url => {
     const wdio = new Launcher('tests/wdio.config.js', {
       baseUrl: url.toString(),
       onComplete (code) {
@@ -271,10 +277,19 @@ exports.e2e = (done) => {
 
 /**
  * Generate CHANGELOG.md file.
- *
- * @param {URL} url
  */
 exports.release = async () => {
+  const { argv } = yargs.options({
+    pre: {
+      describe: 'Bump as prerelase version',
+      type: 'string'
+    },
+    as: {
+      describe: 'Bump as version',
+      type: 'string'
+    }
+  })
+
   const releaseConfig = {
     sign: true,
     scripts: {
@@ -298,7 +313,7 @@ exports.release = async () => {
  * Start php development server and watch files changes through browserSync.
  */
 exports.default = async () => {
-  const url = await phpServer(wpHome)
+  const url = await phpServer()
 
   await bSync(url)
 
