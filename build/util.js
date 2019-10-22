@@ -2,16 +2,72 @@ const { readdirSync, readFileSync } = require('fs')
 const { promisify } = require('util')
 const execFile = promisify(require('child_process').execFile)
 const path = require('path')
+const yargs = exports.args = require('yargs')
 
 const { task, parallel, series, watch } = require('gulp')
 
 const pkgJson = require('./../package.json')
 
-const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
-
 if (process.env.WP_ENV && !process.env.NODE_ENV) {
   process.env.NODE_ENV = process.env.WP_ENV
 }
+
+const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
+
+const bumpFile = (filePath, cb) => {
+  const fs = require('fs')
+
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        if (err.code === 'ENOENT') {
+          console.info('[skip] File', filePath, 'not found')
+          return resolve()
+        }
+
+        return reject(err)
+      }
+
+      data = cb(data)
+
+      fs.writeFile(filePath, data, 'utf8', (err) => {
+        if (err) {
+          return reject(err)
+        }
+
+        console.info(`[info] Bump ${filePath} to ${pkgJson.version}`)
+        resolve()
+      })
+    })
+  })
+}
+
+yargs
+  .usage('Usage $0 [command]')
+  .version(pkgJson.version)
+  .demandCommand(1)
+  .command({
+    command: 'bump <path>',
+    desc: 'Bump version in readme.txt & style.css file',
+    handler (argv) {
+      const files = [
+        'style.css',
+        'readme.txt'
+      ]
+
+      return Promise.all(files.map(file => {
+        return bumpFile(`${argv.path}/${file}`, (data) => data.replace(/(:\s+)(\d.\d.\d)$/g, `$1${pkgJson.version}`))
+      }))
+    }
+  }).argv
+
+const { argv } = yargs.options({
+  bump: {
+    describe: 'Bump version before zipping',
+    default: true,
+    type: 'boolean'
+  }
+})
 
 const globalConfig = {
   version: pkgJson.version,
@@ -58,9 +114,11 @@ const globalConfig = {
   },
 
   zip: {
+    zip: {},
     release: {
       sign: false,
       skip: {
+        bump: !argv.bump,
         commit: true,
         tag: true
       }
@@ -194,6 +252,7 @@ const configure = exports.configure = (src, dest, tasks) => {
 
   task('build', parallel(...buildTasks))
   task('zip', parallel(...zipTasks))
+
   return toWatch
 }
 

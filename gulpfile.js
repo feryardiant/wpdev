@@ -20,8 +20,7 @@ const zip = require('gulp-zip')
 
 require('dotenv').config()
 
-const { configure, scandir, watch, isProduction } = require('./build/util')
-const yargs = require('yargs')
+const { configure, args, watch, isProduction } = require('./build/util')
 
 const tasks = configure('source', 'build', {
   /**
@@ -123,21 +122,14 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   zip: async ({ src, dest, config }, done) => {
-    const { argv } = yargs.options({
-      bump: {
-        describe: 'Bump version before zipping',
-        default: true,
-        type: 'boolean'
-      }
-    })
-
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
-
-    if (argv.bump) {
-      // Generate CHANGELOG.md file inside source directory
-      await version(config.release)
+    config.release.scripts = {
+      postbump: `node build/util.js bump ${config.path}`
     }
+
+    // Generate CHANGELOG.md file inside source directory
+    await version(config.release)
 
     return gulp.src(src, { base: config.base })
       .pipe(zip(`${config.name}-${config.version}.zip`, config.zip))
@@ -152,7 +144,7 @@ const tasks = configure('source', 'build', {
  * @returns {String}
  */
 const phpServer = () => new Promise((resolve, reject) => {
-  const { argv } = yargs.options({
+  const { argv } = args.options({
     proxy: {
       alias: 'p',
       describe: 'Enable proxy',
@@ -211,7 +203,7 @@ const phpServer = () => new Promise((resolve, reject) => {
  * @returns {String}
  */
 const bSync = (url) => new Promise((resolve, reject) => {
-  const { argv } = yargs.options({
+  const { argv } = args.options({
     open: {
       alias: 'o',
       describe: 'Open in browser',
@@ -289,7 +281,7 @@ exports.e2e = (done) => {
  * Generate CHANGELOG.md file.
  */
 exports.release = async () => {
-  const { argv } = yargs.options({
+  const { argv } = args.options({
     pre: {
       describe: 'Bump as prerelase version',
       type: 'string'
