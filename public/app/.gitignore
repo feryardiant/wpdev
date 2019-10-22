@@ -3,6 +3,7 @@ mu-plugins/*
 plugins/*
 themes/*
 uploads/*
+db.php
 object-cache.php
 
 # !.gitignore

@@ -66,28 +66,27 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 
 ### Directory Structure and Gulp tasks
 
-* **build** directory : Consists of all build utilities including all the scripts you might be using during your development. This directory also the output folder for generated `.zip` files when you run `gulp build` command,
+* **config** directory : Consists of all build utilities, configuration files, including all the scripts you'd be using on all environment,
 * **public** directory : The server document root directory,
 * **source** directory : Them main source directory of your project, it consists of two primary sub-directory, which is `plugins` and `themes`,
-* **tests** directory : Testing directory.
+* **tests** directory : Testing directory, obviously.
 
 ```
-├── build
 ├── config
 │   ├── environments
 │   └── heroku
 ├── public
 │   └── app
 ├── source
+│   ├── assets
 │   ├── plugins
-│   ├── shared
 │   └── themes
 └── tests
     ├── plugins
     └── themes
 ```
 
-The gulp script will autoatically scan any sub-directories under `plugins` and `themes` and generate the required `gulp` tasks if the sub-directory meets the following structures:
+The `gulp` scripts will autoatically scan any sub-directories under `plugins` and `themes` and generate all the required `gulp` tasks if the sub-directory meets the following structures:
 
 ```
 <dirname>
@@ -98,7 +97,7 @@ The gulp script will autoatically scan any sub-directories under `plugins` and `
 └── languages
 ```
 
-Once you've create `<dirname>` above under `plugins` or `themes`, you'll see the following gulp tasks:
+Once you've create `<dirname>` above inside `plugins` or `themes` directory, you'll see the following gulp tasks:
 
 ```
 $ gulp -T

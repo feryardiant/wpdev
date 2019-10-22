@@ -9,8 +9,11 @@ exports.config = {
   ],
   capabilities: [
     {
+      os: 'Windows',
+      os_version: '10',
       maxInstances: 5,
       browserName: 'chrome',
+      resolution: '1440x900',
       'goog:chromeOptions': {}
     }
   ],
@@ -41,26 +44,26 @@ exports.config = {
   /**
    * Gets executed once before all workers get launched.
    * @param {Object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {Array.<Object>} caps list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
+  // onPrepare: function (config, caps) {
   // },
   /**
    * Gets executed just before initialising the webdriver session and test framework. It allows you
    * to manipulate configurations depending on the capability or spec.
    * @param {Object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {Array.<Object>} caps list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // beforeSession: function (config, capabilities, specs) {
+  // beforeSession: function (config, caps, specs) {
   // },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
-   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {Array.<Object>} caps list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: (capabilities, specs) => {
+  before: (caps, specs) => {
     const chai = require('chai')
     global.expect = chai.expect
     chai.Should()

@@ -4,27 +4,31 @@
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
   "scripts": {
     "postdeploy": [
-      "config/heroku/postinstall.sh"
+      "config/post-deploy.sh"
     ]
   },
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "hobby"
+      "size": "free"
     }
   },
   "env": {
     "WP_ENV": {
+      "description": "Only for automated deploys, please don't enter anything!",
+      "required": true
+    },
+    "WP_DEFAULT_THEME": {
+      "description": "Only for automated deploys, please don't enter anything!",
       "required": true
     },
     "WP_DEBUG": {
-      "required": false,
-      "description": "Set this to 'TRUE' to turn on debug logging",
-      "value": "true"
+      "description": "Only for automated deploys, please don't enter anything!",
+      "required": false
     },
     "HEROKU_APP_NAME": {
-      "required": true,
-      "description": "Only for automated deploys, please don't enter anything!"
+      "description": "Only for automated deploys, please don't enter anything!",
+      "required": true
     },
     "AUTH_KEY": {
       "description": "A secret key to increase security of stored information.",
@@ -60,7 +64,8 @@
     }
   },
   "addons": [
-    "cleardb:ignite"
+    "cleardb:ignite",
+    "heroku-redis:hobby-dev"
   ],
   "buildpacks": [
     { "url": "heroku/php" }

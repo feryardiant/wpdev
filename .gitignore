@@ -27,6 +27,7 @@ public/.htaccess
 
 # Development
 # --------------------------
+releases
 vendor
 .vagrant
 .php-version
