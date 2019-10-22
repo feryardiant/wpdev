@@ -62,4 +62,6 @@ jobs:
       env:
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      run: npx gulp e2e --mode testing
+      run: |
+        npx gulp build --mode production
+        npx gulp e2e --mode testing
