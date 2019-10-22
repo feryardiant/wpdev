@@ -21,19 +21,13 @@ const bumpFile = (filePath, cb) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         if (err.code === 'ENOENT') {
-          console.info('[skip] File', filePath, 'not found')
           return resolve()
         }
-
         return reject(err)
       }
 
       fs.writeFile(filePath, cb(data), 'utf8', (err) => {
-        if (err) {
-          return reject(err)
-        }
-
-        console.info(`[info] Bump ${filePath} to ${pkgJson.version}`)
+        if (err) return reject(err)
         resolve()
       })
     })
@@ -55,6 +49,9 @@ yargs
 
       return Promise.all(files.map(file => {
         return bumpFile(`${argv.path}/${file}`, (data) => {
+          // Skip bump if contain '-'
+          // eg: 0.0.0-pre, 0.0.0-alpha, etc
+          if (pkgJson.version.includes('-')) return data
           return data.replace(/(:\s+)(\d.\d.\d)$/gm, `$1${pkgJson.version}`)
         })
       }))
