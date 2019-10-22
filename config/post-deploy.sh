@@ -29,14 +29,12 @@ fi
 if [ -z $WP_HOME ]; then
     _err '`WP_HOME` is not defined'
     exit 1
-else
-    _inf '`WP_HOME` detected at '$WP_HOME
 fi
 
 if [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
-    _inf 'File: `wp-cli.local.yml` created successfully'
+    _suc 'File: `wp-cli.local.yml` created successfully'
 else
     _inf 'File: `wp-cli.local.yml` already present'
 fi
@@ -53,7 +51,7 @@ vendor/bin/wp option update permalink_structure '/%postname%/'
 
 vendor/bin/wp cache flush
 
-if [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
+if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
     cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
     _suc 'Drop-in Object-Cache instaled successfully'
 fi
