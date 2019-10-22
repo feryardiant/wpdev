@@ -62,6 +62,7 @@
     "ext-exif": "*",
     "ext-gd": "*",
     "ext-gettext": "*",
+    "ext-mbstring": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "koodimonni/composer-dropin-installer": "^1.2",
