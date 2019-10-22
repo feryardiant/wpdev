@@ -60,7 +60,8 @@
     }
   },
   "addons": [
-    "cleardb:ignite"
+    "cleardb:ignite",
+    "heroku-redis:hobby-dev"
   ],
   "buildpacks": [
     { "url": "heroku/php" }
