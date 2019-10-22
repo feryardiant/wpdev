@@ -49,17 +49,13 @@ jobs:
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
     - name: Install WordPress Core
       env:
-        WP_DEBUG: true
-        WP_DEBUG_DISPLAY: true
-        WP_LOCAL_DEV: true
+        WP_ENV: testing
         WP_HOME: http://localhost:8080
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: |
         cp .env.example .env
         config/post-deploy.sh
     - name: Unit Test
-      env:
-        WP_ENV: testing
       run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests
       if: matrix.wp-versions == 5.0

@@ -22,9 +22,9 @@ const zip = require('gulp-zip')
 
 require('dotenv').config()
 
-const { configure, args, watch, isProduction } = require('./build/util')
+const { configure, args, watch, isProduction } = require('./config/build-util')
 
-const tasks = configure('source', 'build', {
+const tasks = configure('source', 'releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *
@@ -123,7 +123,7 @@ const tasks = configure('source', 'build', {
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
     config.release.scripts = {
-      postbump: `node build/util.js bump ${config.path}`
+      postbump: `node config/build-util.js bump ${config.path}`
     }
 
     // Generate CHANGELOG.md file inside source directory
