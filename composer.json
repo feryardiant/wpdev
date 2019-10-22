@@ -103,7 +103,6 @@
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
         "wpackagist-plugin/debug-bar",
-        "wpackagist-plugin/redis-cache",
         "wpackagist-plugin/theme-check",
         "wpackagist-plugin/regenerate-thumbnails",
         "wpackagist-plugin/wordpress-importer",
