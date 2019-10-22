@@ -64,6 +64,7 @@
     "ext-gettext": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
+    "koodimonni/composer-dropin-installer": "^1.2",
     "oscarotero/env": "^1.2",
     "predis/predis": "^1.1",
     "roots/wordpress": "^5.2",
@@ -114,6 +115,11 @@
       ],
       "public/app/themes/{$name}/": [
         "type:wordpress-theme"
+      ]
+    },
+    "dropin-paths": {
+      "public/app": [
+        "package:wpackagist-plugin/redis-cache:includes/object-cache.php"
       ]
     },
     "wordpress-install-dir": "public/wp"
