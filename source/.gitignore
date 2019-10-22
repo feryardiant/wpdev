@@ -1,4 +1,2 @@
 *.min.*
-readme.txt
 composer.lock
-CHANGELOG.md
