@@ -10,17 +10,18 @@
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "hobby"
+      "size": "free"
     }
   },
   "env": {
     "WP_ENV": {
       "required": true
     },
+    "WP_DEFAULT_THEME": {
+      "required": true
+    },
     "WP_DEBUG": {
-      "required": false,
-      "description": "Set this to 'TRUE' to turn on debug logging",
-      "value": "true"
+      "required": false
     },
     "HEROKU_APP_NAME": {
       "required": true,
