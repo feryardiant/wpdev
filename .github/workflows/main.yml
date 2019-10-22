@@ -49,6 +49,9 @@ jobs:
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
     - name: Install WordPress Core
       env:
+        WP_DEBUG: true
+        WP_DEBUG_DISPLAY: true
+        WP_LOCAL_DEV: true
         WP_HOME: http://localhost:8080
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: |
