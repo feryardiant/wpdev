@@ -31,7 +31,7 @@ if [ -z $WP_HOME ]; then
     exit 1
 fi
 
-if [ 'testing' != "$WP_ENV" ] && [ ! -f wp-cli.local.yml ]; then
+if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
     _suc 'File: `wp-cli.local.yml` created successfully'
@@ -39,22 +39,22 @@ fi
 
 if [ -f .env ]; then
     vendor/bin/wp dotenv salts generate
-    vendor/bin/wp dotenv set WP_ENV "$WP_ENV"
-    vendor/bin/wp dotenv set DB_HOST "$DB_HOST"
-    vendor/bin/wp dotenv set WP_HOME "$WP_HOME"
-    vendor/bin/wp dotenv list --format=table
+    vendor/bin/wp dotenv set WP_ENV $WP_ENV
+    vendor/bin/wp dotenv set WP_HOME $WP_HOME
+    vendor/bin/wp dotenv set DB_HOST $DB_HOST
 fi
 
-vendor/bin/wp --info
 vendor/bin/wp core install --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
 
-vendor/bin/wp option update permalink_structure '/%postname%/'
-# vendor/bin/wp option update link_manager_enabled '1'
+if [ $WP_ENV != 'testing' ]; then
+    vendor/bin/wp option update permalink_structure '/%postname%/'
+    # vendor/bin/wp option update link_manager_enabled '1'
 
-vendor/bin/wp cache flush
+    vendor/bin/wp cache flush
 
-if [ 'testing' != "$WP_ENV" ] && [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
-    cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
-    _suc 'Drop-in Object-Cache instaled successfully'
+    if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
+        cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
+        _suc 'Drop-in Object-Cache instaled successfully'
+    fi
 fi
