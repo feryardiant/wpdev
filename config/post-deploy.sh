@@ -19,9 +19,9 @@ if [ ! -z $HEROKU_APP_NAME ]; then
 fi
 
 if [ ! -f vendor/bin/wp ]; then
-    _inf 'Downloading wp-cli...'
     curl -Lso vendor/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x vendor/bin/wp
+    _suc 'WP-CLI instaled successfully'
 else
     _inf 'Executable wp-cli already present in vendor/bin/wp'
 fi
@@ -33,16 +33,16 @@ else
     _inf '`WP_HOME` detected at '$WP_HOME
 fi
 
-if [ -f .env ]; then
-    vendor/bin/wp dotenv salts generate
-fi
-
 if [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
-    _inf 'Creating file: `wp-cli.local.yml` '
+    _inf 'File: `wp-cli.local.yml` created successfully'
 else
-    _inf 'File `wp-cli.local.yml` already present'
+    _inf 'File: `wp-cli.local.yml` already present'
+fi
+
+if [ -f .env ]; then
+    vendor/bin/wp dotenv list
 fi
 
 vendor/bin/wp core install --skip-email --title="WordPress Site" \
@@ -55,5 +55,5 @@ vendor/bin/wp cache flush
 
 if [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
     cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
-    _inf 'Drop-in object-cache.php instaled'
+    _suc 'Drop-in Object-Cache instaled successfully'
 fi
