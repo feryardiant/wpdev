@@ -15,17 +15,20 @@
   },
   "env": {
     "WP_ENV": {
+      "description": "Only for automated deploys, please don't enter anything!",
       "required": true
     },
     "WP_DEFAULT_THEME": {
+      "description": "Only for automated deploys, please don't enter anything!",
       "required": true
     },
     "WP_DEBUG": {
+      "description": "Only for automated deploys, please don't enter anything!",
       "required": false
     },
     "HEROKU_APP_NAME": {
-      "required": true,
-      "description": "Only for automated deploys, please don't enter anything!"
+      "description": "Only for automated deploys, please don't enter anything!",
+      "required": true
     },
     "AUTH_KEY": {
       "description": "A secret key to increase security of stored information.",
