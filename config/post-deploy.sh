@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 
-# usage color "31;0" "string"
-# 0 default, 1 strong, 4 underlined, 5 blink
-# fg: 31 red,  32 green, 33 yellow, 34 blue, 35 purple, 36 cyan, 37 white
-# bg: 40 black, 41 red, 44 blue, 45 purple
-c_err='41'
-c_inf='33'
-c_suc='32'
-c_rst='37'
-
 _inf() {
+
 	echo -e "\e[34;1mInfo:\e[0m" "$@"
 }
 
@@ -41,6 +33,10 @@ else
     _inf '`WP_HOME` detected at '$WP_HOME
 fi
 
+if [ -f .env ]; then
+    vendor/bin/wp dotenv salts generate
+fi
+
 if [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
@@ -49,16 +45,15 @@ else
     _inf 'File `wp-cli.local.yml` already present'
 fi
 
-# vendor/bin/wp core install --skip-email --no-color --title="WordPress Site" \
-#     --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
+vendor/bin/wp core install --skip-email --title="WordPress Site" \
+    --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
 
-# vendor/bin/wp option update permalink_structure '/%postname%/'
-# # vendor/bin/wp option update link_manager_enabled '1'
+vendor/bin/wp option update permalink_structure '/%postname%/'
+# vendor/bin/wp option update link_manager_enabled '1'
 
 vendor/bin/wp cache flush
 
 if [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
     cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
     _inf 'Drop-in object-cache.php instaled'
-    vendor/bin/wp redis enable
 fi

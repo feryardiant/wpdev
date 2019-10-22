@@ -50,17 +50,13 @@ jobs:
     - name: Install WordPress Core
       env:
         WP_HOME: http://localhost:8080
+        DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: |
         cp .env.example .env
-        vendor/bin/wp dotenv salts generate
-        vendor/bin/wp dotenv set DB_HOST 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
-        vendor/bin/wp dotenv set WP_ENV testing
-        vendor/bin/wp dotenv set WP_HOME $WP_HOME
-        vendor/bin/wp dotenv set WP_SITEURL $WP_HOME
-        vendor/bin/wp core install --url="$WP_HOME" --title='WordPress Site' --admin_user=admin --admin_email=admin@blank.wp --skip-email
-        vendor/bin/wp option update permalink_structure '/%postname%/'
-        vendor/bin/wp cache flush
+        config/post-deploy.sh
     - name: Unit Test
+      env:
+        WP_ENV: testing
       run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests
       if: matrix.wp-versions == 5.0

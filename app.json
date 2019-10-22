@@ -4,7 +4,7 @@
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
   "scripts": {
     "postdeploy": [
-      "config/heroku/postinstall.sh"
+      "config/post-deploy.sh"
     ]
   },
   "formation": {
