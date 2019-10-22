@@ -28,9 +28,7 @@ const bumpFile = (filePath, cb) => {
         return reject(err)
       }
 
-      data = cb(data)
-
-      fs.writeFile(filePath, data, 'utf8', (err) => {
+      fs.writeFile(filePath, cb(data), 'utf8', (err) => {
         if (err) {
           return reject(err)
         }
@@ -56,7 +54,9 @@ yargs
       ]
 
       return Promise.all(files.map(file => {
-        return bumpFile(`${argv.path}/${file}`, (data) => data.replace(/(:\s+)(\d.\d.\d)$/g, `$1${pkgJson.version}`))
+        return bumpFile(`${argv.path}/${file}`, (data) => {
+          return data.replace(/(:\s+)(\d.\d.\d)$/gm, `$1${pkgJson.version}`)
+        })
       }))
     }
   }).argv

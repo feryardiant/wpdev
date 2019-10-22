@@ -5,7 +5,7 @@ Donate link: https://example.com/
 Tags: blog, custom-background, custom-header, custom-logo, custom-menu, featured-images, footer-widgets, full-width-template, left-sidebar, one-column, portfolio, right-sidebar, threaded-comments, translation-ready, two-columns
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 0.1.0
+Stable tag: 0.2.1
 Requires PHP: 7.1
 License: GNU General Public License v2 or later
 License URI: LICENSE
