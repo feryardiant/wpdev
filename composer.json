@@ -60,8 +60,8 @@
     "php": ">=7.1",
     "ext-bcmath": "*",
     "ext-exif": "*",
-    "ext-gd": "*",
     "ext-gettext": "*",
+    "ext-imagick": "*",
     "ext-mbstring": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
@@ -71,13 +71,6 @@
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
     "vlucas/phpdotenv": "^3.4",
-    "wp-cli/cache-command": "^2.0",
-    "wp-cli/config-command": "^2.0",
-    "wp-cli/core-command": "^2.0",
-    "wp-cli/cron-command": "^2.0",
-    "wp-cli/db-command": "^2.0",
-    "wp-cli/entity-command": "^2.0",
-    "wp-cli/wp-cli": "^2.3",
     "wpackagist-plugin/redis-cache": "^1.4",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.6.4",
@@ -92,9 +85,6 @@
     "phpunit/phpunit": "^7.5",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.4",
-    "wp-cli/i18n-command": "^2.2",
-    "wp-cli/scaffold-command": "^2.0",
-    "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/debug-bar": "^1.0",
     "wpackagist-plugin/theme-check": "20190801.1"
   },
@@ -104,6 +94,7 @@
         "humanmade/s3-uploads",
         "wpackagist-plugin/debug-bar",
         "wpackagist-plugin/theme-check",
+        "wpackagist-plugin/redis-cache",
         "wpackagist-plugin/regenerate-thumbnails",
         "wpackagist-plugin/wordpress-importer",
         "wpdev/blank-companion",
@@ -114,11 +105,6 @@
       ],
       "public/app/themes/{$name}/": [
         "type:wordpress-theme"
-      ]
-    },
-    "dropin-paths": {
-      "public/app": [
-        "package:wpackagist-plugin/redis-cache:includes/object-cache.php"
       ]
     },
     "wordpress-install-dir": "public/wp"
