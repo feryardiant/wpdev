@@ -170,7 +170,9 @@ const phpServer = () => new Promise((resolve, reject) => {
     }
   }
 
-  process.on('exit', php.closeServer)
+  process.on('exit', () => {
+    php.closeServer()
+  })
 
   php.server({
     port: url.port,
@@ -201,6 +203,10 @@ const phpServer = () => new Promise((resolve, reject) => {
  * @returns {String}
  */
 const bSync = (url) => new Promise((resolve, reject) => {
+  if (process.env.NODE_ENV === 'testing') {
+    return resolve(url)
+  }
+
   const { argv } = args.options({
     open: {
       alias: 'o',
