@@ -8,12 +8,6 @@ const { task, parallel, series, watch } = require('gulp')
 
 const pkgJson = require('./../package.json')
 
-if (process.env.WP_ENV && !process.env.NODE_ENV) {
-  process.env.NODE_ENV = process.env.WP_ENV
-}
-
-const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
-
 const bumpFile = (filePath, cb) => {
   const fs = require('fs')
 
@@ -34,38 +28,46 @@ const bumpFile = (filePath, cb) => {
   })
 }
 
-yargs
-  .usage('Usage $0 [command]')
-  .version(pkgJson.version)
-  .demandCommand(1)
-  .command({
-    command: 'bump <path>',
-    desc: 'Bump version in readme.txt & style.css file',
-    handler (argv) {
-      const files = [
-        'style.css',
-        'readme.txt'
-      ]
+if (require.main === module) {
+  yargs
+    .usage('Usage $0 [command]')
+    .version(pkgJson.version)
+    .demandCommand(1)
+    .command({
+      command: 'bump <path>',
+      desc: 'Bump version in readme.txt & style.css file',
+      handler (argv) {
+        const files = [
+          'style.css',
+          'readme.txt'
+        ]
 
-      return Promise.all(files.map(file => {
-        return bumpFile(`${argv.path}/${file}`, (data) => {
-          // Skip bump if contain '-'
-          // eg: 0.0.0-pre, 0.0.0-alpha, etc
-          if (pkgJson.version.includes('-')) return data
-          return data.replace(/(:\s+)(\d.\d.\d)$/gm, `$1${pkgJson.version}`)
-        })
-      }))
-    }
-  }).argv
+        return Promise.all(files.map(file => {
+          return bumpFile(`${argv.path}/${file}`, (data) => {
+            // Skip bump if contain '-'
+            // eg: 0.0.0-pre, 0.0.0-alpha, etc
+            if (pkgJson.version.includes('-')) return data
+            return data.replace(/(:\s+)(\d.\d.\d)$/gm, `$1${pkgJson.version}`)
+          })
+        }))
+      }
+    }).argv
+}
 
 const { argv } = yargs.options({
   bump: {
     describe: 'Bump version before zipping',
     default: true,
     type: 'boolean'
+  },
+  mode: {
+    describe: 'Override default `WP_ENV` in .env fiel',
+    type: 'string'
   }
 })
 
+process.env.NODE_ENV = argv.mode || process.env.WP_ENV || 'development'
+const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
 const globalConfig = {
   version: pkgJson.version,
   author: pkgJson.author,
@@ -76,6 +78,8 @@ const globalConfig = {
     css: 'scss/**/*.scss',
     js: 'js/**/*.js',
   },
+
+  gulp: {},
 
   php: {
     phpcs: {
@@ -199,39 +203,43 @@ const configure = exports.configure = (src, dest, tasks) => {
 
   for (const [name, asset] of scandir(src, dest)) {
     const assetTasks = []
-    const config = {
-      name: name,
-      type: asset.type,
-      path: asset.path,
-      version: globalConfig.version,
-      author: globalConfig.author
-    }
 
     for (const key of Object.keys(asset)) {
       if (['type', 'path'].includes(key)) {
         continue
       }
 
-      if (['js', 'css'].includes(key)) {
-        config.rename = {
-          suffix: '.min'
-        }
+      const config = {
+        name: name,
+        type: asset.type,
+        path: asset.path,
+        version: globalConfig.version,
+        author: globalConfig.author
+      }
 
+      if (['js', 'css'].includes(key)) {
+        config.rename = { suffix: '.min' }
         config.browserslist = pkgJson.browserslist
+        config.sourcemaps = {}
+        config.gulp = {
+          sourcemaps: !isProduction
+        }
       }
 
       const taskName = `${name}:${key}`
-
-      if (globalConfig.hasOwnProperty(key)) {
-        Object.assign(config, globalConfig[key])
-      }
 
       if ('zip' !== key) {
         toWatch[taskName] = asset[key].src
         assetTasks.push(taskName)
       } else {
-        config.base = path.join(process.cwd(), config.path, '..')
+        config.gulp = {
+          base: path.join(process.cwd(), config.path, '..')
+        }
         zipTasks.push(taskName)
+      }
+
+      if (globalConfig.hasOwnProperty(key)) {
+        Object.assign(config, globalConfig[key])
       }
 
       task(taskName, (done) => {

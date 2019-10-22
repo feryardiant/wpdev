@@ -13,8 +13,10 @@ const php = require('gulp-connect-php')
 const phpcs = require('gulp-phpcs')
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
+const sourcemaps = require('gulp-sourcemaps')
 const stylelint = require('gulp-stylelint')
 const uglify = require('gulp-uglify')
+const when = require('gulp-if')
 const wpPot = require('gulp-wp-pot')
 const zip = require('gulp-zip')
 
@@ -60,14 +62,14 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   css ({ src, dest, config }) {
-    return gulp.src(src, { sourcemaps: true })
+    return gulp.src(src, config.gulp)
       .pipe(stylelint(config.stylelint))
       .pipe(sass(config.sass).on('error', sass.logError))
       .pipe(autoprefixer())
+      .pipe(gulp.dest(dest, config.gulp))
+      .pipe(when(isProduction, cleanCSS()))
+      .pipe(when(isProduction, rename(config.rename)))
       .pipe(gulp.dest(dest))
-      .pipe(cleanCSS())
-      .pipe(rename(config.rename))
-      .pipe(gulp.dest(dest, { sourcemaps: true }))
       .pipe(bs.stream())
   },
 
@@ -81,18 +83,14 @@ const tasks = configure('source', 'build', {
    * @return {stream}
    */
   js ({ src, dest, config }) {
-    const stream = gulp.src(src, { sourcemaps: true })
+    return gulp.src(src, config.gulp)
       .pipe(eslint(config.eslint))
-
-    if (isProduction) {
-      stream.pipe(eslint.failAfterError())
-    }
-
-    return stream
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError())
       .pipe(babel(config.babel))
-      .pipe(uglify(config.uglify))
-      .pipe(rename(config.rename))
-      .pipe(gulp.dest(dest, { sourcemaps: true }))
+      .pipe(when(isProduction, uglify(config.uglify)))
+      .pipe(when(isProduction, rename(config.rename)))
+      .pipe(when(isProduction, gulp.dest(dest, config.gulp)))
       .pipe(bs.stream())
   },
 
@@ -131,7 +129,7 @@ const tasks = configure('source', 'build', {
     // Generate CHANGELOG.md file inside source directory
     await version(config.release)
 
-    return gulp.src(src, { base: config.base })
+    return gulp.src(src, config.gulp)
       .pipe(zip(`${config.name}-${config.version}.zip`, config.zip))
       .pipe(gulp.dest(dest))
   }
@@ -293,7 +291,7 @@ exports.release = async () => {
     sign: {
       describe: 'Sign the release tag',
       type: 'boolean',
-      default: true
+      default: isProduction
     }
   })
 
