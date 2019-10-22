@@ -289,11 +289,16 @@ exports.release = async () => {
     as: {
       describe: 'Bump as version',
       type: 'string'
+    },
+    sign: {
+      describe: 'Sign the release tag',
+      type: 'boolean',
+      default: true
     }
   })
 
   const releaseConfig = {
-    sign: true,
+    sign: argv.sign,
     scripts: {
       prerelease: 'gulp build && git add -A',
       postbump: 'gulp zip',
