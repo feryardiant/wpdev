@@ -1,4 +1,4 @@
-const { readdirSync, readFileSync } = require('fs')
+const { existsSync, readdirSync, readFileSync } = require('fs')
 const { promisify } = require('util')
 const execFile = promisify(require('child_process').execFile)
 const path = require('path')
@@ -134,11 +134,12 @@ const scandir = exports.scandir = (dir, dest) => {
   return readdirSync(dir, readdirOpt).reduce((types, type) => {
     if (!['plugins', 'themes'].includes(type.name)) return types
 
-    const sourceDir = readdirSync(path.join(dir, type.name), readdirOpt).reduce((sources, source) => {
-      if (!source.isDirectory()) return sources
+    const packages = readdirSync(path.join(dir, type.name), readdirOpt).reduce((pkgs, src) => {
+      if (!src.isDirectory()) return pkgs
 
-      let target = `${type.name}/${source.name}`
-      sources = {
+      let target = `${type.name}/${src.name}`
+      const assetPath = `${target}/assets`
+      const pkg = {
         type: type.name,
         path: `${dir}/${target}`,
         php: {
@@ -146,26 +147,31 @@ const scandir = exports.scandir = (dir, dest) => {
             `${dir}/${target}/**/*.php`,
             `!${dir}/${target}/vendor`
           ],
-          dest: `${tmpDir}/${target}/languages/${source.name}.pot`,
+          dest: `${tmpDir}/${target}/languages/${src.name}.pot`,
         }
       }
 
-      Object.keys(paths).forEach(asset => {
-        const assetPath = `${target}/assets`
-        const srcPath = [
-          `${dir}/${assetPath}/${paths[asset]}`
-        ]
+      if (existsSync(path.join(dir, assetPath))) {
+        Object.keys(paths).forEach(asset => {
+          if (!existsSync(path.join(dir, assetPath, paths[asset].split('/')[0]))) {
+            return
+          }
 
-        if (['js', 'css'].includes(asset)) {
-          const excludes = path.join(dir, assetPath, paths[asset].replace(/\./, '.min.'))
-          srcPath.push(`!${excludes}`)
-        }
+          const srcPath = [
+            `${dir}/${assetPath}/${paths[asset]}`
+          ]
 
-        sources[asset] = {
-          src: srcPath,
-          dest: `${dir}/${assetPath}/${asset}`
-        }
-      })
+          if (['js', 'css'].includes(asset)) {
+            const excludes = path.join(dir, assetPath, paths[asset].replace(/\./, '.min.'))
+            srcPath.push(`!${excludes}`)
+          }
+
+          pkg[asset] = {
+            src: srcPath,
+            dest: `${dir}/${assetPath}/${asset}`
+          }
+        })
+      }
 
       const zipSrc = [
         `${dir}/${target}/**`
@@ -178,16 +184,17 @@ const scandir = exports.scandir = (dir, dest) => {
         }
       })
 
-      sources.zip = {
+      pkg.zip = {
         src: zipSrc,
         dest: dest
       }
 
-      return [source.name, sources]
-    }, [])
+      pkgs[src.name] = pkg
+      return pkgs
+    }, {})
 
-    if (sourceDir.length > 0) {
-      types.push(sourceDir)
+    for (const [name, pkg] of Object.entries(packages)) {
+      types.push([name, pkg])
     }
 
     return types
@@ -198,8 +205,6 @@ const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const zipTasks = []
   const toWatch = {}
-
-  console.log(scandir(src, dest))
 
   for (const [name, asset] of scandir(src, dest)) {
     const assetTasks = []
@@ -251,12 +256,12 @@ const configure = exports.configure = (src, dest, tasks) => {
       })
     }
 
-    task(`${name}:build`, parallel(...assetTasks))
+    task(`${name}:build`, parallel(...assetTasks.sort()))
     buildTasks.push(...assetTasks)
   }
 
-  task('build', parallel(...buildTasks))
-  task('zip', parallel(...zipTasks))
+  task('build', parallel(...buildTasks.sort()))
+  task('zip', series(...zipTasks))
 
   return toWatch
 }
