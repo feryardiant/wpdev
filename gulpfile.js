@@ -222,37 +222,24 @@ const bSync = (url) => new Promise((resolve, reject) => {
     },
   })
 
+  const routes = [
+    '/wp-admin/css',
+    '/wp-admin/images',
+    '/wp-admin/js',
+    '/wp-includes/css',
+    '/wp-includes/images',
+    '/wp-includes/js'
+  ]
+
   bs.init({
     proxy: url.toString(),
     baseDir: './public',
     notify: argv.notify,
     open: argv.open,
-    serveStatic: [
-      {
-        route: '/wp-admin/css',
-        dir: 'public/wp/wp-admin/css'
-      },
-      {
-        route: '/wp-admin/images',
-        dir: 'public/wp/wp-admin/images',
-      },
-      {
-        route: '/wp-admin/js',
-        dir: 'public/wp/wp-admin/js',
-      },
-      {
-        route: '/wp-includes/css',
-        dir: 'public/wp/wp-includes/css',
-      },
-      {
-        route: '/wp-includes/images',
-        dir: 'public/wp/wp-includes/images',
-      },
-      {
-        route: '/wp-includes/js',
-        dir: 'public/wp/wp-includes/js',
-      }
-    ]
+    serveStatic: routes.map(route => ({
+      route,
+      dir: `public/wp${route}`
+    }))
   }, () => {
     url.port = 3000
     resolve(url)
