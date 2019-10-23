@@ -16,11 +16,11 @@
   "env": {
     "WP_ENV": {
       "description": "Only for automated deploys, please don't enter anything!",
-      "required": true
+      "required": false
     },
     "WP_DEFAULT_THEME": {
       "description": "Only for automated deploys, please don't enter anything!",
-      "required": true
+      "required": false
     },
     "WP_DEBUG": {
       "description": "Only for automated deploys, please don't enter anything!",
@@ -28,7 +28,7 @@
     },
     "HEROKU_APP_NAME": {
       "description": "Only for automated deploys, please don't enter anything!",
-      "required": true
+      "required": false
     },
     "AUTH_KEY": {
       "description": "A secret key to increase security of stored information.",
