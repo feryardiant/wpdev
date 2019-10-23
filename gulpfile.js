@@ -126,6 +126,11 @@ const tasks = configure('source', 'releases', {
       postbump: `node config/build-util.js bump ${config.path}`
     }
 
+    // Don't generate changelog if no version bump
+    if (config.release.skip.bump) {
+      config.release.skip.changelog = true
+    }
+
     // Generate CHANGELOG.md file inside source directory
     await version(config.release)
 
