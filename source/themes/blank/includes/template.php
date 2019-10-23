@@ -44,7 +44,6 @@ class Template extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'wp_head', [ $this, 'head' ] );
 		add_action( 'blank_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'blank_before_main', [ $this, 'before_main' ], 10 );
@@ -57,15 +56,6 @@ class Template extends Feature {
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 		add_filter( 'get_custom_logo', [ $this, 'site_branding' ] );
 		add_filter( 'template_include', [ $this, 'wrapper' ] );
-	}
-
-	/**
-	 * Template Setup
-	 *
-	 * @return void
-	 */
-	public function setup() : void {
-		// .
 	}
 
 	/**

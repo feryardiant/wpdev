@@ -32,6 +32,7 @@ use ArrayAccess;
  * @property-read Customizer $customizer
  * @property-read Menu $menu
  * @property-read Template $template
+ * @property-read Typography $typography
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
  */
@@ -111,6 +112,7 @@ final class Theme implements ArrayAccess {
 			Customizer::class,
 			Menu::class,
 			Template::class,
+			Typography::class,
 			Widgets::class,
 		] );
 
@@ -443,6 +445,24 @@ final class Theme implements ArrayAccess {
 		}
 
 		return $locale;
+	}
+
+	/**
+	 * Get filesystem instance.
+	 *
+	 * @since 0.2.1
+	 * @return \WP_Filesystem_Base
+	 */
+	public function get_filesystem() : \WP_Filesystem_Base {
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
+		global $wp_filesystem;
+
+		return $wp_filesystem;
 	}
 
 	/**
