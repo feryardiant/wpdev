@@ -46,6 +46,10 @@
       "type": "path",
       "url": "source/themes/blank"
     },
+    "child-theme": {
+      "type": "path",
+      "url": "source/themes/blank-child"
+    },
     "plugin": {
       "type": "path",
       "url": "source/plugins/blank-companion"
@@ -74,8 +78,7 @@
     "wpackagist-plugin/redis-cache": "^1.4",
     "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.6.4",
-    "wpdev/blank": "*",
-    "wpdev/blank-companion": "*"
+    "wpdev/blank-child": "*"
   },
   "require-dev": {
     "10up/wp_mock": "^0.4.2",

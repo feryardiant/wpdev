@@ -14,15 +14,13 @@ const bumpFile = (filePath, cb) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
-        if (err.code === 'ENOENT') {
-          return resolve()
-        }
+        if (err.code === 'ENOENT') return resolve()
         return reject(err)
       }
 
       fs.writeFile(filePath, cb(data), 'utf8', (err) => {
         if (err) return reject(err)
-        resolve()
+        return resolve()
       })
     })
   })
@@ -61,7 +59,7 @@ const { argv } = yargs.options({
     type: 'boolean'
   },
   mode: {
-    describe: 'Override default `WP_ENV` in .env fiel',
+    describe: 'Override default `WP_ENV` in .env field',
     type: 'string'
   }
 })
@@ -200,6 +198,8 @@ const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const zipTasks = []
   const toWatch = {}
+
+  console.log(scandir(src, dest))
 
   for (const [name, asset] of scandir(src, dest)) {
     const assetTasks = []

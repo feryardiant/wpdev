@@ -71,9 +71,8 @@ Config::define('CONTENT_DIR',       '/app');
 Config::define('WP_CONTENT_DIR',    $webroot_dir . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL',    Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
-$_default_theme = env('WP_DEFAULT_THEME');
-if ($_default_theme) {
-    Config::define('WP_DEFAULT_THEME',  env('WP_DEFAULT_THEME') ?? '');
+if ($_default_theme = env('WP_DEFAULT_THEME')) {
+    Config::define('WP_DEFAULT_THEME',  env('WP_DEFAULT_THEME'));
 }
 unset($_default_theme);
 
