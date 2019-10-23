@@ -2,9 +2,8 @@
 /**
  * Blank Theme.
  *
- * @package    WordPress_Boilerplate
- * @subpackage WPBP_Theme
- * @since      0.1.1
+ * @package  Blank
+ * @since    0.2.0
  */
 
 namespace Blank;
