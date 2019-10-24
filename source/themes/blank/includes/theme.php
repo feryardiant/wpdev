@@ -73,9 +73,14 @@ final class Theme implements ArrayAccess {
 	public function __construct() {
 		self::$cached = (object) [];
 
-		$transient_name     = $this->transient_name( 'theme_info' );
-		self::$cached->info = get_transient( $transient_name );
-		self::$cached->info = [];
+		$transient_name        = $this->transient_name( 'theme_info' );
+		self::$cached->info    = get_transient( $transient_name );
+		self::$cached->options = [
+			'panels'   => [],
+			'sections' => [],
+			'settings' => [],
+			'values'   => [],
+		];
 
 		if ( empty( self::$cached->info ) ) {
 			/** @var WP_Theme $theme */
@@ -101,10 +106,6 @@ final class Theme implements ArrayAccess {
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
-
-		if ( function_exists( 'tgmpa' ) ) {
-			add_action( 'tgmpa_register', [ $this, 'tgmpa_register' ] );
-		}
 
 		$this->initialize( [
 			Asset::class,
@@ -389,28 +390,16 @@ final class Theme implements ArrayAccess {
 	}
 
 	/**
-	 * Register required plugins
-	 *
-	 * @return void
-	 */
-	public function tgmpa_register() {
-		tgmpa( [
-			[
-				'name' => 'JetPack by Automatic',
-				'slug' => 'jetpack',
-			],
-		] );
-	}
-
-	/**
 	 * Class initializer.
 	 *
 	 * @since 0.1.1
-	 * @param  array $classes
+	 * @param  array $features
 	 * @return void
 	 */
-	private function initialize( array $classes ) {
-		foreach ( $classes as $name => $class ) {
+	private function initialize( array $features ) {
+		$features = apply_filters( 'blank_init', $features );
+
+		foreach ( $features as $name => $class ) {
 			if ( is_numeric( $name ) ) {
 				$name = strtolower(
 					str_replace( [ '\\', __NAMESPACE__ . '.' ], [ '.', '' ], $class )
@@ -498,13 +487,6 @@ final class Theme implements ArrayAccess {
 		} elseif ( is_dir( $options_dir ) ) {
 			$options = array_diff( scandir( $options_dir ), [ '.', '..' ] );
 		}
-
-		self::$cached->options = [
-			'panels'   => [],
-			'sections' => [],
-			'settings' => [],
-			'values'   => [],
-		];
 
 		foreach ( $options as $file ) {
 			$info = pathinfo( $file );
