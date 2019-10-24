@@ -217,25 +217,6 @@ class Asset extends Feature {
 	}
 
 	/**
-	 * Register Google fonts.
-	 *
-	 * @since 0.1.0
-	 * @return string Google fonts URL for the theme.
-	 */
-	public function google_fonts_url() {
-		$google_fonts = apply_filters( 'blank_google_font_families', [
-			'source-sans-pro' => 'Source+Sans+Pro:400,300,300italic,400italic,600,700,900',
-		] );
-
-		$query_args = [
-			'family' => implode( '|', $google_fonts ),
-			'subset' => rawurlencode( 'latin,latin-ext' ),
-		];
-
-		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-	}
-
-	/**
 	 * Get asset file uri.
 	 *
 	 * @since 0.1.0
