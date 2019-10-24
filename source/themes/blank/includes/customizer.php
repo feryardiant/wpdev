@@ -22,10 +22,16 @@ class Customizer extends Feature {
 	 * @var array
 	 */
 	private $control_aliases = [
-		'color'  => \WP_Customize_Color_Control::class,
-		'image'  => \WP_Customize_Image_Control::class,
-		'media'  => \WP_Customize_Media_Control::class,
-		'upload' => \WP_Customize_Upload_Control::class,
+		'blank-text'       => Customizer\Basic_Control::class,
+		'blank-number'     => Customizer\Basic_Control::class,
+		'blank-email'      => Customizer\Basic_Control::class,
+		'blank-telp'       => Customizer\Basic_Control::class,
+		'blank-dropdown'   => Customizer\Dropdown_Control::class,
+		'blank-typography' => Customizer\Typography_Control::class,
+		'color'            => \WP_Customize_Color_Control::class,
+		'image'            => \WP_Customize_Image_Control::class,
+		'media'            => \WP_Customize_Media_Control::class,
+		'upload'           => \WP_Customize_Upload_Control::class,
 	];
 
 	/**
@@ -44,6 +50,10 @@ class Customizer extends Feature {
 	 * @param WP_Customize_Manager $customizer
 	 */
 	public function register( Manager $customizer ) {
+		$customizer->register_control_type( Customizer\Basic_Control::class );
+		$customizer->register_control_type( Customizer\Dropdown_Control::class );
+		$customizer->register_control_type( Customizer\Typography_Control::class );
+
 		$customizer->get_setting( 'blogname' )->transport         = 'postMessage';
 		$customizer->get_setting( 'blogdescription' )->transport  = 'postMessage';
 		$customizer->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -82,15 +92,25 @@ class Customizer extends Feature {
 				}
 			} else {
 				foreach ( $values as $key => $value ) {
-					$key      = $this->add_prefix( $key );
-					$selector = null;
-					$settings = [
-						'transport' => 'postMessage',
+					$key          = $this->add_prefix( $key );
+					$selector     = null;
+					$setting_keys = [
+						'default',
+						'sanitize_callback',
+						'transport',
+						'capability',
+					];
+					$settings     = [
+						'transport'  => 'postMessage',
+						'type'       => 'theme_mod',
+						'capability' => 'edit_theme_options',
 					];
 
-					if ( isset( $value['default'] ) ) {
-						$settings['default'] = $value['default'];
-						unset( $value['default'] );
+					foreach ( $setting_keys as $setting_key ) {
+						if ( isset( $value[ $setting_key ] ) ) {
+							$settings[ $setting_key ] = $value[ $setting_key ];
+							unset( $value[ $setting_key ] );
+						}
 					}
 
 					$customizer->add_setting( $key, $settings );

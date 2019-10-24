@@ -46,7 +46,7 @@ final class Theme implements ArrayAccess {
 	const TRANSIENT_NAMES = [
 		'theme_info',
 		'icons_info',
-		'styles_info',
+		'fonts_info',
 	];
 
 	/**
@@ -75,6 +75,7 @@ final class Theme implements ArrayAccess {
 
 		$transient_name     = $this->transient_name( 'theme_info' );
 		self::$cached->info = get_transient( $transient_name );
+		self::$cached->info = [];
 
 		if ( empty( self::$cached->info ) ) {
 			/** @var WP_Theme $theme */
@@ -82,7 +83,7 @@ final class Theme implements ArrayAccess {
 			$theme_info = [
 				'siteurl'    => get_option( 'siteurl' ),
 				'name'       => $theme->name,
-				'slug'       => $theme->template,
+				'slug'       => strtolower( $theme->template ),
 				'version'    => $theme->version,
 				'author'     => $theme->get( 'Author' ),
 				'author_uri' => $theme->get( 'AuthorURI' ),
@@ -344,7 +345,7 @@ final class Theme implements ArrayAccess {
 		 */
 		add_editor_style( [
 			$this->asset->get_uri( 'gutenberg-editor.css' ),
-			$this->asset->google_fonts_url(),
+			$this->typography->get_google_fonts_url(),
 		] );
 
 		/**
@@ -452,6 +453,7 @@ final class Theme implements ArrayAccess {
 	 *
 	 * @since 0.2.1
 	 * @return \WP_Filesystem_Base
+	 * @codeCoverageIgnore
 	 */
 	public function get_filesystem() : \WP_Filesystem_Base {
 		if ( ! function_exists( 'WP_Filesystem' ) ) {

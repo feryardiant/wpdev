@@ -83,58 +83,58 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/template.php:252
+#: includes/template.php:251
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:286
+#: includes/template.php:285
 msgid "Site Navigation"
 msgstr ""
 
-#: includes/template.php:317, templates/content-none.php:13
+#: includes/template.php:316, templates/content-none.php:13
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:322
+#: includes/template.php:321
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:326
+#: includes/template.php:325
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:488
+#: includes/template.php:487
 msgid "Copyright &copy; %s."
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/theme.php:138
+#: includes/theme.php:139
 msgid "%s Option Panel"
 msgstr ""
 
-#: includes/theme.php:139
+#: includes/theme.php:140
 msgid "Theme Option"
 msgstr ""
 
-#: includes/theme.php:357
+#: includes/theme.php:358
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:362
+#: includes/theme.php:363
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:367
+#: includes/theme.php:368
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:372
+#: includes/theme.php:373
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:377
+#: includes/theme.php:378
 msgid "Huge"
 msgstr ""
 

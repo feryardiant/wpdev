@@ -88,10 +88,11 @@ class Asset extends Feature {
 			'wp.i18n.setLocaleData( ' . $locale_data . ', "' . $this->theme->slug . '" );'
 		);
 
-		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'admin' ), $this->version, true );
+		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'customizer' ), $this->version, true );
 
 		wp_localize_script( 'blank-customizer', 'blank_customizer', $this->get_localize_script( [
 			'customizer_url' => admin_url( '/customize.php?autofocus' ),
+			'webfonts'       => $this->theme->typography->get_fonts(),
 		] ) );
 
 		wp_enqueue_script( 'blank-customizer' );
@@ -120,20 +121,23 @@ class Asset extends Feature {
 	 * @return array
 	 */
 	protected function get_styles_dependencies( string $context ) : array {
-		wp_register_style( 'blank-google-fonts', $this->google_fonts_url(), [], $this->version );
-
 		wp_register_style( 'blank-variables', false, [], $this->version );
 		wp_add_inline_style( 'blank-variables', $this->css_variables( $this->theme ) );
 
+		$google_fonts = $this->theme->typography->get_google_fonts_url();
+		$common_deps  = [
+			'blank-variables',
+		];
+
+		if ( $google_fonts ) {
+			wp_register_style( 'blank-google-fonts', $google_fonts, [], $this->version );
+
+			$common_deps[] = 'blank-google-fonts';
+		}
+
 		$deps = apply_filters( 'blank_scripts_dependencies', [
-			'theme'      => [
-				'blank-google-fonts',
-				'blank-variables',
-			],
-			'admin'      => [
-				'blank-google-fonts',
-				'blank-variables',
-			],
+			'theme'      => $common_deps,
+			'admin'      => $common_deps,
 			'customizer' => [],
 		], $context );
 
@@ -152,12 +156,13 @@ class Asset extends Feature {
 				'jquery',
 			],
 			'admin'      => [
-				'wp-i18n',
 				'jquery',
+				'wp-i18n',
 			],
 			'customizer' => [
+				'customize-preview',
+				'customize-controls',
 				'underscore',
-				'wp-color-picker',
 				'wp-element',
 				'wp-components',
 				'wp-date',

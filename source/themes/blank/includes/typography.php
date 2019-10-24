@@ -2,9 +2,8 @@
 /**
  * Blank Theme.
  *
- * @package    WordPress_Boilerplate
- * @subpackage WPBP_Theme
- * @since      0.2.1
+ * @package  Blank
+ * @since    0.2.1
  */
 
 namespace Blank;
@@ -75,15 +74,161 @@ class Typography extends Feature {
 
 	/**
 	 * Initialize class.
-	 *
-	 * -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-	 * Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-	 * SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 	 */
 	protected function initialize() : void {
 		add_action( 'wp_loaded', function () {
 			$this->get_google_webfonts();
 		} );
+	}
+
+	/**
+	 * Get all fonts.
+	 *
+	 * @since 0.2.1
+	 * @return array
+	 */
+	public function get_fonts() : array {
+		$name  = $this->theme->transient_name( 'fonts_info' );
+		$fonts = get_transient( $name ) ?: [];
+
+		if ( empty( $fonts ) ) {
+			$fonts = array_merge( $this->get_system_fonts(), $this->get_google_webfonts() );
+
+			set_transient( $name, $fonts );
+		}
+
+		return $fonts;
+	}
+
+	/**
+	 * Register Google fonts.
+	 *
+	 * @since 0.2.2
+	 * @return string|null Google fonts URL for the theme.
+	 */
+	public function get_google_fonts_url() : ?string {
+		$google_fonts = (object) apply_filters( 'blank_google_fonts_enabled', [
+			'families' => [],                      // Source+Sans+Pro.
+			'variants' => [ 'regular', 'italic' ], // regular, italic, 300, 300italic.
+			'subsets'  => [ 'latin' ],             // latin-ext.
+		] );
+
+		if ( empty( $google_fonts->families ) ) {
+			return null;
+		}
+
+		$query_args = [
+			'family' => implode( '|', $google_fonts->families ),
+			'subset' => rawurlencode( 'latin,latin-ext' ),
+		];
+
+		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+	}
+
+	/**
+	 * Get all available System Fonts.
+	 *
+	 * Should we add these emoji fonts?
+	 * - "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+	 * As well as these system fonts?
+	 * - -apple-system, BlinkMacSystemFont
+	 * - SFMono-Regular
+	 *
+	 * @link https://www.tutorialbrain.com/css_tutorial/css_font_family_list/
+	 * @since 0.2.1
+	 * @return array
+	 */
+	public function get_system_fonts() : array {
+		$fonts   = [];
+		$default = [
+			'source'   => 'system',
+			'subsets'  => [ 'latin' ],
+			'variants' => [
+				'300',
+				'300italic',
+				'regular',
+				'italic',
+				'700',
+				'700italic',
+			],
+		];
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Segoe UI',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Roboto',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Helvetica Neue',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Helvetica',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Verdana',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Arial',
+			'category' => 'sans-serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Times New Roman',
+			'category' => 'serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Times',
+			'category' => 'serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Georgia',
+			'category' => 'serif',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Menlo',
+			'category' => 'monospace',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Monaco',
+			'category' => 'monospace',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Consolas',
+			'category' => 'monospace',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Liberation Mono',
+			'category' => 'monospace',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Courier New',
+			'category' => 'monospace',
+		], $default );
+
+		$fonts[] = (object) wp_parse_args( [
+			'family'   => 'Courier',
+			'category' => 'monospace',
+		], $default );
+
+		return $fonts;
 	}
 
 	/**
@@ -105,16 +250,6 @@ class Typography extends Feature {
 		$filesystem->put_contents( $fonts_cache_file, wp_json_encode( $fonts ) );
 
 		return $fonts;
-	}
-
-	/**
-	 * Get all available System Fonts.
-	 *
-	 * @since 0.2.1
-	 * @return array
-	 */
-	public function get_system_fonts() : array {
-		return [];
 	}
 
 	/**
@@ -155,6 +290,7 @@ class Typography extends Feature {
 			$items[] = (object) [
 				'family'   => $item->family,
 				'category' => $category,
+				'source'   => 'google',
 				'variants' => $item->variants,
 				'subsets'  => $item->subsets,
 				'files'    => $item->files,
