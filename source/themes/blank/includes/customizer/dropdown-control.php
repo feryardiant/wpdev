@@ -38,23 +38,14 @@ class Dropdown_Control extends Abstract_Control {
 	 * @inheritDoc
 	 * @return void
 	 */
-	protected function content_template() {
+	protected function control_template() {
 		?>
-		<header>
-			<label for="{{ data.id }}" class="customize-control-title">{{{ data.label }}}</label>
-			<# if ( data.description ) { #>
-				<span class="description customize-control-description">{{{ data.description }}}</span>
+		<select id="{{ data.id }}" data-multiple="{{ data.multiple }}">
+			<option value="">Choose One</option>
+			<# for ( key in data.choices ) { #>
+				<option value="{{ data.value[ key ] }}">{{ data.choices[ data.value[ key ] ] }}</option>
 			<# } #>
-		</header>
-
-		<section>
-			<select id="{{ data.id }}" data-multiple="{{ data.multiple }}" {{{ data.link }}}>
-				<option value="">Choose One</option>
-				<# for ( key in data.choices ) { #>
-					<option value="{{ data.value[ key ] }}">{{ data.choices[ data.value[ key ] ] }}</option>
-				<# } #>
-			</select>
-		</section>
+		</select>
 		<?php
 	}
 }

@@ -15,18 +15,20 @@ namespace Blank\Customizer;
  */
 abstract class Abstract_Control extends \WP_Customize_Control {
 	/**
+	 * Is current control available for multi devices?.
+	 *
+	 * @var int
+	 */
+	public $multi_devices = 0;
+
+	/**
 	 * @inheritDoc
 	 * @return void
 	 */
 	public function to_json() {
 		parent::to_json();
 
-		if ( isset( $this->default ) ) {
-			$this->json['default'] = $this->default;
-		} else {
-			$this->json['default'] = $this->setting->default;
-		}
-
+		$this->json['default'] = $this->default ?? $this->setting->default;
 		$this->json['value']   = $this->value();
 		$this->json['choices'] = $this->choices;
 		$this->json['link']    = $this->get_link();
@@ -55,7 +57,7 @@ abstract class Abstract_Control extends \WP_Customize_Control {
 	 */
 	protected function render() {
 		$id    = 'customize-control-' . $this->normalized_id();
-		$class = 'customize-control customize-control-blank customize-control-' . $this->type;
+		$class = 'customize-control customize-control-blank-options customize-control-' . $this->type;
 
 		printf( '<li id="%s" class="%s"></li>', esc_attr( $id ), esc_attr( $class ) );
 	}
@@ -76,4 +78,29 @@ abstract class Abstract_Control extends \WP_Customize_Control {
 	protected function render_content() {
 		// .
 	}
+
+	/**
+	 * @inheritDoc
+	 * @return void
+	 */
+	protected function content_template() {
+		?>
+		<div class="blank-control" data-type="{{ data.type }}">
+			<header>
+				<button type="button" class="blank-control-revert"></button>
+				<h3 class="blank-control-title">{{{ data.label }}}</h3>
+				<# if ( data.description ) { #><p class="blank-control-description">{{{ data.description }}}</p><# } #>
+			</header>
+
+			<section><?php $this->control_template(); ?></section>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Custom Control Template
+	 *
+	 * @return void
+	 */
+	abstract protected function control_template();
 }

@@ -24,18 +24,9 @@ class Basic_Control extends Abstract_Control {
 	 * @inheritDoc
 	 * @return void
 	 */
-	protected function content_template() {
+	protected function control_template() {
 		?>
-		<header>
-			<label for="{{ data.id }}" class="customize-control-title">{{{ data.label }}}</label>
-			<# if ( data.description ) { #>
-				<span class="description customize-control-description">{{{ data.description }}}</span>
-			<# } #>
-		</header>
-
-		<section>
-			<input id="{{ data.id }}" type="{{ data.type }}" {{{ data.link }}} value="{{ data.value }}" />
-		</section>
+		<input id="{{ data.id }}" type="{{ data.type }}" value="{{ data.value }}" />
 		<?php
 	}
 }

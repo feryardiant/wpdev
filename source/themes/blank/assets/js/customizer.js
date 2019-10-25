@@ -6,7 +6,7 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
 
-( function( document, $, { customize } ) {
+( function( document, blank, $, { customize } ) {
   // const apiBaseUrl = document.querySelector( 'link[rel="https://api.w.org/"]' )
   //   .getAttribute( 'href' )
 
@@ -34,10 +34,34 @@
     } )
   } )
 
+  // Show or hide site title.
+  customize( 'blank[show_site_title]', ( value ) => {
+    value.bind( ( to ) => {
+      $( '.site-title' ).toggleClass( 'is-hidden', to )
+    } )
+  } )
+
   // Update site background color...
   customize( 'blogdescription', ( value ) => {
     value.bind( ( to ) => {
       $( '.site-description' ).text( to )
+    } )
+  } )
+
+  // Show or hide site tagline.
+  customize( 'blank[show_tagline]', ( value ) => {
+    value.bind( ( to ) => {
+      $( '.site-description' ).toggleClass( 'is-hidden', to )
+    } )
+  } )
+
+  // Update site background color...
+  customize( 'blank[typography_base_font]', ( value ) => {
+    value.bind( ( to ) => {
+      const prop = '--typography_base_font'
+      const font = blank.webfonts.find( ( f ) => f.family === to.family ) || {}
+
+      document.documentElement.style.setProperty( `${ prop }_family`, `'${ to.family }', ${ font.category }` )
     } )
   } )
 
@@ -98,4 +122,4 @@
       }
     } )
   } )
-} )( document, jQuery, wp )
+} )( document, window.blank_customizer, jQuery, wp )
