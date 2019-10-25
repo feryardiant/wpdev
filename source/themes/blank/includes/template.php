@@ -185,7 +185,7 @@ class Template extends Feature {
 		];
 
 		$logo['src'] = $logo['ID'] ? wp_get_attachment_image_url( $logo['ID'], $size ) : null;
-		$logo        = apply_filter( 'blank_site_logo', $logo );
+		$logo        = apply_filters( 'blank_site_logo', $logo );
 
 		if ( ! $logo || ! $logo['src'] ) {
 			return null;

@@ -387,6 +387,13 @@ final class Theme implements ArrayAccess {
 		 * Add support for responsive embedded content.
 		 */
 		add_theme_support( 'responsive-embeds' );
+
+		add_filter( 'blank_site_logo', function ( $logo ) {
+			if ( ! $logo['src'] ) {
+				$logo['src'] = $this->asset->get_uri( 'main-logo.svg' );
+			}
+			return $logo;
+		} );
 	}
 
 	/**
