@@ -303,8 +303,8 @@ final class Theme implements ArrayAccess {
 		add_theme_support(
 			'custom-logo',
 			apply_filters( 'blank_support_custom_logo_args', [
-				'height'      => 110,
-				'width'       => 470,
+				'height'      => 60,
+				'width'       => 210,
 				'flex-width'  => true,
 				'flex-height' => true,
 			] )
@@ -495,10 +495,7 @@ final class Theme implements ArrayAccess {
 				continue;
 			}
 
-			$this->add_option(
-				str_replace( '-', '_', $info['filename'] ),
-				require_once $this->get_dir( "{$dirname}/{$file}" )
-			);
+			$this->add_option( $info['filename'], require_once $this->get_dir( "{$dirname}/{$file}" ) );
 		}
 	}
 
@@ -513,6 +510,7 @@ final class Theme implements ArrayAccess {
 	 * @return void
 	 */
 	public function add_option( string $name, array $attributes = [], string $parent = null ) : void {
+		$name     = str_replace( '-', '_', $name );
 		$type     = 'settings';
 		$children = [];
 		$defaults = [
@@ -542,6 +540,13 @@ final class Theme implements ArrayAccess {
 				'section' => $parent,
 				'type'    => 'text',
 			] );
+
+			$attributes['default'] = apply_filters(
+				'blank_option_default',
+				$attributes['default'],
+				$attributes['type'],
+				$name
+			);
 
 			self::$cached->options['values'][ $name ] = $attributes['default'];
 		}
