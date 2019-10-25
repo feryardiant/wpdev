@@ -79,6 +79,8 @@ class Typography extends Feature {
 		add_action( 'wp_loaded', function () {
 			$this->get_google_webfonts();
 		} );
+
+		add_filter( 'blank_option_default', [ $this, 'default_option' ], 10, 3 );
 	}
 
 	/**
@@ -98,6 +100,36 @@ class Typography extends Feature {
 		}
 
 		return $fonts;
+	}
+
+	/**
+	 * Register Google fonts.
+	 *
+	 * @since 0.2.2
+	 * @param mixed  $default
+	 * @param string $type
+	 * @param string $name
+	 * @return array Google fonts URL for the theme.
+	 */
+	public function default_option( $default, string $type, string $name ) {
+		if ( 'blank-typography' !== $type ) {
+			return $default;
+		}
+
+		$family = 'Source Sans Pro';
+
+		if ( 'typography_pre_font' === $name ) {
+			$family = 'Monospace';
+		}
+
+		return wp_parse_args( $default ?: [], [
+			'family'    => $family,
+			'variant'   => 'regular',
+			'subsets'   => [ 'latin' ],
+			'size'      => [ 1, 'rem' ],
+			'height'    => [ 1, 'em' ],
+			'transform' => 'initial',
+		] );
 	}
 
 	/**
