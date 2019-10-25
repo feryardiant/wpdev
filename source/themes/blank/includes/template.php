@@ -184,11 +184,12 @@ class Template extends Feature {
 			'ID' => get_theme_mod( 'custom_logo' ) ?: null,
 		];
 
-		if ( ! $logo['ID'] ) {
+		$logo['src'] = $logo['ID'] ? wp_get_attachment_image_url( $logo['ID'], $size ) : null;
+		$logo        = apply_filter( 'blank_site_logo', $logo );
+
+		if ( ! $logo || ! $logo['src'] ) {
 			return null;
 		}
-
-		$logo['src'] = wp_get_attachment_image_url( $logo['ID'], $size );
 
 		return (object) $logo;
 	}
@@ -210,20 +211,11 @@ class Template extends Feature {
 
 		$attr = wp_parse_args( $attr, [
 			'class' => 'custom-logo',
+			'src'   => esc_url( $site_logo->src ),
 			'alt'   => get_post_meta( $site_logo->ID, '_wp_attachment_image_alt', true ),
 		] );
 
-		$output = sprintf(
-			'<img %1$s src="%2$s"/>',
-			make_attr_from_array( $attr ),
-			esc_url( $site_logo->src )
-		);
-
-		if ( $returns ) {
-			return $output;
-		}
-
-		echo wp_kses( $output, $this->common_kses() );
+		return make_html_tag( 'img', $attr, true, $returns );
 	}
 
 	/**
