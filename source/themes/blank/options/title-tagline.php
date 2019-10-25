@@ -28,22 +28,7 @@ return [
 			'label'    => __( 'Display Site Title', 'blank' ),
 			'type'     => 'checkbox',
 			'default'  => true,
-		],
-		'site_title_font' => [
-			'label'           => __( 'Site Title Font Family', 'blank' ),
-			'type'            => 'text',
-			'default'         => '',
-			'active_callback' => function () {
-				return $this->get_option( 'show_site_title' );
-			},
-		],
-		'site_title_size' => [
-			'label'           => __( 'Site Title Font Size', 'blank' ),
-			'type'            => 'text',
-			'default'         => '',
-			'active_callback' => function () {
-				return $this->get_option( 'show_site_title' );
-			},
+			'selector' => '.site-title',
 		],
 
 		'inline_site_title' => [
@@ -56,25 +41,10 @@ return [
 		],
 
 		'show_tagline' => [
-			'label'   => __( 'Display Tagline', 'blank' ),
-			'type'    => 'checkbox',
-			'default' => true,
-		],
-		'site_tagline_font' => [
-			'label'           => __( 'Tagline Font Family', 'blank' ),
-			'type'            => 'text',
-			'default'         => '',
-			'active_callback' => function () {
-				return $this->get_option( 'show_tagline' );
-			},
-		],
-		'site_tagline_size' => [
-			'label'           => __( 'Tagline Font Size', 'blank' ),
-			'type'            => 'text',
-			'default'         => '',
-			'active_callback' => function () {
-				return $this->get_option( 'show_tagline' );
-			},
+			'label'    => __( 'Display Tagline', 'blank' ),
+			'type'     => 'checkbox',
+			'default'  => true,
+			'selector' => '.site-description',
 		],
 	],
 ];
