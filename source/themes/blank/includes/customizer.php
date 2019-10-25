@@ -70,10 +70,7 @@ class Customizer extends Feature {
 			] );
 		}
 
-		$options  = $this->theme->options();
-		$callback = function () {
-			// .
-		};
+		$options = $this->theme->options();
 
 		foreach ( $options as $position => $values ) {
 			if ( 'values' === $position ) {
@@ -94,6 +91,7 @@ class Customizer extends Feature {
 				foreach ( $values as $key => $value ) {
 					$key          = $this->add_prefix( $key );
 					$selector     = null;
+					$callback     = null;
 					$setting_keys = [
 						'default',
 						'sanitize_callback',
@@ -101,7 +99,6 @@ class Customizer extends Feature {
 						'capability',
 					];
 					$settings     = [
-						'transport'  => 'postMessage',
 						'type'       => 'theme_mod',
 						'capability' => 'edit_theme_options',
 					];
@@ -113,13 +110,15 @@ class Customizer extends Feature {
 						}
 					}
 
-					$customizer->add_setting( $key, $settings );
-
 					if ( isset( $value['selector'] ) ) {
+						$settings['transport'] = 'postMessage';
+
 						$selector = $value['selector'];
 						$callback = $value['render_callback'] ?? $callback;
 						unset( $value['selector'], $value['render_callback'] );
 					}
+
+					$customizer->add_setting( $key, $settings );
 
 					if ( array_key_exists( $value['section'], $options['sections'] ) ) {
 						$value['section'] = $this->add_prefix( $value['section'] );
