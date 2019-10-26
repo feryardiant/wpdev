@@ -66,6 +66,115 @@ class Customizer extends Feature {
 	public function register( Manager $customizer ) {
 		$this->register_controls( $customizer );
 
+		$this->override_builtins( $customizer );
+
+		$options = $this->theme->options();
+
+		foreach ( $options as $position => $values ) {
+			if ( 'values' === $position ) {
+				continue;
+			}
+
+			if ( ! in_array( $position, [ 'panels', 'sections' ], true ) ) {
+				$this->register_control_setting( $customizer, $options, $values );
+				continue;
+			}
+
+			$method = 'panels' === $position ? 'add_panel' : 'add_section';
+
+			foreach ( $values as $key => $value ) {
+				if ( 'sections' === $position && isset( $value['panel'] ) ) {
+					$value['panel'] = $this->add_prefix( $value['panel'] );
+				}
+
+				call_user_func( [ $customizer, $method ], $this->add_prefix( $key ), $value );
+			}
+		}
+	}
+
+	/**
+	 * Register customizer settings.
+	 *
+	 * @since 0.2.1
+	 * @param WP_Customize_Manager $customizer
+	 */
+	protected function register_controls( Manager $customizer ) {
+		foreach ( array_keys( $this->controls ) as $blank_control ) {
+			$customizer->register_control_type( $blank_control );
+		}
+	}
+
+	/**
+	 * Register customizer settings.
+	 *
+	 * @since 0.2.1
+	 * @param WP_Customize_Manager $customizer
+	 * @param array                $options
+	 * @param array                $values
+	 */
+	protected function register_control_setting( Manager $customizer, array $options, array $values ) {
+		$setting_keys = [
+			'default',
+			'sanitize_callback',
+			'transport',
+			'capability',
+		];
+
+		foreach ( $values as $key => $value ) {
+			$key      = $this->add_prefix( $key );
+			$selector = null;
+			$callback = null;
+			$settings = [
+				'type'       => 'theme_mod',
+				'transport'  => 'auto',
+				'capability' => 'edit_theme_options',
+			];
+
+			foreach ( $setting_keys as $setting_key ) {
+				if ( isset( $value[ $setting_key ] ) ) {
+					$settings[ $setting_key ] = $value[ $setting_key ];
+					unset( $value[ $setting_key ] );
+				}
+			}
+
+			$customizer->add_setting( $key, $settings );
+
+			if ( isset( $value['selector'] ) ) {
+				$selector = $value['selector'];
+				$callback = $value['render_callback'] ?? $callback;
+				unset( $value['selector'], $value['render_callback'] );
+			}
+
+			if ( array_key_exists( $value['section'], $options['sections'] ) ) {
+				$value['section'] = $this->add_prefix( $value['section'] );
+			}
+
+			$control_class = $this->get_control_alias( $value['type'] );
+
+			if ( $control_class ) {
+				$customizer->add_control(
+					new $control_class( $customizer, $key, $value )
+				);
+			} else {
+				$customizer->add_control( $key, $value );
+			}
+
+			if ( null !== $selector ) {
+				$customizer->selective_refresh->add_partial( $key, [
+					'selector'        => $selector,
+					'render_callback' => $callback,
+				] );
+			}
+		}
+	}
+
+	/**
+	 * Register customizer settings.
+	 *
+	 * @since 0.2.1
+	 * @param WP_Customize_Manager $customizer
+	 */
+	protected function override_builtins( Manager $customizer ) {
 		$customizer->get_setting( 'blogname' )->transport         = 'postMessage';
 		$customizer->get_setting( 'blogdescription' )->transport  = 'postMessage';
 		$customizer->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -80,91 +189,6 @@ class Customizer extends Feature {
 				'selector'        => '.site-description',
 				'render_callback' => [ $this->theme->template, 'site_slogan' ],
 			] );
-		}
-
-		$options = $this->theme->options();
-
-		foreach ( $options as $position => $values ) {
-			if ( 'values' === $position ) {
-				continue;
-			}
-
-			if ( in_array( $position, [ 'panels', 'sections' ], true ) ) {
-				$method = 'panels' === $position ? 'add_panel' : 'add_section';
-
-				foreach ( $values as $key => $value ) {
-					if ( 'sections' === $position && isset( $value['panel'] ) ) {
-						$value['panel'] = $this->add_prefix( $value['panel'] );
-					}
-
-					call_user_func( [ $customizer, $method ], $this->add_prefix( $key ), $value );
-				}
-			} else {
-				foreach ( $values as $key => $value ) {
-					$key          = $this->add_prefix( $key );
-					$selector     = null;
-					$callback     = null;
-					$setting_keys = [
-						'default',
-						'sanitize_callback',
-						'transport',
-						'capability',
-					];
-					$settings     = [
-						'type'       => 'theme_mod',
-						'transport'  => 'postMessage',
-						'capability' => 'edit_theme_options',
-					];
-
-					foreach ( $setting_keys as $setting_key ) {
-						if ( isset( $value[ $setting_key ] ) ) {
-							$settings[ $setting_key ] = $value[ $setting_key ];
-							unset( $value[ $setting_key ] );
-						}
-					}
-
-					$customizer->add_setting( $key, $settings );
-
-					if ( isset( $value['selector'] ) ) {
-						$selector = $value['selector'];
-						$callback = $value['render_callback'] ?? $callback;
-						unset( $value['selector'], $value['render_callback'] );
-					}
-
-					if ( array_key_exists( $value['section'], $options['sections'] ) ) {
-						$value['section'] = $this->add_prefix( $value['section'] );
-					}
-
-					$control_class = $this->get_control_alias( $value['type'] );
-
-					if ( $control_class ) {
-						$customizer->add_control(
-							new $control_class( $customizer, $key, $value )
-						);
-					} else {
-						$customizer->add_control( $key, $value );
-					}
-
-					if ( null !== $selector ) {
-						$customizer->selective_refresh->add_partial( $key, [
-							'selector'        => $selector,
-							'render_callback' => $callback,
-						] );
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Register customizer settings.
-	 *
-	 * @since 0.2.1
-	 * @param WP_Customize_Manager $customizer
-	 */
-	protected function register_controls( Manager $customizer ) {
-		foreach ( array_keys( $this->controls ) as $blank_control ) {
-			$customizer->register_control_type( $blank_control );
 		}
 	}
 

@@ -5,6 +5,8 @@
  */
 
 ( function( document, blank, $, { customize } ) {
+  // blank-control-revert
+
   customize.controlConstructor[ 'blank-typography' ] = customize.Control.extend( {
     ready() {
       const { container, setting, params } = this

@@ -100,8 +100,8 @@ class Typography_Control extends Abstract_Control {
 			<div class="blank-control-column font-size">
 				<label for="{{ data.id }}-size-value">Font Size</label>
 				<div class="blank-control-inputs-group">
-					<input id="{{ data.id }}-size-value" value="{{ data.value.size[0] }}" min="1" class="size-value input" type="number"/>
-					<select id="{{ data.id }}-size-unit" data-value="{{ data.value.size[1] }}" class="size-unit input">
+					<input id="{{ data.id }}-size-value" value="{{ data.value.size[0] }}" min="1" class="input input-value size-value" type="number"/>
+					<select id="{{ data.id }}-size-unit" data-value="{{ data.value.size[1] }}" class="input input-unit size-unit">
 						<# for ( unit of data.choices.size_units ) { #>
 							<option value="{{ unit }}">{{ unit }}</option>
 						<# } #>
@@ -112,8 +112,8 @@ class Typography_Control extends Abstract_Control {
 			<div class="blank-control-column line-height">
 				<label for="{{ data.id }}-height-value">Line Height</label>
 				<div class="blank-control-inputs-group">
-					<input id="{{ data.id }}-height-value" value="{{ data.value.height[0] }}" min="1" class="height-value input" type="number"/>
-					<select id="{{ data.id }}-height-unit" data-value="{{ data.value.height[1] }}" class="height-unit input">
+					<input id="{{ data.id }}-height-value" value="{{ data.value.height[0] }}" min="1" class="input input-value height-value" type="number"/>
+					<select id="{{ data.id }}-height-unit" data-value="{{ data.value.height[1] }}" class="input input-unit height-unit">
 						<# for ( height of data.choices.heights ) { #>
 							<option value="{{ height }}">{{ height }}</option>
 						<# } #>

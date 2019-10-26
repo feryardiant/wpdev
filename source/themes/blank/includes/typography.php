@@ -181,19 +181,27 @@ class Typography extends Feature {
 	 * @return string|null Google fonts URL for the theme.
 	 */
 	public function get_google_fonts_url() : ?string {
-		$google_fonts = (object) apply_filters( 'blank_google_fonts_enabled', [
-			'families' => [],                      // Source+Sans+Pro.
-			'variants' => [ 'regular', 'italic' ], // regular, italic, 300, 300italic.
-			'subsets'  => [ 'latin' ],             // latin-ext.
-		] );
+		$google_fonts = (object) [];
+		$enabled      = array_filter( $this->get_options_values(), function ( $option ) {
+			return 'google' === $option->category;
+		} );
 
-		if ( empty( $google_fonts->families ) ) {
+		if ( empty( $enabled ) ) {
 			return null;
 		}
 
+		foreach ( $enabled as $font ) {
+			if ( ! in_array( $font->family, $google_fonts->families, true ) ) {
+				$google_fonts->families[] = $font->family;
+			}
+			if ( ! in_array( $font->subset, $google_fonts->subsets, true ) ) {
+				$google_fonts->subsets[] = $font->subset;
+			}
+		}
+
 		$query_args = [
-			'family' => implode( '|', $google_fonts->families ),
-			'subset' => rawurlencode( 'latin,latin-ext' ),
+			'family' => join( '|', $google_fonts->families ),
+			'subset' => rawurlencode( join( ',', $google_fonts->subsets ) ),
 		];
 
 		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
