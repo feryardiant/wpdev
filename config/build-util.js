@@ -230,10 +230,7 @@ const configure = exports.configure = (src, dest, tasks) => {
         config.gulp = {
           sourcemaps: !isProduction
         }
-
-        toWatch[taskName] = asset[key].src
       }
-
 
       if ('zip' === key) {
         config.gulp = {
@@ -242,6 +239,11 @@ const configure = exports.configure = (src, dest, tasks) => {
         zipTasks.push(taskName)
       } else {
         assetTasks.push(taskName)
+      }
+
+      // Watch php, js & css tasks only
+      if (!['zip', 'img'].includes(key)) {
+        toWatch[taskName] = asset[key].src
       }
 
       if (globalConfig.hasOwnProperty(key)) {
