@@ -24,7 +24,7 @@ require('dotenv').config()
 
 const { configure, args, watch, isProduction } = require('./config/build-util')
 
-const tasks = configure('source', 'releases', {
+const tasks = configure('source', 'source/releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *

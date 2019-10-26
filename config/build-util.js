@@ -214,6 +214,7 @@ const configure = exports.configure = (src, dest, tasks) => {
         continue
       }
 
+      const taskName = `${name}:${key}`
       const config = {
         name: name,
         type: asset.type,
@@ -229,18 +230,18 @@ const configure = exports.configure = (src, dest, tasks) => {
         config.gulp = {
           sourcemaps: !isProduction
         }
+
+        toWatch[taskName] = asset[key].src
       }
 
-      const taskName = `${name}:${key}`
 
-      if ('zip' !== key) {
-        toWatch[taskName] = asset[key].src
-        assetTasks.push(taskName)
-      } else {
+      if ('zip' === key) {
         config.gulp = {
           base: path.join(process.cwd(), config.path, '..')
         }
         zipTasks.push(taskName)
+      } else {
+        assetTasks.push(taskName)
       }
 
       if (globalConfig.hasOwnProperty(key)) {
@@ -267,13 +268,7 @@ const configure = exports.configure = (src, dest, tasks) => {
 }
 
 exports.watch = (tasks, browserSync) => {
-  const reload = (done) => {
-    browserSync.reload()
-    done()
-  }
-
-  for (const [taskName, src] of Object.entries(tasks)) {
-
-    watch(src, series(taskName, reload))
+  for (const [task, src] of Object.entries(tasks)) {
+    watch(src, series(task, browserSync.reload))
   }
 }
