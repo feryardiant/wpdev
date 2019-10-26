@@ -17,7 +17,7 @@
 }
 
 /* Do not show the outline on the skip link target. */
-#site-content {
+.site-content {
   &[tabindex='-1']:focus {
     outline: 0;
   }
