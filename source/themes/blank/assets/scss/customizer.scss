@@ -1,5 +1,54 @@
-.customize-control-blank {
-  margin-bottom: 14px;
+$border-color: #d1d1d1;
+$border-radius: 3px;
+$box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+$box-shadow-active: 0 0 2px rgba(30, 140, 190, 0.8);
+
+.customize-control {
+  margin-bottom: 0 !important;
+  padding: 8px 0 14px;
+  border-bottom: 1px solid #ddd;
+
+  &-checkbox {
+    padding: 12px 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &-blank-options {
+    margin-bottom: 14px;
+  }
+
+  label {
+    white-space: normal;
+    line-height: 1.8;
+    display: inline-block;
+    flex: 1 1 auto;
+    user-select: none;
+    width: 100%;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea {
+    margin: 0 !important;
+    border-radius: $border-radius;
+    line-height: 1.6 !important;
+    padding: 3px 4px 4px 6px;
+    position: relative;
+    z-index: 1;
+    border-color: $border-color;
+  }
+
+  input[type="checkbox"] {
+    border-radius: $border-radius;
+  }
 }
 
 .blank {
@@ -65,50 +114,47 @@
       padding: 0 3px;
     }
 
-    label {
-      font-size: 13px;
-      white-space: normal;
-      line-height: 1.8;
-      display: block;
-      flex: 1 1 auto;
-      user-select: none;
-      width: 100%;
-    }
-
-    .input {
-      margin: 0;
-      border-radius: 3px;
-      line-height: 1.6;
-      font-size: 13px;
-      padding: 2px 3px 3px;
-      position: relative;
-      z-index: 1;
-    }
-
     &-inputs-group {
-      border-radius: 3px;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
       display: flex;
-      border: 1px solid #ddd;
+      border: 1px solid $border-color;
+
+      :active {
+        box-shadow: $box-shadow-active;
+      }
 
       .input {
         box-shadow: none;
         border: 0;
         border-radius: 0;
 
-        &:focus {
-          z-index: 2;
+        &:first-child {
+          border-top-left-radius: calc($border-color - 1);
+          border-bottom-left-radius: calc($border-color - 1);
         }
 
-        &:not(:first-child)::before {
-          content: '';
-          position: absolute;
-          z-index: 4;
-          width: 1px;
-          height: 20px;
-          background-color: #ddd;
+        &:last-child {
+          border-top-right-radius: calc($border-color - 1);
+          border-bottom-right-radius: calc($border-color - 1);
+        }
+
+        &-unit {
+          font-size: 13px;
+          text-transform: uppercase;
+        }
+
+        &:focus {
+          z-index: 2;
+          box-shadow: none;
         }
       }
+    }
+  }
+
+  &[data-type="blank-typography"] {
+    label {
+      display: flex;
     }
   }
 }
