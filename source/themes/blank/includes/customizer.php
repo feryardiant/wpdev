@@ -22,16 +22,30 @@ class Customizer extends Feature {
 	 * @var array
 	 */
 	private $control_aliases = [
-		'blank-text'       => Customizer\Basic_Control::class,
-		'blank-number'     => Customizer\Basic_Control::class,
-		'blank-email'      => Customizer\Basic_Control::class,
-		'blank-telp'       => Customizer\Basic_Control::class,
-		'blank-dropdown'   => Customizer\Dropdown_Control::class,
-		'blank-typography' => Customizer\Typography_Control::class,
-		'color'            => \WP_Customize_Color_Control::class,
-		'image'            => \WP_Customize_Image_Control::class,
-		'media'            => \WP_Customize_Media_Control::class,
-		'upload'           => \WP_Customize_Upload_Control::class,
+		'color'  => \WP_Customize_Color_Control::class,
+		'image'  => \WP_Customize_Image_Control::class,
+		'media'  => \WP_Customize_Media_Control::class,
+		'upload' => \WP_Customize_Upload_Control::class,
+	];
+
+	/**
+	 * Built-in Controls
+	 *
+	 * @var array
+	 */
+	private $controls = [
+		Customizer\Basic_Control::class => [
+			'blank-text',
+			'blank-number',
+			'blank-email',
+			'blank-telp',
+		],
+		Customizer\Dropdown_Control::class => [
+			'blank-dropdown',
+		],
+		Customizer\Typography_Control::class => [
+			'blank-typography',
+		],
 	];
 
 	/**
@@ -50,9 +64,7 @@ class Customizer extends Feature {
 	 * @param WP_Customize_Manager $customizer
 	 */
 	public function register( Manager $customizer ) {
-		$customizer->register_control_type( Customizer\Basic_Control::class );
-		$customizer->register_control_type( Customizer\Dropdown_Control::class );
-		$customizer->register_control_type( Customizer\Typography_Control::class );
+		$this->register_controls( $customizer );
 
 		$customizer->get_setting( 'blogname' )->transport         = 'postMessage';
 		$customizer->get_setting( 'blogdescription' )->transport  = 'postMessage';
@@ -100,6 +112,7 @@ class Customizer extends Feature {
 					];
 					$settings     = [
 						'type'       => 'theme_mod',
+						'transport'  => 'postMessage',
 						'capability' => 'edit_theme_options',
 					];
 
@@ -110,23 +123,21 @@ class Customizer extends Feature {
 						}
 					}
 
-					if ( isset( $value['selector'] ) ) {
-						$settings['transport'] = 'postMessage';
+					$customizer->add_setting( $key, $settings );
 
+					if ( isset( $value['selector'] ) ) {
 						$selector = $value['selector'];
 						$callback = $value['render_callback'] ?? $callback;
 						unset( $value['selector'], $value['render_callback'] );
 					}
 
-					$customizer->add_setting( $key, $settings );
-
 					if ( array_key_exists( $value['section'], $options['sections'] ) ) {
 						$value['section'] = $this->add_prefix( $value['section'] );
 					}
 
-					if ( array_key_exists( $value['type'], $this->control_aliases ) ) {
-						$control_class = $this->control_aliases[ $value['type'] ];
+					$control_class = $this->get_control_alias( $value['type'] );
 
+					if ( $control_class ) {
 						$customizer->add_control(
 							new $control_class( $customizer, $key, $value )
 						);
@@ -143,6 +154,42 @@ class Customizer extends Feature {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Register customizer settings.
+	 *
+	 * @since 0.2.1
+	 * @param WP_Customize_Manager $customizer
+	 */
+	protected function register_controls( Manager $customizer ) {
+		foreach ( array_keys( $this->controls ) as $blank_control ) {
+			$customizer->register_control_type( $blank_control );
+		}
+	}
+
+	/**
+	 * Get control class from alias.
+	 *
+	 * @param string $type
+	 * @return string|null
+	 */
+	protected function get_control_alias( string $type ) : ?string {
+		if ( array_key_exists( $type, $this->control_aliases ) ) {
+			return $this->control_aliases[ $type ];
+		}
+
+		$controls = array_keys(
+			array_filter( $this->controls, function ( $control ) use ( $type ) {
+				return in_array( $type, $control, true );
+			} )
+		);
+
+		if ( 1 === count( $controls ) ) {
+			return $controls[0];
+		}
+
+		return null;
 	}
 
 	/**

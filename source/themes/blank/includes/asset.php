@@ -88,6 +88,7 @@ class Asset extends Feature {
 			'wp.i18n.setLocaleData( ' . $locale_data . ', "' . $this->theme->slug . '" );'
 		);
 
+		wp_enqueue_style( 'blank-customizer', $this->get_uri( 'customizer.css' ), $this->get_styles_dependencies( 'customizer' ), $this->version );
 		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'customizer' ), $this->version, true );
 
 		wp_localize_script( 'blank-customizer', 'blank_customizer', $this->get_localize_script( [
@@ -182,38 +183,30 @@ class Asset extends Feature {
 	 * @return string
 	 */
 	protected function css_variables( Theme $theme ) {
-		return self::make_css( [
-			':root' => [
-				'--background-color'            => $theme->get_option( 'background_color' ),
+		$variables = [
+			'--background-color'            => $theme->get_option( 'background_color' ),
 
-				'--max-site-width'              => $theme->get_option( 'max_site_width' ),
+			'--max-site-width'              => $theme->get_option( 'max_site_width' ),
 
-				'--typography-base-font'        => $theme->get_option( 'typography_base_font' ),
-				'--typography-base-color'       => $theme->get_option( 'typography_base_color' ),
-				'--typography-link-color'       => $theme->get_option( 'typography_link_color' ),
-				'--typography-link-hover-color' => $theme->get_option( 'typography_link_hover_color' ),
+			'--primary-color'               => $theme->get_option( 'primary_color' ),
+			'--secondary-color'             => $theme->get_option( 'secondary_color' ),
+			'--info-color'                  => $theme->get_option( 'info_color' ),
+			'--success-color'               => $theme->get_option( 'success_color' ),
+			'--warning-color'               => $theme->get_option( 'warning_color' ),
+			'--danger-color'                => $theme->get_option( 'danger_color' ),
+			'--light-color'                 => $theme->get_option( 'light_color' ),
+			'--dark-color'                  => $theme->get_option( 'dark_color' ),
+		];
 
-				'--typography-heading-font'     => $theme->get_option( 'typography_heading_font' ),
-				'--typography-heading-color'    => $theme->get_option( 'typography_heading_color' ),
-				'--typography-h1-font'          => $theme->get_option( 'typography_h1_font' ),
-				'--typography-h2-font'          => $theme->get_option( 'typography_h2_font' ),
-				'--typography-h3-font'          => $theme->get_option( 'typography_h3_font' ),
-				'--typography-h4-font'          => $theme->get_option( 'typography_h4_font' ),
-				'--typography-h5-font'          => $theme->get_option( 'typography_h5_font' ),
-				'--typography-h6-font'          => $theme->get_option( 'typography_h6_font' ),
-				'--typography-blockquote-font'  => $theme->get_option( 'typography_blockquote_font' ),
-				'--typography-pre-font'         => $theme->get_option( 'typography_pre_font' ),
+		foreach ( $theme->typography->get_options_values() as $option ) {
+			$variables[ '--' . $option->name . '_family' ] = "'{$option->family}', {$option->category}";
+			$variables[ '--' . $option->name . '_weight' ] = $option->weight;
+			$variables[ '--' . $option->name . '_style' ]  = $option->style;
+			$variables[ '--' . $option->name . '_size' ]   = $option->size[0] . ' ' . $option->size[1];
+			$variables[ '--' . $option->name . '_height' ] = $option->height[0] . ' ' . $option->height[1];
+		}
 
-				'--primary-color'               => $theme->get_option( 'primary_color' ),
-				'--secondary-color'             => $theme->get_option( 'secondary_color' ),
-				'--info-color'                  => $theme->get_option( 'info_color' ),
-				'--success-color'               => $theme->get_option( 'success_color' ),
-				'--warning-color'               => $theme->get_option( 'warning_color' ),
-				'--danger-color'                => $theme->get_option( 'danger_color' ),
-				'--light-color'                 => $theme->get_option( 'light_color' ),
-				'--dark-color'                  => $theme->get_option( 'dark_color' ),
-			],
-		] );
+		return self::make_css( [ ':root' => apply_filters( 'blank_css_variables', $variables ) ] );
 	}
 
 	/**

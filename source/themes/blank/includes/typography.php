@@ -90,8 +90,10 @@ class Typography extends Feature {
 	 * @return array
 	 */
 	public function get_fonts() : array {
+		static $fonts = [];
+
 		$name  = $this->theme->transient_name( 'fonts_info' );
-		$fonts = get_transient( $name ) ?: [];
+		$fonts = get_transient( $name ) ?: $fonts;
 
 		if ( empty( $fonts ) ) {
 			$fonts = array_merge( $this->get_system_fonts(), $this->get_google_webfonts() );
@@ -100,6 +102,46 @@ class Typography extends Feature {
 		}
 
 		return $fonts;
+	}
+
+	/**
+	 * Get all fonts in used
+	 *
+	 * @return array
+	 */
+	public function get_options_values() : array {
+		static $values = [];
+
+		if ( ! empty( $values ) ) {
+			return $values;
+		}
+
+		$all_fonts = $this->get_fonts();
+		$options   = array_filter( $this->theme->options( 'settings' ), function ( $setting ) {
+			return 'blank-typography' === $setting['type'];
+		} );
+
+		foreach ( array_keys( $options ) as $name ) {
+			$value       = (object) $this->theme->get_option( $name );
+			$value->name = $name;
+
+			$fonts = array_values(
+				array_filter( $all_fonts, function ( $font ) use ( $value ) {
+					return $font->family === $value->family;
+				} )
+			);
+
+			$value->weight = in_array( $value->variant, [ 'regular', 'italic' ], true ) ? 400 : substr( $value->variant, 3 );
+			$value->style  = 'italic' === substr( $value->variant, -6 ) ? 'italic' : 'normal';
+
+			if ( ! empty( $fonts ) && $fonts[0] ) {
+				$value->category = $fonts[0]->category;
+			}
+
+			$values[] = $value;
+		}
+
+		return $values;
 	}
 
 	/**
@@ -119,7 +161,7 @@ class Typography extends Feature {
 		$family = 'Source Sans Pro';
 
 		if ( 'typography_pre_font' === $name ) {
-			$family = 'Monospace';
+			$family = 'Source Code Pro';
 		}
 
 		return wp_parse_args( $default ?: [], [

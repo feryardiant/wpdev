@@ -55,13 +55,43 @@
     } )
   } )
 
-  // Update site background color...
+  const updateFont = ( prefix, value ) => {
+    const font = blank.webfonts.find( ( f ) => f.family === value.family ) || {}
+    const weight = [ 'italic', 'regular' ].includes( value.variant ) ? 400 : value.variant.slice( 0, 3 )
+    const style = 'italic' === value.variant.slice( -6 ) ? 'italic' : 'normal'
+
+    document.documentElement.style.setProperty( `${ prefix }_family`, `'${ value.family }', ${ font.category }` )
+    document.documentElement.style.setProperty( `${ prefix }_weight`, weight )
+    document.documentElement.style.setProperty( `${ prefix }_style`, style )
+    document.documentElement.style.setProperty( `${ prefix }_size`, value.size.join( ' ' ) )
+    document.documentElement.style.setProperty( `${ prefix }_height`, value.height.join( ' ' ) )
+  }
+
+  // Base site typography...
   customize( 'blank[typography_base_font]', ( value ) => {
     value.bind( ( to ) => {
-      const prop = '--typography_base_font'
-      const font = blank.webfonts.find( ( f ) => f.family === to.family ) || {}
+      updateFont( '--typography_base_font', to )
+    } )
+  } )
 
-      document.documentElement.style.setProperty( `${ prop }_family`, `'${ to.family }', ${ font.category }` )
+  // Heading typography...
+  customize( 'blank[typography_heading_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_heading_font', to )
+    } )
+  } )
+
+  // BlockQuote typography...
+  customize( 'blank[typography_blockquote_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_blockquote_font', to )
+    } )
+  } )
+
+  // Pre-formated typography...
+  customize( 'blank[typography_pre_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_pre_font', to )
     } )
   } )
 

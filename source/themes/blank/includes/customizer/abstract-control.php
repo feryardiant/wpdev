@@ -87,7 +87,7 @@ abstract class Abstract_Control extends \WP_Customize_Control {
 		?>
 		<div class="blank-control" data-type="{{ data.type }}">
 			<header>
-				<button type="button" class="blank-control-revert"></button>
+				<button {{{ data.link }}} type="button" class="blank-control-revert"></button>
 				<h3 class="blank-control-title">{{{ data.label }}}</h3>
 				<# if ( data.description ) { #><p class="blank-control-description">{{{ data.description }}}</p><# } #>
 			</header>

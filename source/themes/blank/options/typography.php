@@ -13,7 +13,7 @@ return [
 		'typography_base_font' => [
 			'label'   => __( 'Base Font Family', 'blank' ),
 			'default' => [],
-			'type'    => 'typography',
+			'type'    => 'blank-typography',
 		],
 		'typography_base_color' => [
 			'label'   => __( 'Base Font Color', 'blank' ),
@@ -35,7 +35,7 @@ return [
 		'typography_heading_font' => [
 			'label'   => __( 'Heading Font Family', 'blank' ),
 			'default' => [],
-			'type'    => 'typography',
+			'type'    => 'blank-typography',
 		],
 		'typography_heading_color' => [
 			'label'   => __( 'Heading Font Color', 'blank' ),
@@ -46,13 +46,13 @@ return [
 		'typography_blockquote_font' => [
 			'label'   => __( 'Blockquote Font', 'blank' ),
 			'default' => [],
-			'type'    => 'typography',
+			'type'    => 'blank-typography',
 		],
 
 		'typography_pre_font' => [
 			'label'   => __( 'Preformated Font', 'blank' ),
 			'default' => [],
-			'type'    => 'typography',
+			'type'    => 'blank-typography',
 		],
 	],
 ];

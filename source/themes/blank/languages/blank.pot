@@ -83,58 +83,58 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/template.php:251
+#: includes/template.php:243
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:285
+#: includes/template.php:277
 msgid "Site Navigation"
 msgstr ""
 
-#: includes/template.php:316, templates/content-none.php:13
+#: includes/template.php:308, templates/content-none.php:13
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:321
+#: includes/template.php:313
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:325
+#: includes/template.php:317
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:487
+#: includes/template.php:479
 msgid "Copyright &copy; %s."
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/theme.php:139
+#: includes/theme.php:140
 msgid "%s Option Panel"
 msgstr ""
 
-#: includes/theme.php:140
+#: includes/theme.php:141
 msgid "Theme Option"
 msgstr ""
 
-#: includes/theme.php:358
+#: includes/theme.php:359
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:363
+#: includes/theme.php:364
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:368
+#: includes/theme.php:369
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:373
+#: includes/theme.php:374
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:378
+#: includes/theme.php:379
 msgid "Huge"
 msgstr ""
 
@@ -226,28 +226,12 @@ msgstr ""
 msgid "Display Site Title"
 msgstr ""
 
-#: options/title-tagline.php:33
-msgid "Site Title Font Family"
-msgstr ""
-
-#: options/title-tagline.php:41
-msgid "Site Title Font Size"
-msgstr ""
-
-#: options/title-tagline.php:50
+#: options/title-tagline.php:35
 msgid "Inline Logo & Site Title"
 msgstr ""
 
-#: options/title-tagline.php:59
+#: options/title-tagline.php:44
 msgid "Display Tagline"
-msgstr ""
-
-#: options/title-tagline.php:64
-msgid "Tagline Font Family"
-msgstr ""
-
-#: options/title-tagline.php:72
-msgid "Tagline Font Size"
 msgstr ""
 
 #: options/typography.php:10
@@ -282,35 +266,11 @@ msgstr ""
 msgid "Heading Font Color"
 msgstr ""
 
-#: options/typography.php:46
-msgid "Heading 1 Font"
-msgstr ""
-
-#: options/typography.php:52
-msgid "Heading 2 Font"
-msgstr ""
-
-#: options/typography.php:58
-msgid "Heading 3 Font"
-msgstr ""
-
-#: options/typography.php:64
-msgid "Heading 4 Font"
-msgstr ""
-
-#: options/typography.php:70
-msgid "Heading 5 Font"
-msgstr ""
-
-#: options/typography.php:76
-msgid "Heading 6 Font"
-msgstr ""
-
-#: options/typography.php:82
+#: options/typography.php:47
 msgid "Blockquote Font"
 msgstr ""
 
-#: options/typography.php:88, options/typography.php:94
+#: options/typography.php:53
 msgid "Preformated Font"
 msgstr ""
 
