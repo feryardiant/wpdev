@@ -46,12 +46,17 @@ fi
 if [ $WP_ENV != 'production' ]; then
     vendor/bin/wp core install --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
+
+    vendor/bin/wp option update permalink_structure '/%postname%/'
+    vendor/bin/wp option update link_manager_enabled '1'
+
+    vendor/bin/wp plugin install contact-form-7 --activate
+    vendor/bin/wp plugin install jetpack --activate
+    vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize
 fi
 
 if [ $WP_ENV != 'testing' ]; then
-    vendor/bin/wp option update permalink_structure '/%postname%/'
-    # vendor/bin/wp option update link_manager_enabled '1'
-
+    wp transient delete blank_theme_info
     vendor/bin/wp cache flush
 
     if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
