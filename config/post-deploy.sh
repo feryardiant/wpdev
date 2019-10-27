@@ -50,13 +50,11 @@ if [ $WP_ENV != 'production' ]; then
     vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
 
-    _inf 'Updating site options...'
     vendor/bin/wp option update permalink_structure '/%postname%/' --color
     vendor/bin/wp option update link_manager_enabled '1' --color
 
     _inf 'Installing required plugins'
-    vendor/bin/wp plugin install contact-form-7 --activate --color
-    vendor/bin/wp plugin install jetpack --activate --color
+    vendor/bin/wp plugin install contact-form-7 jetpack --activate --color
 fi
 
 if [ $WP_ENV != 'testing' ]; then
