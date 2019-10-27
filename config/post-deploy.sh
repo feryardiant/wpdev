@@ -44,14 +44,19 @@ if [ -f .env ]; then
 fi
 
 if [ $WP_ENV != 'production' ]; then
-    vendor/bin/wp core install --skip-email --title="WordPress Site" \
+    _inf 'Installling WordPress...'
+    vendor/bin/wp core install --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
 
+    _inf 'Updating site options...'
     vendor/bin/wp option update permalink_structure '/%postname%/'
     vendor/bin/wp option update link_manager_enabled '1'
 
+    _inf 'Installing required plugins'
     vendor/bin/wp plugin install contact-form-7 --activate
     vendor/bin/wp plugin install jetpack --activate
+
+    _inf 'Import dummy content'
     vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize
 fi
 
