@@ -43,7 +43,7 @@ if [ -f .env ]; then
     vendor/bin/wp dotenv set DB_HOST $DB_HOST --color
 fi
 
-if [ $WP_ENV != 'production' ]; then
+if [ $WP_ENV != 'production' ] || [ ! -z $FORCE_REINSTALL ]; then
     _i_cmd='install'
     if [ ! -z $MULTISITE ] && [ $MULTISITE = 'true' ]; then
         _i_cmd='multisite-install'
