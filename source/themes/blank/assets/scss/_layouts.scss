@@ -21,15 +21,6 @@
   &[tabindex='-1']:focus {
     outline: 0;
   }
-
-  .hentry {
-    padding-bottom: 2rem;
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      padding-top: 2rem;
-    }
-  }
 }
 
 .site-footer {

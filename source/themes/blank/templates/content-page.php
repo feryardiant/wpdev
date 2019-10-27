@@ -8,43 +8,29 @@
  * @since    0.2.0
  */
 
+/** @var \Blank\Content $blank_content */
+$blank_content = blank( 'content' );
+
 ?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<!-- blank_post_thumbnail(); -->
+
+	<header class="entry-header">
+
+		<?php $blank_content->header(); ?>
+
+	</header> <!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php
 		the_content();
 
-		wp_link_pages( [
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'blank' ),
-			'after'  => '</div>',
-		] );
+		$blank_content->link_pages();
 		?>
 	</div> <!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php
-		if ( get_edit_post_link() ) :
-			edit_post_link(
-				sprintf(
-					wp_kses(
-						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'blank' ),
-						[
-							'span' => [
-								'class' => [],
-							],
-						]
-					),
-					get_the_title()
-				),
-				'<span class="edit-link">',
-				'</span>'
-			);
-		endif;
-		?>
 
-		<?php the_posts_navigation(); ?>
+		<?php $blank_content->footer(); ?>
+
 	</footer> <!-- .entry-footer -->
 
 </article> <!-- #post-<?php the_ID(); ?> -->

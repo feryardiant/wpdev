@@ -402,38 +402,6 @@ final class Theme implements ArrayAccess {
 			// .
 		] );
 
-		add_theme_support( 'starter-content', [
-			// Place widgets in the desired locations (such as sidebar or footer).
-			// Example widgets:
-			// - archives, calendar, categories, meta, recent-comments, recent-posts,
-			// - search, text_business_info, text_about.
-			'widgets'     => [],
-
-			// Specify pages to create, and optionally add custom thumbnails to them.
-			// Note: For thumbnails, use attachment symbolic references in {{double-curly-braces}}.
-			// Post options:
-			// - post_type, post_title, post_excerpt, post_name (slug), post_content,
-			// - menu_order, comment_status, thumbnail (featured image ID), and template.
-			'posts'       => [ 'home', 'about', 'blog' ],
-
-			// Assign options defaults, such as front page settings.
-			// The 'show_on_front' value can be 'page' to show a specified page, or 'posts' to show your latest posts.
-			// Note: Use page ID symbolic references from the posts section above wrapped in {{double-curly-braces}}.
-			'options'     => [
-				'show_on_front'  => 'page',
-				'page_on_front'  => '{{home}}',
-				'page_for_posts' => '{{blog}}',
-			],
-
-			// Set up nav menus.
-			'nav_menus'   => [
-				'top' => [
-					'name'  => 'Top Menu',
-					'items' => [ 'link_home', 'page_about', 'page_blog' ],
-				],
-			],
-		] );
-
 		add_filter( 'blank_site_logo', function ( $logo ) {
 			if ( ! $logo['src'] ) {
 				$logo['src'] = $this->asset->get_uri( 'main-logo.svg' );

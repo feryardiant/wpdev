@@ -365,17 +365,10 @@ class Template extends Feature {
 			$main_classes[] = 'is-two-thirds';
 		}
 
-		$section_classes = [];
-
 		$main_attr = [
 			'id'    => 'primary',
 			'role'  => 'main',
 			'class' => (array) apply_filters( 'blank_main_class', $main_classes ),
-		];
-
-		$section_attr = [
-			'id'    => 'main',
-			'class' => (array) apply_filters( 'blank_section_class', $section_classes ),
 		];
 
 		$kses = [
@@ -384,16 +377,11 @@ class Template extends Feature {
 				'class' => [],
 				'role'  => [],
 			],
-			'section' => [
-				'id'    => [],
-				'class' => [],
-			],
 		];
 
 		echo wp_kses( sprintf(
-			'<main %1$s><section %2$s>',
-			make_attr_from_array( $main_attr ),
-			make_attr_from_array( $section_attr )
+			'<main %1$s>',
+			make_attr_from_array( $main_attr )
 		), $kses );
 	}
 
@@ -404,7 +392,6 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function after_content() {
-		echo '</section> <!-- #main.site-main -->';
 		echo '</main> <!-- #primary -->';
 	}
 

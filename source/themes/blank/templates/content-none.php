@@ -9,7 +9,9 @@
  */
 
 ?><section <?php post_class(); ?>>
+
 	<div class="page-content">
+
 		<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'blank' ); ?></p>
 
 		<?php
@@ -40,5 +42,7 @@
 
 		the_widget( 'WP_Widget_Tag_Cloud' );
 		?>
+
 	</div> <!-- .page-content -->
+
 </section> <!-- .no-results -->

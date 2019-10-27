@@ -71,8 +71,44 @@ msgstr ""
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:62
+#: includes/content.php:78
 msgid "Post"
+msgstr ""
+
+#. translators: %s: post date.
+#: includes/content.php:154
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#. translators: %s: post author.
+#: includes/content.php:169
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#: includes/content.php:209
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: post title
+#: includes/content.php:232
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#. translators: 1: list of categories.
+#: includes/content.php:262
+msgid "Posted in %1$s"
+msgstr ""
+
+#. translators: 1: list of tags.
+#: includes/content.php:277
+msgid "Tagged %1$s"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: includes/content.php:291
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
 #: includes/menu.php:43
@@ -87,25 +123,25 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:277
+#: includes/template.php:280
 msgid "Site Navigation"
 msgstr ""
 
-#: includes/template.php:308, templates/content-none.php:13
+#: includes/template.php:313, templates/content-none.php:15
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:313
+#: includes/template.php:318
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:317
+#: includes/template.php:322
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:479
+#: includes/template.php:459
 msgid "Copyright &copy; %s."
 msgstr ""
 
@@ -274,71 +310,22 @@ msgstr ""
 msgid "Preformated Font"
 msgstr ""
 
-#: templates/content-none.php:22
+#: templates/content-none.php:24
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smiley
-#: templates/content-none.php:38
+#: templates/content-none.php:40
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: templates/content-page.php:19, templates/content.php:41
-msgid "Pages:"
-msgstr ""
-
 #. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#: templates/content-page.php:32, templates/content.php:54, includes/helpers/template-tags-functions.php:103
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
-
-#. translators: %s: Name of current post. Only visible to screen readers
-#: templates/content.php:30
+#: templates/content.php:27
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
 #: templates/full-width.php:4
 msgid "Full Width"
-msgstr ""
-
-#. translators: %s: post date.
-#: includes/helpers/template-tags-functions.php:31
-msgctxt "post date"
-msgid "Posted on %s"
-msgstr ""
-
-#. translators: %s: post author.
-#: includes/helpers/template-tags-functions.php:45
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/helpers/template-tags-functions.php:60
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of categories.
-#: includes/helpers/template-tags-functions.php:64
-msgid "Posted in %1$s"
-msgstr ""
-
-#. translators: used between list items, there is a space after the comma
-#: includes/helpers/template-tags-functions.php:70
-msgctxt "list item separator"
-msgid ", "
-msgstr ""
-
-#. translators: 1: list of tags.
-#: includes/helpers/template-tags-functions.php:74
-msgid "Tagged %1$s"
-msgstr ""
-
-#. translators: %s: post title
-#: includes/helpers/template-tags-functions.php:86
-msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
 #: includes/walker/nav-menu.php:39

@@ -4,6 +4,11 @@
 // @import 'bulma/sass/elements/box.sass';
 @import 'bulma/sass/elements/button.sass';
 @import 'bulma/sass/elements/container.sass';
+
+.container:not(.is-fluid) {
+  padding: 0 $gap;
+}
+
 @import 'bulma/sass/elements/content.sass';
 @import 'bulma/sass/elements/icon.sass';
 @import 'bulma/sass/elements/image.sass';
