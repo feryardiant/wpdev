@@ -34,6 +34,8 @@ if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
     _suc 'File: `wp-cli.local.yml` created successfully'
+    cat wp-cli.local.yml
+    echo ''
 fi
 
 if [ -f .env ]; then
@@ -44,6 +46,8 @@ if [ -f .env ]; then
 fi
 
 if [ $WP_ENV != 'production' ]; then
+    export WP_SITEURL="$WP_HOME"
+
     _inf 'Installling WordPress...'
     vendor/bin/wp core install --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
