@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 _inf() {
-
 	echo -e "\e[34;1mInfo:\e[0m" "$@"
 }
 
@@ -44,8 +43,10 @@ if [ -f .env ]; then
     vendor/bin/wp dotenv set DB_HOST $DB_HOST
 fi
 
-vendor/bin/wp core install --skip-email --title="WordPress Site" \
-    --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
+if [ $WP_ENV != 'production' ]; then
+    vendor/bin/wp core install --skip-email --title="WordPress Site" \
+        --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
+fi
 
 if [ $WP_ENV != 'testing' ]; then
     vendor/bin/wp option update permalink_structure '/%postname%/'
