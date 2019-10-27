@@ -34,8 +34,6 @@ if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
     _suc 'File: `wp-cli.local.yml` created successfully'
-    cat wp-cli.local.yml
-    echo ''
 fi
 
 if [ -f .env ]; then
@@ -49,15 +47,15 @@ if [ $WP_ENV != 'production' ]; then
     _inf 'Installling WordPress...'
     vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
+fi
 
+if [ $WP_ENV != 'testing' ]; then
     vendor/bin/wp option update permalink_structure '/%postname%/' --color
     vendor/bin/wp option update link_manager_enabled '1' --color
 
     _inf 'Installing required plugins'
     vendor/bin/wp plugin install contact-form-7 jetpack --activate --color
-fi
 
-if [ $WP_ENV != 'testing' ]; then
     wp transient delete blank_theme_info
     vendor/bin/wp cache flush --color
 
