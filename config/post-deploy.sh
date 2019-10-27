@@ -37,10 +37,10 @@ if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
 fi
 
 if [ -f .env ]; then
-    vendor/bin/wp dotenv salts generate
-    vendor/bin/wp dotenv set WP_ENV $WP_ENV
-    vendor/bin/wp dotenv set WP_HOME $WP_HOME
-    vendor/bin/wp dotenv set DB_HOST $DB_HOST
+    vendor/bin/wp dotenv salts generate --color
+    vendor/bin/wp dotenv set WP_ENV $WP_ENV --color
+    vendor/bin/wp dotenv set WP_HOME $WP_HOME --color
+    vendor/bin/wp dotenv set DB_HOST $DB_HOST --color
 fi
 
 if [ $WP_ENV != 'production' ]; then
@@ -56,7 +56,7 @@ if [ $WP_ENV != 'testing' ]; then
     _inf 'Installing required plugins'
     vendor/bin/wp plugin install contact-form-7 jetpack --activate --color
 
-    wp transient delete blank_theme_info
+    wp transient delete blank_theme_info --color
     vendor/bin/wp cache flush --color
 
     if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
@@ -69,3 +69,4 @@ if [ -z $HEROKU_APP_NAME ]; then
     _inf 'Import dummy content'
     vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
 fi
+
