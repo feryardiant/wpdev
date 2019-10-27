@@ -243,7 +243,10 @@ class Template extends Feature {
 		$text      = apply_filters( 'blank_skip_link_text', __( 'Skip to content', 'blank' ) );
 		$target_id = apply_filters( 'blank_skip_link_target', $target_id );
 
-		echo '<a class="skip-link screen-reader-text" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
+		make_html_tag( 'a', [
+			'class' => [ 'skip-link', 'screen-reader-text' ],
+			'href'  => '#' . esc_attr( $target_id ),
+		], $text, false );
 	}
 
 	/**
@@ -271,27 +274,29 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function primary_navigation() {
-		$wrapper_attr = array_merge( [
+		$attr = array_merge( [
 			'class'      => 'site-navigation',
 			'role'       => 'navigation',
 			'aria-label' => __( 'Site Navigation', 'blank' ),
 		], get_schema_org_attr( 'navigation' ) );
 
-		echo wp_kses(
-			'<nav ' . make_attr_from_array( $wrapper_attr ) . '>',
-			get_allowed_attr( 'nav' )
-		);
-
-		make_html_tag( 'button', [
-			'role'          => 'button',
-			'class'         => 'menu-toggle',
-			'aria-controls' => 'menu-primary',
-			'aria-expanded' => 'false',
-		], '<span class="mobile-menu"></span>', false );
-
-		wp_nav_menu( [ 'theme_location' => 'primary' ] );
-
-		echo '</div>';
+		make_html_tag( 'nav', $attr, [
+			'button' => [
+				'attr' => [
+					'role'          => 'button',
+					'class'         => 'menu-toggle',
+					'aria-controls' => 'menu-primary',
+					'aria-expanded' => 'false',
+				],
+				'ends' => [
+					'span' => [
+						'attr' => [ 'class' => 'mobile-menu' ],
+						'ends' => false,
+					],
+				],
+			],
+			wp_nav_menu( [ 'theme_location' => 'primary', 'echo' => false ] ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
+		], false );
 	}
 
 	/**
@@ -321,20 +326,8 @@ class Template extends Feature {
 			$subtitle = get_the_archive_description();
 		}
 
-		$kses = [
-			'h1' => [
-				'class' => [],
-			],
-			'span' => [
-				'class' => [],
-			],
-		];
-
-		echo wp_kses( sprintf(
-			'<h1 class="title">%1$s</h1><span class="subtitle">%2$s</span>',
-			$title,
-			$subtitle
-		), $kses );
+		make_html_tag( 'h1', [ 'class' => 'title' ], $title );
+		make_html_tag( 'span', [ 'class' => 'subtitle' ], $subtitle );
 	}
 
 	/**
@@ -487,21 +480,12 @@ class Template extends Feature {
 	 * Common KSES.
 	 *
 	 * @link https://codex.wordpress.org/Function_Reference/wp_kses
+	 * @param string ...$attrs
 	 * @return array
 	 */
-	public function common_kses() : array {
-		return [
-			'div' => [
-				'class' => [],
-			],
-			'a' => [
-				'target' => [],
-				'href'   => [],
-				'class'  => [],
-			],
-			'span' => [
-				'class' => [],
-			],
-		];
+	public function common_kses( string ...$attrs ) : array {
+		return get_allowed_attr(
+			array_merge( [ 'div', 'a', 'span' ], $attrs )
+		);
 	}
 }
