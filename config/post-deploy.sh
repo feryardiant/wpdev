@@ -44,8 +44,13 @@ if [ -f .env ]; then
 fi
 
 if [ $WP_ENV != 'production' ]; then
+    _i_cmd='install'
+    if [ ! -z $MULTISITE ] && [ $MULTISITE = 'true' ]; then
+        _i_cmd='multisite-install'
+    fi
+
     _inf 'Installling WordPress...'
-    vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
+    vendor/bin/wp core "$_i_cmd" --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
 fi
 
