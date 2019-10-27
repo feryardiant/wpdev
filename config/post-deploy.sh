@@ -48,7 +48,7 @@ fi
 if [ $WP_ENV != 'production' ]; then
     _inf 'Installling WordPress...'
     vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
-        --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
+        --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
 
     vendor/bin/wp option update permalink_structure '/%postname%/' --color
     vendor/bin/wp option update link_manager_enabled '1' --color
