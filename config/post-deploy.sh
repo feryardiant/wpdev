@@ -45,31 +45,32 @@ if [ -f .env ]; then
     vendor/bin/wp dotenv set DB_HOST $DB_HOST
 fi
 
+export WP_SITEURL="$WP_HOME"
+
 if [ $WP_ENV != 'production' ]; then
-    export WP_SITEURL="$WP_HOME"
 
     _inf 'Installling WordPress...'
-    vendor/bin/wp core install --url="$WP_HOME" --skip-email --title="WordPress Site" \
+    vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
 
     _inf 'Updating site options...'
-    vendor/bin/wp option update permalink_structure '/%postname%/'
-    vendor/bin/wp option update link_manager_enabled '1'
+    vendor/bin/wp option update permalink_structure '/%postname%/' --color
+    vendor/bin/wp option update link_manager_enabled '1' --color
 
     _inf 'Installing required plugins'
-    vendor/bin/wp plugin install contact-form-7 --activate
-    vendor/bin/wp plugin install jetpack --activate
-
-    _inf 'Import dummy content'
-    vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize
+    vendor/bin/wp plugin install contact-form-7 --activate --color
+    vendor/bin/wp plugin install jetpack --activate --color
 fi
 
 if [ $WP_ENV != 'testing' ]; then
     wp transient delete blank_theme_info
-    vendor/bin/wp cache flush
+    vendor/bin/wp cache flush --color
 
     if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
         cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
         _suc 'Drop-in Object-Cache instaled successfully'
     fi
+else
+    _inf 'Import dummy content'
+    vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
 fi
