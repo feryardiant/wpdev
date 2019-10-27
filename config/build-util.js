@@ -242,7 +242,7 @@ const configure = exports.configure = (src, dest, tasks) => {
       }
 
       // Watch php, js & css tasks only
-      if (!['zip', 'img'].includes(key)) {
+      if (['css', 'js', 'php'].includes(key)) {
         toWatch[taskName] = asset[key].src
       }
 
@@ -270,7 +270,12 @@ const configure = exports.configure = (src, dest, tasks) => {
 }
 
 exports.watch = (tasks, browserSync) => {
+  const reload = (done) => {
+    browserSync.reload()
+    done()
+  }
+
   for (const [task, src] of Object.entries(tasks)) {
-    watch(src, series(task, browserSync.reload))
+    watch(src, series(task, reload))
   }
 }
