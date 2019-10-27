@@ -12,7 +12,7 @@ _err() {
 	echo -e "\e[31;1mError:\e[0m" "$@" | cat - 1>&2
 }
 
-if [ ! -z $HEROKU_APP_NAME ]; then
+if [ -z WP_HOME ] && [ ! -z $HEROKU_APP_NAME ]; then
     cd $HOME
     WP_HOME="https://${HEROKU_APP_NAME}.herokuapp.com"
 fi
@@ -65,7 +65,9 @@ if [ $WP_ENV != 'testing' ]; then
         cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
         _suc 'Drop-in Object-Cache instaled successfully'
     fi
-else
+fi
+
+if [ -z $HEROKU_APP_NAME ]; then
     _inf 'Import dummy content'
     vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
 fi
