@@ -137,7 +137,7 @@ class Asset extends Feature {
 		}
 
 		$deps = apply_filters( 'blank_scripts_dependencies', [
-			'theme'      => $common_deps,
+			'theme'      => array_merge( $common_deps, [ 'wp-block-library' ] ),
 			'admin'      => $common_deps,
 			'customizer' => [],
 		], $context );

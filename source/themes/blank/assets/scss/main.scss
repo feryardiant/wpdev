@@ -8,6 +8,11 @@
 @import 'bulma/sass/base/helpers.sass';
 
 /**
+ * WP-Blocks Library.
+ */
+@import './blocks-library';
+
+/**
  * Import Customization.
  */
 @import './grids';

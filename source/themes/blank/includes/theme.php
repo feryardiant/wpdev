@@ -327,26 +327,16 @@ final class Theme implements ArrayAccess {
 		);
 
 		/**
-		 * Add support for Block Styles.
-		 */
-		add_theme_support( 'wp-block-styles' );
-
-		/**
 		 * Add support for full and wide align images.
 		 */
 		add_theme_support( 'align-wide' );
 
 		/**
-		 * Add support for editor styles.
-		 */
-		add_theme_support( 'editor-styles' );
-
-		/**
 		 * Enqueue editor styles.
 		 */
 		add_editor_style( [
-			$this->asset->get_uri( 'gutenberg-editor.css' ),
 			$this->typography->get_google_fonts_url(),
+			$this->asset->get_uri( 'gutenberg-editor.css' ),
 		] );
 
 		/**
