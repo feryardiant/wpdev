@@ -43,15 +43,12 @@ if [ -f .env ]; then
     vendor/bin/wp dotenv set DB_HOST $DB_HOST --color
 fi
 
-if [ $WP_ENV != 'production' ] || [ ! -z $FORCE_REINSTALL ]; then
-    _i_cmd='install'
-    if [ ! -z $MULTISITE ] && [ $MULTISITE = 'true' ]; then
-        _i_cmd='multisite-install'
-    fi
+_inf 'Installling WordPress...'
+vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
+    --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
 
-    _inf 'Installling WordPress...'
-    vendor/bin/wp core "$_i_cmd" --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
-        --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
+if [ ! -z $MULTISITE ] && [ $MULTISITE = 'true' ]; then
+    vendor/bin/wp core multisite-convert --color --title="WordPress Network"
 fi
 
 if [ $WP_ENV != 'testing' ]; then
