@@ -61,7 +61,7 @@ if [ $WP_ENV != 'testing' ]; then
     wp transient delete blank_theme_info --color
     vendor/bin/wp cache flush --color
 
-    if [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
+    if [ $WP_ENV = 'production' ] && [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
         cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
         _suc 'Drop-in Object-Cache instaled successfully'
     fi
