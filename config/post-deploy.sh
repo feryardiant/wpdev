@@ -32,7 +32,7 @@ fi
 
 if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
     cp wp-cli.yml wp-cli.local.yml
-    sed -i -E "s~;url =.*~url = ${WP_HOME}~" wp-cli.local.yml
+    sed -i -E "s~;url: .*~url: ${WP_HOME}~" wp-cli.local.yml
     _suc 'File: `wp-cli.local.yml` created successfully'
     cat wp-cli.local.yml
     echo ''
@@ -45,10 +45,7 @@ if [ -f .env ]; then
     vendor/bin/wp dotenv set DB_HOST $DB_HOST
 fi
 
-export WP_SITEURL="$WP_HOME"
-
 if [ $WP_ENV != 'production' ]; then
-
     _inf 'Installling WordPress...'
     vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
         --admin_user="admin" --admin_password="secret" --admin_email="admin@example.com"
