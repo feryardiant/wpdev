@@ -1,0 +1,11 @@
+[buildpack]
+name = "WordPress"
+
+    [publish.Ignore]
+    files = [
+        ".editorconfig",
+        ".env.example",
+        ".gitignore",
+        ".github/",
+        "source/"
+    ]
