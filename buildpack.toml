@@ -1,5 +1,5 @@
 [buildpack]
-name = "WordPress"
+name = "Custom WordPress"
 
     [publish.Ignore]
     files = [
@@ -7,5 +7,7 @@ name = "WordPress"
         ".env.example",
         ".gitignore",
         ".github/",
-        "source/"
+        "public/",
+        "source/",
+        "tests/"
     ]

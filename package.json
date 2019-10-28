@@ -11,6 +11,7 @@
     "wordpress-project"
   ],
   "scripts": {
+    "build": "gulp build --mode production",
     "lint:js": "eslint",
     "lint:css": "stylelint",
     "e2e": "wdio tests/wdio.config.js"

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir>
+
+# fail hard
+set -o pipefail
+# fail harder
+set -eu
+
+BIN_DIR=$(cd $(dirname $0); pwd)
+
+# convenience functions
+source "$BIN_DIR"/util.sh
+
+curl_retry() {
+    local ec=18;
+    local attempts=0;
+    while (( ec == 18 && attempts++ < 3 )); do
+        curl "$@" # -C - would return code 33 if unsupported by server
+        ec=$?
+    done
+    return $ec
+}
+
+status "Installing WP-CLI..."
+
+wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
+
+curl_retry --fail --silent --location -o $HOME/vendor/bin/wp "$wpcli_url" || {
+error <<-EOF
+    Failed to download a WP-CLI executable for bootstrapping!
+
+    This is most likely a temporary internal error. If the problem
+    persists, make sure that you are not running a custom or forked
+    version of the Heroku Ruby buildpack which may need updating.
+EOF
+}
+
+chmod +x $HOME/vendor/bin/wp
+
+status "Setup local wp-cli.yml..."
+
+cp $HOME/wp-cli.yml $HOME/wp-cli.local.yml
+sed -i -E "s~url: .*~url: ${WP_HOME}~" $HOME/wp-cli.local.yml
+
+wp --info 2> /dev/null | tail -n 1 | indent
+
+$HOME/vendor/bin/wp core install --skip-email --title="WordPress Site" \
+    --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
