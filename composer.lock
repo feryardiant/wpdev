@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.26",
+            "version": "3.112.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "eda066813388de5ab8584f06707dacd0b15908b0"
+                "reference": "6d56cc8372e66a99c68f3e9d4bfe26fc485269bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/eda066813388de5ab8584f06707dacd0b15908b0",
-                "reference": "eda066813388de5ab8584f06707dacd0b15908b0",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6d56cc8372e66a99c68f3e9d4bfe26fc485269bc",
+                "reference": "6d56cc8372e66a99c68f3e9d4bfe26fc485269bc",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-10-22T18:17:52+00:00"
+            "time": "2019-10-28T21:23:42+00:00"
         },
         {
             "name": "composer/installers",
@@ -1244,20 +1244,23 @@
         },
         {
             "name": "antecedent/patchwork",
-            "version": "2.1.9",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "1229bb22283177e196b572120de0772d9ee9baac"
+                "reference": "ff7aae02f1c5492716fe13d59de4cfc389b8c4b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/1229bb22283177e196b572120de0772d9ee9baac",
-                "reference": "1229bb22283177e196b572120de0772d9ee9baac",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/ff7aae02f1c5492716fe13d59de4cfc389b8c4b0",
+                "reference": "ff7aae02f1c5492716fe13d59de4cfc389b8c4b0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -1281,7 +1284,7 @@
                 "runkit",
                 "testing"
             ],
-            "time": "2019-08-18T15:18:18+00:00"
+            "time": "2019-10-26T07:10:56+00:00"
         },
         {
             "name": "composer/semver",
@@ -2403,16 +2406,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.16",
+            "version": "7.5.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "316afa6888d2562e04aeb67ea7f2017a0eb41661"
+                "reference": "4c92a15296e58191a4cd74cff3b34fc8e374174a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/316afa6888d2562e04aeb67ea7f2017a0eb41661",
-                "reference": "316afa6888d2562e04aeb67ea7f2017a0eb41661",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4c92a15296e58191a4cd74cff3b34fc8e374174a",
+                "reference": "4c92a15296e58191a4cd74cff3b34fc8e374174a",
                 "shasum": ""
             },
             "require": {
@@ -2483,7 +2486,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-09-14T09:08:39+00:00"
+            "time": "2019-10-28T10:37:36+00:00"
         },
         {
             "name": "rmccue/requests",
@@ -3318,16 +3321,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "82cd0f854ceca17731d6d019c7098e3755c45060"
+                "reference": "65b12cdeaaa6cd276d4c3033a95b9b88b12701e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/82cd0f854ceca17731d6d019c7098e3755c45060",
-                "reference": "82cd0f854ceca17731d6d019c7098e3755c45060",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/65b12cdeaaa6cd276d4c3033a95b9b88b12701e7",
+                "reference": "65b12cdeaaa6cd276d4c3033a95b9b88b12701e7",
                 "shasum": ""
             },
             "require": {
@@ -3365,7 +3368,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-10-16T21:14:26+00:00"
+            "time": "2019-10-28T04:36:32+00:00"
         },
         {
             "name": "symfony/finder",
@@ -3733,12 +3736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "f731dd5c34f2222c94350d672198f179a1b3b069"
+                "reference": "3d50ae5d8de2d9ee83b9aa66910edaff948e1be5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/f731dd5c34f2222c94350d672198f179a1b3b069",
-                "reference": "f731dd5c34f2222c94350d672198f179a1b3b069",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/3d50ae5d8de2d9ee83b9aa66910edaff948e1be5",
+                "reference": "3d50ae5d8de2d9ee83b9aa66910edaff948e1be5",
                 "shasum": ""
             },
             "require": {
@@ -3787,7 +3790,7 @@
                 "cli",
                 "wordpress"
             ],
-            "time": "2019-10-01T11:57:40+00:00"
+            "time": "2019-10-24T08:21:10+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -3886,6 +3889,5 @@
         "ext-imagick": "*",
         "ext-mbstring": "*"
     },
-    "platform-dev": [],
-    "version": "0.2.8"
+    "platform-dev": []
 }
