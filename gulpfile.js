@@ -289,6 +289,7 @@ exports.release = async () => {
   })
 
   const releaseConfig = {
+    commitAll: true,
     sign: argv.sign,
     skip: {},
     scripts: {
