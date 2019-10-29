@@ -2,8 +2,8 @@
 Contributors: (this should be a list of wordpress.org userid's)
 Donate link: https://example.com/
 Tags: comments, spam
-Requires at least: 4.5
-Tested up to: 0.2.3
+Requires at least: 5.0
+Tested up to: 5.2
 Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
