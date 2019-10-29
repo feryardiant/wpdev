@@ -50,7 +50,14 @@ wp() {
 
 export -f wp
 
-if [ ! -f $BUILD_DIR/wp-cli.yml ]; then
+# Use 'wp-cli.heroku.yml' file if exists, otherwise fallback to 'wp-cli.yml'
+if [ -f $BUILD_DIR/wp-cli.heroku.yml ]; then
+    wpcli_yml=$BUILD_DIR/wp-cli.heroku.yml
+else
+    wpcli_yml=$BUILD_DIR/wp-cli.yml
+fi
+
+if [ -z $wpcli_yml ]; then
 error <<-EOF
     Failed to configure WP-CLI!
 
@@ -60,8 +67,16 @@ fi
 
 cd $BUILD_DIR
 
+# We can't validate wp-cli.yml content right now
+# So, I assumed that the 'url' config is exists
+# but with different address, let say: `url: http://localhost`
+cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
+sed -i -E "s~url: .*~url: ${WP_HOME}~" $BUILD_DIR/wp-cli.local.yml
+
 status "Installing WordPress"
 
-wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+# I think we should add custom envvar to configure these flags
+# But I'll leave it as it for now.
+wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com" | indent
 
 status "Setup completed"
