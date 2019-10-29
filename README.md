@@ -1,4 +1,4 @@
-# My Personal WordPress Project Boilerplate
+# My Personal WordPress Project Boilerplate [![Actions Status](https://github.com/feryardiant/wpdev/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/feryardiant/wpdev/actions)
 
 This project aims to provide complete solution for WordPress development and deployment to heroku, even though it isn't completed just yet. 😬
 
