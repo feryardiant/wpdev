@@ -17,12 +17,17 @@ if [ -z WP_HOME ] && [ ! -z $HEROKU_APP_NAME ]; then
     WP_HOME="https://${HEROKU_APP_NAME}.herokuapp.com"
 fi
 
-if [ ! -f vendor/bin/wp ]; then
+
+if ! command -v wp >/dev/null 2>&1; then
     curl -Lso vendor/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x vendor/bin/wp
     _suc 'WP-CLI instaled successfully'
+
+    wp() {
+        vendor/bin/wp "$@"
+    }
 else
-    _inf 'Executable wp-cli already present in vendor/bin/wp'
+    _inf 'Executable wp-cli already present in '$(which wp)
 fi
 
 if [ -z $WP_HOME ]; then
@@ -37,25 +42,25 @@ if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
 fi
 
 if [ -f .env ]; then
-    vendor/bin/wp dotenv salts generate --color
-    vendor/bin/wp dotenv set WP_ENV $WP_ENV --color
-    vendor/bin/wp dotenv set WP_HOME $WP_HOME --color
-    vendor/bin/wp dotenv set DB_HOST $DB_HOST --color
+    wp dotenv salts generate --color
+    wp dotenv set WP_ENV $WP_ENV --color
+    wp dotenv set WP_HOME $WP_HOME --color
+    wp dotenv set DB_HOST $DB_HOST --color
 fi
 
 _inf 'Installling WordPress...'
-vendor/bin/wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
+wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
 
 if [ $WP_ENV != 'testing' ]; then
-    vendor/bin/wp option update permalink_structure '/%postname%/' --color
-    vendor/bin/wp option update link_manager_enabled '1' --color
+    wp option update permalink_structure '/%postname%/' --color
+    wp option update link_manager_enabled '1' --color
 
     _inf 'Installing required plugins'
-    vendor/bin/wp plugin install contact-form-7 jetpack --activate --color
+    wp plugin install contact-form-7 jetpack --activate --color
 
     wp transient delete blank_theme_info --color
-    vendor/bin/wp cache flush --color
+    wp cache flush --color
 
     if [ $WP_ENV = 'production' ] && [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
         cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
@@ -65,6 +70,6 @@ fi
 
 if [ -z $HEROKU_APP_NAME ]; then
     _inf 'Import dummy content'
-    vendor/bin/wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
+    wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
 fi
 

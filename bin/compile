@@ -17,7 +17,7 @@ source "$BIN_DIR"/util.sh
 
 mkdir -p "$BUILD_DIR/.heroku/wp-cli/bin"
 
-# if the build dir is not "/app", we symlink in the .heroku/php subdir
+# if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
 # (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
 [[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
 
@@ -42,9 +42,7 @@ chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
 
 mkdir -p $BUILD_DIR/.profile.d
 
-echo "export PATH=\"PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
-
-# source $BUILD_DIR/.profile.d/100-wpcli.sh
+echo "export PATH=\"\$PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
 
 wp() {
 	$BUILD_DIR/.heroku/wp-cli/bin/wp "$@" | indent
@@ -61,10 +59,6 @@ EOF
 fi
 
 cd $BUILD_DIR
-
-status "WP-CLI installed successfully"
-
-wp --info
 
 status "Installing WordPress"
 

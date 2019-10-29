@@ -5,7 +5,7 @@
 source "$(cd $(dirname $0); cd ..; pwd)"/bin/util.sh
 
 if [ ! -z WP_HOME ] && [ -f "$1/wp-cli.yml" ]; then
-    echo 'Custom WordPress'
+    echo 'WordPress'
     exit 0
 fi
 

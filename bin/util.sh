@@ -65,17 +65,6 @@ export_env_dir() {
     fi
 }
 
-write_export() {
-    local build_dir="$1"
-
-    # only write the export script if the buildpack directory is writable.
-    # this may occur in situations outside of Heroku, such as running the
-    # buildpacks locally.
-    if [ -w "$build_dir/.heroku/wp-cli" ]; then
-        echo "export PATH=\"$build_dir/.heroku/wp-cli/bin\"" > "$bp_dir/export"
-    fi
-}
-
 create_default_env() {
     local build_dir="$1"
 

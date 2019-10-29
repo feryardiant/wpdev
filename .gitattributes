@@ -6,9 +6,11 @@
 *.js    linguist-vendored
 
 .github          export-ignore
-docs             export-ignore
+bin              export-ignore
+source/docs      export-ignore
 CONTRIBUTING.md  export-ignore
 CHANGELOG.md     export-ignore
+buildpack.toml   export-ignore
 
 # app.json         export-ignore
 # composer.lock    export-ignore
