@@ -38,14 +38,16 @@ error <<-EOF
 EOF
 }
 
-chmod +x $WP_CLI_DIR/bin/wp
+chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
 
-echo "export PATH=\"$build_dir/.heroku/wp-cli/bin\"" > $BP_DIR/export
+mkdir -p $BUILD_DIR/.profile.d
+
+echo "export PATH=\$HOME/.heroku/wp-cli/bin" > $BUILD_DIR/.profile.d/100-wpcli.sh
 
 source $BP_DIR/export
 
 wp() {
-	$(which wp) "$@"
+	"$BUILD_DIR"/.heroku/wp-cli/bin/wp "$@"
 }
 
 export -f wp
