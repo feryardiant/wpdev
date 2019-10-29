@@ -57,7 +57,7 @@ else
     wpcli_yml=$BUILD_DIR/wp-cli.yml
 fi
 
-if [ -z $wpcli_yml ]; then
+if [ ! -f $wpcli_yml ]; then
 error <<-EOF
     Failed to configure WP-CLI!
 
