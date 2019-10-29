@@ -119,7 +119,7 @@ const globalConfig = {
       sign: false,
       skip: {
         bump: !argv.bump,
-        commit: true,
+        // commit: true,
         tag: true
       }
     }
