@@ -41,3 +41,47 @@ indent() {
 		*)      sed -u "$c";; # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
 	esac
 }
+
+curl_retry() {
+    local ec=18;
+    local attempts=0;
+    while (( ec == 18 && attempts++ < 3 )); do
+        curl "$@" # -C - would return code 33 if unsupported by server
+        ec=$?
+    done
+    return $ec
+}
+
+export_env_dir() {
+    env_dir=$1
+    whitelist_regex=${2:-''}
+    blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+    if [ -d "$env_dir" ]; then
+        for e in $(ls $env_dir); do
+        echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+        export "$e=$(cat $env_dir/$e)"
+        :
+        done
+    fi
+}
+
+write_export() {
+    local build_dir="$1"
+
+    # only write the export script if the buildpack directory is writable.
+    # this may occur in situations outside of Heroku, such as running the
+    # buildpacks locally.
+    if [ -w "$build_dir/.heroku/wp-cli" ]; then
+        echo "export PATH=\"$build_dir/.heroku/wp-cli/bin\"" > "$bp_dir/export"
+    fi
+}
+
+create_default_env() {
+    local build_dir="$1"
+
+    export WP_CLI_DIR=$build_dir/.heroku/wp-cli
+    export WP_CLI_CACHE_DIR=${WP_CLI_CACHE_DIR:-$WP_CLI_DIR/cache}
+    export WP_CLI_PACKAGES_DIR=${WP_CLI_PACKAGES_DIR:-$WP_CLI_DIR/packages}
+    export WP_ENV=${WP_ENV:-production}
+}
+

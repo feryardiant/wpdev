@@ -15,21 +15,20 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$BIN_DIR"/util.sh
 
-curl_retry() {
-    local ec=18;
-    local attempts=0;
-    while (( ec == 18 && attempts++ < 3 )); do
-        curl "$@" # -C - would return code 33 if unsupported by server
-        ec=$?
-    done
-    return $ec
-}
+mkdir -p "$BUILD_DIR/.heroku/wp-cli/{bin,cache,packages}"
+
+# if the build dir is not "/app", we symlink in the .heroku/php subdir
+# (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
+[[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
+
+create_default_env "$BUILD_DIR"
+export_env_dir "$ENV_DIR"
 
 status "Installing WP-CLI..."
 
 wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-curl_retry --fail --silent --location -o $BUILD_DIR/vendor/bin/wp "$wpcli_url" || {
+curl_retry --fail --silent --location -o $WP_CLI_DIR/bin/wp "$wpcli_url" || {
 error <<-EOF
     Failed to download a WP-CLI executable for bootstrapping!
 
@@ -39,7 +38,16 @@ error <<-EOF
 EOF
 }
 
-chmod +x $BUILD_DIR/vendor/bin/wp
+chmod +x $WP_CLI_DIR/bin/wp
+
+echo "export PATH=\"$build_dir/.heroku/wp-cli/bin\"" > $BP_DIR/export
+source $BP_DIR/export
+
+wp() {
+	$(which wp) "$@"
+}
+
+export -f wp
 
 if [ ! -f $BUILD_DIR/wp-cli.yml ]; then
 error <<-EOF
@@ -49,11 +57,13 @@ error <<-EOF
 EOF
 fi
 
-$BUILD_DIR/vendor/bin/wp --info | indent
+cd $BUILD_DIR
+
+wp --info | indent
 
 status "Installing WordPress"
 
-$BUILD_DIR/vendor/bin/wp core install --skip-email --title="WordPress Site" \
+wp core install --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com" | indent
 
 status "Setup completed"
