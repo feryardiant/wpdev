@@ -52,10 +52,9 @@ function get_identifier_attr_from_array( array $attr ) : ?string {
 	}
 
 	if ( isset( $attr['class'] ) ) {
-		$class = $attr['class'];
-		if ( is_string( $class ) ) {
-			$class = explode( ' ', $class );
-		}
+		$class = is_string( $attr['class'] )
+			? explode( ' ', $attr['class'] )
+			: (array) $attr['class'];
 
 		return '.' . $class[0];
 	}
@@ -105,8 +104,12 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 
 		$id = get_identifier_attr_from_array( $attr );
 		if ( $id ) {
-			$close = ' <!-- ' . $id . ' -->';
+			$close = ' <!-- ' . $id . ' -->' . PHP_EOL;
 		}
+	}
+
+	if ( is_callable( $ends ) ) {
+		$ends = call_user_func( $ends );
 	}
 
 	if ( true === $ends ) {
@@ -115,8 +118,34 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		return $begin . '></' . $tag . '>' . $close;
 	}
 
-	if ( is_callable( $ends ) ) {
-		$ends = call_user_func( $ends );
+	$kses = [ $tag ];
+
+	if ( is_array( $ends ) ) {
+		$inner = [];
+
+		foreach ( $ends as $sub_tag => $param ) {
+			if ( is_string( $param ) ) {
+				$kses[]  = [ 'div', 'a', 'span' ];
+				$inner[] = PHP_EOL . $param;
+				continue;
+			}
+
+			$param = wp_parse_args( $param, [
+				'attr' => [],
+				'ends' => false,
+			] );
+
+			$inner[] = PHP_EOL . make_html_tag( $sub_tag, $param['attr'], $param['ends'], true );
+			$kses[]  = $sub_tag;
+
+			if ( is_array( $param['ends'] ) ) {
+				foreach ( array_keys( $param['ends'] ) as $end_tag ) {
+					$kses[] = $end_tag;
+				}
+			}
+		}
+
+		$ends = join( '', $inner );
 	}
 
 	$output = $begin . '>' . $ends . '</' . $tag . '>' . $close;
@@ -125,14 +154,23 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		return $output;
 	}
 
-	echo wp_kses( $output, [ $tag => get_allowed_attr( $tag, $attr ) ] );
+	foreach ( $kses as $el ) {
+		if ( is_array( $el ) ) {
+			$kses = array_merge( $kses, get_allowed_attr( $el ) );
+			continue;
+		}
+
+		$kses[ $el ] = get_allowed_attr( $el );
+	}
+
+	echo wp_kses( $output, $kses );
 }
 
 /**
  * Retrieve allowed HTML attribute for given tag.
  *
- * @param  string $tag
- * @param  array  $attr
+ * @param  string|array $tag
+ * @param  array        $attr
  * @return array
  */
 function get_allowed_attr( $tag, array $attr = [] ) : array {
@@ -140,6 +178,13 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 
 	if ( ! $allowed_kses ) {
 		$allowed_kses = wp_kses_allowed_html( 'post' );
+	}
+
+	if ( is_array( $tag ) ) {
+		return array_reduce( $tag, function ( $tags, $tag ) use ( $allowed_kses ) {
+			$tags[ $tag ] = $allowed_kses[ $tag ];
+			return $tags;
+		}, [] );
 	}
 
 	$schema_org = [

@@ -1,0 +1,121 @@
+.wp-block-pullquote {
+  padding: 3em 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  border-top: 4px solid #555d66;
+  border-bottom: 4px solid #555d66;
+  color: #40464d;
+
+  &.alignleft,
+  &.alignright {
+    max-width: 305px;
+  }
+
+  p {
+    font-size: 28px;
+    line-height: 1.6;
+  }
+
+  &.alignleft p,
+  &.alignright p {
+    font-size: 20px;
+  }
+
+  cite,
+  footer,
+  &__citation {
+    color: #40464d;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-style: normal;
+  }
+
+  cite,
+  footer {
+    position: relative;
+  }
+
+  .has-text-color a {
+    color: inherit;
+  }
+
+  .wp-block-pullquote:not(.is-style-solid-color) {
+    background: none;
+  }
+}
+
+.wp-block-quote {
+  border-left: 4px solid #000;
+  margin: 20px 0;
+  padding-left: 1em;
+
+  cite,
+  footer,
+  &__citation {
+    color: #6c7781;
+    font-size: 13px;
+    margin-top: 1em;
+    position: relative;
+    font-style: normal;
+  }
+
+  &[style*="text-align:right"],
+  &[style*="text-align: right"] {
+    border-left: none;
+    border-right: 4px solid #000;
+    padding-left: 0;
+    padding-right: 1em;
+  }
+
+  &[style*="text-align:center"],
+  &[style*="text-align: center"] {
+    border: none;
+    padding-left: 0;
+  }
+
+  &.is-style-large,
+  &.is-large {
+    border: none;
+    margin: 0 0 16px;
+    padding: 0 1em;
+
+    p {
+      font-size: 24px;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    cite,
+    footer {
+      font-size: 18px;
+      text-align: right;
+    }
+  }
+}
+
+.wp-block-pullquote.is-style-solid-color {
+  border: none;
+
+  cite {
+    color: inherit;
+  }
+
+  blockquote {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    max-width: 60%;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 32px;
+    }
+
+    cite {
+      text-transform: none;
+      font-style: normal;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.wp-block-column {
+  flex-grow: 1;
+  margin-bottom: 1em;
+  flex-basis: 100%;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  @include tablet {
+    flex-basis: calc(50% - 16px);
+    flex-grow: 0;
+
+    &:nth-child(2n) {
+      margin-left: 32px;
+    }
+  }
+
+  @include desktop {
+    &:not(:first-child) {
+      margin-left: 32px;
+    }
+  }
+}
+
+.wp-block-columns {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include destop {
+    flex-wrap: nowrap;
+  }
+}

@@ -17,18 +17,9 @@
 }
 
 /* Do not show the outline on the skip link target. */
-#site-content {
+.site-content {
   &[tabindex='-1']:focus {
     outline: 0;
-  }
-
-  .hentry {
-    padding-bottom: 2rem;
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      padding-top: 2rem;
-    }
   }
 }
 

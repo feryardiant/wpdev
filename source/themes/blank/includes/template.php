@@ -2,9 +2,8 @@
 /**
  * Blank Theme.
  *
- * @package    WordPress_Boilerplate
- * @subpackage WPBP_Theme
- * @since      0.1.1
+ * @package  Blank
+ * @since    0.2.0
  */
 
 namespace Blank;
@@ -44,7 +43,6 @@ class Template extends Feature {
 	 * @since 0.1.1
 	 */
 	protected function initialize() : void {
-		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'wp_head', [ $this, 'head' ] );
 		add_action( 'blank_hero_body', [ $this, 'hero_body' ], 10 );
 		add_action( 'blank_before_main', [ $this, 'before_main' ], 10 );
@@ -57,15 +55,6 @@ class Template extends Feature {
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
 		add_filter( 'get_custom_logo', [ $this, 'site_branding' ] );
 		add_filter( 'template_include', [ $this, 'wrapper' ] );
-	}
-
-	/**
-	 * Template Setup
-	 *
-	 * @return void
-	 */
-	public function setup() : void {
-		// .
 	}
 
 	/**
@@ -195,11 +184,12 @@ class Template extends Feature {
 			'ID' => get_theme_mod( 'custom_logo' ) ?: null,
 		];
 
-		if ( ! $logo['ID'] ) {
+		$logo['src'] = $logo['ID'] ? wp_get_attachment_image_url( $logo['ID'], $size ) : null;
+		$logo        = apply_filters( 'blank_site_logo', $logo );
+
+		if ( ! $logo || ! $logo['src'] ) {
 			return null;
 		}
-
-		$logo['src'] = wp_get_attachment_image_url( $logo['ID'], $size );
 
 		return (object) $logo;
 	}
@@ -221,20 +211,11 @@ class Template extends Feature {
 
 		$attr = wp_parse_args( $attr, [
 			'class' => 'custom-logo',
+			'src'   => esc_url( $site_logo->src ),
 			'alt'   => get_post_meta( $site_logo->ID, '_wp_attachment_image_alt', true ),
 		] );
 
-		$output = sprintf(
-			'<img %1$s src="%2$s"/>',
-			make_attr_from_array( $attr ),
-			esc_url( $site_logo->src )
-		);
-
-		if ( $returns ) {
-			return $output;
-		}
-
-		echo wp_kses( $output, $this->common_kses() );
+		return make_html_tag( 'img', $attr, true, $returns );
 	}
 
 	/**
@@ -262,7 +243,10 @@ class Template extends Feature {
 		$text      = apply_filters( 'blank_skip_link_text', __( 'Skip to content', 'blank' ) );
 		$target_id = apply_filters( 'blank_skip_link_target', $target_id );
 
-		echo '<a class="skip-link screen-reader-text" href="#' . esc_attr( $target_id ) . '">' . esc_html( $text ) . '</a>';
+		make_html_tag( 'a', [
+			'class' => [ 'skip-link', 'screen-reader-text' ],
+			'href'  => '#' . esc_attr( $target_id ),
+		], $text, false );
 	}
 
 	/**
@@ -290,27 +274,29 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function primary_navigation() {
-		$wrapper_attr = array_merge( [
+		$attr = array_merge( [
 			'class'      => 'site-navigation',
 			'role'       => 'navigation',
 			'aria-label' => __( 'Site Navigation', 'blank' ),
 		], get_schema_org_attr( 'navigation' ) );
 
-		echo wp_kses(
-			'<nav ' . make_attr_from_array( $wrapper_attr ) . '>',
-			get_allowed_attr( 'nav' )
-		);
-
-		make_html_tag( 'button', [
-			'role'          => 'button',
-			'class'         => 'menu-toggle',
-			'aria-controls' => 'menu-primary',
-			'aria-expanded' => 'false',
-		], '<span class="mobile-menu"></span>', false );
-
-		wp_nav_menu( [ 'theme_location' => 'primary' ] );
-
-		echo '</div>';
+		make_html_tag( 'nav', $attr, [
+			'button' => [
+				'attr' => [
+					'role'          => 'button',
+					'class'         => 'menu-toggle',
+					'aria-controls' => 'menu-primary',
+					'aria-expanded' => 'false',
+				],
+				'ends' => [
+					'span' => [
+						'attr' => [ 'class' => 'mobile-menu' ],
+						'ends' => false,
+					],
+				],
+			],
+			wp_nav_menu( [ 'theme_location' => 'primary', 'echo' => false ] ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
+		], false );
 	}
 
 	/**
@@ -340,20 +326,8 @@ class Template extends Feature {
 			$subtitle = get_the_archive_description();
 		}
 
-		$kses = [
-			'h1' => [
-				'class' => [],
-			],
-			'span' => [
-				'class' => [],
-			],
-		];
-
-		echo wp_kses( sprintf(
-			'<h1 class="title">%1$s</h1><span class="subtitle">%2$s</span>',
-			$title,
-			$subtitle
-		), $kses );
+		make_html_tag( 'h1', [ 'class' => 'title' ], $title );
+		make_html_tag( 'span', [ 'class' => 'subtitle' ], $subtitle );
 	}
 
 	/**
@@ -391,17 +365,10 @@ class Template extends Feature {
 			$main_classes[] = 'is-two-thirds';
 		}
 
-		$section_classes = [];
-
 		$main_attr = [
 			'id'    => 'primary',
 			'role'  => 'main',
 			'class' => (array) apply_filters( 'blank_main_class', $main_classes ),
-		];
-
-		$section_attr = [
-			'id'    => 'main',
-			'class' => (array) apply_filters( 'blank_section_class', $section_classes ),
 		];
 
 		$kses = [
@@ -410,16 +377,11 @@ class Template extends Feature {
 				'class' => [],
 				'role'  => [],
 			],
-			'section' => [
-				'id'    => [],
-				'class' => [],
-			],
 		];
 
 		echo wp_kses( sprintf(
-			'<main %1$s><section %2$s>',
-			make_attr_from_array( $main_attr ),
-			make_attr_from_array( $section_attr )
+			'<main %1$s>',
+			make_attr_from_array( $main_attr )
 		), $kses );
 	}
 
@@ -430,7 +392,6 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function after_content() {
-		echo '</section> <!-- #main.site-main -->';
 		echo '</main> <!-- #primary -->';
 	}
 
@@ -506,21 +467,12 @@ class Template extends Feature {
 	 * Common KSES.
 	 *
 	 * @link https://codex.wordpress.org/Function_Reference/wp_kses
+	 * @param string ...$attrs
 	 * @return array
 	 */
-	public function common_kses() : array {
-		return [
-			'div' => [
-				'class' => [],
-			],
-			'a' => [
-				'target' => [],
-				'href'   => [],
-				'class'  => [],
-			],
-			'span' => [
-				'class' => [],
-			],
-		];
+	public function common_kses( string ...$attrs ) : array {
+		return get_allowed_attr(
+			array_merge( [ 'div', 'a', 'span' ], $attrs )
+		);
 	}
 }

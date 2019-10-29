@@ -88,10 +88,12 @@ class Asset extends Feature {
 			'wp.i18n.setLocaleData( ' . $locale_data . ', "' . $this->theme->slug . '" );'
 		);
 
-		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'admin' ), $this->version, true );
+		wp_enqueue_style( 'blank-customizer', $this->get_uri( 'customizer.css' ), $this->get_styles_dependencies( 'customizer' ), $this->version );
+		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'customizer' ), $this->version, true );
 
 		wp_localize_script( 'blank-customizer', 'blank_customizer', $this->get_localize_script( [
 			'customizer_url' => admin_url( '/customize.php?autofocus' ),
+			'webfonts'       => $this->theme->typography->get_fonts(),
 		] ) );
 
 		wp_enqueue_script( 'blank-customizer' );
@@ -120,20 +122,23 @@ class Asset extends Feature {
 	 * @return array
 	 */
 	protected function get_styles_dependencies( string $context ) : array {
-		wp_register_style( 'blank-google-fonts', $this->google_fonts_url(), [], $this->version );
-
 		wp_register_style( 'blank-variables', false, [], $this->version );
 		wp_add_inline_style( 'blank-variables', $this->css_variables( $this->theme ) );
 
+		$google_fonts = $this->theme->typography->get_google_fonts_url();
+		$common_deps  = [
+			'blank-variables',
+		];
+
+		if ( $google_fonts ) {
+			wp_register_style( 'blank-google-fonts', $google_fonts, [], $this->version );
+
+			$common_deps[] = 'blank-google-fonts';
+		}
+
 		$deps = apply_filters( 'blank_scripts_dependencies', [
-			'theme'      => [
-				'blank-google-fonts',
-				'blank-variables',
-			],
-			'admin'      => [
-				'blank-google-fonts',
-				'blank-variables',
-			],
+			'theme'      => array_merge( $common_deps, [ 'wp-block-library' ] ),
+			'admin'      => $common_deps,
 			'customizer' => [],
 		], $context );
 
@@ -152,12 +157,13 @@ class Asset extends Feature {
 				'jquery',
 			],
 			'admin'      => [
-				'wp-i18n',
 				'jquery',
+				'wp-i18n',
 			],
 			'customizer' => [
+				'customize-preview',
+				'customize-controls',
 				'underscore',
-				'wp-color-picker',
 				'wp-element',
 				'wp-components',
 				'wp-date',
@@ -177,57 +183,30 @@ class Asset extends Feature {
 	 * @return string
 	 */
 	protected function css_variables( Theme $theme ) {
-		return self::make_css( [
-			':root' => [
-				'--background-color'            => $theme->get_option( 'background_color' ),
+		$variables = [
+			'--background-color'            => $theme->get_option( 'background_color' ),
 
-				'--max-site-width'              => $theme->get_option( 'max_site_width' ),
+			'--max-site-width'              => $theme->get_option( 'max_site_width' ),
 
-				'--typography-base-font'        => $theme->get_option( 'typography_base_font' ),
-				'--typography-base-color'       => $theme->get_option( 'typography_base_color' ),
-				'--typography-link-color'       => $theme->get_option( 'typography_link_color' ),
-				'--typography-link-hover-color' => $theme->get_option( 'typography_link_hover_color' ),
-
-				'--typography-heading-font'     => $theme->get_option( 'typography_heading_font' ),
-				'--typography-heading-color'    => $theme->get_option( 'typography_heading_color' ),
-				'--typography-h1-font'          => $theme->get_option( 'typography_h1_font' ),
-				'--typography-h2-font'          => $theme->get_option( 'typography_h2_font' ),
-				'--typography-h3-font'          => $theme->get_option( 'typography_h3_font' ),
-				'--typography-h4-font'          => $theme->get_option( 'typography_h4_font' ),
-				'--typography-h5-font'          => $theme->get_option( 'typography_h5_font' ),
-				'--typography-h6-font'          => $theme->get_option( 'typography_h6_font' ),
-				'--typography-blockquote-font'  => $theme->get_option( 'typography_blockquote_font' ),
-				'--typography-pre-font'         => $theme->get_option( 'typography_pre_font' ),
-
-				'--primary-color'               => $theme->get_option( 'primary_color' ),
-				'--secondary-color'             => $theme->get_option( 'secondary_color' ),
-				'--info-color'                  => $theme->get_option( 'info_color' ),
-				'--success-color'               => $theme->get_option( 'success_color' ),
-				'--warning-color'               => $theme->get_option( 'warning_color' ),
-				'--danger-color'                => $theme->get_option( 'danger_color' ),
-				'--light-color'                 => $theme->get_option( 'light_color' ),
-				'--dark-color'                  => $theme->get_option( 'dark_color' ),
-			],
-		] );
-	}
-
-	/**
-	 * Register Google fonts.
-	 *
-	 * @since 0.1.0
-	 * @return string Google fonts URL for the theme.
-	 */
-	public function google_fonts_url() {
-		$google_fonts = apply_filters( 'blank_google_font_families', [
-			'source-sans-pro' => 'Source+Sans+Pro:400,300,300italic,400italic,600,700,900',
-		] );
-
-		$query_args = [
-			'family' => implode( '|', $google_fonts ),
-			'subset' => rawurlencode( 'latin,latin-ext' ),
+			'--primary-color'               => $theme->get_option( 'primary_color' ),
+			'--secondary-color'             => $theme->get_option( 'secondary_color' ),
+			'--info-color'                  => $theme->get_option( 'info_color' ),
+			'--success-color'               => $theme->get_option( 'success_color' ),
+			'--warning-color'               => $theme->get_option( 'warning_color' ),
+			'--danger-color'                => $theme->get_option( 'danger_color' ),
+			'--light-color'                 => $theme->get_option( 'light_color' ),
+			'--dark-color'                  => $theme->get_option( 'dark_color' ),
 		];
 
-		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+		foreach ( $theme->typography->get_options_values() as $option ) {
+			$variables[ '--' . $option->name . '_family' ] = "'{$option->family}', {$option->category}";
+			$variables[ '--' . $option->name . '_weight' ] = $option->weight;
+			$variables[ '--' . $option->name . '_style' ]  = $option->style;
+			$variables[ '--' . $option->name . '_size' ]   = $option->size[0] . ' ' . $option->size[1];
+			$variables[ '--' . $option->name . '_height' ] = $option->height[0] . ' ' . $option->height[1];
+		}
+
+		return self::make_css( [ ':root' => apply_filters( 'blank_css_variables', $variables ) ] );
 	}
 
 	/**

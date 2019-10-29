@@ -107,7 +107,6 @@ const tasks = configure('source', 'source/releases', {
     return gulp.src(src)
       .pipe(imagemin(config.imagemin))
       .pipe(gulp.dest(dest))
-      .pipe(bs.stream())
   },
 
   /**

@@ -32,6 +32,7 @@ use ArrayAccess;
  * @property-read Customizer $customizer
  * @property-read Menu $menu
  * @property-read Template $template
+ * @property-read Typography $typography
  * @property-read Widgets $widgets
  * @property-read Integrations\JetPack $jetpack
  */
@@ -45,7 +46,7 @@ final class Theme implements ArrayAccess {
 	const TRANSIENT_NAMES = [
 		'theme_info',
 		'icons_info',
-		'styles_info',
+		'fonts_info',
 	];
 
 	/**
@@ -72,8 +73,14 @@ final class Theme implements ArrayAccess {
 	public function __construct() {
 		self::$cached = (object) [];
 
-		$transient_name     = $this->transient_name( 'theme_info' );
-		self::$cached->info = get_transient( $transient_name );
+		$transient_name        = $this->transient_name( 'theme_info' );
+		self::$cached->info    = get_transient( $transient_name );
+		self::$cached->options = [
+			'panels'   => [],
+			'sections' => [],
+			'settings' => [],
+			'values'   => [],
+		];
 
 		if ( empty( self::$cached->info ) ) {
 			/** @var WP_Theme $theme */
@@ -81,7 +88,7 @@ final class Theme implements ArrayAccess {
 			$theme_info = [
 				'siteurl'    => get_option( 'siteurl' ),
 				'name'       => $theme->name,
-				'slug'       => $theme->template,
+				'slug'       => strtolower( $theme->template ),
 				'version'    => $theme->version,
 				'author'     => $theme->get( 'Author' ),
 				'author_uri' => $theme->get( 'AuthorURI' ),
@@ -100,10 +107,6 @@ final class Theme implements ArrayAccess {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
-		if ( function_exists( 'tgmpa' ) ) {
-			add_action( 'tgmpa_register', [ $this, 'tgmpa_register' ] );
-		}
-
 		$this->initialize( [
 			Asset::class,
 			Comment::class,
@@ -111,6 +114,7 @@ final class Theme implements ArrayAccess {
 			Customizer::class,
 			Menu::class,
 			Template::class,
+			Typography::class,
 			Widgets::class,
 		] );
 
@@ -299,8 +303,8 @@ final class Theme implements ArrayAccess {
 		add_theme_support(
 			'custom-logo',
 			apply_filters( 'blank_support_custom_logo_args', [
-				'height'      => 110,
-				'width'       => 470,
+				'height'      => 60,
+				'width'       => 210,
 				'flex-width'  => true,
 				'flex-height' => true,
 			] )
@@ -323,26 +327,16 @@ final class Theme implements ArrayAccess {
 		);
 
 		/**
-		 * Add support for Block Styles.
-		 */
-		add_theme_support( 'wp-block-styles' );
-
-		/**
 		 * Add support for full and wide align images.
 		 */
 		add_theme_support( 'align-wide' );
 
 		/**
-		 * Add support for editor styles.
-		 */
-		add_theme_support( 'editor-styles' );
-
-		/**
 		 * Enqueue editor styles.
 		 */
 		add_editor_style( [
+			$this->typography->get_google_fonts_url(),
 			$this->asset->get_uri( 'gutenberg-editor.css' ),
-			$this->asset->google_fonts_url(),
 		] );
 
 		/**
@@ -383,31 +377,40 @@ final class Theme implements ArrayAccess {
 		 * Add support for responsive embedded content.
 		 */
 		add_theme_support( 'responsive-embeds' );
-	}
 
-	/**
-	 * Register required plugins
-	 *
-	 * @return void
-	 */
-	public function tgmpa_register() {
-		tgmpa( [
-			[
-				'name' => 'JetPack by Automatic',
-				'slug' => 'jetpack',
-			],
+		/**
+		 * Add support for custom background.
+		 */
+		add_theme_support( 'custom-background', [
+			'default-color' => '#fff',
 		] );
+
+		/**
+		 * Add support for custom header.
+		 */
+		add_theme_support( 'custom-header', [
+			// .
+		] );
+
+		add_filter( 'blank_site_logo', function ( $logo ) {
+			if ( ! $logo['src'] ) {
+				$logo['src'] = $this->asset->get_uri( 'main-logo.svg' );
+			}
+			return $logo;
+		} );
 	}
 
 	/**
 	 * Class initializer.
 	 *
 	 * @since 0.1.1
-	 * @param  array $classes
+	 * @param  array $features
 	 * @return void
 	 */
-	private function initialize( array $classes ) {
-		foreach ( $classes as $name => $class ) {
+	private function initialize( array $features ) {
+		$features = apply_filters( 'blank_init', $features );
+
+		foreach ( $features as $name => $class ) {
 			if ( is_numeric( $name ) ) {
 				$name = strtolower(
 					str_replace( [ '\\', __NAMESPACE__ . '.' ], [ '.', '' ], $class )
@@ -446,6 +449,25 @@ final class Theme implements ArrayAccess {
 	}
 
 	/**
+	 * Get filesystem instance.
+	 *
+	 * @since 0.2.1
+	 * @return \WP_Filesystem_Base
+	 * @codeCoverageIgnore
+	 */
+	public function get_filesystem() : \WP_Filesystem_Base {
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
+		global $wp_filesystem;
+
+		return $wp_filesystem;
+	}
+
+	/**
 	 * Register theme options.
 	 *
 	 * @since 0.1.1
@@ -477,13 +499,6 @@ final class Theme implements ArrayAccess {
 			$options = array_diff( scandir( $options_dir ), [ '.', '..' ] );
 		}
 
-		self::$cached->options = [
-			'panels'   => [],
-			'sections' => [],
-			'settings' => [],
-			'values'   => [],
-		];
-
 		foreach ( $options as $file ) {
 			$info = pathinfo( $file );
 
@@ -491,10 +506,7 @@ final class Theme implements ArrayAccess {
 				continue;
 			}
 
-			$this->add_option(
-				str_replace( '-', '_', $info['filename'] ),
-				require_once $this->get_dir( "{$dirname}/{$file}" )
-			);
+			$this->add_option( $info['filename'], require_once $this->get_dir( "{$dirname}/{$file}" ) );
 		}
 	}
 
@@ -509,6 +521,7 @@ final class Theme implements ArrayAccess {
 	 * @return void
 	 */
 	public function add_option( string $name, array $attributes = [], string $parent = null ) : void {
+		$name     = str_replace( '-', '_', $name );
 		$type     = 'settings';
 		$children = [];
 		$defaults = [
@@ -538,6 +551,13 @@ final class Theme implements ArrayAccess {
 				'section' => $parent,
 				'type'    => 'text',
 			] );
+
+			$attributes['default'] = apply_filters(
+				'blank_option_default',
+				$attributes['default'],
+				$attributes['type'],
+				$name
+			);
 
 			self::$cached->options['values'][ $name ] = $attributes['default'];
 		}
@@ -600,15 +620,17 @@ final class Theme implements ArrayAccess {
 	 * @return array|null
 	 */
 	public function options( ?string $key = null ) : ?array {
+		$options = self::$cached->options;
+
 		if ( $key ) {
-			if ( ! array_key_exists( $key, self::$cached->options ) ) {
+			if ( ! array_key_exists( $key, $options ) ) {
 				return null;
 			}
 
-			return self::$cached->options[ $key ];
+			return $options[ $key ];
 		}
 
-		return self::$cached->options;
+		return $options;
 	}
 
 	/**

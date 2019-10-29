@@ -1,0 +1,137 @@
+.customize-control {
+  margin-bottom: 0 !important;
+  padding: 8px 0 14px;
+  border-bottom: 1px solid #ddd; }
+  .customize-control-checkbox {
+    padding: 12px 0; }
+  .customize-control:first-child {
+    padding-top: 0; }
+  .customize-control-blank-options {
+    margin-bottom: 14px; }
+  .customize-control label {
+    white-space: normal;
+    line-height: 1.8;
+    display: inline-block;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    width: 100%; }
+  .customize-control input[type="text"],
+  .customize-control input[type="email"],
+  .customize-control input[type="number"],
+  .customize-control input[type="password"],
+  .customize-control input[type="tel"],
+  .customize-control input[type="url"],
+  .customize-control select,
+  .customize-control textarea {
+    margin: 0 !important;
+    border-radius: 3px;
+    line-height: 1.6 !important;
+    padding: 3px 4px 4px 6px;
+    position: relative;
+    z-index: 1;
+    border-color: #d1d1d1; }
+  .customize-control input[type="checkbox"] {
+    border-radius: 3px; }
+
+.blank-control {
+  position: relative; }
+  .blank-control > header:not(:empty) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative; }
+  .blank-control-title {
+    line-height: 1.8;
+    letter-spacing: 0.1px;
+    text-transform: capitalize;
+    margin: 0;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+  .blank-control-revert {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-family: dashicons;
+    /* stylelint-disable-line font-family-no-missing-generic-family-keyword */
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 10px;
+    width: 24px;
+    height: 24px;
+    color: #0073aa;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .blank-control-revert:not([disabled]) {
+      cursor: pointer; }
+    .blank-control-revert::before {
+      content: '\f531';
+      -webkit-transform: rotate(45deg);
+              transform: rotate(45deg);
+      -webkit-transition: -webkit-transform 0.3s ease;
+      transition: -webkit-transform 0.3s ease;
+      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, -webkit-transform 0.3s ease; }
+  .blank-control.changed .blank-control-revert {
+    opacity: 1; }
+  .blank-control:hover .blank-control-revert {
+    opacity: 1;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg); }
+  .blank-control-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 -3px; }
+  .blank-control-column {
+    padding: 0 3px; }
+  .blank-control-inputs-group {
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border: 1px solid #d1d1d1; }
+    .blank-control-inputs-group :active {
+      -webkit-box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
+              box-shadow: 0 0 2px rgba(30, 140, 190, 0.8); }
+    .blank-control-inputs-group .input {
+      -webkit-box-shadow: none;
+              box-shadow: none;
+      border: 0;
+      border-radius: 0; }
+      .blank-control-inputs-group .input:first-child {
+        border-top-left-radius: calc($border-color - 1);
+        border-bottom-left-radius: calc($border-color - 1); }
+      .blank-control-inputs-group .input:last-child {
+        border-top-right-radius: calc($border-color - 1);
+        border-bottom-right-radius: calc($border-color - 1); }
+      .blank-control-inputs-group .input-unit {
+        font-size: 13px;
+        text-transform: uppercase; }
+      .blank-control-inputs-group .input:focus {
+        z-index: 2;
+        -webkit-box-shadow: none;
+                box-shadow: none; }
+
+.blank[data-type="blank-typography"] label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }

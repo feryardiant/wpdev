@@ -25,8 +25,9 @@ $red: hsl(348, 100%, 61%);
 
 // Typography
 
-// $family-sans-serif: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-// $family-monospace: monospace;
+$family-sans-serif: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+// $family-serif: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', serif;
+$family-monospace: monospace;
 // $render-mode: optimizeLegibility;
 
 // $size-1: 3rem;
@@ -50,7 +51,8 @@ $red: hsl(348, 100%, 61%);
 // Responsiveness
 
 // The container horizontal gap, which acts as the offset for breakpoints
-// $gap: 32px;
+$gap: 32px;
+$column-gap: 0.75rem;
 // 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
 // $tablet: 769px;
 // 960px container + 4rem
@@ -143,9 +145,11 @@ $red: hsl(348, 100%, 61%);
 
 // Typography
 
-// $family-primary: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5FAE\8F6F\96C5\9ED1', Arial, sans-serif;
-// $family-secondary: $family-sans-serif;
-// $family-code: $family-monospace;
+$family-primary: var(--typography_base_font_family);
+$family-secondary: var(--typography_base_font_family);
+$family-code: var(--typography_pre_font_family);
+
+$body-background-color: var(--background-color);
 
 // $size-small: $size-7;
 // $size-normal: $size-6;
@@ -164,6 +168,6 @@ $red: hsl(348, 100%, 61%);
 @import 'bulma/sass/utilities/initial-variables.sass';
 @import 'bulma/sass/utilities/functions.sass';
 @import 'bulma/sass/utilities/derived-variables.sass';
-@import 'bulma/sass/utilities/animations.sass';
+// @import 'bulma/sass/utilities/animations.sass';
 @import 'bulma/sass/utilities/mixins.sass';
 @import 'bulma/sass/utilities/controls.sass';

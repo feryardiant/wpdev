@@ -6,7 +6,7 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
 
-( function( document, $, { customize } ) {
+( function( document, blank, $, { customize } ) {
   // const apiBaseUrl = document.querySelector( 'link[rel="https://api.w.org/"]' )
   //   .getAttribute( 'href' )
 
@@ -34,10 +34,64 @@
     } )
   } )
 
+  // Show or hide site title.
+  customize( 'blank[show_site_title]', ( value ) => {
+    value.bind( ( to ) => {
+      $( '.site-title' ).toggleClass( 'is-hidden', to )
+    } )
+  } )
+
   // Update site background color...
   customize( 'blogdescription', ( value ) => {
     value.bind( ( to ) => {
       $( '.site-description' ).text( to )
+    } )
+  } )
+
+  // Show or hide site tagline.
+  customize( 'blank[show_tagline]', ( value ) => {
+    value.bind( ( to ) => {
+      $( '.site-description' ).toggleClass( 'is-hidden', to )
+    } )
+  } )
+
+  const updateFont = ( prefix, value ) => {
+    const font = blank.webfonts.find( ( f ) => f.family === value.family ) || {}
+    const weight = [ 'italic', 'regular' ].includes( value.variant ) ? 400 : value.variant.slice( 0, 3 )
+    const style = 'italic' === value.variant.slice( -6 ) ? 'italic' : 'normal'
+
+    document.documentElement.style.setProperty( `${ prefix }_family`, `'${ value.family }', ${ font.category }` )
+    document.documentElement.style.setProperty( `${ prefix }_weight`, weight )
+    document.documentElement.style.setProperty( `${ prefix }_style`, style )
+    document.documentElement.style.setProperty( `${ prefix }_size`, value.size.join( ' ' ) )
+    document.documentElement.style.setProperty( `${ prefix }_height`, value.height.join( ' ' ) )
+  }
+
+  // Base site typography...
+  customize( 'blank[typography_base_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_base_font', to )
+    } )
+  } )
+
+  // Heading typography...
+  customize( 'blank[typography_heading_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_heading_font', to )
+    } )
+  } )
+
+  // BlockQuote typography...
+  customize( 'blank[typography_blockquote_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_blockquote_font', to )
+    } )
+  } )
+
+  // Pre-formated typography...
+  customize( 'blank[typography_pre_font]', ( value ) => {
+    value.bind( ( to ) => {
+      updateFont( '--typography_pre_font', to )
     } )
   } )
 
@@ -98,4 +152,4 @@
       }
     } )
   } )
-} )( document, jQuery, wp )
+} )( document, window.blank_customizer, jQuery, wp )
