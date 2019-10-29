@@ -118,7 +118,6 @@ const globalConfig = {
     release: {
       sign: false,
       skip: {
-        bump: !argv.bump,
         commit: true,
         tag: true
       }

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4-patch.4](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.3...v0.2.4-patch.4) (2019-10-29)
+
+
+### Bug Fixes
+
+* **build:** remove skip bump flag on sub-package ([9de5fb3](https://github.com/feryardiant/wpdev/commit/9de5fb33d0fd123fbdc024d927015d604742e438))
+
 ### [0.2.4-patch.3](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.2...v0.2.4-patch.3) (2019-10-29)
 
 
