@@ -1,5 +1,6 @@
 url: http://localhost
 path: public/wp
 color: true
+admin_user: admin
 server:
   docroot: public
