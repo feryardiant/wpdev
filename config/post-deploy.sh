@@ -35,7 +35,7 @@ if [ -z $WP_HOME ]; then
     exit 1
 fi
 
-if [ $WP_ENV != 'testing' ] && [ ! -f wp-cli.local.yml ]; then
+if [[ $WP_ENV != 'testing' && ! -f wp-cli.local.yml ]]; then
     cp wp-cli.yml wp-cli.local.yml
     sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
     _suc 'File: `wp-cli.local.yml` created successfully'
@@ -52,7 +52,7 @@ _inf 'Installling WordPress...'
 wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@wp.feryardiant.id"
 
-if [ $WP_ENV != 'testing' ]; then
+if [[ $WP_ENV != 'testing' ]]; then
     wp option update permalink_structure '/%postname%/' --color
     wp option update link_manager_enabled '1' --color
 
@@ -62,7 +62,7 @@ if [ $WP_ENV != 'testing' ]; then
     wp transient delete blank_theme_info --color
     wp cache flush --color
 
-    if [ $WP_ENV = 'production' ] && [ ! -f public/app/object-cache.php ] && [ -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]; then
+    if [[ $WP_ENV = 'production' && ! -f public/app/object-cache.php && -f public/app/mu-plugins/redis-cache/includes/object-cache.php ]]; then
         cp public/app/mu-plugins/redis-cache/includes/object-cache.php public/app/object-cache.php
         _suc 'Drop-in Object-Cache instaled successfully'
     fi
@@ -70,6 +70,6 @@ fi
 
 if [ -z $HEROKU_APP_NAME ]; then
     _inf 'Import dummy content'
-    wp import source/assets/dummy-content.xml --authors=skip --skip=image-resize --quiet
+    wp import source/assets/dummy-content.xml --authors=create --skip=image-resize --quiet | tail -n 1 | sed -e 's~<br \/>~\n~gi' -e 's~<\/p><p>~\n~gi' -e 's~<[^>]*>~~gim' -e 's~&#822[0|1];~"~gi'
 fi
 
