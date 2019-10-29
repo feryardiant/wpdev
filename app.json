@@ -72,6 +72,8 @@
     "heroku-redis:hobby-dev"
   ],
   "buildpacks": [
-    { "url": "heroku/php" }
+    { "url": "heroku/php" },
+    { "url": "heroku/nodejs" },
+    { "url": "feryardiant/wpdev" }
   ]
 }

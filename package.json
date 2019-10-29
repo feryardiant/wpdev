@@ -11,6 +11,7 @@
     "wordpress-project"
   ],
   "scripts": {
+    "build": "gulp build --skip php --mode production",
     "lint:js": "eslint",
     "lint:css": "stylelint",
     "e2e": "wdio tests/wdio.config.js"
@@ -24,9 +25,9 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@wdio/browserstack-service": "^5.13.2",
-    "@wdio/cli": "^5.15.2",
+    "@wdio/cli": "^5.15.4",
     "@wdio/dot-reporter": "^5.15.2",
-    "@wdio/local-runner": "^5.15.2",
+    "@wdio/local-runner": "^5.15.4",
     "@wdio/mocha-framework": "^5.14.3",
     "@wordpress/eslint-plugin": "^3.1.0",
     "babel-eslint": "^10.0.3",
@@ -34,7 +35,7 @@
     "chai": "^4.2.0",
     "cross-env": "^5.2.1",
     "dotenv": "^8.1.0",
-    "eslint": "^6.4.0",
+    "eslint": "^6.6.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.0",
     "gulp-babel": "^8.0.0",
@@ -56,7 +57,7 @@
     "standard-version": "^7.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
-    "stylelint-scss": "^3.11.0",
+    "stylelint-scss": "^3.12.0",
     "yargs": "^14.0.0",
     "yorkie": "^2.0.0"
   },

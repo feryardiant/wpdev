@@ -205,6 +205,10 @@ const configure = exports.configure = (src, dest, tasks) => {
   const buildTasks = []
   const zipTasks = []
   const toWatch = {}
+  const { argv } = yargs.option('skip', {
+    describe: 'Skip certain task',
+    choices: ['css', 'img', 'js', 'php']
+  })
 
   for (const [name, asset] of scandir(src, dest)) {
     const assetTasks = []
@@ -256,12 +260,17 @@ const configure = exports.configure = (src, dest, tasks) => {
       })
     }
 
-    task(`${name}:build`, parallel(...assetTasks.sort()))
-    buildTasks.push(...assetTasks)
+    if (assetTasks.length > 0) {
+      task(`${name}:build`, parallel(...assetTasks.sort()))
+      buildTasks.push(...assetTasks)
+    }
   }
 
-  task('build', parallel(...buildTasks.sort()))
+  const skip = argv.skip && ['css', 'img', 'js', 'php'].includes(argv.skip) ? argv.skip : false
+  const _tasks = !skip ? buildTasks : buildTasks.filter(t => !t.endsWith(skip))
+
   task('zip', series(...zipTasks))
+  task('build', parallel(..._tasks.sort()))
 
   return toWatch
 }
@@ -273,7 +282,6 @@ exports.watch = (tasks, browserSync) => {
   }
 
   for (const [taskName, src] of Object.entries(tasks)) {
-
     watch(src, series(taskName, reload))
   }
 }

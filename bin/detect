@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+# convenience functions
+source "$(cd $(dirname $0); cd ..; pwd)"/bin/util.sh
+
+if [ ! -z WP_HOME ] && [ -f "$1/wp-cli.yml" ]; then
+    echo 'Custom WordPress'
+    exit 0
+fi
+
+error <<-EOF
+    Application not supported by this buildpack!
+
+    The 'feryardiant/wpdev' buildpack is set on this application,
+    but was unable to detect a WordPress codebase.
+
+    A WordPress on Heroku requires a 'wp-cli.yml' at the root of
+    the directory structure. If you are trying to deploy a
+    WordPress site, ensure that file is present at the top level
+    directory.
+
+    If you are trying to deploy an application written in another
+    language, you need to change the list of buildpacks set on your
+    Heroku app using the 'heroku buildpacks' command.
+
+    For more information, refer to the following documentation:
+    https://devcenter.heroku.com/articles/buildpacks
+    https://devcenter.heroku.com/articles/php-support#activation
+EOF
+
+exit 1

@@ -1,0 +1,13 @@
+[buildpack]
+name = "Custom WordPress"
+
+    [publish.Ignore]
+    files = [
+        ".editorconfig",
+        ".env.example",
+        ".gitignore",
+        ".github/",
+        "public/",
+        "source/",
+        "tests/"
+    ]
