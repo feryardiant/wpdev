@@ -18,17 +18,17 @@ if [ -z WP_HOME ] && [ ! -z $HEROKU_APP_NAME ]; then
 fi
 
 
-if [ ! -f vendor/bin/wp ] || ! command -v wp >/dev/null 2>&1; then
+if [ ! -f vendor/bin/wp ]; then
     curl -Lso vendor/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x vendor/bin/wp
     _suc 'WP-CLI instaled successfully'
-
-    wp() {
-        vendor/bin/wp "$@"
-    }
 else
-    _inf 'Executable wp-cli already present in '$(which wp)
+    _inf 'Executable wp-cli already installed'
 fi
+
+wp() {
+    vendor/bin/wp "$@"
+}
 
 if [ -z $WP_HOME ]; then
     _err '`WP_HOME` is not defined'
