@@ -300,7 +300,7 @@ exports.release = async () => {
     releaseConfig.skip.tag = true
     releaseConfig.skip.commit = true
   } else {
-    releaseConfig.scripts.prechangelog += ' && git add -A'
+    releaseConfig.scripts.precommit = 'git add -A'
   }
 
   if (typeof argv.pre === 'string') {
