@@ -18,7 +18,7 @@ if [ -z WP_HOME ] && [ ! -z $HEROKU_APP_NAME ]; then
 fi
 
 
-if [[ ! command -v wp >/dev/null 2>&1 && ! -f vendor/bin/wp ]]; then
+if ! command -v wp >/dev/null 2>&1 && [ ! -f vendor/bin/wp ]; then
     curl -Lso vendor/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x vendor/bin/wp
     _suc 'WP-CLI instaled successfully'
