@@ -238,6 +238,10 @@ const configure = exports.configure = (src, dest, tasks) => {
 
       const taskName = `${name}:${key}`
 
+      if (globalConfig.hasOwnProperty(key)) {
+        Object.assign(config, globalConfig[key])
+      }
+
       if ('zip' !== key) {
         toWatch[taskName] = asset[key].src
         assetTasks.push(taskName)
@@ -245,11 +249,15 @@ const configure = exports.configure = (src, dest, tasks) => {
         config.gulp = {
           base: path.join(process.cwd(), config.path, '..')
         }
-        zipTasks.push(taskName)
-      }
 
-      if (globalConfig.hasOwnProperty(key)) {
-        Object.assign(config, globalConfig[key])
+        config.release.releaseAs = config.version
+
+        // Don't generate changelog if no version bump
+        if (config.release.skip.bump) {
+          config.release.skip.changelog = true
+        }
+
+        zipTasks.push(taskName)
       }
 
       task(taskName, (done) => {

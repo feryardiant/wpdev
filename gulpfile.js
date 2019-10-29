@@ -126,11 +126,6 @@ const tasks = configure('source', 'releases', {
       postbump: `node config/build-util.js bump ${config.path}`
     }
 
-    // Don't generate changelog if no version bump
-    if (config.release.skip.bump) {
-      config.release.skip.changelog = true
-    }
-
     // Generate CHANGELOG.md file inside source directory
     await version(config.release)
 
@@ -295,10 +290,18 @@ exports.release = async () => {
 
   const releaseConfig = {
     sign: argv.sign,
+    skip: {},
     scripts: {
-      prerelease: 'gulp build && git add -A',
-      postbump: 'gulp zip',
+      prerelease: `gulp build --mode ${process.env.NODE_ENV}`,
+      postbump: `gulp zip --mode ${process.env.NODE_ENV}`,
     }
+  }
+
+  if (!isProduction) {
+    releaseConfig.skip.tag = true
+    releaseConfig.skip.commit = true
+  } else {
+    releaseConfig.scripts.postbump += ' && git add -A'
   }
 
   if (typeof argv.pre === 'string') {
