@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.1...v0.2.4) (2019-10-29)
+
+
+### Features
+
+* **theme:** add ability to create nested html, ([6436b9f](https://github.com/feryardiant/wpdev/commit/6436b9f3a2be954c2e4931aecbb0c5cbca06a107))
+* **theme:** add custom customizer control ([6ef3af7](https://github.com/feryardiant/wpdev/commit/6ef3af77c7463839e0e525160f60ffad3e2b59de))
+* **theme:** add custom-logo hook & make use of make_html_tag helper ([ee2e41f](https://github.com/feryardiant/wpdev/commit/ee2e41ff79bcdce5723834c8d0db02a4e663f93a))
+* **theme:** add default site logo filter ([86fd037](https://github.com/feryardiant/wpdev/commit/86fd037e9716f96369d7e6a4959a5aa66327c767))
+* **theme:** add default theme option filter & change default logo size ([1e3fe30](https://github.com/feryardiant/wpdev/commit/1e3fe30aa773d50dc7bb1d7c0cd1456af9fada09))
+* **theme:** init typography feature ([913af3d](https://github.com/feryardiant/wpdev/commit/913af3d9288dd86a4bd666eed1ef223cd8b0db04))
+* **theme:** remove 'wp-block-styles' supports and use custom styling ([958d14b](https://github.com/feryardiant/wpdev/commit/958d14ba68a328b31fe6f927b169df9bb9e26e79))
+
+
+### Bug Fixes
+
+* **archive:** add commitAll flag ([d784a93](https://github.com/feryardiant/wpdev/commit/d784a935cc2136fbb23e758a9bffcf4d99d58bdd))
+* **build:** remove skip bump flag on sub-package ([fe8f861](https://github.com/feryardiant/wpdev/commit/fe8f8617944177291a0e070fdf2ebc4e5b6eb3dc))
+* **build:** try to use postbump hook ([49db7a9](https://github.com/feryardiant/wpdev/commit/49db7a900822835dad1f8ea3c8a10dd35ab61a15))
+* **build:** use git add on precommit hook ([012bf5a](https://github.com/feryardiant/wpdev/commit/012bf5a827ee97a6121221a6a372577be736cf86))
+
 ### [0.2.4-patch.1](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.0...v0.2.4-patch.1) (2019-10-29)
 
 ### [0.2.4-patch.0](https://github.com/feryardiant/wpdev/compare/v0.2.3...v0.2.4-patch.0) (2019-10-29)
