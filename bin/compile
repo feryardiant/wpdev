@@ -38,8 +38,6 @@ EOF
 
 chmod +x $APP_DIR/vendor/bin/wp
 
-status "Setup local wp-cli.yml..."
-
 if [ ! -f $APP_DIR/wp-cli.yml ]; then
 error <<-EOF
     Failed to configure WP-CLI!
@@ -47,9 +45,6 @@ error <<-EOF
     File 'wp-cli.yml' is required during this process.
 EOF
 fi
-
-cp $APP_DIR/wp-cli.yml $APP_DIR/wp-cli.local.yml
-sed -i -E "s~url: .*~url: ${WP_HOME}~" $APP_DIR/wp-cli.local.yml
 
 status "WP CLI is installed with the following configuration"
 
@@ -59,3 +54,5 @@ status "Installing WordPress"
 
 $APP_DIR/vendor/bin/wp core install --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+
+status "Setup completed"
