@@ -7,6 +7,7 @@ set -o pipefail
 set -eu
 
 BIN_DIR=$(cd $(dirname $0); pwd)
+APP_DIR="$1"
 
 # convenience functions
 source "$BIN_DIR"/util.sh
@@ -25,7 +26,7 @@ status "Installing WP-CLI..."
 
 wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-curl_retry --fail --silent --location -o $HOME/vendor/bin/wp "$wpcli_url" || {
+curl_retry --fail --silent --location -o $APP_DIR/vendor/bin/wp "$wpcli_url" || {
 error <<-EOF
     Failed to download a WP-CLI executable for bootstrapping!
 
@@ -35,14 +36,26 @@ error <<-EOF
 EOF
 }
 
-chmod +x $HOME/vendor/bin/wp
+chmod +x $APP_DIR/vendor/bin/wp
 
 status "Setup local wp-cli.yml..."
 
-cp $HOME/wp-cli.yml $HOME/wp-cli.local.yml
-sed -i -E "s~url: .*~url: ${WP_HOME}~" $HOME/wp-cli.local.yml
+if [ ! -f $APP_DIR/wp-cli.yml ]; then
+error <<-EOF
+    Failed to configure WP-CLI!
 
-wp --info 2> /dev/null | tail -n 1 | indent
+    File 'wp-cli.yml' is required during this process.
+EOF
+fi
 
-$HOME/vendor/bin/wp core install --skip-email --title="WordPress Site" \
+cp $APP_DIR/wp-cli.yml $APP_DIR/wp-cli.local.yml
+sed -i -E "s~url: .*~url: ${WP_HOME}~" $APP_DIR/wp-cli.local.yml
+
+status "WP CLI is installed with the following configuration"
+
+$APP_DIR/vendor/bin/wp --info 2> /dev/null | tail -n 1 | indent
+
+status "Installing WordPress"
+
+$APP_DIR/vendor/bin/wp core install --skip-email --title="WordPress Site" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
