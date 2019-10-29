@@ -44,10 +44,10 @@ mkdir -p $BUILD_DIR/.profile.d
 
 echo "export PATH=\"PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
 
-source $BUILD_DIR/.profile.d/100-wpcli.sh
+# source $BUILD_DIR/.profile.d/100-wpcli.sh
 
 wp() {
-	"$BUILD_DIR"/.heroku/wp-cli/bin/wp "$@"
+	$BUILD_DIR/.heroku/wp-cli/bin/wp "$@" | indent
 }
 
 export -f wp
@@ -64,10 +64,10 @@ cd $BUILD_DIR
 
 status "WP-CLI installed successfully"
 
-wp --info | indent
+wp --info
 
 status "Installing WordPress"
 
-wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com" | indent
+wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 status "Setup completed"
