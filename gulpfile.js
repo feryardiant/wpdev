@@ -24,7 +24,7 @@ require('dotenv').config()
 
 const { configure, args, watch, isProduction } = require('./config/build-util')
 
-const tasks = configure('source', 'releases', {
+const tasks = configure('source', 'source/releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *
@@ -119,7 +119,7 @@ const tasks = configure('source', 'releases', {
    * @param {Object}       param0.config
    * @return {stream}
    */
-  zip: async ({ src, dest, config }, done) => {
+  zip: async ({ src, dest, config }) => {
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
     config.release.releaseAs = config.version
