@@ -77,6 +77,6 @@ status "Installing WordPress"
 
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
-wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com" | indent
+wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 status "Setup completed"
