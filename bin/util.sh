@@ -36,10 +36,7 @@ indent() {
 	# if the first argument is an empty string, it's the same as no argument (useful if a second argument is passed)
 	# the second argument is the prefix to use for indenting; defaults to seven space characters, but can be set to e.g. " !     " to decorate each line of an error message
 	local c="${1:+"2,999"} s/^/${2-"       "}/"
-	case $(uname) in
-		Darwin) sed -l "$c";; # mac/bsd sed: -l buffers on line boundaries
-		*)      sed -u "$c";; # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
-	esac
+	sed -u "$c" # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
 }
 
 curl_retry() {
@@ -83,4 +80,3 @@ create_default_env() {
     export WP_CLI_PACKAGES_DIR=${WP_CLI_PACKAGES_DIR:-$build_dir/.heroku/wp-cli/packages}
     export WP_ENV=${WP_ENV:-production}
 }
-
