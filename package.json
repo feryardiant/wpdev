@@ -11,6 +11,7 @@
     "wordpress-project"
   ],
   "scripts": {
+    "archive": "gulp build && gulp zip",
     "build": "gulp build --skip php --mode production",
     "lint:js": "eslint",
     "lint:css": "stylelint",

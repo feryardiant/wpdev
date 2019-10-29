@@ -123,7 +123,7 @@ const tasks = configure('source', 'releases', {
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
     config.release.scripts = {
-      prerelease: `node config/build-util.js bump ${config.path} && git add -A`
+      prerelease: `node config/build-util.js bump ${config.path}`
     }
 
     // Generate CHANGELOG.md file inside source directory
@@ -292,8 +292,7 @@ exports.release = async () => {
     sign: argv.sign,
     skip: {},
     scripts: {
-      prerelease: `gulp build --mode ${process.env.NODE_ENV}`,
-      postbump: `gulp zip --mode ${process.env.NODE_ENV}`,
+      prechangelog: `NODE_ENV=${process.env.NODE_ENV} npm run archive`,
     }
   }
 
@@ -301,7 +300,7 @@ exports.release = async () => {
     releaseConfig.skip.tag = true
     releaseConfig.skip.commit = true
   } else {
-    releaseConfig.scripts.prerelease += ' && git add -A'
+    releaseConfig.scripts.prechangelog += ' && git add -A'
   }
 
   if (typeof argv.pre === 'string') {
