@@ -60,11 +60,12 @@ const { argv } = yargs.options({
   },
   mode: {
     describe: 'Override default `WP_ENV` in .env field',
+    default: process.env.WP_ENV,
     type: 'string'
   }
 })
 
-process.env.NODE_ENV = argv.mode || process.env.WP_ENV || 'development'
+process.env.NODE_ENV = argv.mode || 'production'
 const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
 const globalConfig = {
   version: pkgJson.version,
