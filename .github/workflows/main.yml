@@ -54,12 +54,14 @@ jobs:
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: |
         cp .env.example .env
-        config/post-deploy.sh
+        .github/setup.sh
     - name: Unit Test
       run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests
       if: matrix.wp-versions == 5.0
       env:
+        BS_AUTOMATE_PROJECT: ${{ GITHUB_REPOSITORY }} - ${{ GITHUB_WORKFLOW }}
+        BS_AUTOMATE_BUILD: build No. ${{ GITHUB_ACTION }}
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
