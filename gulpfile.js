@@ -123,7 +123,7 @@ const tasks = configure('source', 'releases', {
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
     config.release.scripts = {
-      postbump: `node config/build-util.js bump ${config.path} && git add -A`
+      prerelease: `node config/build-util.js bump ${config.path} && git add -A`
     }
 
     // Generate CHANGELOG.md file inside source directory
