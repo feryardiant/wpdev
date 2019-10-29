@@ -3,7 +3,8 @@
   "description": "Custom WordPress Project Boilerplate",
   "repository": "https://github.com/feryardiant/wpdev",
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
-  "keywords": ["php", "wordpress"],
+  "keywords": ["php", "wordpress", "boilerplate", "composer", "bedrock"],
+  "stack": "heroku-18",
   "formation": {
     "web": {
       "quantity": 1,
@@ -66,11 +67,11 @@
   },
   "addons": [
     "cleardb:ignite",
-    "heroku-redis:hobby-dev"
+    "heroku-redis:hobby-dev",
+    "scheduler:standard"
   ],
   "buildpacks": [
     { "url": "heroku/php" },
-    { "url": "heroku/nodejs" },
-    { "url": "feryardiant/wpdev" }
+    { "url": "feryardiant/wordpress" }
   ]
 }
