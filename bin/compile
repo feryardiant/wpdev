@@ -15,7 +15,7 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$BIN_DIR"/util.sh
 
-mkdir -p "$BUILD_DIR/.heroku/wp-cli/{bin,cache,packages}"
+mkdir -p "$BUILD_DIR/.heroku/wp-cli/bin"
 
 # if the build dir is not "/app", we symlink in the .heroku/php subdir
 # (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
@@ -28,7 +28,7 @@ status "Installing WP-CLI..."
 
 wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-curl_retry --fail --silent --location -o $WP_CLI_DIR/bin/wp "$wpcli_url" || {
+curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
 error <<-EOF
     Failed to download a WP-CLI executable for bootstrapping!
 
@@ -41,6 +41,7 @@ EOF
 chmod +x $WP_CLI_DIR/bin/wp
 
 echo "export PATH=\"$build_dir/.heroku/wp-cli/bin\"" > $BP_DIR/export
+
 source $BP_DIR/export
 
 wp() {

@@ -79,9 +79,8 @@ write_export() {
 create_default_env() {
     local build_dir="$1"
 
-    export WP_CLI_DIR=$build_dir/.heroku/wp-cli
-    export WP_CLI_CACHE_DIR=${WP_CLI_CACHE_DIR:-$WP_CLI_DIR/cache}
-    export WP_CLI_PACKAGES_DIR=${WP_CLI_PACKAGES_DIR:-$WP_CLI_DIR/packages}
+    export WP_CLI_CACHE_DIR=${WP_CLI_CACHE_DIR:-$build_dir/.heroku/wp-cli/cache}
+    export WP_CLI_PACKAGES_DIR=${WP_CLI_PACKAGES_DIR:-$build_dir/.heroku/wp-cli/packages}
     export WP_ENV=${WP_ENV:-production}
 }
 
