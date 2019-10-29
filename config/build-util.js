@@ -249,13 +249,6 @@ const configure = exports.configure = (src, dest, tasks) => {
           base: path.join(process.cwd(), config.path, '..')
         }
 
-        config.release.releaseAs = config.version
-
-        // Don't generate changelog if no version bump
-        if (config.release.skip.bump) {
-          config.release.skip.changelog = true
-        }
-
         zipTasks.push(taskName)
       }
 

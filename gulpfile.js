@@ -122,8 +122,9 @@ const tasks = configure('source', 'releases', {
   zip: async ({ src, dest, config }, done) => {
     config.release.path = config.path
     config.release.infile = `${config.path}/CHANGELOG.md`
+    config.release.releaseAs = config.version
     config.release.scripts = {
-      prerelease: `node config/build-util.js bump ${config.path}`
+      postbump: `node config/build-util.js bump ${config.path}`
     }
 
     // Generate CHANGELOG.md file inside source directory
