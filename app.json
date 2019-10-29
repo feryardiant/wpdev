@@ -1,12 +1,9 @@
 {
   "name": "WordPress Boilerplate",
+  "description": "Custom WordPress Project Boilerplate",
   "repository": "https://github.com/feryardiant/wpdev",
   "logo": "https://s.w.org/style/images/about/WordPress-logotype-wmark.png",
-  "scripts": {
-    "postdeploy": [
-      "config/post-deploy.sh"
-    ]
-  },
+  "keywords": ["php", "wordpress"],
   "formation": {
     "web": {
       "quantity": 1,
