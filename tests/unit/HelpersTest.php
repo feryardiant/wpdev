@@ -98,48 +98,48 @@ class HelpersTest extends TestCase {
         return [
             // make_html_tag('hr', [], true)
             [
-                '<hr/>',
+                '<hr/>' . PHP_EOL,
                 'hr',
                 [],
                 true,
             ],
             // make_html_tag('hr', [], true)
             [
-                '<img src="/path/to/img.jpg"/>',
+                '<img src="/path/to/img.jpg"/>' . PHP_EOL,
                 'img',
                 ['src' => '/path/to/img.jpg'],
                 true,
             ],
             // make_html_tag('img', ['src' => '...', 'class' => '...'], true)
             [
-                '<img src="/path/to/img.jpg" class="img is-rounded"/> <!-- .img -->',
+                '<img src="/path/to/img.jpg" class="img is-rounded"/> <!-- .img -->' . PHP_EOL,
                 'img',
                 ['src' => '/path/to/img.jpg', 'class' => 'img is-rounded'],
                 true,
             ],
             // make_html_tag('img', ['src' => '...', 'id' => '...'], true)
             [
-                '<img src="/path/to/img.jpg" id="img-id"/> <!-- #img-id -->',
+                '<img src="/path/to/img.jpg" id="img-id"/> <!-- #img-id -->' . PHP_EOL,
                 'img',
                 ['src' => '/path/to/img.jpg', 'id' => 'img-id'],
                 true,
             ],
             // make_html_tag('img', ['src' => '...', '...'], true)
             [
-                '<img src="/path/to/img.jpg" id="img-id" class="foo bar"/> <!-- #img-id -->',
+                '<img src="/path/to/img.jpg" id="img-id" class="foo bar"/> <!-- #img-id -->' . PHP_EOL,
                 'img',
                 ['src' => '/path/to/img.jpg', 'id' => 'img-id', 'class' => 'foo bar' ],
                 true,
             ],
             // make_html_tag('div', ['class' => '...'])
             [
-                '<div class="hentry"></div> <!-- .hentry -->',
+                '<div class="hentry"></div> <!-- .hentry -->' . PHP_EOL,
                 'div',
                 ['class' => 'hentry'],
             ],
             // make_html_tag('div', ['class' => '...'], 'Some Text')
             [
-                '<div class="hentry">Some Text</div> <!-- .hentry -->',
+                '<div class="hentry">Some Text</div> <!-- .hentry -->' . PHP_EOL,
                 'div',
                 ['class' => 'hentry'],
                 'Some Text'

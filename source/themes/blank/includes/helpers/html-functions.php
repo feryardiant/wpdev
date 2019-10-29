@@ -97,15 +97,13 @@ function normalize_class_attr( $class, ...$classes ) : array {
  */
 function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 	$begin = '<' . $tag;
-	$close = '';
+	$close = PHP_EOL;
 
 	if ( ! empty( $attr ) ) {
 		$begin .= ' ' . make_attr_from_array( $attr );
 
-		$id = get_identifier_attr_from_array( $attr );
-		if ( $id ) {
-			$close = ' <!-- ' . $id . ' -->' . PHP_EOL;
-		}
+		$id    = get_identifier_attr_from_array( $attr );
+		$close = $id ? ' <!-- ' . $id . ' -->' . $close : $close;
 	}
 
 	if ( is_callable( $ends ) ) {
