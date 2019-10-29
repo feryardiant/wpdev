@@ -1,14 +1,17 @@
-# My Personal WordPress project boilerplate
+# My Personal WordPress Project Boilerplate
 
-[Bedrock](https://roots.io/bedrock/) is a modern WordPress stack that helps you get started with the best development tools and project structure.
+This project aims to provide complete solution for WordPress development and deployment to heroku, even though it isn't completed just yet. 😬
 
-## TODO
+Inspired by [wordpress-heroku](https://github.com/PhilippHeuer/wordpress-heroku) by Phillip Heuer and based on the exact same boilerplate of [Bedrock](https://roots.io/bedrock/), this project will give you better experiences while developing your very own WordPress themes and plugins that easily deployed to heroku.
 
-* [x] Configure demo on Heroku
-* [x] Configure Development server
-* [ ] Configure Testing
-* [ ] Create WP-CLI command to extend its [`scaffolder`](https://developer.wordpress.org/cli/commands/scaffold/) to suite the current directory structure
-* [ ] Generate zip files that ready to be published on WordPress plugins or theme directory
+## Features
+
+* [x] Integrated Unit and end-to-end testing
+* [x] Custom [heroku buildpack](https://devcenter.heroku.com/articles/buildpack-api)
+* [x] Automated changelog generator
+* [x] Better assets compilation
+* [x] Easily create archive that ready to distribute to WordPress themes or plugins directory
+* [ ] Thoughts? [let me know](https://github.com/feryardiant/wpdev/issues/new) 😁
 
 ## Requirements
 
@@ -20,7 +23,13 @@ Its always good to have WP-CLI [installed globally](https://wp-cli.org/#installi
 
 ## Installation
 
-This project is available to install with the following command
+### 1. One-Click-Deployment
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+Using this button you can deploy a new instance of WordPress. All required extensions will be deployed automatically. This also works if you fork your own project to work on your site.
+
+### 2. Using `composer create-project` command
 
 ```bash
 $ composer create-project feryardiant/wpdev [project-folder]
@@ -43,7 +52,7 @@ Don't forget to configure your HTTP server' `document root` to `public` director
 
 ### Development
 
-I utilize `gulp` for all development workflow in this project, not only for compiling `scss` files, minify images and compressing `js`, but also to run development server. Once you're done with installation process above, please install the development dependencies through `npm`
+I using `gulp` for almost all development workflow in this project, not only for compiling `scss` files, minify images and compressing `js`, but also to run development server. Once you're done with installation process above, please install the development dependencies through `npm`
 
 ```bash
 $ npm -g install glup-cli # in case you didn't have gulp instaled globally on your system
@@ -62,13 +71,14 @@ All the changes you've made will be automatically linted and compiled, once it d
 
 ## Workflow
 
-Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-structure/), the project directory structure is pretty much the same, but with some tweak.
+Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-structure/), the project directory structure is pretty much similar, but with some tweaks.
 
 ### Directory Structure and Gulp tasks
 
-* **config** directory : Consists of all build utilities, configuration files, including all the scripts you'd be using on all environment,
+* **bin** directory : Consists of all [buildpack executables](https://devcenter.heroku.com/articles/buildpack-api#buildpack-api) only, feel free to delete this directory once you've cloned this project or install it on your local machine,
+* **config** directory : Consists of all build utilities and configuration files, including all the scripts you'd be using on all environment,
 * **public** directory : The server document root directory,
-* **source** directory : Them main source directory of your project, it consists of two primary sub-directory, which is `plugins` and `themes`,
+* **source** directory : Them main source directory of your project, it contains of two primary sub-directories, which are `plugins` and `themes`,
 * **tests** directory : Testing directory, obviously.
 
 ```
@@ -76,14 +86,16 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 │   ├── environments
 │   └── heroku
 ├── public
-│   └── app
+│   ├── app
+│   └── wp
 ├── source
 │   ├── assets
 │   ├── plugins
 │   └── themes
 └── tests
-    ├── plugins
-    └── themes
+    ├── e2e
+    ├── stubs
+    └── unit
 ```
 
 The `gulp` scripts will autoatically scan any sub-directories under `plugins` and `themes` and generate all the required `gulp` tasks if the sub-directory meets the following structures:
@@ -97,30 +109,45 @@ The `gulp` scripts will autoatically scan any sub-directories under `plugins` an
 └── languages
 ```
 
-Once you've create `<dirname>` above inside `plugins` or `themes` directory, you'll see the following gulp tasks:
+Once you've create `<dirname>` above inside `plugins` or `themes` directory, you'll see similar gulp tasks as following:
 
 ```
 $ gulp -T
-├── <dirname>:php
-├── <dirname>:img
-├── <dirname>:css
-├── <dirname>:js
-├── <dirname>:zip
-├─┬ <dirname>:build
+├── theme-companion:php
+├── theme-companion:zip
+├─┬ theme-companion:build
 │ └─┬ <parallel>
-│   ├── <dirname>:php
-│   ├── <dirname>:img
-│   ├── <dirname>:css
-│   └── <dirname>:js
+│   └── theme-companion:php
+├── theme:php
+├── theme:img
+├── theme:css
+├── theme:js
+├── theme:zip
+├─┬ theme:build
+│ └─┬ <parallel>
+│   ├── theme:css
+│   ├── theme:img
+│   ├── theme:js
+│   └── theme:php
+├── theme-child:php
+├── theme-child:zip
+├─┬ theme-child:build
+│ └─┬ <parallel>
+│   └── theme-child:php
+├─┬ zip
+│ └─┬ <series>
+│   ├── theme-companion:zip
+│   ├── theme:zip
+│   └── theme-child:zip
 ├─┬ build
 │ └─┬ <parallel>
-│   ├── <dirname>:php
-│   ├── <dirname>:img
-│   ├── <dirname>:css
-│   └── <dirname>:js
-├─┬ zip
-│ └─┬ <parallel>
-│   └── wpbp:zip
+│   ├── theme-child:php
+│   ├── theme-companion:php
+│   ├── theme:css
+│   ├── theme:img
+│   ├── theme:js
+│   └── theme:php
+├── e2e
 ├── release
 └── default
 ```
@@ -128,6 +155,7 @@ $ gulp -T
 ### Notes
 
 * `<dirname>:build` task will execute all task under `<dirname>` namespace, except for `<dirname>:zip` task.
+* Each `*:css`, `*:img` and `*:js` will only available if you have `img`, `js` and `scss` directories under `assets` directory.
 * `build` task will combine all `*:build` tasks on each namespace.
 * `zip` task will combine all `*:zip` tasks on each namespace.
 * `release` task will run `build` task, generate `CHANGELOG.md`, run `zip` task and bump version number of this project.
