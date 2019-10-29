@@ -62,28 +62,23 @@
   },
   "require": {
     "php": ">=7.1",
-    "ext-bcmath": "*",
-    "ext-exif": "*",
-    "ext-gettext": "*",
-    "ext-imagick": "*",
-    "ext-mbstring": "*",
+    "cmb2/cmb2": "^2.6",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "oscarotero/env": "^1.2",
-    "predis/predis": "^1.1",
     "roots/wordpress": "^5.2",
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
+    "tillkruss/redis-cache": "^1.5",
     "vlucas/phpdotenv": "^3.4",
-    "wpackagist-plugin/redis-cache": "^1.4",
-    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
-    "wpackagist-plugin/wordpress-importer": "^0.6.4",
+    "wpackagist-plugin/contact-form-7": "^5.1",
     "wpdev/blank-child": "*"
   },
   "require-dev": {
     "10up/wp_mock": "^0.4.2",
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "johnbillion/query-monitor": "^3.4",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "phpunit/phpunit": "^7.5",
     "roave/security-advisories": "dev-master",
@@ -91,19 +86,22 @@
     "wp-cli/core-command": "^2.0",
     "wp-cli/import-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
-    "wpackagist-plugin/debug-bar": "^1.0",
     "wpackagist-plugin/theme-check": "20190801.1"
+  },
+  "suggest": {
+    "ext-bcmath": "*",
+    "ext-exif": "*",
+    "ext-gettext": "*",
+    "ext-imagick": "*",
+    "ext-mbstring": "*"
   },
   "extra": {
     "installer-paths": {
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
-        "wpackagist-plugin/debug-bar",
+        "tillkruss/redis-cache",
+        "johnbillion/query-monitor",
         "wpackagist-plugin/theme-check",
-        "wpackagist-plugin/redis-cache",
-        "wpackagist-plugin/regenerate-thumbnails",
-        "wpackagist-plugin/wordpress-importer",
-        "wpdev/blank-companion",
         "type:wordpress-muplugin"
       ],
       "public/app/plugins/{$name}/": [

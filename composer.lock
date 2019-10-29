@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac743e712f87039369e3e3272369ad8e",
+    "content-hash": "9e09b3c6f2ada79c0a543140c8484827",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -88,6 +88,59 @@
                 "sdk"
             ],
             "time": "2019-10-28T21:23:42+00:00"
+        },
+        {
+            "name": "cmb2/cmb2",
+            "version": "v2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "008d9b83263d971d6bd41c27e31113db852d5ef3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/008d9b83263d971d6bd41c27e31113db852d5ef3",
+                "reference": "008d9b83263d971d6bd41c27e31113db852d5ef3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1.2",
+                "nette/utils": "2.5.3",
+                "phpunit/phpunit": "6.5.13"
+            },
+            "suggest": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "WebDevStudios",
+                    "email": "contact@webdevstudios.com",
+                    "homepage": "https://github.com/WebDevStudios",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
+            "homepage": "https://github.com/CMB2/CMB2",
+            "keywords": [
+                "metabox",
+                "plugin",
+                "wordpress"
+            ],
+            "time": "2019-01-21T04:30:08+00:00"
         },
         {
             "name": "composer/installers",
@@ -585,56 +638,6 @@
             "time": "2015-07-25T16:39:46+00:00"
         },
         {
-            "name": "predis/predis",
-            "version": "v1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
-                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Predis\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2016-06-16T16:22:20+00:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -975,6 +978,41 @@
             "time": "2019-08-06T08:03:45+00:00"
         },
         {
+            "name": "tillkruss/redis-cache",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tillkruss/redis-cache.git",
+                "reference": "916a12e86f4e42e2bec0c0b5ab752aa8154dfe89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tillkruss/redis-cache/zipball/916a12e86f4e42e2bec0c0b5ab752aa8154dfe89",
+                "reference": "916a12e86f4e42e2bec0c0b5ab752aa8154dfe89",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im/"
+                }
+            ],
+            "description": "A persistent object cache backend for WordPress powered by Redis. Supports Predis, PhpRedis, HHVM, replication and clustering.",
+            "homepage": "https://github.com/tillkruss/redis-cache",
+            "time": "2019-10-17T17:04:06+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v3.6.0",
             "source": {
@@ -1032,58 +1070,22 @@
             "time": "2019-09-10T21:37:39+00:00"
         },
         {
-            "name": "wpackagist-plugin/redis-cache",
-            "version": "1.5.0",
+            "name": "wpackagist-plugin/contact-form-7",
+            "version": "5.1.4",
             "source": {
                 "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/redis-cache/",
-                "reference": "tags/1.5.0"
+                "url": "https://plugins.svn.wordpress.org/contact-form-7/",
+                "reference": "tags/5.1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redis-cache.1.5.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/contact-form-7.5.1.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/redis-cache/"
-        },
-        {
-            "name": "wpackagist-plugin/regenerate-thumbnails",
-            "version": "3.1.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
-                "reference": "tags/3.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.1.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
-        },
-        {
-            "name": "wpackagist-plugin/wordpress-importer",
-            "version": "0.6.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
-                "reference": "tags/0.6.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
+            "homepage": "https://wordpress.org/plugins/contact-form-7/"
         },
         {
             "name": "wpdev/blank",
@@ -1517,6 +1519,54 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "johnbillion/query-monitor",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johnbillion/query-monitor.git",
+                "reference": "87d11f55d524b21172c358468e1587e42974a277"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnbillion/query-monitor/zipball/87d11f55d524b21172c358468e1587e42974a277",
+                "reference": "87d11f55d524b21172c358468e1587e42974a277",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.6"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "johnbillion/falsey-assertequals-detector": "^1 || ^3",
+                "phpcompatibility/phpcompatibility-wp": "^2.0",
+                "phpunit/phpunit": "^5 || ^7",
+                "roots/wordpress": "*",
+                "squizlabs/php_codesniffer": "^3.2",
+                "vlucas/phpdotenv": "^3",
+                "wp-cli/wp-cli-bundle": "^2.1",
+                "wp-coding-standards/wpcs": "~2.0.0",
+                "wp-phpunit/wp-phpunit": "*"
+            },
+            "type": "wordpress-plugin",
+            "extra": {
+                "wordpress-install-dir": "tests/wordpress"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "John Blackbourn",
+                    "homepage": "https://johnblackbourn.com/"
+                }
+            ],
+            "description": "The Developer Tools panel for WordPress.",
+            "homepage": "https://github.com/johnbillion/query-monitor/",
+            "time": "2019-10-08T20:45:29+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -3838,24 +3888,6 @@
             "time": "2019-05-21T02:50:00+00:00"
         },
         {
-            "name": "wpackagist-plugin/debug-bar",
-            "version": "1.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/debug-bar/",
-                "reference": "tags/1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/debug-bar.1.0.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/debug-bar/"
-        },
-        {
             "name": "wpackagist-plugin/theme-check",
             "version": "20190801.1",
             "source": {
@@ -3882,13 +3914,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1",
-        "ext-bcmath": "*",
-        "ext-exif": "*",
-        "ext-gettext": "*",
-        "ext-imagick": "*",
-        "ext-mbstring": "*"
+        "php": ">=7.1"
     },
-    "platform-dev": [],
-    "version": "0.2.4"
+    "platform-dev": []
 }
