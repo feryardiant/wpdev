@@ -101,6 +101,7 @@
         "humanmade/s3-uploads",
         "tillkruss/redis-cache",
         "johnbillion/query-monitor",
+        "wpackagist-plugin/contact-form-7",
         "wpackagist-plugin/theme-check",
         "type:wordpress-muplugin"
       ],
