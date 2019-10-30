@@ -11,11 +11,9 @@
     "wordpress-project"
   ],
   "scripts": {
-    "archive": "gulp build && gulp zip",
-    "build": "gulp build --skip php --mode production",
-    "lint:js": "eslint",
-    "lint:css": "stylelint",
-    "e2e": "wdio tests/wdio.config.js"
+    "serve": "cross-env WP_ENV=development gulp",
+    "archive": "cross-env WP_ENV=production gulp build && gulp zip",
+    "build": "cross-env WP_ENV=production gulp build --skip php"
   },
   "dependencies": {
     "bulma": "^0.7.5"
