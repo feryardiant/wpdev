@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e09b3c6f2ada79c0a543140c8484827",
+    "content-hash": "52b2d25a44d8e8ab1a15b0f9d7e80b94",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.30",
+            "version": "3.112.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6d56cc8372e66a99c68f3e9d4bfe26fc485269bc"
+                "reference": "dd708cda7df0def37e9dcb6e3640d4d122e4bd28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6d56cc8372e66a99c68f3e9d4bfe26fc485269bc",
-                "reference": "6d56cc8372e66a99c68f3e9d4bfe26fc485269bc",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dd708cda7df0def37e9dcb6e3640d4d122e4bd28",
+                "reference": "dd708cda7df0def37e9dcb6e3640d4d122e4bd28",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-10-28T21:23:42+00:00"
+            "time": "2019-10-29T18:07:59+00:00"
         },
         {
             "name": "cmb2/cmb2",
@@ -1088,12 +1088,30 @@
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
         },
         {
+            "name": "wpackagist-plugin/wordpress-importer",
+            "version": "0.6.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
+                "reference": "tags/0.6.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
+        },
+        {
             "name": "wpdev/blank",
-            "version": "0.2.1",
+            "version": "0.2.4",
             "dist": {
                 "type": "path",
                 "url": "source/themes/blank",
-                "reference": "a575c4ab4faa8c1f0d1a3a391f77efac2b062459"
+                "reference": "256d91fc9b02c07d204ea2b939f5655da36e1794"
             },
             "require": {
                 "php": ">=7.1"
@@ -1112,11 +1130,11 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "0.2.1",
+            "version": "0.2.4",
             "dist": {
                 "type": "path",
                 "url": "source/themes/blank-child",
-                "reference": "9762e0e8c8c6c66207d84cf1ebfabb25645efd94"
+                "reference": "3d36f81896e5ccc6d4293ed4dcbf3ae639b2811b"
             },
             "require": {
                 "php": ">=7.1",
@@ -1137,11 +1155,11 @@
         },
         {
             "name": "wpdev/blank-companion",
-            "version": "0.2.1",
+            "version": "0.2.4",
             "dist": {
                 "type": "path",
                 "url": "source/plugins/blank-companion",
-                "reference": "ceaffdf53619bf32da811f44ca5d42ebc739b493"
+                "reference": "1cff73cd0b2253b1337be2aa9b750fb35eac8387"
             },
             "type": "wordpress-plugin",
             "license": [
@@ -2593,12 +2611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "eb59d9f35a47f567ae15e7179d7c666489cd4b85"
+                "reference": "f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/eb59d9f35a47f567ae15e7179d7c666489cd4b85",
-                "reference": "eb59d9f35a47f567ae15e7179d7c666489cd4b85",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa",
+                "reference": "f8c8349a4b12a26edfa8b21d07d3dbeb6dcedcfa",
                 "shasum": ""
             },
             "conflict": {
@@ -2801,7 +2819,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-10-09T14:04:58+00:00"
+            "time": "2019-10-29T22:11:03+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
