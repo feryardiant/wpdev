@@ -1,4 +1,4 @@
-=== Blank ===
+=== Blank Child ===
 
 Contributors: ferywardiyanto
 Donate link: https://paypal.me/feryardiant

@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Blank Companion
- * Plugin URI:  https://wp.feryardiant.id
- * Description: A Companion plugin for Blank
- * Version:     0.2.0
+ * Plugin URI:  https://github.com/feryardiant/wpdev
+ * Description: A Companion plugin for Blank Theme
+ * Version:     0.2.4
  * Author:      Fery Wardiyanto
  * Author URI:  https://feryardiant.id/
  * Text Domain: blank

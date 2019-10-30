@@ -1,10 +1,12 @@
-=== Sample ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
+=== Blank Companion ===
+
+Contributors: ferywardiyanto
+Donate link: https://paypal.me/feryardiant
 Tags: comments, spam
 Requires at least: 5.0
 Tested up to: 5.2
 Stable tag: 0.2.4
+Requires PHP: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,13 +41,9 @@ you put the stable version, in order to eliminate any doubt.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. In your admin panel, go to Plugins and click the Add New button.
+1. Click Upload Plugin and Choose File, then select the plugin's .zip file. Click Install Now.
+1. Click Activate to use your new plugin right away.
 
 == Frequently Asked Questions ==
 

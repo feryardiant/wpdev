@@ -82,6 +82,7 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 * **tests** directory : Testing directory, obviously.
 
 ```
+├── bin
 ├── config
 │   ├── environments
 │   └── heroku
@@ -113,11 +114,11 @@ Once you've create `<dirname>` above inside `plugins` or `themes` directory, you
 
 ```
 $ gulp -T
-├── theme-companion:php
-├── theme-companion:zip
-├─┬ theme-companion:build
+├── theme-plugin:php
+├── theme-plugin:zip
+├─┬ theme-plugin:build
 │ └─┬ <parallel>
-│   └── theme-companion:php
+│   └── theme-plugin:php
 ├── theme:php
 ├── theme:img
 ├── theme:css
@@ -136,13 +137,13 @@ $ gulp -T
 │   └── theme-child:php
 ├─┬ zip
 │ └─┬ <series>
-│   ├── theme-companion:zip
+│   ├── theme-plugin:zip
 │   ├── theme:zip
 │   └── theme-child:zip
 ├─┬ build
 │ └─┬ <parallel>
 │   ├── theme-child:php
-│   ├── theme-companion:php
+│   ├── theme-plugin:php
 │   ├── theme:css
 │   ├── theme:img
 │   ├── theme:js
