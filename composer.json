@@ -28,7 +28,7 @@
       "@php -r \"copy('wp-cli.yml', 'wp-cli.local.yml');\""
     ],
     "post-create-project-cmd": [
-      "@vendor/bin/wp dotenv salts generate"
+      "vendor/bin/wp dotenv salts generate"
     ],
     "lint": [
       "vendor/bin/phpcs --standard=source/phpcs.xml source"
@@ -37,15 +37,15 @@
       "vendor/bin/phpunit -c tests/phpunit.xml --coverage-text"
     ],
     "wp:fresh": [
-      "@wp db reset --yes",
+      "wp db reset --yes",
       "@wp:instal"
     ],
     "wp:install": [
-      "@wp core install --title=\"WordPress Local\" --admin_password=secret --admin_email=admin@example.com --skip-email",
-      "@wp option update permalink_structure '/%postname%/'"
+      "vendor/bin/wp core install --title=\"WordPress Local\" --admin_password=secret --admin_email=admin@example.com --skip-email",
+      "vendor/bin/wp option update permalink_structure '/%postname%/'"
     ],
     "wp:dummy": [
-      "@wp import source/assets/dummy-content.xml --authors=create"
+      "vendor/bin/wp import source/assets/dummy-content.xml --authors=create"
     ]
   },
   "repositories": {
