@@ -82,7 +82,7 @@ function normalize_class_attr( $class, ...$classes ) : array {
 		return normalize_class_attr( $class );
 	}, $class ) );
 
-	return array_values( array_unique( $class ) );
+	return array_values( array_unique( array_filter( $class ) ) );
 }
 
 /**
