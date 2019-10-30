@@ -13,24 +13,25 @@
   },
   "env": {
     "WP_ENV": {
-      "description": "Only for automated deploys, please don't enter anything!",
+      "description": "WordPress environment you desire for your Heroku instance",
       "required": false
     },
     "WP_DEFAULT_THEME": {
-      "description": "Only for automated deploys, please don't enter anything!",
-      "required": false
+      "description": "Default theme that enabled on the first time you install!",
+      "required": false,
+      "value": "blank"
     },
     "WP_DEBUG": {
-      "description": "Only for automated deploys, please don't enter anything!",
+      "description": "Whether you want to turn debuging on or off.",
       "required": false
     },
-    "JETPACK_DEV_DEBUG": {
-      "description": "Only for automated deploys, please don't enter anything!",
+    "WP_DEBUG_DISPLAY": {
+      "description": "Whether you want to display debuging on or off.",
       "required": false
     },
     "HEROKU_APP_NAME": {
       "description": "Only for automated deploys, please don't enter anything!",
-      "required": true
+      "required": false
     },
     "AUTH_KEY": {
       "description": "A secret key to increase security of stored information.",
