@@ -40,8 +40,13 @@ if [ -f .env ]; then
 fi
 
 _inf 'Installling WordPress...'
-composer wp:install
+wp core install --skip-email --title="WordPress Local" \
+    --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+
+# Feel free to setup your own wp_options
+wp option update permalink_structure '/%postname%/'
+wp option update link_manager_enabled '1'
 
 _inf 'Import dummy content'
-composer wp:dummy
+wp import source/assets/dummy-content.xml --authors=create
 
