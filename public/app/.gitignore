@@ -1,3 +1,4 @@
+backupwordpress-*-backups
 mu-plugins/*
 !mu-plugins/*.php
 plugins/*
