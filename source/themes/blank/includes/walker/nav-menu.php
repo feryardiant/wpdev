@@ -78,7 +78,7 @@ class Nav_Menu extends \Walker_Nav_Menu {
 		}
 
 		$attributes = ( ! empty( $class ) ) ? ' ' . make_attr_from_array( [ 'class' => $class ] ) : '';
-		$output    .= "{$eol}{$indent}<div{$attributes}>{$eol}";
+		$output    .= "{$indent}<div{$attributes}>";
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	public function end_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
 
-		$output .= "{$eol}{$indent}</div>{$eol}";
+		$output .= "{$eol}{$indent}</div> <!-- .menu-dropdown -->{$eol}";
 	}
 
 	/**
@@ -101,11 +101,11 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 *
 	 * @internal
 	 * @since 0.1.1
-	 * @param  string   $output
-	 * @param  stdClass $item
-	 * @param  int      $depth
-	 * @param  array    $args
-	 * @param  int      $id
+	 * @param  string         $output
+	 * @param  stdClass       $item
+	 * @param  int            $depth
+	 * @param  array|stdClass $args
+	 * @param  int            $id
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
@@ -113,7 +113,7 @@ class Nav_Menu extends \Walker_Nav_Menu {
 		$title = $item->title ?: $item->post_title;
 
 		if ( '---' === $title ) {
-			$output .= '<hr class="menu-divider">';
+			$output .= $indent . '<hr class="menu-divider">' . $eol;
 			return;
 		}
 
@@ -124,16 +124,16 @@ class Nav_Menu extends \Walker_Nav_Menu {
 			'class' => apply_filters( 'blank_nav_menu_css_class', $item->classes, $item, $args, $depth ),
 		];
 
-		$href = esc_url( $item->url );
-
 		if ( $args->walker->has_children ) {
-			$output .= $eol . $indent . '<div ' . make_attr_from_array( $attr ) . '>';
-			$output .= make_html_tag( 'a', [
+			$item->classes[] = 'has_children';
+
+			$output .= $eol . $indent . '<div ' . make_attr_from_array( $attr ) . '>' . $eol;
+			$output .= $indent . make_html_tag( 'a', [
 				'class' => 'menu-link',
-				'href'  => $href,
+				'href'  => esc_url( $item->url ),
 			], $title );
 		} else {
-			$attr['href'] = $href;
+			$attr['href'] = esc_url( $item->url );
 			$output      .= $eol . $indent . '<a ' . make_attr_from_array( $attr ) . '>' . $title;
 		}
 	}
@@ -143,16 +143,19 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 *
 	 * @internal
 	 * @since 0.1.1
-	 * @param  string   $output
-	 * @param  stdClass $item
-	 * @param  int      $depth
-	 * @param  array    $args
+	 * @param  string         $output
+	 * @param  stdClass       $item
+	 * @param  int            $depth
+	 * @param  array|stdClass $args
 	 */
 	public function end_el( &$output, $item, $depth = 0, $args = [] ) {
-		$eol = $this->get_indentation( $args, $depth )[1];
-		$tag = in_array( 'has-children', $item->classes, true ) ? 'div' : 'a';
+		list( $indent, $eol ) = $this->get_indentation( $args, $depth );
+		$has_children         = in_array( 'has_children', $item->classes, true );
 
-		$output .= "</{$tag}>{$eol}";
+		$tag = $has_children ? 'div' : 'a';
+		$ind = $has_children ? $indent : '';
+
+		$output .= "{$ind}</{$tag}> <!-- #menu-item-{$item->ID} -->";
 	}
 
 	/**
@@ -172,7 +175,7 @@ class Nav_Menu extends \Walker_Nav_Menu {
 		$tab = $is_discarded ? '' : "\t";
 		$eol = $is_discarded ? '' : "\n";
 
-		$indent = $depth > 0 ? str_repeat( $tab, $depth ) : $tab;
+		$indent = $depth > 0 ? str_repeat( $tab, $depth + 1 ) : $tab;
 
 		return [ $indent, $eol ];
 	}
