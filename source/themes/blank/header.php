@@ -21,12 +21,12 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<header id="masthead" role="banner" class="site-header" itemtype="https://schema.org/WPHeader" itemscope>
+	<header <?php blank( 'template' )->header_attr( [ 'id' => 'masthead' ] ); ?>>
 
 		<?php blank( 'template' )->header(); ?>
 
-	</header> <!-- .site-header -->
+	</header> <!-- #masthead -->
 
-	<section id="content" class="section site-content">
+	<section <?php blank( 'template' )->content_attr( [ 'id' => 'content' ] ); ?>>
 
 		<?php do_action( 'blank_before_main' ); ?>

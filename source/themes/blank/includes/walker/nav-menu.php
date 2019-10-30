@@ -28,7 +28,7 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 * Fallback output if no menu exists.
 	 *
 	 * @param  array $args
-	 * @return void
+	 * @return string|void
 	 */
 	public function fallback( $args ) {
 		$attr = [ 'class' => 'menu-item' ];
@@ -44,14 +44,19 @@ class Nav_Menu extends \Walker_Nav_Menu {
 			$text = esc_html__( 'Menu items goes here', 'blank' );
 		}
 
-		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-		printf(
-			$args->items_wrap,
-			'menu-' . $args->theme_location,
-			$args->menu_class,
-			make_html_tag( $tag, $attr, $text )
-		);
-		// phpcs:enable
+		$html = sprintf( $args->items_wrap, 'menu-' . $args->theme_location, $args->menu_class, make_html_tag( $tag, $attr, $text ) );
+
+		if ( ! $args->echo ) {
+			return $html;
+		}
+
+		echo wp_kses( $html, [
+			'div' => [ 'class' => true ],
+			'a'   => [
+				'class' => true,
+				'href'  => true,
+			],
+		] );
 	}
 
 	/**

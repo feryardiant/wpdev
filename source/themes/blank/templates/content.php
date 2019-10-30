@@ -8,14 +8,11 @@
  * @since    0.2.0
  */
 
-/** @var \Blank\Content $blank_content */
-$blank_content = blank( 'content' );
-
 ?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">
 
-		<?php $blank_content->header(); ?>
+		<?php blank( 'content' )->header(); ?>
 
 	</header> <!-- .entry-header -->
 
@@ -33,14 +30,14 @@ $blank_content = blank( 'content' );
 			),
 			get_the_title()
 		) );
-
-		$blank_content->link_pages();
 		?>
+
+		<?php blank( 'content' )->link_pages(); ?>
 	</div> <!-- .entry-content -->
 
 	<footer class="entry-footer">
 
-		<?php $blank_content->footer(); ?>
+		<?php blank( 'content' )->footer(); ?>
 
 	</footer> <!-- .entry-footer -->
 

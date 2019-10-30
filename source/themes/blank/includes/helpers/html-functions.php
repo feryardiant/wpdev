@@ -96,6 +96,10 @@ function normalize_class_attr( $class, ...$classes ) : array {
  * @return string|void
  */
 function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
+	if ( ! $tag ) {
+		return;
+	}
+
 	$begin = '<' . $tag;
 	$close = PHP_EOL;
 
@@ -107,7 +111,7 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 	}
 
 	if ( is_callable( $ends ) ) {
-		$ends = call_user_func( $ends );
+		$ends = call_user_func( $ends, blank() );
 	}
 
 	if ( true === $ends ) {
@@ -122,7 +126,7 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		$inner = [];
 
 		foreach ( $ends as $sub_tag => $param ) {
-			if ( is_string( $param ) ) {
+			if ( is_string( $param ) && is_numeric( $sub_tag ) ) {
 				$kses[]  = [ 'div', 'a', 'span' ];
 				$inner[] = PHP_EOL . $param;
 				continue;

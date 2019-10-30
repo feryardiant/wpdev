@@ -233,6 +233,54 @@ class Template extends Feature {
 	}
 
 	/**
+	 * Print searchform.
+	 *
+	 * @since 0.2.4
+	 * @param  bool $returns
+	 * @return void
+	 */
+	public function search_form( bool $returns = false ) {
+		$attr = [
+			'role'       => 'search',
+			'methood'    => 'get',
+			'aria-label' => __( 'Search form', 'blank' ),
+			'class'      => 'searchform',
+			'action'     => esc_url( home_url( '/' ) ),
+		];
+
+		$contents = [
+			'input'  => [
+				'attr' => [
+					'name'        => 's',
+					'class'       => 'input',
+					'type'        => 'text',
+					'placeholder' => __( 'Search...', 'blank' ),
+					'value'       => get_search_query(),
+				],
+				'ends' => true,
+			],
+
+			'button' => [
+				'attr' => [
+					'class'       => 'button',
+					'type'        => 'submit',
+					'aria-label'  => __( 'Submit', 'blank' ),
+				],
+				'ends' => [
+					'i' => [
+						'attr' => [
+							'class' => 'fa fa-search',
+						],
+						'ends' => false,
+					],
+				],
+			],
+		];
+
+		make_html_tag( 'form', $attr, $contents, $returns );
+	}
+
+	/**
 	 * Print the skip-link.
 	 *
 	 * @since 0.1.1
@@ -268,17 +316,39 @@ class Template extends Feature {
 	}
 
 	/**
+	 * Print header attributes.
+	 *
+	 * @since 0.2.4
+	 * @param array $attr
+	 * @param bool  $returns
+	 * @return string|void
+	 */
+	public function header_attr( array $attr = [], bool $returns = false ) {
+		$attr = wp_parse_args( $attr, [ 'class' => 'site-header' ] );
+
+		return $this->print_attr( 'header', $attr, $returns );
+	}
+
+	/**
 	 * Print primary navitaion.
 	 *
 	 * @since 0.2.2
 	 * @return void
 	 */
 	public function primary_navigation() {
+		$args = [ 'theme_location' => 'primary' ];
 		$attr = array_merge( [
 			'class'      => 'site-navigation',
 			'role'       => 'navigation',
 			'aria-label' => __( 'Site Navigation', 'blank' ),
 		], get_schema_org_attr( 'navigation' ) );
+
+		if ( ! has_nav_menu( 'primary' ) ) {
+			wp_nav_menu( $args );
+			return;
+		}
+
+		$args['echo'] = false;
 
 		make_html_tag( 'nav', $attr, [
 			'button' => [
@@ -295,7 +365,7 @@ class Template extends Feature {
 					],
 				],
 			],
-			wp_nav_menu( [ 'theme_location' => 'primary', 'echo' => false ] ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
+			wp_nav_menu( $args ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 		], false );
 	}
 
@@ -371,18 +441,27 @@ class Template extends Feature {
 			'class' => (array) apply_filters( 'blank_main_class', $main_classes ),
 		];
 
-		$kses = [
+		echo wp_kses( sprintf( '<main %1$s>', make_attr_from_array( $main_attr ) ), [
 			'main' => [
-				'id'    => [],
-				'class' => [],
-				'role'  => [],
+				'id'    => true,
+				'class' => true,
+				'role'  => true,
 			],
-		];
+		] );
+	}
 
-		echo wp_kses( sprintf(
-			'<main %1$s>',
-			make_attr_from_array( $main_attr )
-		), $kses );
+	/**
+	 * Print content attributes.
+	 *
+	 * @since 0.2.4
+	 * @param array $attr
+	 * @param bool  $returns
+	 * @return string|void
+	 */
+	public function content_attr( array $attr = [], bool $returns = false ) {
+		$attr = wp_parse_args( $attr, [ 'class' => 'section site-content' ] );
+
+		return $this->print_attr( 'content', $attr, $returns );
 	}
 
 	/**
@@ -396,6 +475,20 @@ class Template extends Feature {
 	}
 
 	/**
+	 * Print content attributes.
+	 *
+	 * @since 0.2.4
+	 * @param array $attr
+	 * @param bool  $returns
+	 * @return string|void
+	 */
+	public function sidebar_attr( array $attr = [], bool $returns = false ) {
+		$attr = wp_parse_args( $attr, [ 'class' => 'column is-one-third widget-area' ] );
+
+		return $this->print_attr( 'sidebr', $attr, $returns );
+	}
+
+	/**
 	 * Print footer.
 	 *
 	 * @since 0.1.1
@@ -405,6 +498,23 @@ class Template extends Feature {
 		$this->footer_widgets();
 
 		$this->footer_info();
+	}
+
+	/**
+	 * Print footer attributes.
+	 *
+	 * @since 0.2.4
+	 * @param array $attr
+	 * @param bool  $returns
+	 * @return string|void
+	 */
+	public function footer_attr( array $attr = [], bool $returns = false ) {
+		$attr = wp_parse_args( $attr, [
+			'class' => 'site-footer',
+			'role'  => 'contentinfo',
+		] );
+
+		return $this->print_attr( 'footer', $attr, $returns );
 	}
 
 	/**
@@ -461,6 +571,27 @@ class Template extends Feature {
 		), false );
 
 		echo wp_kses( $wrapper['after'], $this->common_kses() );
+	}
+
+	/**
+	 * Print attributes.
+	 *
+	 * @since 0.2.4
+	 * @param string $section
+	 * @param array  $attr
+	 * @param bool   $returns
+	 * @return string|void
+	 */
+	protected function print_attr( string $section, array $attr = [], bool $returns = false ) {
+		$attr = apply_filters( 'blank_' . $section . '_attributes', $attr );
+
+		$attr = array_merge( $attr, get_schema_org_attr( $section ) );
+
+		if ( $returns ) {
+			return make_attr_from_array( $attr );
+		}
+
+		echo make_attr_from_array( $attr ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**

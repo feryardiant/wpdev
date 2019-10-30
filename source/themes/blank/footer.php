@@ -14,7 +14,7 @@ do_action( 'blank_after_main' );
 ?>
 	</section> <!-- .site-content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo" itemtype="https://schema.org/WPFooter" itemscope>
+	<footer <?php blank( 'template' )->footer_attr( [ 'id' => 'colopon' ] ); ?>>
 
 		<?php blank( 'template' )->footer(); ?>
 
