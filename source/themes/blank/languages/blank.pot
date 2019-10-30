@@ -119,29 +119,41 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/template.php:243
+#: includes/template.php:246
+msgid "Search form"
+msgstr ""
+
+#: includes/template.php:257
+msgid "Search..."
+msgstr ""
+
+#: includes/template.php:267
+msgid "Submit"
+msgstr ""
+
+#: includes/template.php:291
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:280
+#: includes/template.php:343
 msgid "Site Navigation"
 msgstr ""
 
-#: includes/template.php:313, templates/content-none.php:15
+#: includes/template.php:383, templates/content-none.php:15
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:318
+#: includes/template.php:388
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:322
+#: includes/template.php:392
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:459
+#: includes/template.php:569
 msgid "Copyright &copy; %s."
 msgstr ""
 
@@ -320,7 +332,7 @@ msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: templates/content.php:27
+#: templates/content.php:24
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
