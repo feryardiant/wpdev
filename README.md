@@ -41,14 +41,18 @@ Create new database through PHPMyAdmin or from CLI
 $ mysql -u[username] -p -e 'create database <database-name>'
 ```
 
-Configure your `.env` file as you will, described [here](https://roots.io/bedrock/docs/installing-bedrock), then install WordPress core with the following command:
+Configure your `.env` file to suit your local setup, described [here](https://roots.io/bedrock/docs/installing-bedrock), also don't forget to set the `url` key on `wp-cli.local.yml` file as well. Once you're done, let's install WordPress core with the following command:
 
 ```bash
-# https://developer.wordpress.org/cli/commands/core/install/
+# Please consult to the official documentation for additional option you might needed for the setup
+# See: https://developer.wordpress.org/cli/commands/core/install/
 $ vendor/bin/wp core install
+
+# Or you can simply run the following sortcut
+$ composer wp:install
 ```
 
-Don't forget to configure your HTTP server' `document root` to `public` directory.
+Please make sure to configure your HTTP server' `document root` to `public` directory.
 
 ### Development
 
