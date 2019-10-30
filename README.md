@@ -25,7 +25,7 @@ Its always good to have WP-CLI [installed globally](https://wp-cli.org/#installi
 
 ### 1. One-Click-Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/feryardiant/wpdev/tree/master)
 
 Using this button you can deploy a new instance of WordPress. All required extensions will be deployed automatically. This also works if you fork your own project to work on your site.
 
