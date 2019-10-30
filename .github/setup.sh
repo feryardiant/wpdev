@@ -40,13 +40,8 @@ if [ -f .env ]; then
 fi
 
 _inf 'Installling WordPress...'
-wp core install --color --url="$WP_HOME" --skip-email --title="WordPress Site" \
-    --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
-
-# Feel free to setup your own wp_options
-wp option update permalink_structure '/%postname%/' --color
-wp option update link_manager_enabled '1' --color
+composer wp:install
 
 _inf 'Import dummy content'
-wp import source/assets/dummy-content.xml --authors=create --skip=image-resize --quiet | tail -n 1 | _readable
+composer wp:dummy
 
