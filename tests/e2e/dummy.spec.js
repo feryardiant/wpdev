@@ -4,6 +4,6 @@ describe('my awesome website', () => {
     await browser.url('/')
     const title = await browser.getTitle()
 
-    title.should.to.be.equal('WordPress Site – Just another WordPress site')
+    title.should.to.be.equal('WordPress Local – Just another WordPress site')
   })
 })
