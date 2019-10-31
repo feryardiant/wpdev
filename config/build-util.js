@@ -73,7 +73,7 @@ const globalConfig = {
   watch: false,
 
   paths: {
-    img: 'img/**',
+    img: 'img/**/*',
     css: 'scss/**/*.scss',
     js: 'js/**/*.js',
   },
@@ -242,7 +242,10 @@ const configure = exports.configure = (src, dest, tasks) => {
       }
 
       if ('zip' !== key) {
-        toWatch[taskName] = asset[key].src
+        if ('img' !== key) {
+          // Don't watch image task, there some odd issue
+          toWatch[taskName] = asset[key].src
+        }
         assetTasks.push(taskName)
       } else {
         config.gulp = {
