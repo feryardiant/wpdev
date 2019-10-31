@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52b2d25a44d8e8ab1a15b0f9d7e80b94",
+    "content-hash": "422c9781796dcf55c01d23f984f33865",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.32",
+            "version": "3.112.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1e211dcb7dcf757b041890f072bbaa593b39512a"
+                "reference": "9d8735e4eb252ea8fa3dd1bc11bfcd01f3fa6d6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1e211dcb7dcf757b041890f072bbaa593b39512a",
-                "reference": "1e211dcb7dcf757b041890f072bbaa593b39512a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9d8735e4eb252ea8fa3dd1bc11bfcd01f3fa6d6c",
+                "reference": "9d8735e4eb252ea8fa3dd1bc11bfcd01f3fa6d6c",
                 "shasum": ""
             },
             "require": {
@@ -87,60 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-10-30T18:37:36+00:00"
-        },
-        {
-            "name": "cmb2/cmb2",
-            "version": "v2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "008d9b83263d971d6bd41c27e31113db852d5ef3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/008d9b83263d971d6bd41c27e31113db852d5ef3",
-                "reference": "008d9b83263d971d6bd41c27e31113db852d5ef3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.2.4"
-            },
-            "require-dev": {
-                "apigen/apigen": "4.1.2",
-                "nette/utils": "2.5.3",
-                "phpunit/phpunit": "6.5.13"
-            },
-            "suggest": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "WebDevStudios",
-                    "email": "contact@webdevstudios.com",
-                    "homepage": "https://github.com/WebDevStudios",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Justin Sternberg",
-                    "email": "justin@dsgnwrks.pro",
-                    "homepage": "https://dsgnwrks.pro",
-                    "role": "Developer"
-                }
-            ],
-            "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-            "homepage": "https://github.com/CMB2/CMB2",
-            "keywords": [
-                "metabox",
-                "plugin",
-                "wordpress"
-            ],
-            "time": "2019-01-21T04:30:08+00:00"
+            "time": "2019-10-31T18:10:59+00:00"
         },
         {
             "name": "composer/installers",
@@ -3804,12 +3751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "3d50ae5d8de2d9ee83b9aa66910edaff948e1be5"
+                "reference": "bcda63ed67c087d551f3f645f30b7973bcea8259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/3d50ae5d8de2d9ee83b9aa66910edaff948e1be5",
-                "reference": "3d50ae5d8de2d9ee83b9aa66910edaff948e1be5",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/bcda63ed67c087d551f3f645f30b7973bcea8259",
+                "reference": "bcda63ed67c087d551f3f645f30b7973bcea8259",
                 "shasum": ""
             },
             "require": {
@@ -3858,7 +3805,7 @@
                 "cli",
                 "wordpress"
             ],
-            "time": "2019-10-24T08:21:10+00:00"
+            "time": "2019-10-31T02:35:26+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
