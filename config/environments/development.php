@@ -20,3 +20,6 @@ ini_set('display_errors', 1);
 Config::define('DISALLOW_FILE_MODS', false);
 // Disable automatic update
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
+
+// Cut down post revisions
+Config::define('WP_POST_REVISIONS', 2);

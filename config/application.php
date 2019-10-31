@@ -176,6 +176,12 @@ if ($_s3_auto_upload) {
 unset($_s3_auto_upload);
 
 /**
+ * Sendgrid Integration Settings
+ * @link https://sendgrid.com/docs/for-developers/sending-email/wordpress-faq/<Paste>
+ */
+Config::define('SENDGRID_API_KEY', env('SENDGRID_API_KEY'));
+
+/**
  * Redis Object Cache settings
  */
 /**
