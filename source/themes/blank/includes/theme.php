@@ -303,8 +303,8 @@ final class Theme implements ArrayAccess {
 		add_theme_support(
 			'custom-logo',
 			apply_filters( 'blank_support_custom_logo_args', [
-				'height'      => 60,
-				'width'       => 210,
+				'height'      => 43,
+				'width'       => 160,
 				'flex-width'  => true,
 				'flex-height' => true,
 			] )
@@ -394,7 +394,7 @@ final class Theme implements ArrayAccess {
 
 		add_filter( 'blank_site_logo', function ( $logo ) {
 			if ( ! $logo['src'] ) {
-				$logo['src'] = $this->asset->get_uri( 'main-logo.svg' );
+				$logo['src'] = $this->asset->get_uri( 'acme-logo.svg' );
 			}
 			return $logo;
 		} );
