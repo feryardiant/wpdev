@@ -5,7 +5,7 @@ Donate link: https://paypal.me/feryardiant
 Tags: blog, blog, custom-background, custom-header, custom-logo, custom-menu, featured-images, footer-widgets, full-width-template, left-sidebar, one-column, portfolio, right-sidebar, threaded-comments, translation-ready, two-columns
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 0.2.4
+Stable tag: 0.2.5
 Requires PHP: 7.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

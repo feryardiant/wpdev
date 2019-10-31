@@ -5,7 +5,7 @@ Donate link: https://paypal.me/feryardiant
 Tags: comments, spam
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 0.2.4
+Stable tag: 0.2.5
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/feryardiant/wpdev/compare/v0.2.4...v0.2.5) (2019-10-31)
+
+
+### Features
+
+* **theme:** enhance flexibilities to customize theme layout ([1d280cc](https://github.com/feryardiant/wpdev/commit/1d280cc3ea5bd0f9f57feed0334173126115edbb))
+* **theme:** implement WordPress built-in menu properties ([431fbce](https://github.com/feryardiant/wpdev/commit/431fbce21f76628b4916ea2399b096dc0810db64))
+
+
+### Bug Fixes
+
+* **theme:** wrong menu item arrangement ([0ecf936](https://github.com/feryardiant/wpdev/commit/0ecf936206c9fb7877aa936cd4b23a0941a64957))
+
 ### [0.2.4](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.1...v0.2.4) (2019-10-29)
 
 

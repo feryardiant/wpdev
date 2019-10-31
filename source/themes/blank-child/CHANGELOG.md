@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/feryardiant/wpdev/compare/v0.2.4...v0.2.5) (2019-10-31)
+
 ### [0.2.4](https://github.com/feryardiant/wpdev/compare/v0.2.4-patch.1...v0.2.4) (2019-10-29)
 
 
