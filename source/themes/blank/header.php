@@ -21,12 +21,12 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<header <?php blank( 'template' )->header_attr( [ 'id' => 'masthead' ] ); ?>>
+	<header id="masthead" <?php blank( 'template' )->header_attr(); ?>>
 
 		<?php blank( 'template' )->header(); ?>
 
 	</header> <!-- #masthead -->
 
-	<section <?php blank( 'template' )->content_attr( [ 'id' => 'content' ] ); ?>>
+	<section id="content" <?php blank( 'template' )->content_attr(); ?>>
 
 		<?php do_action( 'blank_before_main' ); ?>

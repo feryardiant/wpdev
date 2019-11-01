@@ -14,7 +14,7 @@ do_action( 'blank_after_main' );
 ?>
 	</section> <!-- .site-content -->
 
-	<footer <?php blank( 'template' )->footer_attr( [ 'id' => 'colopon' ] ); ?>>
+	<footer id="colopon" <?php blank( 'template' )->footer_attr(); ?>>
 
 		<?php blank( 'template' )->footer(); ?>
 
