@@ -19,6 +19,16 @@ return [
 					'default' => '#fff',
 					'type'    => 'color',
 				],
+				'site_layout' => [
+					'label'   => __( 'Site Layout', 'blank' ),
+					'type'    => 'select',
+					'choices' => [
+						'none'  => 'Default',
+						'boxed' => 'Boxed',
+						'wide'  => 'Wide',
+					],
+					'default' => 'wide',
+				],
 				'max_site_width' => [
 					'label'   => __( 'Maximum Site Width', 'blank' ),
 					'type'    => 'number',
