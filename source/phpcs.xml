@@ -35,6 +35,7 @@
 	<file>.</file>
 
 	<exclude-pattern>*/vendor/*$</exclude-pattern>
+	<exclude-pattern>*\.old/*$</exclude-pattern>
 
 
 	<!--
@@ -56,7 +57,15 @@
 		 Multiple valid text domains can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="blank"/>
+			<property name="text_domain" type="array" value="blank,blank-extra"/>
+		</properties>
+	</rule>
+
+	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
+		 Multiple valid prefixes can be provided as a comma-delimited list. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="blank" />
 		</properties>
 	</rule>
 
@@ -82,14 +91,6 @@
 			<property name="alignMultilineItems" value="!=100"/>
 			<!-- Array assignment operator should always be on the same line as the array key. -->
 			<property name="ignoreNewlines" value="false"/>
-		</properties>
-	</rule>
-
-	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<property name="prefixes" type="array" value="blank" />
 		</properties>
 	</rule>
 

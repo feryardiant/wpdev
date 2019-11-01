@@ -62,7 +62,7 @@
     },
     "plugin": {
       "type": "path",
-      "url": "source/plugins/blank-companion"
+      "url": "source/plugins/blank-extra"
     }
   },
   "autoload-dev": {

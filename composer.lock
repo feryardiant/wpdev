@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "422c9781796dcf55c01d23f984f33865",
+    "content-hash": "e934de0f7121271dcb8623b66b5d9bcb",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1077,46 +1077,33 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "0.2.4",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "source/themes/blank-child",
-                "reference": "3d36f81896e5ccc6d4293ed4dcbf3ae639b2811b"
+                "reference": "4eb9fbd9316d1e25641ac41314973dc58c6530ce"
             },
             "require": {
-                "php": ">=7.1",
                 "wpdev/blank": "*",
-                "wpdev/blank-companion": "*"
+                "wpdev/blank-extra": "*"
             },
             "type": "wordpress-theme",
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "authors": [
-                {
-                    "name": "Fery Wardiyanto",
-                    "email": "ferywardiyanto@gmail.com"
-                }
-            ],
-            "description": "Blank WordPress Child Theme for Development"
+            "description": "The Child of Blank"
         },
         {
-            "name": "wpdev/blank-companion",
-            "version": "0.2.4",
+            "name": "wpdev/blank-extra",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
-                "url": "source/plugins/blank-companion",
-                "reference": "1cff73cd0b2253b1337be2aa9b750fb35eac8387"
+                "url": "source/plugins/blank-extra",
+                "reference": "6dccc19acadbf0c753d06e1f423da0d75ff17d6d"
             },
             "type": "wordpress-plugin",
             "license": [
                 "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Fery Wardiyanto",
-                    "email": "ferywardiyanto@gmail.com"
-                }
             ],
             "description": "A Companion plugin for Blank"
         }
@@ -3881,6 +3868,5 @@
     "platform": {
         "php": ">=7.1"
     },
-    "platform-dev": [],
-    "version": "0.2.5"
+    "platform-dev": []
 }
