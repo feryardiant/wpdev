@@ -21,6 +21,11 @@
 </head>
 
 <body <?php body_class(); ?>>
+
+<?php blank( 'template' )->skip_link(); ?>
+
+<div id="page" <?php blank( 'template' )->wrapper_attr(); ?>>
+
 	<header id="masthead" <?php blank( 'template' )->header_attr(); ?>>
 
 		<?php blank( 'template' )->header(); ?>
