@@ -129,13 +129,20 @@ Config::define('DISALLOW_FILE_MODS',  env('DISALLOW_FILE_MODS'));
 /**
  * Debugging Settings
  */
-Config::define('WP_DEBUG',          env('WP_DEBUG') ?: false);
-Config::define('WP_DEBUG_DISPLAY',  env('WP_DEBUG_DISPLAY') ?: false);
-Config::define('WP_DEBUG_LOG',      env('WP_DEBUG_LOG') ?: false);
-Config::define('SCRIPT_DEBUG',      env('SCRIPT_DEBUG') ?: false);
-Config::define('WP_LOCAL_DEV',      env('WP_LOCAL_DEV') ?: false);
+Config::define('WP_DEBUG',         env('WP_DEBUG') ?: false);
+Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?: false);
+Config::define('WP_DEBUG_LOG',     env('WP_DEBUG_LOG') ?: false);
+Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?: false);
 
-/** @link https://jetpack.com/support/development-mode/  */
+/**
+ * Declare current environment is a local one.
+ */
+Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?: false);
+
+/**
+ * Enable JetPack Development Mode
+ * @see https://jetpack.com/support/development-mode/
+ */
 Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: true);
 
 /**
