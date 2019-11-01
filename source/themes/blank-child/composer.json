@@ -1,19 +1,11 @@
 {
   "name": "wpdev/blank-child",
-  "version": "0.2.4",
-  "description": "Blank WordPress Child Theme for Development",
+  "description": "The Child of Blank",
   "type": "wordpress-theme",
   "license": "GPL-2.0-or-later",
-  "authors": [
-    {
-      "name": "Fery Wardiyanto",
-      "email": "ferywardiyanto@gmail.com"
-    }
-  ],
   "require": {
-    "php": ">=7.1",
     "wpdev/blank": "*",
-    "wpdev/blank-companion": "*"
+    "wpdev/blank-extra": "*"
   },
   "config": {
     "preferred-install": "dist",
