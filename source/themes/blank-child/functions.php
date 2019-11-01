@@ -9,7 +9,7 @@
  */
 
 add_action( 'wp_enqueue_scripts', function () {
-	global $blank_theme;
+	$theme = blank();
 
-	wp_enqueue_style( $blank_theme->slug, $blank_theme->get_uri( 'style.css' ), [], $blank_theme->version );
+	wp_enqueue_style( $theme->slug, $theme->get_uri( 'style.css' ), [], $theme->version );
 });

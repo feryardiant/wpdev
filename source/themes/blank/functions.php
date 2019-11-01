@@ -13,16 +13,6 @@
  */
 require_once __DIR__ . '/includes/autoload.php';
 
-/**
- * Initiate theme instance.
- */
-$blank_theme = new Blank\Theme();
-
-/**
- * Load theme options from `options` directory.
- */
-$blank_theme->load_options();
-
 if ( ! function_exists( 'blank' ) ) {
 	/**
 	 * Helper function to interact with theme instance.
@@ -31,8 +21,17 @@ if ( ! function_exists( 'blank' ) ) {
 	 * @return Blank\Theme
 	 */
 	function blank( $key = null ) {
-		global $blank_theme;
+		static $theme;
 
-		return $key ? $blank_theme->$key : $blank_theme;
+		if ( ! $theme ) {
+			$theme = new Blank\Theme();
+		}
+
+		return $key ? $theme->$key : $theme;
 	}
 }
+
+/**
+ * Load theme options from `options` directory.
+ */
+blank()->load_options();
