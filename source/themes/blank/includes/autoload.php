@@ -47,28 +47,4 @@ foreach ( $files as $function ) {
 }
 
 unset( $files, $function );
-
-if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) ) {
-	/**
-	 * Lil' helper to dump a value.
-	 *
-	 * @param  mixed ...$args
-	 * @return void
-	 * @codeCoverageIgnore
-	 */
-	function dump( ...$args ) {
-		global $theme_dir;
-
-		ob_start();
-
-		array_map( function ( $arg ) {
-			var_dump( $arg );
-		}, $args );
-
-		$dump = \str_replace( $theme_dir, '', ob_get_clean() );
-
-		echo $dump;
-		exit;
-	}
-}
 // phpcs:enable
