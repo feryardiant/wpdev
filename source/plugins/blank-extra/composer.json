@@ -1,16 +1,8 @@
 {
-  "name": "wpdev/blank-companion",
-  "version": "0.2.4",
+  "name": "wpdev/blank-extra",
   "description": "A Companion plugin for Blank",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
-  "authors": [
-    {
-      "name": "Fery Wardiyanto",
-      "email": "ferywardiyanto@gmail.com"
-    }
-  ],
-  "require": {},
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,

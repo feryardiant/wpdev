@@ -1,4 +1,4 @@
-=== Blank Companion ===
+=== Blank Extra ===
 
 Contributors: ferywardiyanto
 Donate link: https://paypal.me/feryardiant
