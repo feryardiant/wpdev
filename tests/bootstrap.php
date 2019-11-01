@@ -13,4 +13,5 @@ require_once BASE_PATH.'/vendor/autoload.php';
 
 WP_Mock::bootstrap();
 
+require_once BASE_PATH.'/source/plugins/blank-extra/autoload.php';
 require_once BASE_PATH.'/source/themes/blank/includes/autoload.php';

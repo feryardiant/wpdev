@@ -2,7 +2,7 @@
 
 Contributors: ferywardiyanto
 Donate link: https://paypal.me/feryardiant
-Tags: comments, spam
+Tags: gutenberg, blocks, gutenberg blocks, page builder, editor blocks
 Requires at least: 5.0
 Tested up to: 5.2
 Stable tag: 0.2.5

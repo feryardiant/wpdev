@@ -105,7 +105,6 @@ final class Theme implements ArrayAccess {
 		self::$cached->info['child_uri']  = trailingslashit( get_stylesheet_directory_uri() );
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
-		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
 		$this->initialize( [
 			Asset::class,
@@ -117,34 +116,6 @@ final class Theme implements ArrayAccess {
 			Typography::class,
 			Widgets::class,
 		] );
-
-		/**
-		 * Load Jetpack compatibility file.
-		 */
-		if ( defined( 'JETPACK__VERSION' ) ) {
-			$this->jetpack = Integrations\JetPack::class;
-		}
-	}
-
-	/**
-	 * Theme option panel.
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/add_theme_page/
-	 * @since 0.1.0
-	 * @return mixed
-	 * @codeCoverageIgnore
-	 */
-	public function admin_menu() {
-		add_theme_page(
-			/* translators: %s: Theme name. */
-			sprintf( __( '%s Option Panel', 'blank' ), $this->name ),
-			__( 'Theme Option', 'blank' ),
-			'edit_theme_options',
-			$this->slug . '-options',
-			function () {
-				include_once $this->get_dir( 'templates/admin/options.php' );
-			}
-		);
 	}
 
 	/**
