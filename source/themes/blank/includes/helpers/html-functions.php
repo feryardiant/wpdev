@@ -30,6 +30,10 @@ function make_attr_from_array( array $attr, string $attr_sep = ' ', bool $quoted
 			$value = normalize_class_attr( (array) $value );
 		}
 
+		if ( 'style' === $name ) {
+			$value = make_attr_from_array( (array) $value, '; ', false );
+		}
+
 		if ( is_array( $value ) ) {
 			$value = join( ' ', $value );
 		}
@@ -183,27 +187,39 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 	}
 
 	if ( is_array( $tag ) ) {
-		return array_reduce( $tag, function ( $tags, $tag ) use ( $allowed_kses ) {
-			$tags[ $tag ] = $allowed_kses[ $tag ];
+		return array_reduce( $tag, function ( $tags, $tag ) {
+			$tags[ $tag ] = get_allowed_attr( $tag );
 			return $tags;
 		}, [] );
 	}
 
-	$schema_org = [
+	// Additional attr from schema.org.
+	$extra_attr = [
 		'itemscope' => 1,
 		'itemprop'  => 1,
 		'itemtype'  => 1,
 	];
 
-	if ( array_key_exists( $tag, $allowed_kses ) ) {
-		return array_merge( $allowed_kses[ $tag ], $schema_org );
+	if ( ! empty( $attr ) ) {
+		$extra_attr = array_merge(
+			$extra_attr,
+			array_map( function () {
+				return 1;
+			}, array_flip( array_keys( $attr ) ) )
+		);
 	}
 
-	$attr = array_merge( array_flip( array_keys( $attr ) ), $schema_org );
+	$allowed_attr = array_key_exists( $tag, $allowed_kses ) ? $allowed_kses[ $tag ] : $allowed_kses['div'];
 
-	return array_map( function () {
-		return 1;
-	}, $attr );
+	if ( in_array( $tag, [ 'input', 'select', 'option', 'button' ], true ) ) {
+		$extra_attr['value']         = 1;
+		$extra_attr['type']          = 1;
+		$extra_attr['placeholder']   = 1;
+		$extra_attr['aria-controls'] = 1;
+		$extra_attr['aria-expanded'] = 1;
+	}
+
+	return array_merge( $allowed_attr, $extra_attr );
 }
 
 /**
