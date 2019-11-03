@@ -58,7 +58,8 @@ class Menu extends Feature {
 		$walker = new Walker\Nav_Menu();
 
 		$args['container']   = false;
-		$args['items_wrap']  = PHP_EOL . '<div id="%1$s" class="%2$s">' . PHP_EOL . '%3$s</div> <!-- %1$s -->' . PHP_EOL;
+		$args['menu_id']     = 'menu-' . $args['theme_location'];
+		$args['items_wrap']  = PHP_EOL . '<div id="%1$s" class="%2$s">' . PHP_EOL . '%3$s</div> <!-- #%1$s -->' . PHP_EOL;
 		$args['after']       = '</div>';
 		$args['walker']      = $walker;
 		$args['fallback_cb'] = [ $walker, 'fallback' ];

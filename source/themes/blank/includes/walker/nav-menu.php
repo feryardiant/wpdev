@@ -128,11 +128,12 @@ class Nav_Menu extends \Walker_Nav_Menu {
 
 		$classes = array_diff(
 			empty( $item->classes ) ? [] : (array) $item->classes,
-			[ 'current_page_item', 'page_item' ]
+			[ 'current_page_item', 'page_item', 'current-page-ancestor', 'current_page_parent', 'current_page_ancestor' ]
 		);
 
 		$item->classes = array_replace(
 			$classes,
+			array_fill_keys( array_keys( $classes, 'current-menu-ancestor', true ), 'is-active' ),
 			array_fill_keys( array_keys( $classes, 'current-menu-item', true ), 'is-active' ),
 			array_fill_keys( array_keys( $classes, 'menu-item-has-children', true ), 'has-children' )
 		);
