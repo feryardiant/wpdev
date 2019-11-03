@@ -214,6 +214,7 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 	if ( in_array( $tag, [ 'input', 'select', 'option', 'button' ], true ) ) {
 		$extra_attr['value']         = 1;
 		$extra_attr['type']          = 1;
+		$extra_attr['name']          = 1;
 		$extra_attr['placeholder']   = 1;
 		$extra_attr['aria-controls'] = 1;
 		$extra_attr['aria-expanded'] = 1;
