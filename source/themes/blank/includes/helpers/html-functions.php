@@ -211,13 +211,22 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 
 	$allowed_attr = array_key_exists( $tag, $allowed_kses ) ? $allowed_kses[ $tag ] : $allowed_kses['div'];
 
-	if ( in_array( $tag, [ 'input', 'select', 'option', 'button' ], true ) ) {
-		$extra_attr['value']         = 1;
-		$extra_attr['type']          = 1;
-		$extra_attr['name']          = 1;
-		$extra_attr['placeholder']   = 1;
-		$extra_attr['aria-controls'] = 1;
-		$extra_attr['aria-expanded'] = 1;
+	switch ( $tag ) {
+		case 'form':
+			$extra_attr['action'] = 1;
+			$extra_attr['method'] = 1;
+			break;
+		case 'input':
+		case 'select':
+		case 'option':
+		case 'button':
+			$extra_attr['value']         = 1;
+			$extra_attr['type']          = 1;
+			$extra_attr['name']          = 1;
+			$extra_attr['placeholder']   = 1;
+			$extra_attr['aria-controls'] = 1;
+			$extra_attr['aria-expanded'] = 1;
+			break;
 	}
 
 	return array_merge( $allowed_attr, $extra_attr );
