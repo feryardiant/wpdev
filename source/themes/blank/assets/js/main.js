@@ -5,16 +5,6 @@
  * navigation support for dropdown menus.
  */
 ( ( document ) => {
-  const container = document.getElementById( 'site-navigation' )
-  if ( ! container ) {
-    return
-  }
-
-  const button = container.getElementsByTagName( 'button' )[ 0 ]
-  if ( 'undefined' === typeof button ) {
-    return
-  }
-
   const isIe = /(trident|msie)/i.test( navigator.userAgent )
 
   if ( isIe && document.getElementById && window.addEventListener ) {
@@ -37,91 +27,53 @@
     }, false )
   }
 
-  const menu = container.getElementsByTagName( 'ul' )[ 0 ]
+  const $siteNav = document.querySelector( '.site-navigation' )
+  const $navToggle = $siteNav.querySelector( '.menu-toggle' )
+  const $navMenu = $siteNav.querySelector( '#' + $navToggle.getAttribute( 'aria-controls' ) )
 
-  // Hide menu toggle button if menu is empty and return early.
-  if ( 'undefined' === typeof menu ) {
-    button.style.display = 'none'
-    return
-  }
+  $navMenu.setAttribute( 'aria-expanded', 'false' )
+  $navToggle.onclick = () => {
+    const isExpanded = $siteNav.classList.contains( 'is-expanded' )
+    $siteNav.classList.toggle( 'is-expanded', ! isExpanded )
 
-  menu.setAttribute( 'aria-expanded', 'false' )
-  if ( -1 === menu.className.indexOf( 'nav-menu' ) ) {
-    menu.className += ' nav-menu'
-  }
-
-  button.onclick = function() {
-    if ( -1 !== container.className.indexOf( 'toggled' ) ) {
-      container.className = container.className.replace( ' toggled', '' )
-      button.setAttribute( 'aria-expanded', 'false' )
-      menu.setAttribute( 'aria-expanded', 'false' )
+    if ( ! isExpanded ) {
+      $navMenu.setAttribute( 'aria-expanded', 'true' )
+      $navToggle.setAttribute( 'aria-expanded', 'true' )
     } else {
-      container.className += ' toggled'
-      button.setAttribute( 'aria-expanded', 'true' )
-      menu.setAttribute( 'aria-expanded', 'true' )
+      $navMenu.setAttribute( 'aria-expanded', 'false' )
+      $navToggle.setAttribute( 'aria-expanded', 'false' )
     }
   }
 
-  // Get all the link elements within the menu.
-  const links = menu.getElementsByTagName( 'a' )
+  const $menuItems = $navMenu.querySelectorAll( '.menu-item.has-children' )
 
-  // Each time a menu link is focused or blurred, toggle focus.
-  for ( const link of links ) {
-    link.addEventListener( 'focus', toggleFocus, true )
-    link.addEventListener( 'blur', toggleFocus, true )
+  const toggleFocus = ( e ) => {
+    const $menuItem = e.target.parentNode
+    const isFocused = $menuItem.classList.contains( 'is-focused' )
+
+    if ( ! isFocused ) {
+      e.preventDefault()
+    }
+
+    const $siblings = $menuItem.parentNode.children
+
+    for ( let i = 0; i < $siblings.length; i++ ) {
+      const $sibling = $siblings.item( i )
+      if ( $menuItem === $sibling ) {
+        continue
+      }
+
+      $sibling.classList.remove( 'is-focused' )
+    }
+
+    $menuItem.classList.toggle( 'is-focused' )
   }
 
-  /**
-   * Sets or removes .focus class on an element.
-   */
-  function toggleFocus() {
-    let self = this
+  const menuToggle = ( $item ) => {
+    const $link = $item.querySelector( '.menu-link' )
 
-    // Move up through the ancestors of the current link until we hit .nav-menu.
-    while ( -1 === self.className.indexOf( 'nav-menu' ) ) {
-      // On li elements toggle the class .focus.
-      if ( 'li' === self.tagName.toLowerCase() ) {
-        if ( -1 !== self.className.indexOf( 'focus' ) ) {
-          self.className = self.className.replace( ' focus', '' )
-        } else {
-          self.className += ' focus'
-        }
-      }
-
-      self = self.parentElement
-    }
+    $link.addEventListener( 'touchstart', toggleFocus, true )
   }
 
-  /**
-   * Toggles `focus` class to allow submenu access on tablets.
-   */
-  ( () => {
-    const parentLinks = container.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' )
-
-    if ( 'ontouchstart' in window ) {
-      const touchStartFn = ( e ) => {
-        const menuItems = this.parentNode
-
-        if ( ! menuItems.classList.contains( 'focus' ) ) {
-          e.preventDefault()
-
-          for ( const menuItem of menuItems.parentNode.children ) {
-            if ( menuItems === menuItem ) {
-              continue
-            }
-
-            menuItem.classList.remove( 'focus' )
-          }
-
-          menuItems.classList.add( 'focus' )
-        } else {
-          menuItems.classList.remove( 'focus' )
-        }
-      }
-
-      for ( const parentLink of parentLinks ) {
-        parentLink.addEventListener( 'touchstart', touchStartFn, false )
-      }
-    }
-  } )()
+  $menuItems.forEach( menuToggle )
 } )( document )

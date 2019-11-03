@@ -3,17 +3,8 @@
  */
 @import 'bulma/sass/layout/hero.sass';
 
-/**
- * Import Contents
- */
-@import './contents/accessibilities';
-@import './contents/entries';
-@import './contents/comments';
-@import './contents/media';
-@import './contents/widgets';
-
-.section {
-  padding: 3rem 0;
+.site-identity {
+  display: block;
 }
 
 /* Do not show the outline on the skip link target. */
@@ -25,5 +16,5 @@
 
 .site-footer {
   background-color: $white-bis;
-  padding: 2rem 1rem 4rem;
+  padding: 2rem 0 4rem;
 }

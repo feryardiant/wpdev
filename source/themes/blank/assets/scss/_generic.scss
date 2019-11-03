@@ -68,9 +68,9 @@ pre {
 
 body {
   color: $body-color;
-  font-size: var(--typography_pre_font_size);
-  font-weight: var(--typography_pre_font_weight);
-  line-height: var(--typography_pre_font_height);
+  font-size: var(--typography_base_font_size);
+  font-weight: var(--typography_base_font_weight);
+  line-height: var(--typography_base_font_height);
 }
 
 // Inline
@@ -95,11 +95,6 @@ hr {
   display: block;
   height: $hr-height;
   margin: $hr-margin;
-}
-
-img {
-  height: auto;
-  max-width: 100%;
 }
 
 input[type="checkbox"],

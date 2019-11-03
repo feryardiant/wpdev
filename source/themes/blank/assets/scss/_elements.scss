@@ -1,4 +1,10 @@
 /**
+ * Import Bulma Grid.
+ */
+@import 'bulma/sass/grid/columns.sass';
+@import 'bulma/sass/grid/tiles.sass';
+
+/**
  * Import Bulma Elements.
  */
 // @import 'bulma/sass/elements/box.sass';
@@ -9,7 +15,19 @@
   padding: 0 $gap;
 }
 
+/**
+ * Import Contents
+ */
 @import 'bulma/sass/elements/content.sass';
+@import './contents/accessibilities';
+@import './contents/entries';
+@import './contents/comments';
+@import './contents/media';
+@import './contents/widgets';
+
+/**
+ * Import Bulma Icons
+ */
 @import 'bulma/sass/elements/icon.sass';
 @import 'bulma/sass/elements/image.sass';
 // @import 'bulma/sass/elements/notification.sass';

@@ -10,6 +10,17 @@
   padding: $column-gap;
 }
 
+.content {
+  ul {
+    margin-left: 1.4em;
+
+    &.wp-block-gallery {
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+}
+
 .updated:not(.published) {
   display: none;
 }
@@ -26,23 +37,27 @@
 }
 
 .entry-content {
-  line-height: 1.6em;
+  * {
+    line-height: var(--typography_base_font_height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading {
+    font-family: var(--typography_heading_font_family);
+    font-weight: var(--typography_heading_font_weight);
+    font-style: var(--typography_heading_font_style);
+    line-height: var(--typography_heading_font_height);
+  }
 }
 
 .page-links {
   clear: both;
   margin: 0 0 1em;
-}
-
-.content {
-  ul {
-    margin-left: 1.4em;
-
-    &.wp-block-gallery {
-      list-style-type: none;
-      margin: 0;
-    }
-  }
 }
 
 /* --------------------------------------------------------------

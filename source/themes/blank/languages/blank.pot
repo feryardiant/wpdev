@@ -119,70 +119,61 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/template.php:246
+#: includes/template.php:266
 msgid "Search form"
 msgstr ""
 
-#: includes/template.php:257
+#: includes/template.php:277
 msgid "Search..."
 msgstr ""
 
-#: includes/template.php:267
+#: includes/template.php:287
 msgid "Submit"
 msgstr ""
 
-#: includes/template.php:291
+#: includes/template.php:311
 msgid "Skip to content"
 msgstr ""
 
-#: includes/template.php:343
+#: includes/template.php:432
 msgid "Site Navigation"
 msgstr ""
 
-#: includes/template.php:383, templates/content-none.php:15
+#: includes/template.php:472, templates/content-none.php:15
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
 #. translators: %s: search query.
-#: includes/template.php:388
+#: includes/template.php:477
 msgid "Search Results for: %s"
 msgstr ""
 
-#: includes/template.php:392
+#: includes/template.php:481
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
-#: includes/template.php:569
+#: includes/template.php:672
 msgid "Copyright &copy; %s."
 msgstr ""
 
-#. translators: %s: Theme name.
-#: includes/theme.php:140
-msgid "%s Option Panel"
-msgstr ""
-
-#: includes/theme.php:141
-msgid "Theme Option"
-msgstr ""
-
-#: includes/theme.php:349
+#: includes/theme.php:320
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:354
+#: includes/theme.php:325
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:359
+#: includes/theme.php:330
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:364
+#: includes/theme.php:335
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:369
+#: includes/theme.php:340
 msgid "Huge"
 msgstr ""
 
@@ -210,7 +201,7 @@ msgstr ""
 msgid "Global theme customization value"
 msgstr ""
 
-#: options/general.php:15
+#: options/general.php:15, options/general.php:23
 msgid "Site Layout"
 msgstr ""
 
@@ -218,47 +209,47 @@ msgstr ""
 msgid "Background Color"
 msgstr ""
 
-#: options/general.php:23
+#: options/general.php:33
 msgid "Maximum Site Width"
 msgstr ""
 
-#: options/general.php:28
+#: options/general.php:38
 msgid "Enable responsive"
 msgstr ""
 
-#: options/general.php:35
+#: options/general.php:45
 msgid "Colors"
 msgstr ""
 
-#: options/general.php:38
+#: options/general.php:48
 msgid "Primary Color"
 msgstr ""
 
-#: options/general.php:43
+#: options/general.php:53
 msgid "Secondary Color"
 msgstr ""
 
-#: options/general.php:48
+#: options/general.php:58
 msgid "Info Color"
 msgstr ""
 
-#: options/general.php:53
+#: options/general.php:63
 msgid "Success Color"
 msgstr ""
 
-#: options/general.php:58
+#: options/general.php:68
 msgid "Warning Color"
 msgstr ""
 
-#: options/general.php:63
+#: options/general.php:73
 msgid "Danger Color"
 msgstr ""
 
-#: options/general.php:68
+#: options/general.php:78
 msgid "Light Color"
 msgstr ""
 
-#: options/general.php:73
+#: options/general.php:83
 msgid "Dark Color"
 msgstr ""
 

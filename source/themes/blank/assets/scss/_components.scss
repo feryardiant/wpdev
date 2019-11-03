@@ -7,7 +7,6 @@
 // @import 'bulma/sass/components/level.sass';
 @import 'bulma/sass/components/list.sass';
 @import 'bulma/sass/components/media.sass';
-@import 'bulma/sass/components/menu.sass';
 // @import 'bulma/sass/components/message.sass';
 // @import 'bulma/sass/components/modal.sass';
 // @import 'bulma/sass/components/navbar.sass';
@@ -57,6 +56,10 @@
     }
   }
 }
+
+// Import menu.
+@import 'bulma/sass/components/menu.sass';
+@import './menu';
 
 // @include until($navbar-breakpoint) {
 //   .navbar {
