@@ -6,6 +6,8 @@
  * @since    0.2.0
  */
 
+defined( 'BLANK_EXTRA_DIR' ) || define( 'BLANK_EXTRA_DIR', __DIR__ );
+
 if ( file_exists( BLANK_EXTRA_DIR . 'vendor/autoload.php' ) ) {
 	require_once BLANK_EXTRA_DIR . 'vendor/autoload.php';
 }
