@@ -552,7 +552,7 @@ class Template extends Feature {
 			'class' => (array) apply_filters( 'blank_main_class', $main_classes ),
 		];
 
-		echo wp_kses( sprintf( '<main %1$s>', make_attr_from_array( $main_attr ) ), [
+		echo wp_kses( '<main ' . make_attr_from_array( $main_attr ) . '>', [
 			'main' => [
 				'id'    => true,
 				'class' => true,

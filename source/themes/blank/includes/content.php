@@ -25,6 +25,7 @@ class Content extends Feature {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_filter( 'content_width', [ $this, 'content_width' ] );
 		add_filter( 'post_class', [ $this, 'post_class' ] );
+		add_filter( 'the_password_form', [ $this, 'password_form' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names_choose' ] );
 	}
 
@@ -64,6 +65,54 @@ class Content extends Feature {
 		$classes[] = 'content';
 
 		return $classes;
+	}
+
+	/**
+	 * Custom password form.
+	 *
+	 * @since 0.2.5
+	 * @return string
+	 */
+	public function password_form() {
+		global $post;
+
+		$label = 'pwbox-' . ( empty( $post->ID ) ? wp_rand() : $post->ID );
+		$attr  = [
+			'action' => esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ),
+			'class'  => 'post-password-form',
+			'method' => 'post',
+		];
+
+		return make_html_tag( 'form', $attr, [
+			'p' => [
+				'ends' => [
+					'span'   => [
+						'ends' => __( 'This content is password protected. To view it please enter your password below:', 'blank' ),
+					],
+					'label'  => [
+						'attr' => [ 'for' => $label ],
+						'ends' => __( 'Password:', 'blank' ),
+					],
+					'input'  => [
+						'attr' => [
+							'id'    => $label,
+							'name'  => 'post_password',
+							'type'  => 'password',
+							'class' => 'input',
+						],
+						'ends' => true,
+					],
+					'button' => [
+						'attr' => [
+							'id'    => $label,
+							'type'  => 'submit',
+							'class' => 'button',
+						],
+						'ends' => __( 'Submit', 'blank' ),
+					],
+				],
+			],
+		] );
 	}
 
 	/**
