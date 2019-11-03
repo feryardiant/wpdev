@@ -52,7 +52,6 @@ class Template extends Feature {
 		add_action( 'blank_footer', [ $this, 'footer_credit' ], 20, 0 );
 
 		add_filter( 'body_class', [ $this, 'body_classes' ] );
-		add_filter( 'get_custom_logo', [ $this, 'site_branding' ] );
 		add_filter( 'template_include', [ $this, 'wrapper' ] );
 	}
 
@@ -107,51 +106,6 @@ class Template extends Feature {
 	}
 
 	/**
-	 * Site Branding.
-	 *
-	 * @since 0.1.1
-	 * @return string
-	 */
-	public function site_branding() {
-		$site_name = $this->site_name();
-		$site_desc = $this->site_slogan();
-		$output    = [];
-		$site_logo = $this->site_logo_image( [
-			'alt' => $site_name,
-		] );
-
-		if ( $site_logo ) {
-			$output[] = $site_logo;
-		}
-
-		if ( $this->theme->get_option( 'show_site_title' ) ) {
-			$output[] = '<h1 class="site-title" itemprop="headline">' . $site_name . '</h1>';
-		}
-
-		if ( $this->theme->get_option( 'show_tagline' ) ) {
-			$output[] = '<p class="site-description" itemprop="description">' . $site_desc . '</p>';
-		}
-
-		$attr = [
-			'id'       => 'branding',
-			'href'     => esc_url( home_url( '/' ) ),
-			'class'    => 'site-identity',
-			'itemtype' => 'http://schema.org/Organization',
-		];
-
-		if ( $site_logo && $this->theme->get_option( 'inline_site_title' ) ) {
-			$attr['class'] = 'is-inline-title';
-		}
-
-		return sprintf(
-			'<a %1$s rel="home">%2$s</a> <!-- %3$s -->',
-			make_attr_from_array( $attr ),
-			join( '', $output ),
-			'#' . esc_attr( $attr['id'] )
-		);
-	}
-
-	/**
 	 * Render Site Name.
 	 *
 	 * @since 0.1.1
@@ -180,11 +134,26 @@ class Template extends Feature {
 	 */
 	public function site_logo( string $size = 'full' ) {
 		$logo = [
-			'ID' => get_theme_mod( 'custom_logo' ) ?: null,
+			'ID'  => get_theme_mod( 'custom_logo' ) ?: null,
+			'alt' => $this->site_name(),
+			'src' => null,
 		];
 
-		$logo['src'] = $logo['ID'] ? wp_get_attachment_image_url( $logo['ID'], $size ) : null;
-		$logo        = apply_filters( 'blank_site_logo', $logo );
+		if ( $logo['ID'] ) {
+			list( $src, $width, $height ) = wp_get_attachment_image_url( $logo['ID'], $size );
+
+			$logo['src']    = $src;
+			$logo['width']  = $width;
+			$logo['height'] = $height;
+
+			$alt = get_post_meta( $logo['ID'], '_wp_attachment_image_alt', true );
+
+			if ( ! empty( $alt ) ) {
+				$logo['alt'] = $alt;
+			}
+		}
+
+		$logo = apply_filters( 'blank_site_logo', $logo );
 
 		if ( ! $logo || ! $logo['src'] ) {
 			return null;
@@ -197,24 +166,76 @@ class Template extends Feature {
 	 * Get the custom site logo image.
 	 *
 	 * @since 0.1.1
-	 * @param  array $attr
-	 * @param  bool  $returns
+	 * @param  string $size
+	 * @param  array  $attr
+	 * @param  bool   $returns
 	 * @return string
 	 */
-	public function site_logo_image( array $attr = [], bool $returns = true ) : string {
-		$site_logo = $this->site_logo();
+	public function site_logo_image( string $size = 'full', array $attr = [], bool $returns = true ) : string {
+		$logo = $this->site_logo( $size );
 
-		if ( ! $site_logo ) {
+		if ( ! $logo ) {
 			return '';
 		}
 
 		$attr = wp_parse_args( $attr, [
-			'class' => 'custom-logo',
-			'src'   => esc_url( $site_logo->src ),
-			'alt'   => get_post_meta( $site_logo->ID, '_wp_attachment_image_alt', true ),
+			'class'  => 'custom-logo',
+			'src'    => esc_url( $logo->src ),
+			'alt'    => esc_attr( $logo->alt ),
+			'width'  => $logo->width,
+			'height' => $logo->height,
 		] );
 
 		return make_html_tag( 'img', $attr, true, $returns );
+	}
+
+	/**
+	 * Site Branding.
+	 *
+	 * @since 0.1.1
+	 * @param string $location
+	 * @param bool   $returns
+	 * @return string
+	 */
+	public function site_identity( string $location, bool $returns = false ) {
+		$output    = [];
+		$site_logo = $this->site_logo_image();
+		$attr      = [
+			'href'     => esc_url( home_url( '/' ) ),
+			'itemtype' => 'http://schema.org/Organization',
+			'class'    => [
+				'site-identity',
+				'identity-' . $location,
+			],
+		];
+
+		if ( $site_logo ) {
+			$output['logo'] = $site_logo;
+
+			if ( $this->theme->get_option( 'inline_site_title' ) ) {
+				$attr['class'][] = 'is-inline-title';
+			}
+		}
+
+		if ( $this->theme->get_option( 'show_site_title' ) ) {
+			$output['title'] = '<h1 class="site-title" itemprop="headline">' . $this->site_name() . '</h1>';
+		}
+
+		if ( $this->theme->get_option( 'show_tagline' ) ) {
+			$output['slogan'] = '<p class="site-description" itemprop="description">' . $this->site_slogan() . '</p>';
+		}
+
+		$html = sprintf(
+			'<a %1$s rel="home">%2$s</a> <!-- .site-identity -->',
+			make_attr_from_array( $attr ),
+			join( '', (array) apply_filters( 'blank_site_identity', $output, $location ) )
+		);
+
+		if ( $returns ) {
+			return $html;
+		}
+
+		echo wp_kses( $html, $this->common_kses( 'img', 'h1' ) );
 	}
 
 	/**
@@ -236,7 +257,7 @@ class Template extends Feature {
 	 *
 	 * @since 0.2.4
 	 * @param  bool $returns
-	 * @return void
+	 * @return string|void
 	 */
 	public function search_form( bool $returns = false ) {
 		$attr = [
@@ -276,7 +297,7 @@ class Template extends Feature {
 			],
 		];
 
-		make_html_tag( 'form', $attr, $contents, $returns );
+		return make_html_tag( 'form', $attr, $contents, $returns );
 	}
 
 	/**
@@ -341,7 +362,7 @@ class Template extends Feature {
 			$context
 		);
 
-		$attr['class'][] = 'container';
+		array_unshift( $attr['class'], 'container' );
 
 		echo wp_kses( '<div ' . make_attr_from_array( $attr ) . '>', $this->common_kses() );
 	}
@@ -390,7 +411,7 @@ class Template extends Feature {
 	public function header() {
 		$this->container_start( 'header' );
 
-		the_custom_logo();
+		$this->site_identity( 'header' );
 
 		$this->primary_navigation();
 
@@ -422,7 +443,7 @@ class Template extends Feature {
 			'button' => [
 				'attr' => [
 					'role'          => 'button',
-					'class'         => 'menu-toggle',
+					'class'         => 'menu-toggle button',
 					'aria-controls' => 'menu-primary',
 					'aria-expanded' => 'false',
 				],
@@ -636,30 +657,28 @@ class Template extends Feature {
 			'wrapper' => '<div class="%1$s">%2$s</div> <!-- .%3$s -->',
 		] );
 
-		$html = [];
+		$output = [];
 
-		$html[] = wp_nav_menu( [
+		$output['menu'] = wp_nav_menu( [
 			'theme_location' => 'footer',
 			'depth'          => 1,
 			'echo'           => false,
 		] );
 
-		$logo_image = $this->site_logo_image( [ 'alt' => 'Footer Logo' ] );
-		if ( $logo_image ) {
-			$html[] = make_html_tag( 'div', [ 'class' => 'branding' ], $logo_image );
-		}
+		$output['logo'] = $this->site_identity( 'footer', true );
 
-		$html[] = make_html_tag( 'p', [ 'class' => 'credits' ], sprintf(
+		$output['credits'] = make_html_tag( 'p', [ 'class' => 'credits' ], sprintf(
 			/* translators: %s: Current Year and Site Title. */
 			esc_html__( 'Copyright &copy; %s.', 'blank' ),
 			date( 'Y' ) . ' ' . $this->site_name()
 		) );
 
 		$classes = Helpers\normalize_class_attr( 'site-footer__info', $args['class'] );
+		$output  = apply_filters( 'blank_footer_info', $output );
 
 		echo wp_kses(
-			sprintf( $args['wrapper'], join( ' ', $classes ), join( '', $html ), 'site-footer__info' ),
-			$this->common_kses( 'p', 'img' )
+			sprintf( $args['wrapper'], join( ' ', $classes ), join( '', $output ), 'site-footer__info' ),
+			$this->common_kses( 'p', 'img', 'h1' )
 		);
 	}
 
