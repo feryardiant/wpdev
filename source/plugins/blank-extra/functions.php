@@ -29,7 +29,7 @@ define( 'BLANK_EXTRA_URL', plugin_dir_url( __FILE__ ) );
  * Load the plugin textdomain
  */
 add_action( 'plugins_loaded', function () {
-	load_plugin_textdomain( 'blank-extra', false, plugin_basename( __DIR__ ) . '/languages' );
+	load_plugin_textdomain( 'blank-extra', false, BLANK_EXTRA_DIR . '/languages' );
 } );
 
 $blank_plugin_should_load = true;
@@ -70,4 +70,4 @@ if ( ! $blank_plugin_should_load ) {
 	return;
 }
 
-require_once BLANK_PLUGIN_DIR . 'autoload.php';
+require_once BLANK_EXTRA_DIR . 'autoload.php';
