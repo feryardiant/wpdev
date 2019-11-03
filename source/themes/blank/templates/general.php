@@ -17,16 +17,19 @@ if ( have_posts() ) {
 		the_post();
 
 		/*
-			* Include the Post-Type-specific template for the content.
-			* If you want to override this in a child theme, then include a file
-			* called content-___.php (where ___ is the Post Type name) and that will be used instead.
-			*/
+		 * Include the Post-Type-specific template for the content.
+		 * If you want to override this in a child theme, then include a file
+		 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+		 */
 		get_template_part( 'templates/content', get_post_type() );
 	}
 
 	if ( ! is_front_page() && ( comments_open() || get_comments_number() ) ) {
 		comments_template();
 	}
+
+	the_posts_navigation();
+
 } else {
 
 	get_template_part( 'templates/content', 'none' );
