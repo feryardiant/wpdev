@@ -29,7 +29,7 @@
 .entry-content,
 .entry-summary,
 .entry-footer {
-  @extend .is-clearfix;
+  @include clearfix;
 
   padding: 1rem 0;
 }
@@ -86,18 +86,28 @@
  * -------------------------------------------------------------- */
 .posts-navigation,
 .post-navigation {
-  margin: 0 0 1.5em;
+  @include clearfix;
+
+  padding: 1rem 0;
   overflow: hidden;
 
-  .nav-previous {
-    float: left;
+  .nav-links {
+    display: table;
+    width: 100%;
+  }
+
+  .nav-previous,
+  .nav-next {
+    display: table-cell;
     width: 50%;
+
+    > a {
+      display: block;
+    }
   }
 
   .nav-next {
-    float: right;
     text-align: right;
-    width: 50%;
   }
 }
 
