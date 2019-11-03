@@ -182,8 +182,8 @@ class Template extends Feature {
 			'class'  => 'custom-logo',
 			'src'    => esc_url( $logo->src ),
 			'alt'    => esc_attr( $logo->alt ),
-			'width'  => $logo->width,
-			'height' => $logo->height,
+			'width'  => $logo->width ?? null,
+			'height' => $logo->height ?? null,
 		] );
 
 		return make_html_tag( 'img', $attr, true, $returns );
