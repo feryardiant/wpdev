@@ -235,7 +235,7 @@ class Template extends Feature {
 			return $html;
 		}
 
-		echo wp_kses( $html, $this->common_kses( 'img', 'h1' ) );
+		echo wp_kses( $html, $this->common_kses( 'img', 'h1', 'p' ) );
 	}
 
 	/**

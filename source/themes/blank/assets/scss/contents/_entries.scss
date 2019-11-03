@@ -29,6 +29,8 @@
 .entry-content,
 .entry-summary,
 .entry-footer {
+  @extend .is-clearfix;
+
   padding: 1rem 0;
 }
 

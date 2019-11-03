@@ -10,13 +10,13 @@
 
 ?><article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<header class="entry-header is-clearfix">
+	<header class="entry-header">
 
 		<?php blank( 'content' )->header(); ?>
 
 	</header> <!-- .entry-header -->
 
-	<div class="entry-content is-clearfix">
+	<div class="entry-content">
 		<?php
 		the_content();
 
@@ -24,7 +24,7 @@
 		?>
 	</div> <!-- .entry-content -->
 
-	<footer class="entry-footer is-clearfix">
+	<footer class="entry-footer">
 
 		<?php blank( 'content' )->footer(); ?>
 
