@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "jQuery": true,
+    "wp": true
+  },
+  "extends": [
+    "plugin:@wordpress/eslint-plugin/esnext"
+  ],
+  "rules": {
+    "indent": [
+      2,
+      2
+    ],
+    "no-console": 2,
+    "semi": [
+      2,
+      "never"
+    ],
+    "wrap-iife": [
+      2,
+      "inside"
+    ]
+  }
+}

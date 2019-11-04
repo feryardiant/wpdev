@@ -56,7 +56,7 @@
     "standard-version": "^7.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard-scss": "^1.1.0",
-    "stylelint-scss": "^3.12.0",
+    "stylelint-scss": "^3.12.1",
     "yargs": "^14.0.0",
     "yorkie": "^2.0.0"
   },
@@ -77,17 +77,9 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "browser": true,
       "node": true,
       "es6": true
     },
-    "globals": {
-      "jQuery": true,
-      "wp": true
-    },
-    "extends": [
-      "plugin:@wordpress/eslint-plugin/esnext"
-    ],
     "parserOptions": {
       "ecmaVersion": 8,
       "parser": "babel-eslint"
@@ -97,7 +89,6 @@
         2,
         2
       ],
-      "no-console": 2,
       "semi": [
         2,
         "never"
