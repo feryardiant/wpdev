@@ -154,6 +154,8 @@ class Content extends Feature {
 	 * @since 0.2.1
 	 */
 	public function header() {
+		$this->thumbnail();
+
 		$this->title();
 
 		if ( 'post' === get_post_type() ) {
@@ -243,9 +245,7 @@ class Content extends Feature {
 			echo '<a class="post-thumbnail" href="' . esc_url( get_permalink() ) . '" aria-hidden="true" tabindex="-1">';
 
 			the_post_thumbnail( 'post-thumbnail', [
-				'alt' => the_title_attribute( [
-					'echo' => false,
-				] ),
+				'alt' => the_title_attribute( [ 'echo' => false ] ),
 			] );
 
 			echo '</a>  <!-- .post-thumbnail -->';
