@@ -83,16 +83,15 @@
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
     "tillkruss/redis-cache": "^1.5",
-    "vlucas/phpdotenv": "^3.4",
+    "vlucas/phpdotenv": "^4.1",
     "wpackagist-plugin/contact-form-7": "^5.1",
-    "wpackagist-plugin/wordpress-importer": "^0.6.4",
+    "wpackagist-plugin/wordpress-importer": "^0.7",
     "wpdev/blank-child": "*"
   },
   "require-dev": {
     "10up/wp_mock": "^0.4.2",
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-    "johnbillion/query-monitor": "^3.4",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.6",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "phpunit/phpunit": "^7.5",
     "roave/security-advisories": "dev-master",
@@ -100,6 +99,7 @@
     "wp-cli/core-command": "^2.0",
     "wp-cli/import-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
+    "wpackagist-plugin/query-monitor": "^3.5",
     "wpackagist-plugin/theme-check": "20190801.1"
   },
   "suggest": {
@@ -114,8 +114,8 @@
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
         "tillkruss/redis-cache",
-        "johnbillion/query-monitor",
         "wpackagist-plugin/contact-form-7",
+        "wpackagist-plugin/query-monitor",
         "wpackagist-plugin/theme-check",
         "wpackagist-plugin/wordpress-importer",
         "type:wordpress-muplugin"
