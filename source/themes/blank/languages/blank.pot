@@ -71,43 +71,55 @@ msgstr ""
 msgid "Your email address will not be published."
 msgstr ""
 
-#: includes/content.php:78
+#: includes/content.php:90
+msgid "This content is password protected. To view it please enter your password below:"
+msgstr ""
+
+#: includes/content.php:94
+msgid "Password:"
+msgstr ""
+
+#: includes/content.php:111, includes/template.php:287
+msgid "Submit"
+msgstr ""
+
+#: includes/content.php:127
 msgid "Post"
 msgstr ""
 
 #. translators: %s: post date.
-#: includes/content.php:154
+#: includes/content.php:205
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr ""
 
 #. translators: %s: post author.
-#: includes/content.php:171
+#: includes/content.php:222
 msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
-#: includes/content.php:213
+#: includes/content.php:262
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: post title
-#: includes/content.php:238
+#: includes/content.php:287
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
 #. translators: 1: list of categories.
-#: includes/content.php:270
+#: includes/content.php:319
 msgid "Posted in %1$s"
 msgstr ""
 
 #. translators: 1: list of tags.
-#: includes/content.php:287
+#: includes/content.php:336
 msgid "Tagged %1$s"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: includes/content.php:303
+#: includes/content.php:352
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
@@ -125,10 +137,6 @@ msgstr ""
 
 #: includes/template.php:277
 msgid "Search..."
-msgstr ""
-
-#: includes/template.php:287
-msgid "Submit"
 msgstr ""
 
 #: includes/template.php:311
@@ -311,15 +319,6 @@ msgstr ""
 
 #: options/typography.php:53
 msgid "Preformated Font"
-msgstr ""
-
-#: templates/content-none.php:24
-msgid "Most Used Categories"
-msgstr ""
-
-#. translators: %1$s: smiley
-#: templates/content-none.php:40
-msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers

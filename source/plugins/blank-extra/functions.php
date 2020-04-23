@@ -70,4 +70,4 @@ if ( ! $blank_plugin_should_load ) {
 	return;
 }
 
-require_once BLANK_EXTRA_DIR . 'autoload.php';
+require_once BLANK_EXTRA_DIR . '/autoload.php';
