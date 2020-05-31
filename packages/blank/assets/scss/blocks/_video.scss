@@ -1,0 +1,23 @@
+.wp-block-video {
+  margin-left: 0;
+  margin-right: 0;
+
+  video {
+    max-width: 100%;
+  }
+
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    [poster] {
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+
+  figcaption {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    color: #555d66;
+    text-align: center;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,31 @@
+.wp-block-separator {
+  border: none;
+  border-bottom: 2px solid #8f98a1;
+  margin: 1.65em auto;
+
+  &:not(.is-style-wide):not(.is-style-dots) {
+    max-width: 100px;
+  }
+
+  &.is-style-wide {
+    border-bottom-width: 1px;
+  }
+
+  &.is-style-dots {
+    background: none;
+    border: none;
+    text-align: center;
+    max-width: none;
+    line-height: 1;
+    height: auto;
+  }
+
+  &.is-style-dots::before {
+    content: "\00b7 \00b7 \00b7";
+    color: #191e23;
+    font-size: 20px;
+    letter-spacing: 2em;
+    padding-left: 2em;
+    font-family: serif;
+  }
+}

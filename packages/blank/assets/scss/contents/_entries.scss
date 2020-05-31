@@ -1,0 +1,133 @@
+/* --------------------------------------------------------------
+ * Posts and pages
+ * -------------------------------------------------------------- */
+.sticky {
+  display: block;
+}
+
+.hentry {
+  margin: 0 (-$column-gap) $gap;
+  padding: $column-gap;
+}
+
+.content {
+  ul {
+    margin-left: 1.4em;
+
+    &.wp-block-gallery {
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+}
+
+.updated:not(.published) {
+  display: none;
+}
+
+.page-content,
+.entry-header,
+.entry-content,
+.entry-summary,
+.entry-footer {
+  @include clearfix;
+
+  padding: 1rem 0;
+}
+
+.entry-header {
+  padding-bottom: 1rem;
+}
+
+.post-thumbnail {
+  display: block;
+}
+
+.entry-content {
+  * {
+    line-height: var(--typography_base_font_height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading {
+    font-family: var(--typography_heading_font_family);
+    font-weight: var(--typography_heading_font_weight);
+    font-style: var(--typography_heading_font_style);
+    line-height: var(--typography_heading_font_height);
+  }
+}
+
+.page-links {
+  clear: both;
+  margin: 0 0 1em;
+}
+
+/* --------------------------------------------------------------
+ * Alignments
+ * -------------------------------------------------------------- */
+.alignleft {
+  @extend .is-pulled-left;
+
+  margin-right: 1rem;
+}
+
+.alignright {
+  @extend .is-pulled-right;
+
+  margin-left: 1rem;
+}
+
+.aligncenter {
+  text-align: center;
+}
+
+/* --------------------------------------------------------------
+ * Navigations
+ * -------------------------------------------------------------- */
+.posts-navigation,
+.post-navigation {
+  @include clearfix;
+
+  padding: 1rem 0;
+  overflow: hidden;
+
+  .nav-links {
+    display: table;
+    width: 100%;
+  }
+
+  .nav-previous,
+  .nav-next {
+    display: table-cell;
+    width: 50%;
+
+    > a {
+      display: block;
+    }
+  }
+
+  .nav-next {
+    text-align: right;
+  }
+}
+
+/* --------------------------------------------------------------
+ * Infinite scroll
+ * -------------------------------------------------------------- */
+
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+.infinite-scroll .posts-navigation,
+.infinite-scroll.neverending .site-footer {
+  /* Theme Footer (when set to scrolling) */
+  display: none;
+}
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before. */
+.infinity-end.neverending .site-footer {
+  display: block;
+}
