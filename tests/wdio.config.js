@@ -13,6 +13,8 @@ exports.config = {
       os_version: '10',
       maxInstances: 5,
       browserName: 'chrome',
+      project: process.env.BROWSERSTACK_PROJECT || 'WordPress Dev',
+      build: process.env.BROWSERSTACK_BUILD || 'Local',
       resolution: '1440x900',
       'goog:chromeOptions': {}
     }
