@@ -24,7 +24,7 @@ jobs:
           - 3306
     strategy:
       matrix:
-        php-versions: ['7.1']
+        php-versions: ['7.2']
         wp-versions: ['5.0', '5.1', '5.2']
       # exclude:
       #   - php-versions: 7.2
