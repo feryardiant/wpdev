@@ -1,9 +1,10 @@
 require('dotenv').config()
 
+// const url = new URL(process.env.WP_HOME)
+
 exports.config = {
   runner: 'local',
   logLevel: 'warn',
-  baseUrl: process.env.WP_HOME,
   specs: [
     './tests/e2e/**/*.spec.js',
   ],
@@ -16,6 +17,7 @@ exports.config = {
       project: process.env.BROWSERSTACK_PROJECT || 'WordPress Dev',
       build: process.env.BROWSERSTACK_BUILD || 'Local',
       resolution: '1440x900',
+      acceptSslCert: true,
       'goog:chromeOptions': {}
     }
   ],
@@ -57,8 +59,9 @@ exports.config = {
    * @param {Array.<Object>} caps list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // beforeSession: function (config, caps, specs) {
-  // },
+  beforeSession: function (config, caps, specs) {
+    require('expect-webdriverio')
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -67,7 +70,7 @@ exports.config = {
    */
   before: (caps, specs) => {
     const chai = require('chai')
-    global.expect = chai.expect
+    // global.expect = chai.expect
     chai.Should()
   },
   /**
