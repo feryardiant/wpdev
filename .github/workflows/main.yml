@@ -45,7 +45,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: Install Dependencies
       run: |
-        npm install
+        yarn --ignore-engines
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
     - name: Install WordPress Core
       env:
@@ -65,5 +65,5 @@ jobs:
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
-        npx gulp build --mode production
-        npx gulp e2e --mode testing
+        yarn gulp build --mode production
+        yarn gulp e2e --mode testing
