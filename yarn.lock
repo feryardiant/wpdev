@@ -3679,10 +3679,10 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotfile@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/dotfile/-/dotfile-0.0.2.tgz#35d78b70376238ee8dd7b5c076d85bdc03d1f933"
-  integrity sha1-NdeLcDdiOO6N17XAdthb3APR+TM=
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 dotgitignore@2.1.0:
   version "2.1.0"
@@ -10980,7 +10980,7 @@ webdriver@6.1.14:
     got "^11.0.2"
     lodash.merge "^4.6.1"
 
-webdriverio@6.1.14:
+webdriverio@6.1.14, webdriverio@^6.1.14:
   version "6.1.14"
   resolved "https://registry.npmjs.org/webdriverio/-/webdriverio-6.1.14.tgz#d78073bb660986efdc26289563e5440af0ec24d1"
   integrity sha512-34GyO2wWJobi6uroSsNtn5JseTMG5R6wZDWP4jyQOt15FSvbs9RlhgRt9ALOKgMNdHVPsk/JaccaMzyX4jNXhw==
