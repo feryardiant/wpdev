@@ -24,7 +24,7 @@ require('dotenv').config()
 
 const { configure, args, watch, isProduction } = require('./config/build-util')
 
-const tasks = configure('source', 'source/releases', {
+const tasks = configure('packages', 'resources/releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *
@@ -43,7 +43,7 @@ const tasks = configure('source', 'source/releases', {
       team: config.author
     }
 
-    config.phpcs.standard = 'source/phpcs.xml'
+    config.phpcs.standard = 'packages/phpcs.xml'
 
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
@@ -236,6 +236,7 @@ const bSync = (url) => new Promise((resolve, reject) => {
     baseDir: './public',
     notify: argv.notify,
     open: argv.open,
+    https: url.protocol === 'https',
     serveStatic: routes.map(route => ({
       route,
       dir: `public/wp${route}`

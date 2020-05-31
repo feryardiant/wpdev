@@ -24,7 +24,7 @@ jobs:
           - 3306
     strategy:
       matrix:
-        php-versions: ['7.1']
+        php-versions: ['7.2']
         wp-versions: ['5.0', '5.1', '5.2']
       # exclude:
       #   - php-versions: 7.2
@@ -36,7 +36,7 @@ jobs:
       uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
-        extension-csv: exif, gd, gettext, imagick, mbstring, xmlrpc
+        extensions: exif, gd, gettext, imagick, mbstring, xmlrpc
         coverage: xdebug
     - name: Set up Node.js
       uses: actions/setup-node@v1
@@ -45,7 +45,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: Install Dependencies
       run: |
-        npm install
+        yarn --ignore-engines
         composer require roots/wordpress ${{ matrix.wp-versions }} --no-progress --no-suggest
     - name: Install WordPress Core
       env:
@@ -60,10 +60,10 @@ jobs:
     - name: End-to-end Tests
       if: matrix.wp-versions == 5.0
       env:
-        BS_AUTOMATE_PROJECT: "$GITHUB_REPOSITORY - $GITHUB_WORKFLOW"
-        BS_AUTOMATE_BUILD: "build No. $GITHUB_ACTION"
+        BROWSERSTACK_PROJECT: "${{ github.repository }} - ${{ github.workflow }}"
+        BROWSERSTACK_BUILD: ${{ github.ref }}
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
-        npx gulp build --mode production
-        npx gulp e2e --mode testing
+        yarn gulp build --mode production
+        yarn gulp e2e --mode testing

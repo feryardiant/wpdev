@@ -1,0 +1,13 @@
+{
+  "name": "wpdev/blank-extra",
+  "description": "A Companion plugin for Blank",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

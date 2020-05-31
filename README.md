@@ -82,7 +82,7 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 * **bin** directory : Consists of all [buildpack executables](https://devcenter.heroku.com/articles/buildpack-api#buildpack-api) only, feel free to delete this directory once you've cloned this project or install it on your local machine,
 * **config** directory : Consists of all build utilities and configuration files, including all the scripts you'd be using on all environment,
 * **public** directory : The server document root directory,
-* **source** directory : Them main source directory of your project, it contains of two primary sub-directories, which are `plugins` and `themes`,
+* **packages** directory : The Themes and Plugins development directory of your project,
 * **tests** directory : Testing directory, obviously.
 
 ```
@@ -93,10 +93,8 @@ Since this project is based on [Bedrock](https://roots.io/bedrock/docs/folder-st
 ├── public
 │   ├── app
 │   └── wp
-├── source
-│   ├── assets
-│   ├── plugins
-│   └── themes
+├── packages
+├── resources
 └── tests
     ├── e2e
     ├── stubs

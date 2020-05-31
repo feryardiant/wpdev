@@ -1,0 +1,17 @@
+{
+  "name": "wpdev/blank-child",
+  "description": "The Child of Blank",
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "wpdev/blank": "*",
+    "wpdev/blank-extra": "*"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

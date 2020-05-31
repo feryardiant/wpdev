@@ -1,0 +1,138 @@
+/* --------------------------------------------------------------
+ * Media
+ * -------------------------------------------------------------- */
+.page-content,
+.entry-content,
+.comment-content {
+  .wp-smiley {
+    border: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+  max-width: 100%;
+}
+
+/* Make sure logo link wraps around logo image. */
+.custom-logo-link {
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------
+ * Galleries
+ * -------------------------------------------------------------- */
+.gallery {
+  margin-bottom: 1.5em;
+
+  &-item {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+  }
+
+  &-columns-2 &-item {
+    max-width: 50%;
+  }
+
+  &-columns-3 &-item {
+    max-width: 33.33%;
+  }
+
+  &-columns-4 &-item {
+    max-width: 25%;
+  }
+
+  &-columns-5 &-item {
+    max-width: 20%;
+  }
+
+  &-columns-6 &-item {
+    max-width: 16.66%;
+  }
+
+  &-columns-7 &-item {
+    max-width: 14.28%;
+  }
+
+  &-columns-8 &-item {
+    max-width: 12.5%;
+  }
+
+  &-columns-9 &-item {
+    max-width: 11.11%;
+  }
+
+  &-caption {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------
+ * Captions and Images
+ * -------------------------------------------------------------- */
+figure.wp-caption,
+img[class*='wp-image-'] {
+  &.alignnone,
+  &.aligncenter {
+    display: block;
+  }
+
+  &.alignnone {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  &.aligncenter {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &.alignleft,
+  &.alignright {
+    margin-top: 1em;
+  }
+
+  &.alignleft {
+    margin-right: 1rem;
+    margin-left: 0;
+  }
+
+  &.alignright {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+}
+
+figure.wp-caption {
+  // margin-top: 0.5rem;
+  // margin-bottom: 1rem;
+  max-width: 100%;
+
+  img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+    display: block;
+
+    &[class*='wp-image-'] {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .wp-caption-text {
+    font-size: 12px;
+    margin: 0.8075em 0;
+    text-align: center;
+  }
+}
