@@ -1,4 +1,4 @@
-# Copyright (C) 2019 blank-extra v0.2.5
+# Copyright (C) 2020 blank-extra v0.2.5
 # This file is distributed under the same license as the blank-extra v0.2.5 package.
 msgid ""
 msgstr ""
@@ -16,12 +16,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. translators: %s: PHP version
-#: functions.php:43
+#: functions.php:44
 msgid "Blank requires PHP version %s+, plugin is currently NOT RUNNING."
 msgstr ""
 
 #. translators: %s: WordPress version
-#: functions.php:59
+#: functions.php:60
 msgid "Blank requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING."
 msgstr ""
 
