@@ -60,8 +60,8 @@ jobs:
     - name: End-to-end Tests
       if: matrix.wp-versions == 5.0
       env:
-        BROWSERSTACK_PROJECT: "$GITHUB_REPOSITORY - $GITHUB_WORKFLOW"
-        BROWSERSTACK_BUILD: "build No. $GITHUB_ACTION"
+        BROWSERSTACK_PROJECT: "${{ github.repository }} - ${{ github.workflow }}"
+        BROWSERSTACK_BUILD: "build No. ${{ github.job }}"
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
