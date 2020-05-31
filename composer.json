@@ -31,7 +31,7 @@
       "vendor/bin/wp dotenv salts generate"
     ],
     "lint": [
-      "vendor/bin/phpcs --standard=source/phpcs.xml source"
+      "vendor/bin/phpcs --standard=packages/phpcs.xml packages"
     ],
     "test": [
       "vendor/bin/phpunit -c tests/phpunit.xml --coverage-text"
@@ -41,10 +41,10 @@
       "@wp:instal"
     ],
     "wp:install": [
-      "vendor/bin/wp core install --title=\"WordPress Local\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
+      "vendor/bin/wp core install --title=\"WordPress Dev\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
     "wp:dummy": [
-      "vendor/bin/wp import source/assets/dummy-content.xml --authors=create"
+      "vendor/bin/wp import resources/dummy-content.xml --authors=create"
     ]
   },
   "repositories": {
@@ -54,21 +54,21 @@
     },
     "theme": {
       "type": "path",
-      "url": "source/themes/blank"
+      "url": "packages/blank"
     },
     "child-theme": {
       "type": "path",
-      "url": "source/themes/blank-child"
+      "url": "packages/blank-child"
     },
     "plugin": {
       "type": "path",
-      "url": "source/plugins/blank-extra"
+      "url": "packages/blank-extra"
     }
   },
   "autoload-dev": {
     "files": [
-      "source/plugins/blank-extra/autoload.php",
-      "source/themes/blank/includes/autoload.php"
+      "packages/blank-extra/autoload.php",
+      "packages/blank/includes/autoload.php"
     ],
     "psr-4": {
       "Tests\\": "tests/unit"
