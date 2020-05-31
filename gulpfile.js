@@ -236,6 +236,7 @@ const bSync = (url) => new Promise((resolve, reject) => {
     baseDir: './public',
     notify: argv.notify,
     open: argv.open,
+    https: url.protocol === 'https',
     serveStatic: routes.map(route => ({
       route,
       dir: `public/wp${route}`
