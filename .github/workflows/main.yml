@@ -61,7 +61,7 @@ jobs:
       if: matrix.wp-versions == 5.0
       env:
         BROWSERSTACK_PROJECT: "${{ github.repository }} - ${{ github.workflow }}"
-        BROWSERSTACK_BUILD: "build No. ${{ github.job }}"
+        BROWSERSTACK_BUILD: "${{ github.ref }} ${{ github.sha }}"
         BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
         BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       run: |
