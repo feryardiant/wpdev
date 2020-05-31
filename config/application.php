@@ -8,8 +8,6 @@
  * can.
  */
 
-use Dotenv\Dotenv;
-use Dotenv\Repository\RepositoryBuilder;
 use Roots\WPConfig\Config;
 
 /** @var string Directory containing all of the site's files */
@@ -27,11 +25,7 @@ if (file_exists($root_dir . '/.env')) {
     /**
      * Use Dotenv to set required environment variables and load .env file in root
      */
-    $repository = RepositoryBuilder::create()
-        ->immutable()
-        ->make();
-
-    $dotenv = Dotenv::create($repository, $root_dir);
+    $dotenv = Dotenv\Dotenv::createImmutable($root_dir);
 
     $dotenv->load();
     $dotenv->required(['WP_HOME']);

@@ -22,8 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'BLANK_EXTRA_BASE', plugin_basename( __FILE__ ) );
-define( 'BLANK_EXTRA_DIR', plugin_dir_path( __FILE__ ) );
-define( 'BLANK_EXTRA_URL', plugin_dir_url( __FILE__ ) );
+
+defined( 'BLANK_EXTRA_DIR' ) || define( 'BLANK_EXTRA_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'BLANK_EXTRA_URL' ) || define( 'BLANK_EXTRA_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Load the plugin textdomain
@@ -35,7 +36,7 @@ add_action( 'plugins_loaded', function () {
 $blank_plugin_should_load = true;
 
 if ( ! version_compare( PHP_VERSION, '7.0', '>=' ) ) {
-	$blank_plugin_should_load = falase;
+	$blank_plugin_should_load = false;
 
 	add_action( 'admin_notices', function () {
 		$message = sprintf(
@@ -51,7 +52,7 @@ if ( ! version_compare( PHP_VERSION, '7.0', '>=' ) ) {
 }
 
 if ( ! version_compare( get_bloginfo( 'version' ), '5.0', '>=' ) ) {
-	$blank_plugin_should_load = falase;
+	$blank_plugin_should_load = false;
 
 	add_action( 'admin_notices', function () {
 		$message = sprintf(

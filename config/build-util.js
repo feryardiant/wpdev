@@ -127,77 +127,67 @@ const globalConfig = {
 
 const scandir = exports.scandir = (dir, dest) => {
   const readdirOpt = { withFileTypes: true }
-  const tmpDir = 'public/app'
+  // const tmpDir = 'public/app'
   const paths = globalConfig.paths
   const ignoreFiles = readFileSync(path.join(dir, '.distignore'), 'utf-8').split(/\r?\n/)
 
-  return readdirSync(dir, readdirOpt).reduce((types, type) => {
-    if (!['plugins', 'themes'].includes(type.name)) return types
+  return readdirSync(dir, readdirOpt).reduce((dirs, src) => {
+    if (!src.isDirectory()) return dirs
 
-    const packages = readdirSync(path.join(dir, type.name), readdirOpt).reduce((pkgs, src) => {
-      if (!src.isDirectory()) return pkgs
-
-      let target = `${type.name}/${src.name}`
-      const assetPath = `${target}/assets`
-      const pkg = {
-        type: type.name,
-        path: `${dir}/${target}`,
-        php: {
-          src: [
-            `${dir}/${target}/**/*.php`,
-            `!${dir}/${target}/vendor`
-          ],
-          dest: `${tmpDir}/${target}/languages/${src.name}.pot`,
-        }
+    const assetPath = `${src.name}/assets`
+    const pkg = {
+      type: '',
+      path: `${dir}/${src.name}`,
+      php: {
+        src: [
+          `${dir}/${src.name}/**/*.php`,
+          `!${dir}/${src.name}/vendor`
+        ],
+        dest: `${dir}/${src.name}/languages/${src.name}.pot`,
       }
-
-      if (existsSync(path.join(dir, assetPath))) {
-        Object.keys(paths).forEach(asset => {
-          if (!existsSync(path.join(dir, assetPath, paths[asset].split('/')[0]))) {
-            return
-          }
-
-          const srcPath = [
-            `${dir}/${assetPath}/${paths[asset]}`
-          ]
-
-          if (['js', 'css'].includes(asset)) {
-            const excludes = path.join(dir, assetPath, paths[asset].replace(/\./, '.min.'))
-            srcPath.push(`!${excludes}`)
-          }
-
-          pkg[asset] = {
-            src: srcPath,
-            dest: `${dir}/${assetPath}/${asset}`
-          }
-        })
-      }
-
-      const zipSrc = [
-        `${dir}/${target}/**`
-      ]
-
-      ignoreFiles.forEach((line) => {
-        if (line && /^#/.test(line) === false) {
-          const ignore = path.join(dir, target, line)
-          zipSrc.push(`!${ignore}`)
-        }
-      })
-
-      pkg.zip = {
-        src: zipSrc,
-        dest: dest
-      }
-
-      pkgs[src.name] = pkg
-      return pkgs
-    }, {})
-
-    for (const [name, pkg] of Object.entries(packages)) {
-      types.push([name, pkg])
     }
 
-    return types
+    if (existsSync(path.join(dir, assetPath))) {
+      Object.keys(paths).forEach(asset => {
+        if (!existsSync(path.join(dir, assetPath, paths[asset].split('/')[0]))) {
+          return
+        }
+
+        const srcPath = [
+          `${dir}/${assetPath}/${paths[asset]}`
+        ]
+
+        if (['js', 'css'].includes(asset)) {
+          const excludes = path.join(dir, assetPath, paths[asset].replace(/\./, '.min.'))
+          srcPath.push(`!${excludes}`)
+        }
+
+        pkg[asset] = {
+          src: srcPath,
+          dest: `${dir}/${assetPath}/${asset}`
+        }
+      })
+    }
+
+    const zipSrc = [
+      `${dir}/${src.name}/**`
+    ]
+
+    ignoreFiles.forEach((line) => {
+      if (line && /^#/.test(line) === false) {
+        const ignore = path.join(dir, src.name, line)
+        zipSrc.push(`!${ignore}`)
+      }
+    })
+
+    pkg.zip = {
+      src: zipSrc,
+      dest: dest
+    }
+
+    dirs.push([src.name, pkg])
+
+    return dirs
   }, [])
 }
 
@@ -271,10 +261,15 @@ const configure = exports.configure = (src, dest, tasks) => {
   }
 
   const skip = argv.skip && ['css', 'img', 'js', 'php'].includes(argv.skip) ? argv.skip : false
-  const _tasks = !skip ? buildTasks : buildTasks.filter(t => !t.endsWith(skip))
+  const allTasks = !skip ? buildTasks : buildTasks.filter(t => !t.endsWith(skip))
 
-  task('zip', series(...zipTasks))
-  task('build', parallel(..._tasks.sort()))
+  if (zipTasks.length > 0) {
+    task('zip', series(...zipTasks))
+  }
+
+  if (allTasks.length > 0) {
+    task('build', parallel(...allTasks.sort()))
+  }
 
   return toWatch
 }

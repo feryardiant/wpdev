@@ -1,4 +1,4 @@
-# Copyright (C) 2019 blank v0.2.5
+# Copyright (C) 2020 blank v0.2.5
 # This file is distributed under the same license as the blank v0.2.5 package.
 msgid ""
 msgstr ""
@@ -15,11 +15,6 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. translators: 1: title.
-#: comments.php:31
-msgid "One thought on &ldquo;%1$s&rdquo;"
-msgstr ""
-
 #. translators: 1: comment count number, 2: title.
 #: comments.php:37
 msgctxt "comments title"
@@ -27,6 +22,10 @@ msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
+
+#: comments.php:31
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
 
 #: comments.php:62
 msgid "Comments are closed."
@@ -151,13 +150,12 @@ msgstr ""
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#. translators: %s: search query.
-#: includes/template.php:477
-msgid "Search Results for: %s"
-msgstr ""
-
 #: includes/template.php:481
 msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: includes/template.php:477
+msgid "Search Results for: %s"
 msgstr ""
 
 #. translators: %s: Current Year and Site Title.
@@ -183,6 +181,14 @@ msgstr ""
 
 #: includes/theme.php:340
 msgid "Huge"
+msgstr ""
+
+#: includes/walker/nav-menu.php:44
+msgid "Menu items goes here"
+msgstr ""
+
+#: includes/walker/nav-menu.php:39
+msgid "You don't have menu yet, please create one here"
 msgstr ""
 
 #: includes/widgets.php:37
@@ -321,23 +327,6 @@ msgstr ""
 msgid "Preformated Font"
 msgstr ""
 
-#. translators: %s: Name of current post. Only visible to screen readers
-#: templates/content.php:24
-msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr ""
-
-#: templates/full-width.php:4
-msgid "Full Width"
-msgstr ""
-
-#: includes/walker/nav-menu.php:39
-msgid "You don't have menu yet, please create one here"
-msgstr ""
-
-#: includes/walker/nav-menu.php:44
-msgid "Menu items goes here"
-msgstr ""
-
 #: templates/admin/help-tab.php:10
 msgid "Help content goes here"
 msgstr ""
@@ -345,4 +334,13 @@ msgstr ""
 #. translators: %s Theme Name.
 #: templates/admin/options.php:17
 msgid "%s Options"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: templates/content.php:24
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: templates/full-width.php:4
+msgid "Full Width"
 msgstr ""
