@@ -24,7 +24,7 @@ require('dotenv').config()
 
 const { configure, args, watch, isProduction } = require('./config/build-util')
 
-const tasks = configure('source', 'source/releases', {
+const tasks = configure('source', 'resources/releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *
@@ -43,7 +43,7 @@ const tasks = configure('source', 'source/releases', {
       team: config.author
     }
 
-    config.phpcs.standard = 'source/phpcs.xml'
+    config.phpcs.standard = 'packages/phpcs.xml'
 
     return gulp.src(src)
       .pipe(phpcs(config.phpcs))
