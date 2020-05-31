@@ -114,8 +114,16 @@
 		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
 	</rule>
 
-	<rule ref="Generic.Commenting.DocComment">
+	<rule ref="Generic.Commenting">
 		<exclude name="Generic.Commenting.DocComment.MissingShort"/>
+	</rule>
+
+	<rule ref="Generic.Arrays">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+	</rule>
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.PHP.DisallowShortTernary"/>
 	</rule>
 
 

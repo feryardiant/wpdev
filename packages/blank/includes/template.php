@@ -670,7 +670,7 @@ class Template extends Feature {
 		$output['credits'] = make_html_tag( 'p', [ 'class' => 'credits' ], sprintf(
 			/* translators: %s: Current Year and Site Title. */
 			esc_html__( 'Copyright &copy; %s.', 'blank' ),
-			date( 'Y' ) . ' ' . $this->site_name()
+			gmdate( 'Y' ) . ' ' . $this->site_name()
 		) );
 
 		$classes = Helpers\normalize_class_attr( 'site-footer__info', $args['class'] );
