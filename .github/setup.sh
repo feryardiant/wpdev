@@ -18,16 +18,6 @@ _readable() {
     sed -e 's~<br \/>~\n~gi' -e 's~<\/p><p>~\n~gi' -e 's~<[^>]*>~~gim' -e 's~&#822[0|1];~"~gi'
 }
 
-download_wpcli vendor/bin/wp
-
-chmod +x vendor/bin/wp
-
-wp() {
-    vendor/bin/wp "$@"
-}
-
-export -f wp
-
 if [ -z $WP_HOME ]; then
 error <<-EOF
     Failed to configure WP-CLI!
@@ -36,30 +26,34 @@ error <<-EOF
 EOF
 fi
 
-if [[ ! -f wp-cli.local.yml ]]; then
-    cp wp-cli.yml wp-cli.local.yml
-fi
+download_wpcli vendor/bin/wp
+
+chmod +x vendor/bin/wp
+
+wp() {
+    vendor/wp-cli/wp-cli/bin/wp "$@"
+}
+
+cp wp-cli.yml wp-cli.local.yml
 
 sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
 _suc 'File: `wp-cli.local.yml` created successfully'
 
-wp --info
+cp .env.example .env
 
-if [ -f .env ]; then
-    wp dotenv salts generate --color
-    wp dotenv set WP_ENV $WP_ENV --color
-    wp dotenv set WP_HOME $WP_HOME --color
-    wp dotenv set DB_HOST $DB_HOST --color
-fi
+wp dotenv salts generate --color
+wp dotenv set WP_ENV $WP_ENV --color
+wp dotenv set WP_HOME $WP_HOME --color
+wp dotenv set DB_HOST $DB_HOST --color
 
 _inf 'Installling WordPress...'
-wp core install --skip-email --title="WordPress Dev" \
+vendor/bin/wp core install --skip-email --title="WordPress Dev" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 # Feel free to setup your own wp_options
-wp option update permalink_structure '/%postname%/'
-wp option update link_manager_enabled '1'
+vendor/bin/wp option update permalink_structure '/%postname%/'
+vendor/bin/wp option update link_manager_enabled '1'
 
 _inf 'Import dummy content'
-wp import resources/dummy-content.xml --authors=create
+vendor/bin/wp import resources/dummy-content.xml --authors=create
 
