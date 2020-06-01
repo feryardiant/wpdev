@@ -13,7 +13,8 @@
   },
   "env": {
     "WP_ENV": {
-      "description": "WordPress environment you desire for your Heroku instance",
+      "description": "WordPress environment you desire for your Heroku instance, e.g: production, staging, etc",
+      "value": "production",
       "required": false
     },
     "WP_DEFAULT_THEME": {
@@ -23,10 +24,12 @@
     },
     "WP_DEBUG": {
       "description": "Whether you want to turn debuging on or off.",
+      "value": "false",
       "required": false
     },
     "WP_DEBUG_DISPLAY": {
       "description": "Whether you want to display debuging on or off.",
+      "value": "false",
       "required": false
     },
     "HEROKU_APP_NAME": {
