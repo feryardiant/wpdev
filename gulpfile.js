@@ -294,7 +294,7 @@ exports.release = async () => {
     sign: argv.sign,
     skip: {},
     scripts: {
-      postbump: `NODE_ENV=${process.env.NODE_ENV} npm run archive`,
+      postbump: `NODE_ENV=${process.env.NODE_ENV} yarn archive`,
     }
   }
 
