@@ -43,6 +43,8 @@ fi
 sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
 _suc 'File: `wp-cli.local.yml` created successfully'
 
+wp --info
+
 if [ -f .env ]; then
     wp dotenv salts generate --color
     wp dotenv set WP_ENV $WP_ENV --color
