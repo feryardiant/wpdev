@@ -67,15 +67,14 @@ fi
 
 cd $BUILD_DIR
 
-if [ -z $WP_HOME ]; then
-    WP_HOME="http://$HEROKU_APP_NAME.herokuapp.com"
-fi
-
 # We can't validate wp-cli.yml content right now
 # So, I assumed that the 'url' config is exists
 # but with different address, let say: `url: http://localhost`
 cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
-sed -i -E "s~url: .*~url: ${WP_HOME}~" $BUILD_DIR/wp-cli.local.yml
+
+if [ ! -z $HEROKU_APP_NAME ]; then
+    sed -i -E "s~url: .*~url: http://${HEROKU_APP_NAME}.herokuapp.com~" $BUILD_DIR/wp-cli.local.yml
+fi
 
 status "Installing WordPress"
 
