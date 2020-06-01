@@ -48,9 +48,7 @@ jobs:
         WP_ENV: testing
         WP_HOME: http://localhost:8080
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
-      run: |
-        cp .env.example .env
-        .github/setup.sh
+      run: .github/setup.sh
     - name: Unit Test
       run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests
