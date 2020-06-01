@@ -67,6 +67,10 @@ fi
 
 cd $BUILD_DIR
 
+if [ -z $WP_HOME ]; then
+    WP_HOME="http://$HEROKU_APP_NAME.herokuapp.com"
+fi
+
 # We can't validate wp-cli.yml content right now
 # So, I assumed that the 'url' config is exists
 # but with different address, let say: `url: http://localhost`
