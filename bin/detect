@@ -2,7 +2,7 @@
 # bin/detect <build-dir>
 
 # convenience functions
-source "$(cd $(dirname $0); cd ..; pwd)"/bin/util.sh
+source "$(cd $(dirname $0); pwd)"/util.sh
 
 if [ ! -z WP_HOME ] && [ -f "$1/wp-cli.yml" ]; then
     echo 'WordPress'

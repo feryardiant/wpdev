@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source bin/util.sh
+
 _inf() {
 	echo -e "\e[34;1mInfo:\e[0m" "$@"
 }
@@ -16,13 +18,22 @@ _readable() {
     sed -e 's~<br \/>~\n~gi' -e 's~<\/p><p>~\n~gi' -e 's~<[^>]*>~~gim' -e 's~&#822[0|1];~"~gi'
 }
 
+download_wpcli vendor/bin/wp
+
+chmod +x vendor/bin/wp
+
 wp() {
     vendor/bin/wp "$@"
 }
 
+export -f wp
+
 if [ -z $WP_HOME ]; then
-    _err '`WP_HOME` is not defined'
-    exit 1
+error <<-EOF
+    Failed to configure WP-CLI!
+
+    `WP_HOME` is not defined.
+EOF
 fi
 
 if [[ ! -f wp-cli.local.yml ]]; then
