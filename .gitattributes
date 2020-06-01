@@ -6,11 +6,6 @@
 *.js    linguist-vendored
 
 .github          export-ignore
-source/assets    export-ignore
-source/docs      export-ignore
+resources        export-ignore
 CONTRIBUTING.md  export-ignore
 CHANGELOG.md     export-ignore
-
-# app.json         export-ignore
-# composer.lock    export-ignore
-# Procfile         export-ignore

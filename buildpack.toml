@@ -3,22 +3,21 @@ api = "0.2"
 [buildpack]
 id = "feryardiant/wordpress"
 name = "WordPress Buildpack"
-version = "0.1"
 
-    [publish.Ignore]
-    files = [
-        ".editorconfig",
-        ".env.example",
-        ".gitignore",
-        ".github/",
-        "composer.json",
-        "composer.lock",
-        "gulpfile.js",
-        "package.json",
-        "public/",
-        "packages/",
-        "resources/",
-        "server.php",
-        "tests/",
-        "yarn.lock"
-    ]
+  [publish.Ignore]
+  files = [
+    ".editorconfig",
+    ".env.example",
+    ".gitignore",
+    ".github/",
+    "composer.json",
+    "composer.lock",
+    "gulpfile.js",
+    "package.json",
+    "public/",
+    "packages/",
+    "resources/",
+    "server.php",
+    "tests/",
+    "yarn.lock"
+  ]
