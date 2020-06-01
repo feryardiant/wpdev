@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/feryardiant/wpdev/compare/v0.2.5...v0.2.6) (2020-06-01)
+
+
+### Features
+
+* **theme:** add ability to handle style attributes & add more kses ([ce234cf](https://github.com/feryardiant/wpdev/commit/ce234cfcfb2e78333805f44365a6fefd81e75ef8))
+* **theme:** add new option for site layout ([a8685a9](https://github.com/feryardiant/wpdev/commit/a8685a9a90afcd31031311d834400bb1822d6737))
+* **theme:** add site-wide wrapper and move `skip_link()` under body ([a79d423](https://github.com/feryardiant/wpdev/commit/a79d423638c842a781f885b651199bf64613432e))
+* **theme:** cleanup menu output ([534fc20](https://github.com/feryardiant/wpdev/commit/534fc2017519f4bcb2d30850e641e2be5bd027e5))
+* **theme:** clearfix each content segments ([84d29d7](https://github.com/feryardiant/wpdev/commit/84d29d766f33d2cc3c4ad5f588de4bbc3c9cad77))
+
+
+### Bug Fixes
+
+* **build:** things missing sometimes ([a204869](https://github.com/feryardiant/wpdev/commit/a204869d1a8556b52e4bc4aea1e928be5efb8783))
+* **build:** use option instead of passing envvar ([90c42ee](https://github.com/feryardiant/wpdev/commit/90c42ee2e5e9b3eaef5364ba6d4821988b00f39e))
+* **buildpack:** sed wp-cli.yml if possible ([38c1aa0](https://github.com/feryardiant/wpdev/commit/38c1aa056784d0d9841e7d96bd37e584ac4c88a7))
+* **plugin:** fix undefined constant ([2caa814](https://github.com/feryardiant/wpdev/commit/2caa8148384627530db7100a62d2e123441dd451))
+* **plugin:** fix undefined constant on testing ([87e13ff](https://github.com/feryardiant/wpdev/commit/87e13ff69f5a29577da9ca2620746bbf021a1423))
+* **theme:** allow `name` attribute on input elements ([2254593](https://github.com/feryardiant/wpdev/commit/22545933e0a0c3f2fcf619c995fc360f101531c7))
+* **theme:** fix form kses ([c743cf8](https://github.com/feryardiant/wpdev/commit/c743cf8fc2b2a92660ce91d4acc7e93f39fbe463))
+* **theme:** fix menu, header and footer arrangement ([8b4f02c](https://github.com/feryardiant/wpdev/commit/8b4f02cf609f8f3eac3155c540c136762ccbe486))
+* **theme:** fix missing hooks on 404 template ([b7ed9b1](https://github.com/feryardiant/wpdev/commit/b7ed9b16ee6392b354d538a9212309fb3f69988d))
+* **theme:** fix undefined properties ([2cce02b](https://github.com/feryardiant/wpdev/commit/2cce02b8d49f2cd59a075886c133df2c9a54216c))
+* **theme:** invoke `the_posts_navigation()` ([3d15818](https://github.com/feryardiant/wpdev/commit/3d1581828600d6cb1a7dfee32521bc9f3713ec6b))
+* **theme:** patch 404 page ([1297cbd](https://github.com/feryardiant/wpdev/commit/1297cbd84c67c6fe7259fdc1e6110bdf0f685154))
+* **theme:** patch clearfix ([9e0929e](https://github.com/feryardiant/wpdev/commit/9e0929eb9d293c4bb85d8a6a4118be8efb6c768e))
+* **theme:** workaround with menu and some layouts ([d3dc77b](https://github.com/feryardiant/wpdev/commit/d3dc77bb3c43f7c120ec76df23912d7f9972ccc0))
+
 ### [0.2.5](https://github.com/feryardiant/wpdev/compare/v0.2.4...v0.2.5) (2019-10-31)
 
 

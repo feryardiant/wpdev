@@ -5,7 +5,7 @@ Donate link: https://paypal.me/feryardiant
 Email: info@feryardiant.id
 GitHub Theme URI: https://github.com/editorblocks/editor-blocks-theme
 Tags: blog, blog, custom-background, custom-header, custom-logo, custom-menu, featured-images, footer-widgets, full-width-template, left-sidebar, one-column, portfolio, right-sidebar, threaded-comments, translation-ready, two-columns
-Stable tag: 0.2.5
+Stable tag: 0.2.6
 Requires PHP: 7.1
 Tested up to: 5.2
 Requires at least: 5.0
