@@ -18,7 +18,7 @@ if ( ! function_exists( 'blank' ) ) {
 	 * Helper function to interact with theme instance.
 	 *
 	 * @param string|null $key Theme object key.
-	 * @return Blank\Theme|object
+	 * @return Blank\Theme|mixed
 	 */
 	function blank( $key = null ) {
 		static $theme;

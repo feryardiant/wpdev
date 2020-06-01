@@ -16,7 +16,7 @@ indent_size = 2
 [.*rc]
 indent_size = 2
 
-[source/**.php]
+[packages/**.php]
 indent_style = tab
 
 [tests/**.php]
