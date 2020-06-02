@@ -1,6 +1,6 @@
 <?php
 /**
- * Blank Extra Plugin.
+ * Blank Theme.
  *
  * @package  Blank
  * @since    0.2.0
@@ -8,16 +8,20 @@
 
 namespace Blank_Extra;
 
+use Blank\Feature;
+
 /**
- * Theme Setup Class.
+ * Theme Widget Class.
+ *
+ * @category  Widget
  */
-final class Plugin {
+class Options extends Feature {
 	/**
 	 * Initialize class.
 	 *
-	 * @since 0.1.0
+	 * @since 0.1.1
 	 */
-	public function __construct() {
+	protected function initialize() : void {
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 	}
 
@@ -35,9 +39,9 @@ final class Plugin {
 			sprintf( __( '%s Option Panel', 'blank-extra' ), 'Blank' ),
 			__( 'Theme Option', 'blank-extra' ),
 			'edit_theme_options',
-			'blank-extra-options',
+			'blank-options',
 			function () {
-				include_once $this->get_dir( 'templates/admin/options.php' );
+				include_once $this->theme->get_dir( 'templates/admin/options.php' );
 			}
 		);
 	}
