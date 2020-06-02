@@ -20,7 +20,7 @@
     "WP_DEFAULT_THEME": {
       "description": "Default theme that enabled on the first time you install!",
       "required": false,
-      "value": "blank"
+      "value": "blank-child"
     },
     "WP_DEBUG": {
       "description": "Whether you want to turn debuging on or off.",
