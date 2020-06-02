@@ -66,10 +66,7 @@
     }
   },
   "autoload-dev": {
-    "files": [
-      "packages/blank-extra/autoload.php",
-      "packages/blank/includes/autoload.php"
-    ],
+    "files": [],
     "psr-4": {
       "Tests\\": "tests/unit"
     }
