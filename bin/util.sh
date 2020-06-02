@@ -67,8 +67,13 @@ export_env_dir() {
 
 create_default_env() {
     local build_dir="$1"
+    local cache_dir="$2"
 
-    mkdir -p "$build_dir/.heroku/wp-cli/{bin,cache,packages}"
+    if [ ! -d "$cache_dir/wp-cli" ]; then
+        mkdir -p "$cache_dir/wp-cli/{bin,cache,packages}"
+    fi
+
+    ln -s $cache_dir/wp-cli $build_dir/.heroku/wp-cli
 
     # if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
     # (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
