@@ -14,13 +14,7 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$(cd $(dirname $0); pwd)"/util.sh
 
-mkdir -p "$BUILD_DIR/.heroku/wp-cli/bin"
-
-# if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
-# (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
-[[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
-
-create_default_env "$BUILD_DIR"
+create_default_env "$BUILD_DIR" "$CACHE_DIR"
 export_env_dir "$ENV_DIR"
 
 status "Installing WP-CLI..."
@@ -70,5 +64,8 @@ status "Installing WordPress"
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
 wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+
+# Flush cache, just-in-case
+wp cache flush
 
 status "Setup completed"
