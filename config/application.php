@@ -203,7 +203,7 @@ if (!empty($_redis_url) && ($_enable_cache || $_is_production)) {
 
     Config::define('WP_CACHE',          $_enable_cache);
     Config::define('WP_REDIS_DISABLED', false);
-    Config::define('WP_REDIS_CLIENT',   'predis');
+    Config::define('WP_REDIS_CLIENT',   'pecl');
     Config::define('WP_REDIS_SCHEME',   $_redis['scheme']);
     Config::define('WP_REDIS_HOST',     $_redis['host']);
     Config::define('WP_REDIS_PORT',     $_redis['port']);
