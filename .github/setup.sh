@@ -26,20 +26,20 @@ error <<-EOF
 EOF
 fi
 
-_inf 'Installing WP-CLI...'
+# _inf 'Installing WP-CLI...'
 
-download_wpcli vendor/bin/wp
+# download_wpcli vendor/bin/wp
 
-chmod +x vendor/bin/wp
+# chmod +x vendor/bin/wp
 
 wp() {
     # Here we still using WP-CLI from composer because of some it's commands
     # are not working without installing the core first
     # See: https://github.com/feryardiant/wpdev/runs/727937952?check_suite_focus=true#step:7:11
-    vendor/wp-cli/wp-cli/bin/wp "$@"
+    vendor/bin/wp "$@"
 }
 
-_suc 'WP-CLI installed on vendor/bin/wp'
+# _suc 'WP-CLI installed on vendor/bin/wp'
 
 cp wp-cli.yml wp-cli.local.yml
 
@@ -54,13 +54,13 @@ wp dotenv set WP_HOME $WP_HOME --color
 wp dotenv set DB_HOST $DB_HOST --color
 
 _inf 'Installling WordPress...'
-vendor/bin/wp core install --skip-email --title="WordPress Dev" \
+wp core install --skip-email --title="WordPress Dev" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 # Feel free to setup your own wp_options
-# vendor/bin/wp option update permalink_structure '/%postname%/'
-# vendor/bin/wp option update link_manager_enabled '1'
+# wp option update permalink_structure '/%postname%/'
+# wp option update link_manager_enabled '1'
 
 _inf 'Import dummy content'
-vendor/bin/wp import resources/dummy-content.xml --authors=create
+wp import resources/dummy-content.xml --authors=create
 
