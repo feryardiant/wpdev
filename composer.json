@@ -77,6 +77,7 @@
   "require": {
     "php": ">=7.1",
     "ext-gd": "*",
+    "ext-redis": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "oscarotero/env": "^1.2",
