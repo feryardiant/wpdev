@@ -28,11 +28,8 @@ const tasks = configure('packages', 'resources/releases', {
   /**
    * Lint PHP fiels and generate translation file.
    *
-   * @param {Object}       param0
-   * @param {Array|String} param0.src
-   * @param {Array|String} param0.dest
-   * @param {Object}       param0.
-   * @return {stream}
+   * @param {TaskConfig} param0
+   * @return {ReadableStream}
    */
   php ({ src, dest, config }) {
     config.wpPot = {
@@ -55,11 +52,8 @@ const tasks = configure('packages', 'resources/releases', {
   /**
    * Compile SCSS files to CSS & minify.
    *
-   * @param {Object}       param0
-   * @param {Array|String} param0.src
-   * @param {Array|String} param0.dest
-   * @param {Object}       param0.config
-   * @return {stream}
+   * @param {TaskConfig} param0
+   * @return {ReadableStream}
    */
   css ({ src, dest, config }) {
     return gulp.src(src, config.gulp)
@@ -76,11 +70,8 @@ const tasks = configure('packages', 'resources/releases', {
   /**
    * Minify javascripts.
    *
-   * @param {Object}       param0
-   * @param {Array|String} param0.src
-   * @param {Array|String} param0.dest
-   * @param {Object}       param0.config
-   * @return {stream}
+   * @param {TaskConfig} param0
+   * @return {ReadableStream}
    */
   js ({ src, dest, config }) {
     return gulp.src(src, config.gulp)
@@ -97,11 +88,8 @@ const tasks = configure('packages', 'resources/releases', {
   /**
    * Optimize images.
    *
-   * @param {Object}       param0
-   * @param {Array|String} param0.src
-   * @param {Array|String} param0.dest
-   * @param {Object}       param0.config
-   * @return {stream}
+   * @param {TaskConfig} param0
+   * @return {ReadableStream}
    */
   img ({ src, dest, config }) {
     return gulp.src(src)
@@ -112,11 +100,8 @@ const tasks = configure('packages', 'resources/releases', {
   /**
    * Generate CHANGELOG.md for each then Packaging them.
    *
-   * @param {Object}       param0
-   * @param {Array|String} param0.src
-   * @param {Array|String} param0.dest
-   * @param {Object}       param0.config
-   * @return {stream}
+   * @param {TaskConfig} param0
+   * @return {ReadableStream}
    */
   zip: async ({ src, dest, config }) => {
     config.release.path = config.path
