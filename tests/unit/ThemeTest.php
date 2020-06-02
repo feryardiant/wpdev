@@ -2,48 +2,14 @@
 
 namespace Tests;
 
-use Blank\Asset;
-use Blank\Comment;
-use Blank\Content;
-use Blank\Customizer;
 use Blank\Feature;
-use Blank\Menu;
-use Blank\Template;
 use Blank\Theme;
-use Blank\Widgets;
-use Closure;
 use InvalidArgumentException;
 use ReflectionClass;
 use RuntimeException;
 use WP_Mock as mock;
 
 class ThemeTest extends TestCase {
-    protected $transient = [
-        'siteurl'    => 'http://localhost',
-        'name'       => 'ThemeName',
-        'slug'       => 'slug',
-        'child_slug' => 'slug',
-        'theme_uri'  => 'http://example.com',
-        'version'    => '0.2.0',
-        'author'     => 'John Doe',
-        'author_uri' => 'http://example.com',
-    ];
-
-    protected function new_instance_without_constructor(string $class_name, Closure $callback = null) {
-        $reflector = new ReflectionClass($class_name);
-
-        $this->transient['parent_dir'] = STUBS_PATH;
-        $this->transient['parent_uri'] = $this->transient['siteurl'] . '/wp-content/themes/slug';
-        $this->transient['child_dir']  = $this->transient['parent_dir'];
-        $this->transient['child_uri']  = $this->transient['parent_uri'];
-
-        if ($callback) {
-            $callback($reflector);
-        }
-
-        return $reflector->newInstanceWithoutConstructor();
-    }
-
     public function test_constructor() {
         /** @var Theme $theme */
         $theme = $this->new_instance_without_constructor(Theme::class);
@@ -62,11 +28,11 @@ class ThemeTest extends TestCase {
         $this->assertEquals('blank_theme_info', $theme->transient_name('theme_info'));
     }
 
-    public function test_get_instance_feature_class() {
-        $this->expectException(RuntimeException::class);
+    // public function test_get_instance_feature_class() {
+    //     $this->expectException(RuntimeException::class);
 
-        DummyFeature::get_instance();
-    }
+    //     DummyFeature::get_instance();
+    // }
 
     public function test_setter_and_getter() {
         /** @var Theme $theme */
@@ -205,45 +171,15 @@ class ThemeTest extends TestCase {
     }
 
     public function test_theme_features() {
-        mock::userFunction('get_transient', [
-            'times' => 1,
-            'return' => $this->transient,
-        ]);
+        $theme = $this->create_theme_instance();
 
-        mock::userFunction('trailingslashit', [
-            'times' => 4,
-            'return' => '/',
-        ]);
-
-        mock::userFunction('get_template_directory', [
-            'times' => 1,
-            'return' => $dir = STUBS_PATH,
-        ]);
-
-        mock::userFunction('get_stylesheet_directory', [
-            'times' => 1,
-            'return' => $uri = $this->transient['siteurl'] . '/wp-content/themes/slug',
-        ]);
-
-        mock::userFunction('get_template_directory_uri', [
-            'times' => 1,
-            'return' => $dir,
-        ]);
-
-        mock::userFunction('get_stylesheet_directory_uri', [
-            'times' => 1,
-            'return' => $uri,
-        ]);
-
-        $theme = new Theme();
-
-        $this->assertInstanceOf(Asset::class, $theme->asset);
-        $this->assertInstanceOf(Comment::class, $theme->comment);
-        $this->assertInstanceOf(Content::class, $theme->content);
-        $this->assertInstanceOf(Customizer::class, $theme->customizer);
-        $this->assertInstanceOf(Menu::class, $theme->menu);
-        $this->assertInstanceOf(Template::class, $theme->template);
-        $this->assertInstanceOf(Widgets::class, $theme->widgets);
+        $this->assertInstanceOf(\Blank\Asset::class, $theme->asset);
+        $this->assertInstanceOf(\Blank\Comment::class, $theme->comment);
+        $this->assertInstanceOf(\Blank\Content::class, $theme->content);
+        $this->assertInstanceOf(\Blank\Customizer::class, $theme->customizer);
+        $this->assertInstanceOf(\Blank\Menu::class, $theme->menu);
+        $this->assertInstanceOf(\Blank\Template::class, $theme->template);
+        $this->assertInstanceOf(\Blank\Widgets::class, $theme->widgets);
     }
 
     public function test_load_options() {
