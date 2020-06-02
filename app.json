@@ -17,6 +17,11 @@
       "value": "production",
       "required": false
     },
+    "WP_CACHE": {
+      "description": "Whether you want to enable caching on your site.",
+      "value": "false",
+      "required": false
+    },
     "WP_DEFAULT_THEME": {
       "description": "Default theme that enabled on the first time you install!",
       "required": false,
