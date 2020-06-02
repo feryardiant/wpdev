@@ -26,19 +26,26 @@ error <<-EOF
 EOF
 fi
 
+_inf 'Installing WP-CLI...'
+
 download_wpcli vendor/bin/wp
 
 chmod +x vendor/bin/wp
 
 wp() {
+    # Here we still using WP-CLI from composer because of some it's commands
+    # are not working without installing the core first
+    # See: https://github.com/feryardiant/wpdev/runs/727937952?check_suite_focus=true#step:7:11
     vendor/wp-cli/wp-cli/bin/wp "$@"
 }
+
+_suc 'WP-CLI installed on vendor/bin/wp'
 
 cp wp-cli.yml wp-cli.local.yml
 
 sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
-_suc 'File: `wp-cli.local.yml` created successfully'
 
+_inf 'Setting up .env file...'
 cp .env.example .env
 
 wp dotenv salts generate --color
