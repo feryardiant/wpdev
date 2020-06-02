@@ -15,21 +15,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. translators: %s: PHP version
-#: functions.php:44
-msgid "Blank requires PHP version %s+, plugin is currently NOT RUNNING."
-msgstr ""
-
-#. translators: %s: WordPress version
-#: functions.php:60
-msgid "Blank requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING."
-msgstr ""
-
 #. translators: %s: Theme name.
-#: includes/plugin.php:35
+#: includes/options.php:39
 msgid "%s Option Panel"
 msgstr ""
 
-#: includes/plugin.php:36
+#: includes/options.php:40
 msgid "Theme Option"
 msgstr ""
