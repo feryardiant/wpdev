@@ -62,5 +62,5 @@ wp core install --skip-email --title="WordPress Dev" \
 # wp option update link_manager_enabled '1'
 
 # _inf 'Import dummy content'
-# wp import resources/dummy-content.xml --authors=create
+wp import resources/dummy-content.xml --authors=create
 

@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         php-versions: ['7.2']
-        wp-versions: ['5.0', '5.1', '5.2']
+        wp-versions: ['5.0', '5.1', '5.2', '5.3', '5.4']
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -50,9 +50,11 @@ jobs:
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
       run: .github/setup.sh
     - name: Unit Test
-      run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
+      run: |
+        vendor/bin/phpcs --standard=packages/phpcs.xml packages
+        vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests
-      if: matrix.wp-versions == 5.0
+      if: matrix.wp-versions == 5.4
       env:
         BROWSERSTACK_PROJECT: "${{ github.repository }} - ${{ github.workflow }}"
         BROWSERSTACK_BUILD: ${{ github.ref }}
