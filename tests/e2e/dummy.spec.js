@@ -4,6 +4,6 @@ describe('my awesome website', () => {
     await browser.url('/')
     const title = await browser.getTitle()
 
-    expect(title).toEqual('WordPress Local – Your slogan goes here')
+    expect(title).toContain('WordPress Local')
   })
 })
