@@ -90,6 +90,20 @@ function normalize_class_attr( $class, ...$classes ) : array {
 }
 
 /**
+ * Grab all HTML tags from string.
+ *
+ * @param string $html
+ * @return array
+ */
+function get_html_tags( string $html ) : array {
+	preg_match_all( '~</[^>]*?>~', $html, $arr );
+
+	return array_map( function ( $tag ) {
+		return preg_replace( '/[^\p{L}\p{N} ]+/', '', $tag );
+	}, array_merge( ...$arr ) );
+}
+
+/**
  * Create HTML element.
  *
  * @since 0.2.1
@@ -124,34 +138,28 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		return $begin . '></' . $tag . '>' . $close;
 	}
 
-	$kses = [ $tag ];
-
 	if ( is_array( $ends ) ) {
 		$inner = [];
 
 		foreach ( $ends as $sub_tag => $param ) {
-			if ( is_string( $param ) && is_numeric( $sub_tag ) ) {
-				$kses[]  = [ 'div', 'a', 'span' ];
-				$inner[] = PHP_EOL . $param;
-				continue;
+			if ( is_string( $param ) ) {
+				$param = [ 'ends' => $param ];
 			}
 
-			$param = wp_parse_args( $param, [
-				'attr' => [],
-				'ends' => false,
-			] );
-
-			$inner[] = PHP_EOL . make_html_tag( $sub_tag, $param['attr'], $param['ends'], true );
-			$kses[]  = $sub_tag;
-
-			if ( is_array( $param['ends'] ) ) {
-				foreach ( array_keys( $param['ends'] ) as $end_tag ) {
-					$kses[] = $end_tag;
+			if ( is_numeric( $sub_tag ) ) {
+				if ( is_array( $param ) && array_key_exists( 'tag', $param ) ) {
+					$sub_tag = $param['tag'];
+					unset( $param['tag'] );
+				} else {
+					continue;
 				}
 			}
+
+			$inner[] = make_html_tag( $sub_tag, $param['attr'] ?? [], $param['ends'] ?? false, true );
 		}
 
-		$ends = join( '', $inner );
+		$ends = PHP_EOL . join( '', $inner );
+
 	}
 
 	$output = $begin . '>' . $ends . '</' . $tag . '>' . $close;
@@ -160,9 +168,10 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		return $output;
 	}
 
-	foreach ( $kses as $el ) {
-		if ( is_array( $el ) ) {
-			$kses = array_merge( $kses, get_allowed_attr( $el ) );
+	$kses = [ $tag => get_allowed_attr( $tag ) ];
+
+	foreach ( get_html_tags( $output ) as $el ) {
+		if ( array_key_exists( $el, $kses ) ) {
 			continue;
 		}
 
