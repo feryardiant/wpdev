@@ -142,11 +142,12 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		$inner = [];
 
 		foreach ( $ends as $sub_tag => $param ) {
-			if ( is_string( $param ) ) {
-				$param = [ 'ends' => $param ];
-			}
-
 			if ( is_numeric( $sub_tag ) ) {
+				if ( is_string( $param ) ) {
+					$inner[] = $param;
+					continue;
+				}
+
 				if ( is_array( $param ) && array_key_exists( 'tag', $param ) ) {
 					$sub_tag = $param['tag'];
 					unset( $param['tag'] );
@@ -159,7 +160,6 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		}
 
 		$ends = PHP_EOL . join( '', $inner );
-
 	}
 
 	$output = $begin . '>' . $ends . '</' . $tag . '>' . $close;
