@@ -54,7 +54,7 @@ wp dotenv set WP_HOME $WP_HOME --color
 wp dotenv set DB_HOST $DB_HOST --color
 
 _inf 'Installling WordPress...'
-wp core install --skip-email --title="WordPress Dev" \
+wp core install --skip-email --title="WordPress Local" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 # Feel free to setup your own wp_options

@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-// const url = new URL(process.env.WP_HOME)
+const url = new URL(process.env.WP_HOME)
 
 exports.config = {
   runner: 'local',
@@ -25,10 +25,16 @@ exports.config = {
   hostname: 'hub-cloud.browserstack.com',
   user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_ACCESS_KEY,
-  browserstackLocal: true,
 
-  services: ['browserstack'],
   reporters: ['dot'],
+  services: [
+    ['browserstack', {
+      browserstackLocal: true,
+      opts: {
+        forceLocal: true
+      }
+    }]
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -69,9 +75,9 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: (caps, specs) => {
-    const chai = require('chai')
+    // const chai = require('chai')
     // global.expect = chai.expect
-    chai.Should()
+    // chai.Should()
   },
   /**
    * Runs before a WebdriverIO command gets executed.
