@@ -112,6 +112,7 @@ final class Theme implements ArrayAccess {
 			Content::class,
 			Customizer::class,
 			Menu::class,
+			Options::class,
 			Template::class,
 			Typography::class,
 			Widgets::class,

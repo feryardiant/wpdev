@@ -9,37 +9,14 @@
 
 ?><div class="wrap" id="blank-panel">
 	<header>
-		<h1>
-			<?php
-			// translators: %s Theme Name.
-			printf( esc_html__( '%s Options', 'blank' ), esc_html( blank( 'name' ) ) );
-			?>
-		</h1>
+		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 	</header>
 
 	<nav>
-		<ul>
-			<li>
-				<a href="#panel-section-welcome">
-					<?php esc_html_e( 'Welcome', 'blank' ); ?>
-				</a>
-			</li>
-			<li>
-				<a href="#panel-section-general">
-					<?php esc_html_e( 'General', 'blank' ); ?>
-				</a>
-			</li>
-		</ul>
+		<?php blank( 'options' )->get_navigations(); ?>
 	</nav>
 
 	<form action="#" method="post">
-		<main id="panel-sections">
-			<section id="panel-section-welcome">
-				<p>Panel 2</p>
-			</section>
-			<section id="panel-section-general">
-				<p>Panel 1</p>
-			</section>
-		</main> <!-- #poststuff -->
-	</form> <!-- #roles -->
+		<?php blank( 'options' )->get_sections(); ?>
+	</form> <!-- /form -->
 </div> <!-- .wrap -->
