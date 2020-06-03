@@ -606,6 +606,20 @@ final class Theme implements ArrayAccess {
 	}
 
 	/**
+	 * Determine wheter a $constant is true.
+	 *
+	 * @param string ...$constants
+	 * @return bool
+	 */
+	public static function enabled( string ...$constants ) : bool {
+		$enabled = array_map( function ( $constant ) {
+			return defined( $constant ) && constant( $constant ) === true;
+		}, $constants );
+
+		return count( array_filter( $enabled ) ) === count( $constants );
+	}
+
+	/**
 	 * Retrieve an option name by $name.
 	 *
 	 * @since 0.2.1

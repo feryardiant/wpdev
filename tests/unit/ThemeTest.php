@@ -204,6 +204,20 @@ class ThemeTest extends TestCase {
 
         $this->assertCount(0, $theme->options());
     }
+
+    public function test_constant_defined() {
+        $this->assertFalse(Theme::enabled('FOO_BAR'));
+
+        define('FOO_BAR', true);
+        $this->assertTrue(Theme::enabled('FOO_BAR'));
+        $this->assertFalse(Theme::enabled('FOO_BAR', 'BAR_BAZ'));
+
+        define('BAR_BAZ', true);
+        $this->assertTrue(Theme::enabled('FOO_BAR', 'BAR_BAZ'));
+
+        define('BOOM', false);
+        $this->assertFalse(Theme::enabled('FOO_BAR', 'BAR_BAZ', 'BOOM'));
+    }
 }
 
 class DummyFeature extends Feature {

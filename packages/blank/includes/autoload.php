@@ -59,7 +59,7 @@ foreach ( $blank_dirs as $namespace => $dir ) {
 
 unset( $composer_autoloader, $files, $function );
 
-if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) ) {
+if ( ! function_exists( 'dump' ) && ( Blank\Theme::enabled( 'WP_DEBUG_DISPLAY' ) ) ) {
 	/**
 	 * Lil' helper to dump a value.
 	 *
@@ -74,9 +74,7 @@ if ( ! function_exists( 'dump' ) && ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_
 			var_dump( $arg );
 		}, $args );
 
-		$dump = \str_replace( WP_CONTENT_DIR, '', ob_get_clean() );
-
-		echo $dump;
+		echo \str_replace( WP_CONTENT_DIR, '', ob_get_clean() );
 		exit;
 	}
 }
