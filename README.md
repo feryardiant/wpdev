@@ -56,16 +56,16 @@ Please make sure to configure your HTTP server' `document root` to `public` dire
 
 ### Development
 
-I using `gulp` for almost all development workflow in this project, not only for compiling `scss` files, minify images and compressing `js`, but also to run development server. Once you're done with installation process above, please install the development dependencies through `npm`
+I using `gulp` for almost all development workflow in this project, not only for compiling `scss` files, minify images and compressing `js`, but also to run development server. Once you're done with installation process above, please install the development dependencies through `yarn`
 
 ```bash
-$ npm -g install glup-cli # in case you didn't have gulp instaled globally on your system
-$ npm instal
+$ yarn
 ```
 
 To start the development server you can simply run command below:
 
 ```bash
+# yarn global add glup-cli or npm -g install gulp-cli, in case you don't have one
 $ gulp
 ```
 
