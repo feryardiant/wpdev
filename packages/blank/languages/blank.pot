@@ -1,8 +1,8 @@
-# Copyright (C) 2020 blank v0.2.6
-# This file is distributed under the same license as the blank v0.2.6 package.
+# Copyright (C) 2020 blank v0.2.7
+# This file is distributed under the same license as the blank v0.2.7 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: blank v0.2.6\n"
+"Project-Id-Version: blank v0.2.7\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -130,6 +130,14 @@ msgstr ""
 msgid "Footer Menu"
 msgstr ""
 
+#: includes/options.php:57
+msgid "Welcome"
+msgstr ""
+
+#: includes/options.php:61, options/general.php:10
+msgid "General"
+msgstr ""
+
 #: includes/template.php:266
 msgid "Search form"
 msgstr ""
@@ -163,23 +171,23 @@ msgstr ""
 msgid "Copyright &copy; %s."
 msgstr ""
 
-#: includes/theme.php:320
+#: includes/theme.php:321
 msgid "Small"
 msgstr ""
 
-#: includes/theme.php:325
+#: includes/theme.php:326
 msgid "Normal"
 msgstr ""
 
-#: includes/theme.php:330
+#: includes/theme.php:331
 msgid "Medium"
 msgstr ""
 
-#: includes/theme.php:335
+#: includes/theme.php:336
 msgid "Large"
 msgstr ""
 
-#: includes/theme.php:340
+#: includes/theme.php:341
 msgid "Huge"
 msgstr ""
 
@@ -205,10 +213,6 @@ msgstr ""
 
 #: includes/widgets.php:49
 msgid "Footer widget that placed on the bottom of your page."
-msgstr ""
-
-#: options/general.php:10
-msgid "General"
 msgstr ""
 
 #: options/general.php:11
@@ -329,11 +333,6 @@ msgstr ""
 
 #: templates/admin/help-tab.php:10
 msgid "Help content goes here"
-msgstr ""
-
-#. translators: %s Theme Name.
-#: templates/admin/options.php:17
-msgid "%s Options"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers

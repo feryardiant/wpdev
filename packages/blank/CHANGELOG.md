@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/feryardiant/wpdev/compare/v0.2.6...v0.2.7) (2020-06-03)
+
+
+### Features
+
+* **theme:** add ability to extract html tag from string ([92323a2](https://github.com/feryardiant/wpdev/commit/92323a2b355eb96af4d988b1ebc0658eb1aea772))
+* **theme:** add helper method to check is constant(s) enabled ([22cae27](https://github.com/feryardiant/wpdev/commit/22cae2741b04a37b3d0a476319654297784bd383))
+* **theme:** autoload plugin files ([65fd429](https://github.com/feryardiant/wpdev/commit/65fd4295b44c5022acd36daf96c07d9cf769abef))
+* **theme:** init option panel hook ([28c937f](https://github.com/feryardiant/wpdev/commit/28c937fdab861f923098511f7c023ff9b385d9f3))
+
+
+### Bug Fixes
+
+* **theme:** bring back missing icons ([6179942](https://github.com/feryardiant/wpdev/commit/6179942eb8c8aca1b80bad98658dd847de7bca84))
+* **theme:** fix lint issues ([a1399f3](https://github.com/feryardiant/wpdev/commit/a1399f35575e1936f271b7540ad9d021f835f7ba))
+* **theme:** fix option panel page ([fc26c70](https://github.com/feryardiant/wpdev/commit/fc26c7000b29e736ca6b62aafa560462e72fb7de))
+* **theme:** primary menu not rendered poperly ([1598dae](https://github.com/feryardiant/wpdev/commit/1598dae69f960b06c07fac3d6e9961f454b8bf4b)), closes [#41](https://github.com/feryardiant/wpdev/issues/41)
+* **theme:** searchform input not rendered poperly ([61aace0](https://github.com/feryardiant/wpdev/commit/61aace0617d9c561458f581a9e299c13b6e54184)), closes [#41](https://github.com/feryardiant/wpdev/issues/41)
+
 ### [0.2.6](https://github.com/feryardiant/wpdev/compare/v0.2.5...v0.2.6) (2020-06-01)
 
 ### [0.2.5](https://github.com/feryardiant/wpdev/compare/v0.2.4...v0.2.5) (2019-10-31)
