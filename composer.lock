@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.139.1",
+            "version": "3.140.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01"
+                "reference": "9798418d4f0cdc0cf11dab453eca96e1d072df79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/31fc7fc73d550e237b34f7c6802250fd4ade9a01",
-                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9798418d4f0cdc0cf11dab453eca96e1d072df79",
+                "reference": "9798418d4f0cdc0cf11dab453eca96e1d072df79",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-06-02T18:12:38+00:00"
+            "time": "2020-06-03T18:12:30+00:00"
         },
         {
             "name": "composer/installers",
@@ -1426,7 +1426,7 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank",
@@ -1446,7 +1446,7 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-child",
@@ -1467,7 +1467,7 @@
         },
         {
             "name": "wpdev/blank-extra",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-extra",
@@ -2883,12 +2883,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "55922f51129488c246a776ff944463605d447da0"
+                "reference": "6f531c98f815f2fd22b90343e0525a3c686aee6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/55922f51129488c246a776ff944463605d447da0",
-                "reference": "55922f51129488c246a776ff944463605d447da0",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6f531c98f815f2fd22b90343e0525a3c686aee6a",
+                "reference": "6f531c98f815f2fd22b90343e0525a3c686aee6a",
                 "shasum": ""
             },
             "conflict": {
@@ -2942,8 +2942,9 @@
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
                 "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
+                "ezsystems/ezplatform-kernel": ">=1,<1.0.2.1",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
-                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.1|>=6,<6.7.9.1|>=6.8,<6.13.6.2|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.6.2",
+                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.2|>=6,<6.7.9.1|>=6.8,<6.13.6.3|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.7.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
@@ -3155,7 +3156,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-28T00:01:39+00:00"
+            "time": "2020-06-03T14:57:13+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
