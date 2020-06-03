@@ -8,17 +8,19 @@
  * @since    0.1.0
  */
 
+define( 'BLANK_DIR', get_template_directory() );
+
 /**
  * Autoloader
  */
-require_once __DIR__ . '/includes/autoload.php';
+require_once BLANK_DIR . '/includes/autoload.php';
 
 if ( ! function_exists( 'blank' ) ) {
 	/**
 	 * Helper function to interact with theme instance.
 	 *
 	 * @param string|null $key Theme object key.
-	 * @return Blank\Theme|object
+	 * @return Blank\Theme|mixed
 	 */
 	function blank( $key = null ) {
 		static $theme;

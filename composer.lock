@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "343406b294dc839ee4e4c4284ed12f6a",
+    "content-hash": "39024991681277c0cc0f8db4296ea219",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.138.10",
+            "version": "3.139.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cf197a033ad75cd9e3a90a207cf5ec8935aafa48"
+                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cf197a033ad75cd9e3a90a207cf5ec8935aafa48",
-                "reference": "cf197a033ad75cd9e3a90a207cf5ec8935aafa48",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/31fc7fc73d550e237b34f7c6802250fd4ade9a01",
+                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-05-28T18:12:07+00:00"
+            "time": "2020-06-02T18:12:38+00:00"
         },
         {
             "name": "composer/installers",
@@ -1188,16 +1188,16 @@
         },
         {
             "name": "tillkruss/redis-cache",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tillkruss/redis-cache.git",
-                "reference": "5dcf18a1b40e092d97040893ef5c67dfe7b92036"
+                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tillkruss/redis-cache/zipball/5dcf18a1b40e092d97040893ef5c67dfe7b92036",
-                "reference": "5dcf18a1b40e092d97040893ef5c67dfe7b92036",
+                "url": "https://api.github.com/repos/tillkruss/redis-cache/zipball/c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
+                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
                 "shasum": ""
             },
             "require": {
@@ -1229,7 +1229,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-05-30T00:43:38+00:00"
+            "time": "2020-05-31T16:33:33+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1322,6 +1322,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
+        },
+        {
+            "name": "wpackagist-plugin/regenerate-thumbnails",
+            "version": "3.1.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/regenerate-thumbnails/",
+                "reference": "tags/3.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/regenerate-thumbnails.3.1.3.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/regenerate-thumbnails/"
         },
         {
             "name": "wpackagist-plugin/wordpress-importer",
@@ -4216,7 +4234,10 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-exif": "*",
+        "ext-gd": "*",
+        "ext-redis": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

@@ -112,6 +112,7 @@ final class Theme implements ArrayAccess {
 			Content::class,
 			Customizer::class,
 			Menu::class,
+			Options::class,
 			Template::class,
 			Typography::class,
 			Widgets::class,
@@ -602,6 +603,20 @@ final class Theme implements ArrayAccess {
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Determine wheter a $constant is true.
+	 *
+	 * @param string ...$constants
+	 * @return bool
+	 */
+	public static function enabled( string ...$constants ) : bool {
+		$enabled = array_map( function ( $constant ) {
+			return defined( $constant ) && constant( $constant ) === true;
+		}, $constants );
+
+		return count( array_filter( $enabled ) ) === count( $constants );
 	}
 
 	/**

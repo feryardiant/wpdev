@@ -8,7 +8,7 @@
  * @since    0.2.0
  */
 
-namespace Blank\Integrations;
+namespace Blank_Extra\Integrations;
 
 /**
  * JetPack Setup Class.

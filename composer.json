@@ -66,16 +66,16 @@
     }
   },
   "autoload-dev": {
-    "files": [
-      "packages/blank-extra/autoload.php",
-      "packages/blank/includes/autoload.php"
-    ],
+    "files": [],
     "psr-4": {
       "Tests\\": "tests/unit"
     }
   },
   "require": {
     "php": ">=7.1",
+    "ext-exif": "*",
+    "ext-gd": "*",
+    "ext-redis": "*",
     "composer/installers": "^1.7",
     "humanmade/s3-uploads": "^2.1",
     "oscarotero/env": "^1.2",
@@ -85,6 +85,7 @@
     "tillkruss/redis-cache": "^1.5",
     "vlucas/phpdotenv": "^4.1",
     "wpackagist-plugin/contact-form-7": "^5.1",
+    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.7",
     "wpdev/blank-child": "*"
   },
@@ -104,7 +105,6 @@
   },
   "suggest": {
     "ext-bcmath": "*",
-    "ext-exif": "*",
     "ext-gettext": "*",
     "ext-imagick": "*",
     "ext-mbstring": "*"

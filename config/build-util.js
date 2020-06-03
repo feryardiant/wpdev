@@ -125,6 +125,44 @@ const globalConfig = {
   }
 }
 
+/**
+ * @typedef Asset
+ *
+ * @property {Array|String} src
+ * @property {String} dest
+ */
+
+/**
+ * @typedef PkgConfig
+ *
+ * @property {String} path
+ * @property {Asset}  css
+ * @property {Asset}  img
+ * @property {Asset}  js
+ * @property {Asset}  php
+ * @property {Asset}  zip
+ */
+
+/**
+ * @typedef TaskConfig
+ *
+ * @property {Array|String} src
+ * @property {String}       dest
+ * @property {Object}       config
+ */
+
+/**
+ * @callback CallableTask
+ *
+ * @param {TaskConfig}       obj
+ * @param {CallableFunction} done
+ */
+
+/**
+ * @param {String} src
+ * @param {String} dest
+ * @returns {Array.<Array.<String, PkgConfig>>}
+ */
 const scandir = exports.scandir = (dir, dest) => {
   const readdirOpt = { withFileTypes: true }
   // const tmpDir = 'public/app'
@@ -135,6 +173,9 @@ const scandir = exports.scandir = (dir, dest) => {
     if (!src.isDirectory()) return dirs
 
     const assetPath = `${src.name}/assets`
+    /**
+     * @type {PkgConfig}
+     */
     const pkg = {
       type: '',
       path: `${dir}/${src.name}`,
@@ -191,9 +232,24 @@ const scandir = exports.scandir = (dir, dest) => {
   }, [])
 }
 
+/**
+ * @param {String} src
+ * @param {String} dest
+ * @param {Object.<String, CallableTask>} tasks
+ * @returns {Object.<String, Array|String>}
+ */
 const configure = exports.configure = (src, dest, tasks) => {
+  /**
+   * @type {Array.<String>}
+   */
   const buildTasks = []
+  /**
+   * @type {Array.<String>}
+   */
   const zipTasks = []
+  /**
+   * @type {Object.<String, Array|String>}
+   */
   const toWatch = {}
   const { argv } = yargs.option('skip', {
     describe: 'Skip certain task',
@@ -201,7 +257,12 @@ const configure = exports.configure = (src, dest, tasks) => {
   })
 
   for (const [name, asset] of scandir(src, dest)) {
+    /**
+     * @type {Array.<String>}
+     */
     const assetTasks = []
+
+    asset.path
 
     for (const key of Object.keys(asset)) {
       if (['type', 'path'].includes(key)) {

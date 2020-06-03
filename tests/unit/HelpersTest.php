@@ -31,6 +31,10 @@ class HelpersTest extends TestCase {
      * @dataProvider html_elements_data
      */
     public function test_create_html_element($expected, $tag, $attr = [], $ends = false, $returns = true) {
+        mock::userFunction('wp_parse_args', [
+            'return_arg' => 0
+        ]);
+
         if ( $returns ) {
             $actual = make_html_tag($tag, $attr, $ends, $returns);
         } else {
@@ -69,11 +73,16 @@ class HelpersTest extends TestCase {
             ],
             [
                 ['a', 'b', 'c', 'd'],
+                ['a', 'b', 'c', 'd'],
+            ],
+            [
+                ['a', 'b', 'c', 'd', 'e'],
                 [
                     'a',
-                    'b',
-                    'c',
-                    'd',
+                    [
+                        'a b',
+                        ['c d', 'e'],
+                    ],
                 ],
             ],
         ];
@@ -143,6 +152,70 @@ class HelpersTest extends TestCase {
                 'div',
                 ['class' => 'hentry'],
                 'Some Text'
+            ],
+            [
+                '<nav class="foo bar">'.PHP_EOL.
+                    '<ul class="menu">'.PHP_EOL.
+                        '<li class="menu-item">'.PHP_EOL.
+                            '<a class="menu-link" href="#">'.PHP_EOL.
+                            '<span>Item 1</span>'.PHP_EOL.
+                            '</a> <!-- .menu-link -->'.PHP_EOL.
+                        '</li> <!-- .menu-item -->'.PHP_EOL.
+                        '<li class="menu-item">'.PHP_EOL.
+                            '<a class="menu-link" href="#"><span>Item 2</span></a> <!-- .menu-link -->'.PHP_EOL.
+                        '</li> <!-- .menu-item -->'.PHP_EOL.
+                        '<li class="menu-item">'.PHP_EOL.
+                            '<a class="menu-link" href="#">'.PHP_EOL.
+                            '<span>Item 3</span>'.PHP_EOL.
+                            '</a> <!-- .menu-link -->'.PHP_EOL.
+                        '</li> <!-- .menu-item -->'.PHP_EOL.
+                    '</ul> <!-- .menu -->'.PHP_EOL.
+                '</nav> <!-- .foo -->' .PHP_EOL,
+                'nav',
+                ['class' => 'foo bar'],
+                [
+                    'ul' => [
+                        'attr' => ['class' => 'menu'],
+                        'ends' => [
+                            [
+                                'tag' => 'li',
+                                'attr' => ['class' => 'menu-item'],
+                                'ends' => [
+                                    'a' => [
+                                        'attr' => ['class' => 'menu-link', 'href' => '#'],
+                                        'ends' => [
+                                            'span' => 'Item 1'
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'tag' => 'li',
+                                'attr' => ['class' => 'menu-item'],
+                                'ends' => [
+                                    'a' => [
+                                        'attr' => ['class' => 'menu-link', 'href' => '#'],
+                                        'ends' => '<span>Item 2</span>'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'tag' => 'li',
+                                'attr' => ['class' => 'menu-item'],
+                                'ends' => [
+                                    'a' => [
+                                        'attr' => ['class' => 'menu-link', 'href' => '#'],
+                                        'ends' => [
+                                            'span' => [
+                                                'ends' => 'Item 3'
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                        ]
+                    ]
+                ]
             ],
         ];
     }

@@ -271,6 +271,6 @@ class Asset extends Feature {
 	 * @codeCoverageIgnore
 	 */
 	public static function is_debug() : bool {
-		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+		return Theme::enabled( 'SCRIPT_DEBUG' );
 	}
 }

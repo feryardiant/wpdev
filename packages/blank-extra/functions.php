@@ -33,42 +33,12 @@ add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain( 'blank-extra', false, BLANK_EXTRA_DIR . '/languages' );
 } );
 
-$blank_plugin_should_load = true;
+add_filter( 'blank_init', function ( $features ) {
+	$features[] = Blank_Extra\Options::class;
 
-if ( ! version_compare( PHP_VERSION, '7.0', '>=' ) ) {
-	$blank_plugin_should_load = false;
+	if ( class_exists( Jetpack::class ) ) {
+		$features[] = Blank_Extra\Integrations\JetPack::class;
+	}
 
-	add_action( 'admin_notices', function () {
-		$message = sprintf(
-			/* translators: %s: PHP version */
-			esc_html__( 'Blank requires PHP version %s+, plugin is currently NOT RUNNING.', 'blank-extra' ),
-			'7.0'
-		);
-
-		echo wp_kses_post(
-			sprintf( '<div class="error">%s</div>', wpautop( $message ) )
-		);
-	} );
-}
-
-if ( ! version_compare( get_bloginfo( 'version' ), '5.0', '>=' ) ) {
-	$blank_plugin_should_load = false;
-
-	add_action( 'admin_notices', function () {
-		$message = sprintf(
-			/* translators: %s: WordPress version */
-			esc_html__( 'Blank requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'blank-extra' ),
-			'5.0'
-		);
-
-		echo wp_kses_post(
-			sprintf( '<div class="error">%s</div>', wpautop( $message ) )
-		);
-	} );
-}
-
-if ( ! $blank_plugin_should_load ) {
-	return;
-}
-
-require_once BLANK_EXTRA_DIR . '/autoload.php';
+	return $features;
+} );

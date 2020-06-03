@@ -64,9 +64,9 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 *
 	 * @internal
 	 * @since 0.1.1
-	 * @param  string $output
-	 * @param  int    $depth
-	 * @param  array  $args
+	 * @param  string       $output
+	 * @param  int          $depth
+	 * @param  array|object $args
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol, $tab ) = $this->get_indentation( $args, $depth );
@@ -86,9 +86,9 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 *
 	 * @internal
 	 * @since 0.1.1
-	 * @param  string $output
-	 * @param  int    $depth
-	 * @param  array  $args
+	 * @param  string       $output
+	 * @param  int          $depth
+	 * @param  array|object $args
 	 */
 	public function end_lvl( &$output, $depth = 0, $args = [] ) {
 		list( $indent, $eol, $tab ) = $this->get_indentation( $args, $depth );

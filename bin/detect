@@ -2,7 +2,7 @@
 # bin/detect <build-dir>
 
 # convenience functions
-source "$(cd $(dirname $0); cd ..; pwd)"/bin/util.sh
+source "$(cd $(dirname $0); pwd)"/util.sh
 
 if [ ! -z WP_HOME ] && [ -f "$1/wp-cli.yml" ]; then
     echo 'WordPress'
@@ -12,7 +12,7 @@ fi
 error <<-EOF
     Application not supported by this buildpack!
 
-    The 'feryardiant/wpdev' buildpack is set on this application,
+    The 'feryardiant/wordpress' buildpack is set on this application,
     but was unable to detect a WordPress codebase.
 
     A WordPress on Heroku requires a 'wp-cli.yml' at the root of

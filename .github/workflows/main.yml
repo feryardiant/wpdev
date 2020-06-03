@@ -1,13 +1,12 @@
 name: Tests and Build
 
-on: [push]
-# on:
-#   pull_request:
-#     branches:
-#       - master
-#   push:
-#     branches:
-#       - master
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
 
 jobs:
   run:
@@ -26,9 +25,6 @@ jobs:
       matrix:
         php-versions: ['7.2']
         wp-versions: ['5.0', '5.1', '5.2']
-      # exclude:
-      #   - php-versions: 7.2
-      #     wp-versions: 5.0
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -52,9 +48,7 @@ jobs:
         WP_ENV: testing
         WP_HOME: http://localhost:8080
         DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
-      run: |
-        cp .env.example .env
-        .github/setup.sh
+      run: .github/setup.sh
     - name: Unit Test
       run: vendor/bin/phpunit -c tests/phpunit.xml --coverage-text
     - name: End-to-end Tests

@@ -28,7 +28,7 @@ abstract class Feature {
 	 * @since 0.1.0
 	 * @var Feature
 	 */
-	protected static $instance;
+	private static $instance;
 
 	/**
 	 * Initialize class.
@@ -72,7 +72,7 @@ abstract class Feature {
 	 * @return self
 	 * @throws \RuntimeException If not initialized.
 	 */
-	public static function get_instance() {
+	final public static function get_instance() {
 		if ( self::$instance ) {
 			return self::$instance;
 		}

@@ -39,7 +39,7 @@ if (file_exists($root_dir . '/.env')) {
  * Set up our global environment constant and load its config first
  * Default: production
  */
-define('WP_ENV', env('WP_ENV') ?: 'production');
+define('WP_ENV', env('WP_ENV') ?? 'production');
 $_is_production = WP_ENV === 'production';
 
 /**
@@ -57,10 +57,10 @@ if ($_heroku_appname = env('HEROKU_APP_NAME')) {
     $_http_name = $_heroku_appname.'.herokuapp.com';
 }
 
-$_site_url    = env('WP_HOME') ?: $_http_schema."://".$_http_name;
+$_site_url    = env('WP_HOME') ?? $_http_schema."://".$_http_name;
 
 Config::define('WP_HOME',     $_site_url);
-Config::define('WP_SITEURL',  env('WP_SITEURL') ?: $_site_url);
+Config::define('WP_SITEURL',  env('WP_SITEURL') ?? $_site_url);
 
 unset($_http_schema, $_heroku_appname, $_site_url);
 
@@ -82,10 +82,10 @@ unset($_default_theme);
 Config::define('DB_NAME',      env('DB_NAME'));
 Config::define('DB_USER',      env('DB_USER'));
 Config::define('DB_PASSWORD',  env('DB_PASSWORD'));
-Config::define('DB_HOST',      env('DB_HOST') ?: 'localhost');
+Config::define('DB_HOST',      env('DB_HOST') ?? 'localhost');
 Config::define('DB_CHARSET',   'utf8mb4');
 Config::define('DB_COLLATE',   '');
-$table_prefix = env('DB_PREFIX') ?: 'wp_';
+$table_prefix = env('DB_PREFIX') ?? 'wp_';
 
 /**
  * ClearDB config on Heroku
@@ -120,7 +120,7 @@ Config::define('NONCE_SALT',        env('NONCE_SALT'));
 /**
  * Custom Settings
  */
-Config::define('DISABLE_WP_CRON',     env('DISABLE_WP_CRON') ?: false);
+Config::define('DISABLE_WP_CRON',     env('DISABLE_WP_CRON') ?? false);
 // Disable the plugin and theme file editor in the admin
 Config::define('DISALLOW_FILE_EDIT',  env('DISALLOW_FILE_EDIT'));
 // Disable plugin and theme updates and installation from the admin
@@ -129,33 +129,33 @@ Config::define('DISALLOW_FILE_MODS',  env('DISALLOW_FILE_MODS'));
 /**
  * Debugging Settings
  */
-Config::define('WP_DEBUG',         env('WP_DEBUG') ?: false);
-Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?: false);
-Config::define('WP_DEBUG_LOG',     env('WP_DEBUG_LOG') ?: false);
-Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?: false);
+Config::define('WP_DEBUG',         env('WP_DEBUG') ?? false);
+Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?? false);
+Config::define('WP_DEBUG_LOG',     env('WP_DEBUG_LOG') ?? false);
+Config::define('SCRIPT_DEBUG',     env('SCRIPT_DEBUG') ?? false);
 
 /**
  * Declare current environment is a local one.
  */
-Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?: false);
+Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?? false);
 
 /**
  * Enable JetPack Development Mode
  * @see https://jetpack.com/support/development-mode/
  */
-Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: true);
+Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?? true);
 
 /**
  * Multisite Settings
  */
 // Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));
-$multisite = env('MULTISITE') ?: false;
+$multisite = env('MULTISITE') ?? false;
 
 if ($multisite) {
-    $base = env('PATH_CURRENT_SITE') ?: '/';
+    $base = env('PATH_CURRENT_SITE') ?? '/';
     Config::define('MULTISITE',             $multisite);
-    Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?: false);
-    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?: $_http_name);
+    Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?? false);
+    Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?? $_http_name);
     Config::define('PATH_CURRENT_SITE',     $base);
     Config::define('SITE_ID_CURRENT_SITE',  1);
     Config::define('BLOG_ID_CURRENT_SITE',  1);
@@ -170,7 +170,7 @@ if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
  * S3 Uploads settings
  * @link https://github.com/humanmade/S3-Uploads
  */
-$_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?: $_is_production;
+$_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?? $_is_production;
 
 if ($_s3_auto_upload) {
     Config::define('S3_UPLOADS_BUCKET',     env('S3_UPLOADS_BUCKET'));
@@ -196,14 +196,14 @@ Config::define('SENDGRID_API_KEY', env('SENDGRID_API_KEY'));
 * @link https://wordpress.org/plugins/redis-cache/
 */
 $_redis_url    = env('REDIS_URL');
-$_enable_cache = env('WP_CACHE') ?: false;
+$_enable_cache = env('WP_CACHE') ?? false;
 
 if (!empty($_redis_url) && ($_enable_cache || $_is_production)) {
     $_redis = parse_url($_redis_url);
 
     Config::define('WP_CACHE',          $_enable_cache);
     Config::define('WP_REDIS_DISABLED', false);
-    Config::define('WP_REDIS_CLIENT',   'predis');
+    Config::define('WP_REDIS_CLIENT',   'pecl');
     Config::define('WP_REDIS_SCHEME',   $_redis['scheme']);
     Config::define('WP_REDIS_HOST',     $_redis['host']);
     Config::define('WP_REDIS_PORT',     $_redis['port']);

@@ -9,34 +9,17 @@ set -eu
 BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
-BIN_DIR=$(cd $(dirname $0); pwd)
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
 # convenience functions
-source "$BIN_DIR"/util.sh
+source "$(cd $(dirname $0); pwd)"/util.sh
 
-mkdir -p "$BUILD_DIR/.heroku/wp-cli/bin"
-
-# if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
-# (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
-[[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
-
-create_default_env "$BUILD_DIR"
+create_default_env "$BUILD_DIR" "$CACHE_DIR"
 export_env_dir "$ENV_DIR"
 
 status "Installing WP-CLI..."
 
-wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
-
-curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
-error <<-EOF
-    Failed to download a WP-CLI executable for bootstrapping!
-
-    This is most likely a temporary internal error. If the problem
-    persists, make sure that you are not running a custom or forked
-    version of the Heroku Ruby buildpack which may need updating.
-EOF
-}
+download_wpcli $BUILD_DIR/.heroku/wp-cli/bin/wp
 
 chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
 
@@ -81,5 +64,8 @@ status "Installing WordPress"
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
 wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+
+# Flush cache, just-in-case
+wp cache flush
 
 status "Setup completed"
