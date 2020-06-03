@@ -28,23 +28,23 @@
       "@php -r \"copy('wp-cli.yml', 'wp-cli.local.yml');\""
     ],
     "post-create-project-cmd": [
-      "vendor/bin/wp dotenv salts generate"
+      "wp dotenv salts generate"
     ],
     "lint": [
-      "vendor/bin/phpcs --standard=packages/phpcs.xml packages"
+      "phpcs --standard=packages/phpcs.xml packages"
     ],
     "test": [
-      "vendor/bin/phpunit -c tests/phpunit.xml --coverage-text"
+      "phpunit -c tests/phpunit.xml --coverage-text"
     ],
     "wp:fresh": [
       "wp db reset --yes",
       "@wp:instal"
     ],
     "wp:install": [
-      "vendor/bin/wp core install --title=\"WordPress Dev\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
+      "wp core install --title=\"WordPress Dev\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
     "wp:dummy": [
-      "vendor/bin/wp import resources/dummy-content.xml --authors=create"
+      "wp import resources/dummy-content.xml --authors=create"
     ]
   },
   "repositories": {
