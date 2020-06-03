@@ -226,9 +226,13 @@ const bSync = (url) => new Promise((resolve, reject) => {
       route,
       dir: `public/wp${route}`
     }))
-  }, () => {
-    url.port = 3000
-    resolve(url)
+  }, (err) => {
+    if (err) return reject(err)
+
+    url = new URL(url.toString())
+    url.host = 'localhost:3000'
+
+    return resolve(url)
   })
 })
 
