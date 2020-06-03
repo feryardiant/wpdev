@@ -638,11 +638,11 @@ class Template extends Feature {
 			'after'  => '</div> <!-- .site-info --!>',
 		] );
 
-		echo wp_kses( $wrapper['before'], ['div'] );
+		echo wp_kses( $wrapper['before'], [ 'div' => [ 'class' => true ] ] );
 
 		dynamic_sidebar( 'footer-widgets' );
 
-		echo wp_kses( $wrapper['after'], ['div'] );
+		echo wp_kses( $wrapper['after'], [ 'div' ] );
 	}
 
 	/**

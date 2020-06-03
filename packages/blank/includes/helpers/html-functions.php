@@ -98,15 +98,17 @@ function normalize_class_attr( $class, ...$classes ) : array {
 function get_html_tags( string $html ) : array {
 	preg_match_all( '~<(([^/]?).*?/?)>~', $html, $matches );
 
-	return array_reduce($matches[0], function ($tags, $match) {
-		list($tag) = explode(' ', preg_replace('/[^\p{L}\p{N} ]+/', '', $match));
+	return array_reduce( $matches[0], function ( $tags, $match ) {
+		$match = preg_replace( '/[^\p{L}\p{N} ]+/', '', $match );
 
-		if (!in_array($tag, $tags)) {
+		list( $tag ) = explode( ' ', $match );
+
+		if ( ! in_array( $tag, $tags, true ) ) {
 			$tags[] = $tag;
 		}
 
 		return $tags;
-	}, []);
+	}, [] );
 }
 
 /**
@@ -163,7 +165,7 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 			}
 
 			if ( is_string( $param ) ) {
-				$param = ['ends' => $param];
+				$param = [ 'ends' => $param ];
 			}
 
 			$inner[] = make_html_tag( $sub_tag, $param['attr'] ?? [], $param['ends'] ?? false, true );
