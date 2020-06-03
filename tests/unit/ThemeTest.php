@@ -10,6 +10,8 @@ use RuntimeException;
 use WP_Mock as mock;
 
 class ThemeTest extends TestCase {
+    protected $runTestInSeparateProcess = true;
+
     public function test_constructor() {
         /** @var Theme $theme */
         $theme = $this->new_instance_without_constructor(Theme::class);
@@ -28,11 +30,11 @@ class ThemeTest extends TestCase {
         $this->assertEquals('blank_theme_info', $theme->transient_name('theme_info'));
     }
 
-    // public function test_get_instance_feature_class() {
-    //     $this->expectException(RuntimeException::class);
+    public function test_get_instance_feature_class() {
+        $this->expectException(RuntimeException::class);
 
-    //     DummyFeature::get_instance();
-    // }
+        DummyFeature::get_instance();
+    }
 
     public function test_setter_and_getter() {
         /** @var Theme $theme */
@@ -183,8 +185,6 @@ class ThemeTest extends TestCase {
     }
 
     public function test_load_options() {
-        $this->markTestSkipped('Find better way to test this shit');
-
         /** @var Theme $theme */
         $theme = $this->new_instance_without_constructor(Theme::class, function (ReflectionClass $theme) {
             $prop = $theme->getProperty('cached');
@@ -202,7 +202,7 @@ class ThemeTest extends TestCase {
 
         $theme->load_options();
 
-        $this->assertCount(4, $theme->options());
+        $this->assertCount(0, $theme->options());
     }
 }
 
