@@ -115,7 +115,6 @@
       "public/app/mu-plugins/{$name}/": [
         "humanmade/s3-uploads",
         "tillkruss/redis-cache",
-        "wpackagist-plugin/contact-form-7",
         "wpackagist-plugin/query-monitor",
         "wpackagist-plugin/theme-check",
         "wpackagist-plugin/wordpress-importer",
