@@ -96,11 +96,17 @@ function normalize_class_attr( $class, ...$classes ) : array {
  * @return array
  */
 function get_html_tags( string $html ) : array {
-	preg_match_all( '~</[^>]*?>~', $html, $arr );
+	preg_match_all( '~<(([^/]?).*?/?)>~', $html, $matches );
 
-	return array_map( function ( $tag ) {
-		return preg_replace( '/[^\p{L}\p{N} ]+/', '', $tag );
-	}, array_merge( ...$arr ) );
+	return array_reduce($matches[0], function ($tags, $match) {
+		list($tag) = explode(' ', preg_replace('/[^\p{L}\p{N} ]+/', '', $match));
+
+		if (!in_array($tag, $tags)) {
+			$tags[] = $tag;
+		}
+
+		return $tags;
+	}, []);
 }
 
 /**
@@ -144,7 +150,7 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 		foreach ( $ends as $sub_tag => $param ) {
 			if ( is_numeric( $sub_tag ) ) {
 				if ( is_string( $param ) ) {
-					$inner[] = $param;
+					$inner[] = $param . PHP_EOL;
 					continue;
 				}
 
@@ -154,6 +160,10 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
 				} else {
 					continue;
 				}
+			}
+
+			if ( is_string( $param ) ) {
+				$param = ['ends' => $param];
 			}
 
 			$inner[] = make_html_tag( $sub_tag, $param['attr'] ?? [], $param['ends'] ?? false, true );

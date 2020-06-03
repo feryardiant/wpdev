@@ -154,6 +154,21 @@ class HelpersTest extends TestCase {
                 'Some Text'
             ],
             [
+                '<form class="foo">'.PHP_EOL.
+                    '<button class="btn">A button</button> <!-- .btn -->'.PHP_EOL.
+                    '<input type="text" value="foo bar"/>'.PHP_EOL.
+                '</form> <!-- .foo -->' . PHP_EOL,
+                'form',
+                ['class' => 'foo'],
+                [
+                    'button' => [
+                        'attr' => ['class' => 'btn'],
+                        'ends' => 'A button'
+                    ],
+                    '<input type="text" value="foo bar"/>'
+                ]
+            ],
+            [
                 '<nav class="foo bar">'.PHP_EOL.
                     '<ul class="menu">'.PHP_EOL.
                         '<li class="menu-item">'.PHP_EOL.
