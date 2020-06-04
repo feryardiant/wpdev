@@ -14,8 +14,8 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$(cd $(dirname $0); pwd)"/util.sh
 
-create_default_env "$BUILD_DIR" "$CACHE_DIR"
 export_env_dir "$ENV_DIR"
+create_default_env "$BUILD_DIR" "$CACHE_DIR"
 
 status "Installing WP-CLI..."
 
