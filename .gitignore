@@ -6,6 +6,7 @@ Desktop.ini
 *.cache
 *.old
 *.log
+*.tmp
 *.zip
 ._
 *~
