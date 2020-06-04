@@ -58,9 +58,11 @@ wp core install --skip-email --title="WordPress Local" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 # Feel free to setup your own wp_options
-# wp option update permalink_structure '/%postname%/'
+wp option update permalink_structure '/%postname%/'
 # wp option update link_manager_enabled '1'
 
 # _inf 'Import dummy content'
 wp import resources/dummy-content.xml --authors=create
 
+# wp menu location assign primary primary
+# wp menu location assign footer footer
