@@ -41,7 +41,7 @@
       "@wp:instal"
     ],
     "wp:install": [
-      "wp core install --title=\"WordPress Dev\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
+      "wp core install --title=\"WordPress Site\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
     "wp:dummy": [
       "wp import resources/dummy-content.xml --authors=create"
