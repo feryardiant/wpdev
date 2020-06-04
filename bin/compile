@@ -55,17 +55,27 @@ cd $BUILD_DIR
 # but with different address, let say: `url: http://localhost`
 cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
 
-if [ ! -z $HEROKU_APP_NAME ]; then
-    sed -i -E "s~url: .*~url: http://${HEROKU_APP_NAME}.herokuapp.com~" $BUILD_DIR/wp-cli.local.yml
+if [ -z $WP_HOME ]; then
+    export WP_HOME="http://${HEROKU_APP_NAME}.herokuapp.com"
 fi
 
-status "Installing WordPress"
+sed -i -E "s~url: .*~url: ${WP_HOME}~" $BUILD_DIR/wp-cli.local.yml
 
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
-wp core install --skip-email --title="WordPress Site" --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
-
-# Flush cache, just-in-case
-wp cache flush
+if wp core is-installed; then
+    status 'WordPress is installed'
+    wp cache flush
+else
+    if [ ! -z $MULTISITE ] && [ "${MULTISITE}" -eq "true" ]; then
+        status 'Installling WordPress Multisite'
+        wp core multisite-install --skip-email --title="WordPress Local" \
+            --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+    else
+        status 'Installling WordPress'
+        wp core install --skip-email --title="WordPress Local" \
+            --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+    fi
+fi
 
 status "Setup completed"
