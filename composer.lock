@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8c93ca080b3f49b7e264d71e72befe0",
+    "content-hash": "4df58798f66192b4d72e12f31d7d3793",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.140.1",
+            "version": "3.140.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "52645498aea4dd2d090884322121270daf3e0f06"
+                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/52645498aea4dd2d090884322121270daf3e0f06",
-                "reference": "52645498aea4dd2d090884322121270daf3e0f06",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7e37960c1103ee211932be51b2282b41c948a5f0",
+                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-06-04T18:19:47+00:00"
+            "time": "2020-06-05T18:12:25+00:00"
         },
         {
             "name": "composer/installers",
@@ -699,6 +699,51 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
+            "name": "rhubarbgroup/redis-cache",
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rhubarbgroup/redis-cache.git",
+                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
+                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im/"
+                }
+            ],
+            "description": "A persistent object cache backend for WordPress powered by Redis. Supports Predis, PhpRedis, HHVM, replication and clustering.",
+            "homepage": "https://github.com/tillkruss/redis-cache",
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/tillkruss",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-05-31T16:33:33+00:00"
+        },
+        {
             "name": "roots/bedrock-autoloader",
             "version": "1.0.3",
             "source": {
@@ -1250,51 +1295,6 @@
                 }
             ],
             "time": "2020-05-12T16:47:27+00:00"
-        },
-        {
-            "name": "tillkruss/redis-cache",
-            "version": "1.6.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tillkruss/redis-cache.git",
-                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tillkruss/redis-cache/zipball/c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
-                "reference": "c76dcf80d3102375eb5c454a4bb7710c0aab9bf4",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Till Krüss",
-                    "homepage": "https://till.im/"
-                }
-            ],
-            "description": "A persistent object cache backend for WordPress powered by Redis. Supports Predis, PhpRedis, HHVM, replication and clustering.",
-            "homepage": "https://github.com/tillkruss/redis-cache",
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/tillkruss",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tillkruss",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-05-31T16:33:33+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
