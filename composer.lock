@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8c93ca080b3f49b7e264d71e72befe0",
+    "content-hash": "cafe3719ae24491647a4137d6270a113",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.139.1",
+            "version": "3.140.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01"
+                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/31fc7fc73d550e237b34f7c6802250fd4ade9a01",
-                "reference": "31fc7fc73d550e237b34f7c6802250fd4ade9a01",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7e37960c1103ee211932be51b2282b41c948a5f0",
+                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-06-02T18:12:38+00:00"
+            "time": "2020-06-05T18:12:25+00:00"
         },
         {
             "name": "composer/installers",
@@ -1294,6 +1294,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": "rhubarbgroup/redis-cache",
             "time": "2020-05-31T16:33:33+00:00"
         },
         {
@@ -1426,7 +1427,7 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank",
@@ -1446,7 +1447,7 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-child",
@@ -1467,7 +1468,7 @@
         },
         {
             "name": "wpdev/blank-extra",
-            "version": "dev-develop",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-extra",
@@ -2883,12 +2884,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "55922f51129488c246a776ff944463605d447da0"
+                "reference": "de6fda3af9b36c77fdeb62b968157032f7111b09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/55922f51129488c246a776ff944463605d447da0",
-                "reference": "55922f51129488c246a776ff944463605d447da0",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/de6fda3af9b36c77fdeb62b968157032f7111b09",
+                "reference": "de6fda3af9b36c77fdeb62b968157032f7111b09",
                 "shasum": ""
             },
             "conflict": {
@@ -2942,8 +2943,9 @@
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
                 "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
+                "ezsystems/ezplatform-kernel": ">=1,<1.0.2.1",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
-                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.1|>=6,<6.7.9.1|>=6.8,<6.13.6.2|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.6.2",
+                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.2|>=6,<6.7.9.1|>=6.8,<6.13.6.3|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.7.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
@@ -2981,6 +2983,7 @@
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
+                "october/october": ">=1.0.319,<1.0.466",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
@@ -3007,6 +3010,7 @@
                 "propel/propel": ">=2-alpha.1,<=2-alpha.7",
                 "propel/propel1": ">=1,<=1.7.1",
                 "pusher/pusher-php-server": "<2.2.1",
+                "rainlab/debugbar-plugin": "<3.1",
                 "robrichards/xmlseclibs": "<3.0.4",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
                 "scheb/two-factor-bundle": ">=0,<3.26|>=4,<4.11",
@@ -3155,7 +3159,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-28T00:01:39+00:00"
+            "time": "2020-06-04T00:00:55+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
