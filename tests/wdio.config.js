@@ -3,6 +3,7 @@ require('dotenv').config()
 const url = new URL(process.env.WP_HOME)
 
 exports.config = {
+  baseUrl: url.toString(),
   runner: 'local',
   logLevel: 'warn',
   specs: [
