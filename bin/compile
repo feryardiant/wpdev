@@ -21,8 +21,6 @@ status "Installing WP-CLI..."
 
 download_wpcli $BUILD_DIR/.heroku/wp-cli/bin/wp
 
-chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
-
 mkdir -p $BUILD_DIR/.profile.d
 
 echo "export PATH=\"\$PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
