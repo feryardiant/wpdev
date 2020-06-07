@@ -68,8 +68,8 @@ export_env_dir() {
 create_default_env() {
     local build_dir="$1"
 
-    if [ ! -d "$build_dir/wp-cli" ]; then
-        mkdir -p "$build_dir/wp-cli/{bin,cache,packages}"
+    if [ ! -d "$build_dir/.heroku/wp-cli" ]; then
+        mkdir -p "$build_dir/.heroku/wp-cli/{bin,cache,packages}"
     fi
 
     # if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
