@@ -21,7 +21,17 @@ if [ -f "${BUILD_DIR}/.heroku/wp-cli/bin/wp" ]; then
     status 'WP-CLI is already installed'
 else
     status "Installing WP-CLI..."
-    download_wpcli $BUILD_DIR/.heroku/wp-cli/bin/wp
+    download_wpcli $BUILD_DIR/.heroku/wp-cli/bin/wp || {
+error <<-EOF
+Failed to download a WP-CLI executable for bootstrapping!
+
+    This is most likely a temporary internal error. If the problem
+    persists, make sure that you are not running a custom or forked
+    version of the Heroku Ruby buildpack which may need updating.
+EOF
+}
+
+    chmod +x $output_dir
 fi
 
 mkdir -p $BUILD_DIR/.profile.d

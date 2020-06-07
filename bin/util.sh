@@ -89,15 +89,5 @@ download_wpcli() {
     local output_dir="$1"
     local wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-    curl_retry --fail --silent --location -o "$output_dir" "$wpcli_url" || {
-error <<-EOF
-Failed to download a WP-CLI executable for bootstrapping!
-
-    This is most likely a temporary internal error. If the problem
-    persists, make sure that you are not running a custom or forked
-    version of the Heroku Ruby buildpack which may need updating.
-EOF
-
-    chmod +x $output_dir
-}
+    return curl_retry --fail --silent --location -o "$output_dir" "$wpcli_url"
 }
