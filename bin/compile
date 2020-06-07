@@ -18,7 +18,7 @@ source "$(cd $(dirname $0); pwd)"/util.sh
 # (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
 [[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
 
-create_default_env "$BUILD_DIR" "$CACHE_DIR"
+create_default_env "$BUILD_DIR"
 export_env_dir "$ENV_DIR"
 
 status "Installing WP-CLI..."
