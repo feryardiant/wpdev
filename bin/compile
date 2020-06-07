@@ -47,11 +47,11 @@ wp() {
 
 export -f wp
 
-wpcli_yml=$BUILD_DIR/wp-cli.yml
+wpcli_yml="$BUILD_DIR/wp-cli.yml"
 
 # Use 'wp-cli.heroku.yml' file if exists, otherwise fallback to 'wp-cli.yml'
 if [ -f "$BUILD_DIR/wp-cli.heroku.yml" ]; then
-    wpcli_yml=$BUILD_DIR/wp-cli.heroku.yml
+    wpcli_yml="$BUILD_DIR/wp-cli.heroku.yml"
 fi
 
 if [ ! -f "$wpcli_yml" ]; then
@@ -69,11 +69,13 @@ cd $BUILD_DIR
 # but with different address, let say: `url: http://localhost`
 cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
 
-if [ -z "$WP_HOME" ]; then
-    export WP_HOME="http://${HEROKU_APP_NAME}.herokuapp.com"
-fi
+export WP_HOME=${WP_HOME:-http://${HEROKU_APP_NAME}.herokuapp.com}
 
-sed -i -E "s~url: .*~url: ${WP_HOME}~" $BUILD_DIR/wp-cli.local.yml
+# if [ -z "$WP_HOME" ]; then
+#     export WP_HOME="http://${HEROKU_APP_NAME}.herokuapp.com"
+# fi
+
+# sed -i -E "s~url: .*~url: ${WP_HOME}~" $BUILD_DIR/wp-cli.local.yml
 
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
@@ -81,13 +83,13 @@ if wp core is-installed; then
     status 'WordPress is installed'
     wp cache flush
 else
-    if [ ! -z $MULTISITE ] && [ "${MULTISITE}" -eq "true" ]; then
+    if [ ! -z "$MULTISITE" ] && [ "$MULTISITE" -eq "true" ]; then
         status 'Installling WordPress Multisite'
-        wp core multisite-install --skip-email --title="WordPress Local" \
+        wp core multisite-install --url="$WP_HOME" --skip-email --title="WordPress Local" \
             --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
     else
         status 'Installling WordPress'
-        wp core install --skip-email --title="WordPress Local" \
+        wp core install --url="$WP_HOME" --skip-email --title="WordPress Local" \
             --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
     fi
 fi
