@@ -21,7 +21,7 @@ status "Installing WP-CLI..."
 
 wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
+curl_retry --fail --silent --location -o "$BUILD_DIR/.heroku/wp-cli/bin/wp" "$wpcli_url" || {
 error <<-EOF
     Failed to download a WP-CLI executable for bootstrapping!
 
@@ -31,9 +31,9 @@ error <<-EOF
 EOF
 }
 
-chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
+chmod +x "$BUILD_DIR/.heroku/wp-cli/bin/wp"
 
-mkdir -p $BUILD_DIR/.profile.d
+mkdir -p "$BUILD_DIR/.profile.d"
 
 echo "export PATH=\"\$PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
 
@@ -63,7 +63,7 @@ cd $BUILD_DIR
 # We can't validate wp-cli.yml content right now
 # So, I assumed that the 'url' config is exists
 # but with different address, let say: `url: http://localhost`
-cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
+cp "$wpcli_yml" "$BUILD_DIR/wp-cli.local.yml"
 
 export WP_HOME=${WP_HOME:-http://${HEROKU_APP_NAME}.herokuapp.com}
 
