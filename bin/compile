@@ -21,8 +21,11 @@ if [ -f "${BUILD_DIR}/.heroku/wp-cli/bin/wp" ]; then
     status 'WP-CLI is already installed'
 else
     status "Installing WP-CLI..."
-    download_wpcli $BUILD_DIR/.heroku/wp-cli/bin/wp || {
-error <<-EOF
+
+    local wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
+
+    curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
+    error <<-EOF
 Failed to download a WP-CLI executable for bootstrapping!
 
     This is most likely a temporary internal error. If the problem
@@ -31,7 +34,7 @@ Failed to download a WP-CLI executable for bootstrapping!
 EOF
 }
 
-    chmod +x $output_dir
+    chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
 fi
 
 mkdir -p $BUILD_DIR/.profile.d

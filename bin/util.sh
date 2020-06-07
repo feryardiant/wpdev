@@ -84,10 +84,3 @@ create_default_env() {
     export WP_ENV=${WP_ENV:-production}
     # export WP_HOME=${WP_HOME:-http://${HEROKU_APP_NAME}.herokuapp.com}
 }
-
-download_wpcli() {
-    local output_dir="$1"
-    local wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
-
-    return curl_retry --fail --silent --location -o "$output_dir" "$wpcli_url"
-}
