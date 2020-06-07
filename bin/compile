@@ -22,7 +22,7 @@ if [ -f "${BUILD_DIR}/.heroku/wp-cli/bin/wp" ]; then
 else
     status "Installing WP-CLI..."
 
-    local wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
+    wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
     curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
     error <<-EOF
