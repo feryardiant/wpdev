@@ -14,6 +14,8 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$(cd $(dirname $0); pwd)"/util.sh
 
+mkdir -p "$BUILD_DIR"/.heroku/wp-cli/{bin,cache,packages}
+
 create_default_env "$BUILD_DIR"
 export_env_dir "$ENV_DIR"
 
