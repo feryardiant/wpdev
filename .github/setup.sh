@@ -43,7 +43,7 @@ wp() {
 
 cp wp-cli.yml wp-cli.local.yml
 
-sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
+# sed -i -E "s~url: .*~url: ${WP_HOME}~" wp-cli.local.yml
 
 _inf 'Setting up .env file...'
 cp .env.example .env
@@ -54,7 +54,7 @@ wp dotenv set WP_HOME $WP_HOME --color
 wp dotenv set DB_HOST $DB_HOST --color
 
 _inf 'Installling WordPress...'
-wp core install --skip-email --title="WordPress Local" \
+wp core install --skip-email --url="${WP_HOME}" --title="WordPress Local" \
     --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
 
 # Feel free to setup your own wp_options
