@@ -14,19 +14,20 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 # convenience functions
 source "$(cd $(dirname $0); pwd)"/util.sh
 
+# if the build dir is not "/app", we symlink in the .heroku/wp-cli subdir
+# (and only that, to avoid problems with other buildpacks) so that PHP correctly finds its INI files etc
+[[ $BUILD_DIR == '/app' ]] || ln -s $BUILD_DIR/.heroku/wp-cli /app/.heroku/wp-cli
+
 create_default_env "$BUILD_DIR" "$CACHE_DIR"
 export_env_dir "$ENV_DIR"
 
-if [ -f "${BUILD_DIR}/.heroku/wp-cli/bin/wp" ]; then
-    status 'WP-CLI is already installed'
-else
-    status "Installing WP-CLI..."
+status "Installing WP-CLI..."
 
-    wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
+wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
 
-    curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
-    error <<-EOF
-Failed to download a WP-CLI executable for bootstrapping!
+curl_retry --fail --silent --location -o $BUILD_DIR/.heroku/wp-cli/bin/wp "$wpcli_url" || {
+error <<-EOF
+    Failed to download a WP-CLI executable for bootstrapping!
 
     This is most likely a temporary internal error. If the problem
     persists, make sure that you are not running a custom or forked
@@ -34,8 +35,7 @@ Failed to download a WP-CLI executable for bootstrapping!
 EOF
 }
 
-    chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
-fi
+chmod +x $BUILD_DIR/.heroku/wp-cli/bin/wp
 
 mkdir -p $BUILD_DIR/.profile.d
 
@@ -47,14 +47,14 @@ wp() {
 
 export -f wp
 
+wpcli_yml=$BUILD_DIR/wp-cli.yml
+
 # Use 'wp-cli.heroku.yml' file if exists, otherwise fallback to 'wp-cli.yml'
-if [ -f $BUILD_DIR/wp-cli.heroku.yml ]; then
+if [ -f "$BUILD_DIR/wp-cli.heroku.yml" ]; then
     wpcli_yml=$BUILD_DIR/wp-cli.heroku.yml
-else
-    wpcli_yml=$BUILD_DIR/wp-cli.yml
 fi
 
-if [ ! -f $wpcli_yml ]; then
+if [ ! -f "$wpcli_yml" ]; then
 error <<-EOF
 Failed to configure WP-CLI!
 
@@ -69,7 +69,7 @@ cd $BUILD_DIR
 # but with different address, let say: `url: http://localhost`
 cp $wpcli_yml $BUILD_DIR/wp-cli.local.yml
 
-if [ -z $WP_HOME ]; then
+if [ -z "$WP_HOME" ]; then
     export WP_HOME="http://${HEROKU_APP_NAME}.herokuapp.com"
 fi
 

@@ -82,5 +82,4 @@ create_default_env() {
     export WP_CLI_CACHE_DIR=${WP_CLI_CACHE_DIR:-$build_dir/.heroku/wp-cli/cache}
     export WP_CLI_PACKAGES_DIR=${WP_CLI_PACKAGES_DIR:-$build_dir/.heroku/wp-cli/packages}
     export WP_ENV=${WP_ENV:-production}
-    # export WP_HOME=${WP_HOME:-http://${HEROKU_APP_NAME}.herokuapp.com}
 }
