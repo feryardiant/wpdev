@@ -157,8 +157,8 @@ if ($multisite) {
     Config::define('SUBDOMAIN_INSTALL',     env('SUBDOMAIN_INSTALL') ?? false);
     Config::define('DOMAIN_CURRENT_SITE',   env('DOMAIN_CURRENT_SITE') ?? $_http_name);
     Config::define('PATH_CURRENT_SITE',     $base);
-    Config::define('SITE_ID_CURRENT_SITE',  1);
-    Config::define('BLOG_ID_CURRENT_SITE',  1);
+    Config::define('SITE_ID_CURRENT_SITE',  env('SITE_ID_CURRENT_SITE') ?? 1);
+    Config::define('BLOG_ID_CURRENT_SITE',  env('BLOG_ID_CURRENT_SITE') ?? 1);
 }
 
 if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
