@@ -72,13 +72,15 @@
   },
   "environments": {
     "review": {
-      "SCRIPT_DEBUG": "true",
-      "WP_CACHE": "false",
-      "WP_DEBUG": "true",
-      "WP_DEBUG_DISPLAY": "true",
-      "WP_DEBUG_LOG": "true",
-      "WP_ENV": "testing",
-      "WP_LOCAL_DEV": "true"
+      "env": {
+        "SCRIPT_DEBUG": "true",
+        "WP_CACHE": "false",
+        "WP_DEBUG": "true",
+        "WP_DEBUG_DISPLAY": "true",
+        "WP_DEBUG_LOG": "true",
+        "WP_ENV": "testing",
+        "WP_LOCAL_DEV": "true"
+      }
     }
   },
   "scripts": {
