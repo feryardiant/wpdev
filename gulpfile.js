@@ -247,6 +247,7 @@ exports.e2e = (done) => {
 
   return phpServer().then(bSync).then(url => {
     const wdio = new Launcher('tests/wdio.config.js', {
+      baseUrl: url.toString(),
       onComplete (code) {
         done()
         process.exit(code)
