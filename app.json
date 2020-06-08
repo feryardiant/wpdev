@@ -12,6 +12,15 @@
     }
   },
   "env": {
+    "HEROKU_APP_NAME": {
+      "description": "Only for automated deploys, please don't enter anything!",
+      "required": false
+    },
+    "MULTISITE": {
+      "description": "Whether you want to enable multisite install.",
+      "value": "false",
+      "required": false
+    },
     "WP_ENV": {
       "description": "WordPress environment you desire for your Heroku instance, e.g: production, staging, etc",
       "value": "production",
@@ -19,7 +28,7 @@
     },
     "WP_CACHE": {
       "description": "Whether you want to enable caching on your site.",
-      "value": "true",
+      "value": "false",
       "required": false
     },
     "WP_DEFAULT_THEME": {
