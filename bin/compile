@@ -67,7 +67,7 @@ cd $BUILD_DIR
 # but with different address, let say: `url: http://localhost`
 cp "$wpcli_yml" "$BUILD_DIR/wp-cli.local.yml"
 
-export WP_HOME=${WP_HOME:-http://${HEROKU_APP_NAME}.herokuapp.com}
+export WP_HOME=${WP_HOME:-https://${HEROKU_APP_NAME}.herokuapp.com}
 
 wp --info
 
