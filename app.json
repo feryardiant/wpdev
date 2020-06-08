@@ -19,7 +19,7 @@
     },
     "WP_CACHE": {
       "description": "Whether you want to enable caching on your site.",
-      "value": "false",
+      "value": "true",
       "required": false
     },
     "WP_DEFAULT_THEME": {
@@ -35,10 +35,6 @@
     "WP_DEBUG_DISPLAY": {
       "description": "Whether you want to display debuging on or off.",
       "value": "false",
-      "required": false
-    },
-    "HEROKU_APP_NAME": {
-      "description": "Only for automated deploys, please don't enter anything!",
       "required": false
     },
     "AUTH_KEY": {
@@ -74,6 +70,20 @@
       "generator": "secret"
     }
   },
+  "environments": {
+    "review": {
+      "SCRIPT_DEBUG": "true",
+      "WP_CACHE": "false",
+      "WP_DEBUG": "true",
+      "WP_DEBUG_DISPLAY": "true",
+      "WP_DEBUG_LOG": "true",
+      "WP_ENV": "testing",
+      "WP_LOCAL_DEV": "true"
+    }
+  },
+  "scripts": {
+    "postdeploy": "composer wp:post-deploy"
+  },
   "addons": [
     "cleardb:ignite",
     "heroku-redis:hobby-dev",
@@ -81,6 +91,7 @@
   ],
   "buildpacks": [
     { "url": "heroku/php" },
+    { "url": "heroku/nodejs" },
     { "url": "feryardiant/wordpress" }
   ]
 }
