@@ -43,7 +43,7 @@
       "wp core install --title=\"WordPress Site\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
     "wp:post-deploy": [
-      "wp option update permalink_structure '/%postname%/",
+      "wp option update permalink_structure '/%postname%/'",
       "wp option update link_manager_enabled '1'",
       "wp import resources/dummy-content.xml --authors=create"
     ]
