@@ -46,18 +46,15 @@ $_is_production = WP_ENV === 'production';
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
  * @see https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
-if (array_key_exists('HTTP_X_FORWARDED_PROTO', $_SERVER) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == 'https') {
-    $_SERVER['HTTPS'] = 'on';
-}
-
-$_http_schema = array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-$_http_name   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$_SERVER['HTTPS']       = $_SERVER['HTTPS'] ?? $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'off';
+$_http_schema           = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+$_SERVER['HTTP_HOST']   = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
 if ($_heroku_appname = env('HEROKU_APP_NAME')) {
-    $_http_name = $_heroku_appname.'.herokuapp.com';
+    $_SERVER['HTTP_HOST'] = $_heroku_appname.'.herokuapp.com';
 }
 
-$_site_url    = env('WP_HOME') ?? $_http_schema."://".$_http_name;
+$_site_url    = env('WP_HOME') ?? $_http_schema."://".$_SERVER['HTTP_HOST'];
 
 Config::define('WP_HOME',     $_site_url);
 Config::define('WP_SITEURL',  env('WP_SITEURL') ?? $_site_url);
