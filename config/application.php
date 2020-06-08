@@ -193,9 +193,9 @@ Config::define('SENDGRID_API_KEY', env('SENDGRID_API_KEY'));
 * @link https://wordpress.org/plugins/redis-cache/
 */
 $_redis_url    = env('REDIS_URL');
-$_enable_cache = env('WP_CACHE') ?? false;
+$_enable_cache = env('WP_CACHE') ?? $_is_production;
 
-if (!empty($_redis_url) && ($_enable_cache || $_is_production)) {
+if (!empty($_redis_url) && $_enable_cache) {
     $_redis = parse_url($_redis_url);
 
     Config::define('WP_CACHE',          $_enable_cache);
