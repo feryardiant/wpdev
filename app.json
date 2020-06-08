@@ -14,7 +14,7 @@
   "env": {
     "HEROKU_APP_NAME": {
       "description": "Only for automated deploys, please don't enter anything!",
-      "required": false
+      "required": true
     },
     "MULTISITE": {
       "description": "Whether you want to enable multisite install.",
