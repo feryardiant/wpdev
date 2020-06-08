@@ -42,10 +42,13 @@
     "wp:install": [
       "wp core install --title=\"WordPress Site\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
-    "wp:post-deploy": [
-      "wp option update permalink_structure \"/%postname%/\"",
-      "wp option update link_manager_enabled \"1\"",
+    "wp:import-dummy": [
       "wp import resources/dummy-content.xml --authors=create"
+    ],
+    "wp:post-deploy": [
+      "@php -r \"copy('public/app/mu-plugins/redis-cache/includes/object-cache.php', 'public/app/object-cache.php');\"",
+      "wp option update permalink_structure \"/%postname%/\" --no-color",
+      "wp option update link_manager_enabled \"1\" --no-color"
     ]
   },
   "repositories": {
