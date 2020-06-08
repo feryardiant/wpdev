@@ -79,6 +79,7 @@
     "php": ">=7.1",
     "ext-exif": "*",
     "ext-gd": "*",
+    "ext-imagick": "*",
     "ext-redis": "*",
     "composer/installers": "^1.8",
     "humanmade/s3-uploads": "^2.1",
@@ -111,7 +112,6 @@
   "suggest": {
     "ext-bcmath": "*",
     "ext-gettext": "*",
-    "ext-imagick": "*",
     "ext-mbstring": "*"
   },
   "extra": {

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4df58798f66192b4d72e12f31d7d3793",
+    "content-hash": "19694d8abe0b207abb5a0c19711307db",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.140.2",
+            "version": "3.140.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0"
+                "reference": "aebd17510b6220b6e5b239730b02eaf7b9b2b816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7e37960c1103ee211932be51b2282b41c948a5f0",
-                "reference": "7e37960c1103ee211932be51b2282b41c948a5f0",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/aebd17510b6220b6e5b239730b02eaf7b9b2b816",
+                "reference": "aebd17510b6220b6e5b239730b02eaf7b9b2b816",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-06-05T18:12:25+00:00"
+            "time": "2020-06-08T18:19:35+00:00"
         },
         {
             "name": "composer/installers",
@@ -4315,6 +4315,7 @@
         "php": ">=7.1",
         "ext-exif": "*",
         "ext-gd": "*",
+        "ext-imagick": "*",
         "ext-redis": "*"
     },
     "platform-dev": [],
