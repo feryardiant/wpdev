@@ -77,14 +77,13 @@ if wp core is-installed; then
     status 'WordPress is already installed'
     wp cache flush
 else
-    if [ ! -z $MULTISITE ] && [ $MULTISITE = "true" ]; then
+    status 'Installling WordPress'
+    wp core install --url="$WP_HOME" --skip-email --title="WordPress Local" \
+        --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+
+    if [ ! -z $MULTISITE ] && [ "$MULTISITE" = "true" ]; then
         status 'Installling WordPress Multisite'
-        wp core multisite-install --url="$WP_HOME" --skip-email --title="WordPress Local" \
-            --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
-    else
-        status 'Installling WordPress'
-        wp core install --url="$WP_HOME" --skip-email --title="WordPress Local" \
-            --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+        wp core multisite-convert --url="$WP_HOME"
     fi
 fi
 
