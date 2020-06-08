@@ -37,7 +37,13 @@ chmod +x "$BUILD_DIR/.heroku/wp-cli/bin/wp"
 
 mkdir -p "$BUILD_DIR/.profile.d"
 
+export WP_HOME=${WP_HOME:-https://${HEROKU_APP_NAME}.herokuapp.com}
+
+touch $BUILD_DIR/.heroku/wp-cli/config.yml
 echo "export PATH=\"\$PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
+echo "export WP_CLI_CONFIG_PATH=\"~/.heroku/wp-cli/config.yml\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
+echo "export WP_CLI_CACHE_DIR=\"~/.heroku/wp-cli/cache\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
+echo "export WP_CLI_PACKAGES_DIR=\"~/.heroku/wp-cli/packages\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
 
 wp() {
 	$BUILD_DIR/.heroku/wp-cli/bin/wp "$@" | indent
@@ -66,8 +72,6 @@ cd $BUILD_DIR
 # So, I assumed that the 'url' config is exists
 # but with different address, let say: `url: http://localhost`
 cp "$wpcli_yml" "$BUILD_DIR/wp-cli.local.yml"
-
-export WP_HOME=${WP_HOME:-https://${HEROKU_APP_NAME}.herokuapp.com}
 
 wp --info
 
