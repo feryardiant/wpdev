@@ -62,7 +62,7 @@ wp option update permalink_structure '/%postname%/'
 # wp option update link_manager_enabled '1'
 
 # _inf 'Import dummy content'
-wp import resources/dummy-content.xml --authors=create
+wp import tests/dummy-content.xml --authors=tests/dummy-content.mapping.csv
 
 # wp menu location assign primary primary
 # wp menu location assign footer footer

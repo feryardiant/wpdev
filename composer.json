@@ -43,7 +43,7 @@
       "wp core install --title=\"WordPress Site\" --admin_user=admin --admin_password=secret --admin_email=admin@example.com --skip-email"
     ],
     "wp:import-dummy": [
-      "wp import resources/dummy-content.xml --authors=create"
+      "wp import tests/dummy-content.xml --authors=create"
     ],
     "wp:post-deploy": [
       "@php -r \"copy('public/app/mu-plugins/redis-cache/includes/object-cache.php', 'public/app/object-cache.php');\"",
