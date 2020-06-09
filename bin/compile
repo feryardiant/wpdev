@@ -40,10 +40,12 @@ mkdir -p "$BUILD_DIR/.profile.d"
 export WP_HOME=${WP_HOME:-https://${HEROKU_APP_NAME}.herokuapp.com}
 
 touch $BUILD_DIR/.heroku/wp-cli/config.yml
-echo "export PATH=\"\$PATH:\$HOME/.heroku/wp-cli/bin\"" > $BUILD_DIR/.profile.d/100-wpcli.sh
-echo "export WP_CLI_CONFIG_PATH=\"~/.heroku/wp-cli/config.yml\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
-echo "export WP_CLI_CACHE_DIR=\"~/.heroku/wp-cli/cache\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
-echo "export WP_CLI_PACKAGES_DIR=\"~/.heroku/wp-cli/packages\"" >> $BUILD_DIR/.profile.d/100-wpcli.sh
+cat >> $BUILD_DIR/.profile.d/100-wpcli.sh <<EOL
+export PATH="\$PATH:\$HOME/.heroku/wp-cli/bin"
+export WP_CLI_CACHE_DIR="\$HOME/.heroku/wp-cli/cache"
+export WP_CLI_CONFIG_PATH="\$HOME/.heroku/wp-cli/config.yml"
+export WP_CLI_PACKAGES_DIR="\$HOME/.heroku/wp-cli/packages"
+EOL
 
 wp() {
 	$BUILD_DIR/.heroku/wp-cli/bin/wp "$@" | indent
