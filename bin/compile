@@ -11,6 +11,15 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
+# Configure defaults
+WP_HOME=${WP_HOME:-}
+HEROKU_APP_NAME=${HEROKU_APP_NAME:-}
+MULTISITE=${MULTISITE:-false}
+
+if [ -n "$HEROKU_APP_NAME" ] && [ ! -n "$WP_HOME"]; then
+    WP_HOME=https://${HEROKU_APP_NAME}.herokuapp.com
+fi
+
 # convenience functions
 source "$(cd $(dirname $0); pwd)"/util.sh
 
@@ -25,11 +34,7 @@ wpcli_url='https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.
 
 curl_retry --fail --silent --location -o "$BUILD_DIR/.heroku/wp-cli/bin/wp" "$wpcli_url" || {
 error <<-EOF
-    Failed to download a WP-CLI executable for bootstrapping!
-
-    This is most likely a temporary internal error. If the problem
-    persists, make sure that you are not running a custom or forked
-    version of the Heroku Ruby buildpack which may need updating.
+Failed to download a WP-CLI executable for bootstrapping!
 EOF
 }
 
@@ -37,7 +42,7 @@ chmod +x "$BUILD_DIR/.heroku/wp-cli/bin/wp"
 
 mkdir -p "$BUILD_DIR/.profile.d"
 
-export WP_HOME=${WP_HOME:-https://${HEROKU_APP_NAME}.herokuapp.com}
+export WP_HOME
 
 touch $BUILD_DIR/.heroku/wp-cli/config.yml
 cat >> $BUILD_DIR/.profile.d/100-wpcli.sh <<EOL
@@ -75,8 +80,6 @@ cd $BUILD_DIR
 # but with different address, let say: `url: http://localhost`
 cp "$wpcli_yml" "$BUILD_DIR/wp-cli.local.yml"
 
-wp --info
-
 # I think we should add custom envvar to configure these flags
 # But I'll leave it as it for now.
 if wp core is-installed; then
@@ -86,11 +89,11 @@ else
     status 'Installling WordPress'
     wp core install --url="$WP_HOME" --skip-email --title="WordPress Local" \
         --admin_user="admin" --admin_password="secret" --admin_email="demo@example.com"
+fi
 
-    if [ ! -z $MULTISITE ] && [ "$MULTISITE" = "true" ]; then
-        status 'Installling WordPress Multisite'
-        wp core multisite-convert --url="$WP_HOME"
-    fi
+if ! wp core is-installed --network && [ "$MULTISITE" = "true" ]; then
+    status 'Installling WordPress Multisite'
+    wp core multisite-convert --url="$WP_HOME"
 fi
 
 status "Setup completed"
