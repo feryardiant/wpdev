@@ -56,8 +56,9 @@ if ($_heroku_appname = env('HEROKU_APP_NAME')) {
 
 $_site_url    = env('WP_HOME') ?? $_http_schema."://".$_SERVER['HTTP_HOST'];
 
-Config::define('WP_HOME',     $_site_url);
-Config::define('WP_SITEURL',  env('WP_SITEURL') ?? $_site_url);
+Config::define('WP_HOME',         $_site_url);
+Config::define('WP_SITEURL',      env('WP_SITEURL') ?? $_site_url);
+Config::define('FORCE_SSL_ADMIN', env('FORCE_SSL_ADMIN') ?? $_is_production);
 
 unset($_http_schema, $_heroku_appname, $_site_url);
 
