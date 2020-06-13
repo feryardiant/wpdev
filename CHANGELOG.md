@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.10](https://github.com/feryardiant/wpdev/compare/v0.2.9...v0.2.10) (2020-06-13)
+
+
+### Bug Fixes
+
+* **release:** fix release command on github action ([536b3ce](https://github.com/feryardiant/wpdev/commit/536b3ceaceafcdaee0e39a5f30303c2c2bfad59a))
+
 ### [0.2.9](https://github.com/feryardiant/wpdev/compare/v0.2.8...v0.2.9) (2020-06-13)
 
 
