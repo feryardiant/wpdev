@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/feryardiant/wpdev/compare/v0.2.8...v0.2.9) (2020-06-13)
+
+
+### Features
+
+* **buildpack:** add envvar default values ([be2baa9](https://github.com/feryardiant/wpdev/commit/be2baa9421c4d6b00adc8f99c9fad4cea017024e))
+* **ci:** use wp-cli phar ([da48aa3](https://github.com/feryardiant/wpdev/commit/da48aa3923f2520667b22f9607cfa2759030bb86))
+* **heroku:** add post-deploy script ([7df3abd](https://github.com/feryardiant/wpdev/commit/7df3abd78501bb734a7ff9c0f9d55e2585b4bb6b))
+* **release:** add github action to publish releases ([4f4c06f](https://github.com/feryardiant/wpdev/commit/4f4c06f65b8d9b2a551af2f8148bb935bfe1dd7e))
+* **workflow:** cache action ([7f10b40](https://github.com/feryardiant/wpdev/commit/7f10b4073434e58945485df4d514fa67e66ea1dd))
+
+
+### Bug Fixes
+
+* **buildpack:** :unamused: ([c220f36](https://github.com/feryardiant/wpdev/commit/c220f36c656db9f13dcac8a9f020581265ba9449))
+* **buildpack:** do 49cb38e before downoading ([c40fa4e](https://github.com/feryardiant/wpdev/commit/c40fa4ef20dd38f44bae235eb419603b5921392d))
+* **buildpack:** do convert as multisite instead of direct install ([abc45c1](https://github.com/feryardiant/wpdev/commit/abc45c1767362432c195dfc809e9632cd50165e3))
+* **buildpack:** https by default ([3335f29](https://github.com/feryardiant/wpdev/commit/3335f291f5b1645cd70d02f32b7c816a4ce6d3cc))
+* **buildpack:** throw error from compile script ([1dff5ee](https://github.com/feryardiant/wpdev/commit/1dff5ee10d78d1ebe495a7d71309d7054c782253))
+* **buildpack:** try to add more wp-cli envvars ([81b189e](https://github.com/feryardiant/wpdev/commit/81b189e8ba14a758ebb4238267ae430c4a5f55c3))
+* **buildpack:** try to check whether wp-cli is installed ([49cb38e](https://github.com/feryardiant/wpdev/commit/49cb38e791344a3cea5f7400c660c6c67525b807))
+* fix self-signed ssl issue while development ([ab3a42b](https://github.com/feryardiant/wpdev/commit/ab3a42b290bcbcd47b9d4306315c0c8155e9617f))
+* **buildpack:** use $HOME instead of ~ ([112ef56](https://github.com/feryardiant/wpdev/commit/112ef562805ec9519c8491ba88095e5162cc5d9e))
+* **deploy:** fix htaccess issue with wp-json ([401ecf5](https://github.com/feryardiant/wpdev/commit/401ecf52a05d393fec5874baceed9dc073485a96))
+* **deploy:** fix post-deploy script ([f1f3aef](https://github.com/feryardiant/wpdev/commit/f1f3aefbd5e60e29315230dc0ec1f1d091c1a13b))
+* **heroku:** review app env ([8b5f882](https://github.com/feryardiant/wpdev/commit/8b5f882ecc3f8a8861bb3e9cce577b9ec902f00a))
+* **release:** fix release command on github action ([536b3ce](https://github.com/feryardiant/wpdev/commit/536b3ceaceafcdaee0e39a5f30303c2c2bfad59a))
+* **test:** fix url while test on browserstack ([12ef50e](https://github.com/feryardiant/wpdev/commit/12ef50ea0258a1d177df00941aa3e7ea8eedbb7a))
+
 ### [0.2.10](https://github.com/feryardiant/wpdev/compare/v0.2.9...v0.2.10) (2020-06-13)
 
 

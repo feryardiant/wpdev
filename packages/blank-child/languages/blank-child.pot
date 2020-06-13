@@ -1,8 +1,8 @@
-# Copyright (C) 2020 blank-child v0.2.10
-# This file is distributed under the same license as the blank-child v0.2.10 package.
+# Copyright (C) 2020 blank-child v0.2.9
+# This file is distributed under the same license as the blank-child v0.2.9 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: blank-child v0.2.10\n"
+"Project-Id-Version: blank-child v0.2.9\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
