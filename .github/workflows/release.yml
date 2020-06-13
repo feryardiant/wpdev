@@ -40,6 +40,7 @@ jobs:
       run: |
         yarn gulp build --skip php
         yarn gulp zip
+        node_modules/.bin/read-changelog > PUBLISH.txt
 
     - name: Upload binaries to release
       uses: softprops/action-gh-release@v1
