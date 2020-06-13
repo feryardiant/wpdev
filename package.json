@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.10.2",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@feryardiant/read-changelog": "^0.1.7",
     "@wdio/browserstack-service": "^6.1.15",
     "@wdio/cli": "^6.1.15",
     "@wdio/dot-reporter": "^6.1.14",
@@ -129,13 +130,13 @@
     ]
   },
   "lint-staged": {
-    "source/**/*.php": [
-      "vendor/bin/phpcs --standard=source/phpcs.xml"
+    "packages/**/*.php": [
+      "vendor/bin/phpcs --standard=packages/phpcs.xml"
     ],
-    "source/**/*.js": [
+    "packages/**/*.js": [
       "eslint --fix"
     ],
-    "source/**/*.scss": [
+    "packages/**/*.scss": [
       "stylelint --fix"
     ]
   }
