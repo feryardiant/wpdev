@@ -35,7 +35,11 @@ jobs:
       run: yarn --ignore-engines
 
     - name: Build and Archive
-      run: yarn archive
+      env:
+          WP_ENV: production
+      run: |
+        yarn gulp build --skip php
+        yarn gulp zip
 
     - name: Upload binaries to release
       uses: softprops/action-gh-release@v1
