@@ -84,7 +84,7 @@
     "ext-redis": "*",
     "composer/installers": "^1.8",
     "humanmade/s3-uploads": "^2.1",
-    "oscarotero/env": "^1.2",
+    "oscarotero/env": "^2.1",
     "rhubarbgroup/redis-cache": "^1.6",
     "roots/bedrock-autoloader": "^1.0",
     "roots/wordpress": "^5.4",
