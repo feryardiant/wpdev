@@ -19,7 +19,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "bulma": "^0.8.2"
+    "bulma": "^0.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
