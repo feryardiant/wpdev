@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19694d8abe0b207abb5a0c19711307db",
+    "content-hash": "7ef529cbdb84b000c8fcd1c595b799f7",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -4128,15 +4128,15 @@
         },
         {
             "name": "wpackagist-plugin/theme-check",
-            "version": "20190801.1",
+            "version": "20200612.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/theme-check/",
-                "reference": "tags/20190801.1"
+                "reference": "tags/20200612.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/theme-check.20190801.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/theme-check.20200612.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
