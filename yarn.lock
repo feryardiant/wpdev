@@ -5411,15 +5411,15 @@ gulp-uglify@^3.0.2:
     uglify-js "^3.0.5"
     vinyl-sourcemaps-apply "^0.2.0"
 
-gulp-wp-pot@2.3.6:
-  version "2.3.6"
-  resolved "https://registry.npmjs.org/gulp-wp-pot/-/gulp-wp-pot-2.3.6.tgz#01f47f309abcf547240bcc6714d389640e447d89"
-  integrity sha512-RaS7MiT8w9HdfmH8c6l7QKeeZeWDMDoyWUb//vFXGH05XY1t2w4iv22k0AIWyZ9w2ceX6W2ia3jC5hH+5wn2rA==
+gulp-wp-pot@2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/gulp-wp-pot/-/gulp-wp-pot-2.4.3.tgz#371640b5c98a538222aa8a6ca0dbd11e2802a676"
+  integrity sha512-1vbftC7VPZVxbsSYdJrnFkYj+ic858uitVAsu6vYd3mZ/5cxjq6lpVOkLAf3ZOQlwE5gxkqbwcIhyORLvlEhEQ==
   dependencies:
     plugin-error "^1.0.1"
     through2 "^3.0.1"
     vinyl "^2.2.0"
-    wp-pot "^1.7.1"
+    wp-pot "^1.9.3"
 
 gulp-zip@^5.0.1:
   version "5.0.1"
@@ -10957,9 +10957,9 @@ wordwrap@^1.0.0:
   resolved "https://registry.npmjs.org/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
 
-wp-pot@^1.7.1:
+wp-pot@^1.9.3:
   version "1.9.3"
-  resolved "https://registry.npmjs.org/wp-pot/-/wp-pot-1.9.3.tgz#3bd360086d8cb30015e0f42558705da093ac6bcd"
+  resolved "https://registry.yarnpkg.com/wp-pot/-/wp-pot-1.9.3.tgz#3bd360086d8cb30015e0f42558705da093ac6bcd"
   integrity sha512-PvWxTZpG9geOyon68wFPCk70D0pYrUxafRSEtB8gYoDnPKf86Tar9PnzS9x/IX62UGNKtT4zDFFIyQU1L9wyLA==
   dependencies:
     matched "^5.0.0"
