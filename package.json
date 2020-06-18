@@ -62,7 +62,7 @@
     "standard-version": "^8.0.0",
     "stylelint": "^10.0.0",
     "stylelint-config-standard-scss": "^1.1.0",
-    "stylelint-scss": "^3.17.2",
+    "stylelint-scss": "^3.18.0",
     "webdriverio": "^6.1.14",
     "yargs": "^15.3.1"
   },
