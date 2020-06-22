@@ -28,7 +28,7 @@
     "@commitlint/config-conventional": "^8.3.4",
     "@feryardiant/read-changelog": "^0.1.7",
     "@wdio/browserstack-service": "^6.1.15",
-    "@wdio/cli": "^6.1.15",
+    "@wdio/cli": "^6.1.20",
     "@wdio/dot-reporter": "^6.1.14",
     "@wdio/local-runner": "^6.1.14",
     "@wdio/mocha-framework": "^6.1.14",
