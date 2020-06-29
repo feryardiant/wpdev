@@ -53,7 +53,7 @@
     "gulp-stylelint": "^13.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-wp-pot": "2.4.3",
-    "gulp-zip": "^5.0.1",
+    "gulp-zip": "^5.0.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.7",
     "matched": "^4.0",
