@@ -1424,9 +1424,9 @@
     got "^11.0.2"
 
 "@wdio/cli@^6.1":
-  version "6.1.22"
-  resolved "https://registry.npmjs.org/@wdio/cli/-/cli-6.1.22.tgz#3e4633718761b2c00ac87957f2af44fc5ded36cb"
-  integrity sha512-/Z8Vef7m2qb2+Wsv0e9PKSUzsKynf0IgB4TT1bo5xhPjusm4DqWH+ptBuCkXXXoJBHSSyzZFqP2cSnByjICAWQ==
+  version "6.1.24"
+  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.1.24.tgz#b0ec7714aacf585cd24bcfc7f4c7e0bf2c9a5f22"
+  integrity sha512-a0gX4vK7yzXSKtF+9ya0M+hc8ZKPXvJ/LhFaDgnv8n5NNRYO1ghRzRE0O3KSh1kiHp42Z6GAuzpwkpyft3RAKQ==
   dependencies:
     "@wdio/config" "6.1.14"
     "@wdio/logger" "6.0.16"
@@ -1442,7 +1442,7 @@
     lodash.pickby "^4.6.0"
     lodash.union "^4.6.0"
     log-update "^4.0.0"
-    webdriverio "6.1.22"
+    webdriverio "6.1.24"
     yargs "^15.0.1"
     yarn-install "^1.0.0"
 
@@ -3751,6 +3751,20 @@ devtools@6.1.22:
   version "6.1.22"
   resolved "https://registry.npmjs.org/devtools/-/devtools-6.1.22.tgz#7b55a41b497e131b47a33147e5297c7809d7fa51"
   integrity sha512-6m8UCXjDvJgcxm2MuL7TSss2c14KlOZ972jyGdUZi8omjeIa1s2ZrXYFGPK2Gl3XKvl8k8Co3d97W8AHODZgEg==
+  dependencies:
+    "@wdio/config" "6.1.14"
+    "@wdio/logger" "6.0.16"
+    "@wdio/protocols" "6.1.14"
+    "@wdio/utils" "6.1.17"
+    chrome-launcher "^0.13.1"
+    puppeteer-core "^4.0.0"
+    ua-parser-js "^0.7.21"
+    uuid "^8.0.0"
+
+devtools@6.1.23:
+  version "6.1.23"
+  resolved "https://registry.yarnpkg.com/devtools/-/devtools-6.1.23.tgz#637ffefc48e8de6ce0d90ab0840880ae9ad7f5b2"
+  integrity sha512-+9b3bURLZED3sPVPQluGQFTuv/evRfQugM8dr+eybhOIfkSTGIlyks82QlaxMjHEBiaRXk3AFSl1f110T2tTKA==
   dependencies:
     "@wdio/config" "6.1.14"
     "@wdio/logger" "6.0.16"
@@ -11251,7 +11265,7 @@ webdriver@6.1.17:
     got "^11.0.2"
     lodash.merge "^4.6.1"
 
-webdriverio@6.1.22, webdriverio@^6.1:
+webdriverio@6.1.22:
   version "6.1.22"
   resolved "https://registry.npmjs.org/webdriverio/-/webdriverio-6.1.22.tgz#c230d639e141e64c16240dbcce49e13183cb46c8"
   integrity sha512-OBiur+Lybs3V+//OtU+9/qwTsLwRIicsVyYCBSqVFGBu3shk0zM6BppfB6uHeRSBmMGSRtA4od1K/rFysX1j6w==
@@ -11263,6 +11277,28 @@ webdriverio@6.1.22, webdriverio@^6.1:
     archiver "^4.0.1"
     css-value "^0.0.1"
     devtools "6.1.22"
+    grapheme-splitter "^1.0.2"
+    lodash.clonedeep "^4.5.0"
+    lodash.isobject "^3.0.2"
+    lodash.isplainobject "^4.0.6"
+    lodash.zip "^4.2.0"
+    resq "^1.6.0"
+    rgb2hex "^0.2.0"
+    serialize-error "^7.0.0"
+    webdriver "6.1.17"
+
+webdriverio@6.1.24, webdriverio@^6.1:
+  version "6.1.24"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.1.24.tgz#2e71c89050db47d592420ff285a4c7fc9e3e32ea"
+  integrity sha512-VvB4davXI2w3V63Oy6tcmAlXIWXrRP4F8IaQVU1bTMwhMKkJZ82yGaP8BgE07P8e66+0O/ZpPnHNYaaJ6Zkzcg==
+  dependencies:
+    "@wdio/config" "6.1.14"
+    "@wdio/logger" "6.0.16"
+    "@wdio/repl" "6.1.17"
+    "@wdio/utils" "6.1.17"
+    archiver "^4.0.1"
+    css-value "^0.0.1"
+    devtools "6.1.23"
     grapheme-splitter "^1.0.2"
     lodash.clonedeep "^4.5.0"
     lodash.isobject "^3.0.2"
@@ -11502,7 +11538,7 @@ yargs@13.3.2, yargs@^13.3.0, yargs@^13.3.2:
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
 
-yargs@15.3.1, yargs@^15.0.1:
+yargs@15.3.1:
   version "15.3.1"
   resolved "https://registry.npmjs.org/yargs/-/yargs-15.3.1.tgz#9505b472763963e54afe60148ad27a330818e98b"
   integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
@@ -11558,7 +11594,7 @@ yargs@6.6.0:
     y18n "^3.2.1"
     yargs-parser "^4.2.0"
 
-yargs@^15.4:
+yargs@^15.0.1, yargs@^15.4:
   version "15.4.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.0.tgz#53949fb768309bac1843de9b17b80051e9805ec2"
   integrity sha512-D3fRFnZwLWp8jVAAhPZBsmeIHY8tTsb8ItV9KaAaopmC6wde2u6Yw29JBIZHXw14kgkRnYmDgmQU4FVMDlIsWw==
