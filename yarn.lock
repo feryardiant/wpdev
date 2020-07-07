@@ -1456,11 +1456,11 @@
     glob "^7.1.2"
 
 "@wdio/dot-reporter@^6.1":
-  version "6.1.14"
-  resolved "https://registry.npmjs.org/@wdio/dot-reporter/-/dot-reporter-6.1.14.tgz#5b54027cdc161d5463e0a723ae2fdabeff6741b4"
-  integrity sha512-sWeb0wc8HfbGpwTZojZzXxnTkCc2imkSMMXfziOV1dX4hBFWmp+D8tLdL64RSqmSJfOYxAGXXdeVeFx/b8hOzg==
+  version "6.1.23"
+  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-6.1.23.tgz#1b4a6e100ad17cbf2c61dbec9a8185fa1f58b31d"
+  integrity sha512-ee+vJ6IrGjYqtHCrNP87vN/S0eDyjANhdFkmAMvjf9+fJkqJjVXazqshQX0mrmqrLNL429NMs7WsQD2HyyIhng==
   dependencies:
-    "@wdio/reporter" "6.1.14"
+    "@wdio/reporter" "6.1.23"
     chalk "^4.0.0"
 
 "@wdio/local-runner@^6.1":
@@ -1506,10 +1506,10 @@
   dependencies:
     "@wdio/utils" "6.1.17"
 
-"@wdio/reporter@6.1.14":
-  version "6.1.14"
-  resolved "https://registry.npmjs.org/@wdio/reporter/-/reporter-6.1.14.tgz#1885d280654b7b8e14b7be33a5cbf1471d32fb1e"
-  integrity sha512-Pt6P0JU0COHTpggsOoJKUJyAyQsi7xlHebBNU/DWdHHpmzYd4e9vDutjyTqXu/1zn+t+Zq+uL1IC0E4Xjv6f7w==
+"@wdio/reporter@6.1.23":
+  version "6.1.23"
+  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-6.1.23.tgz#d4781cbf4ede1dfded91053dcafd8777a1d4bf6b"
+  integrity sha512-9OmAd6X/g6lpjNkA/sEPc28prCUCZKxbmoapzgaMrp7mNsb0Wmi2UDCWKvTVwldloQON7A98qQTrHr+k9GcL1w==
   dependencies:
     fs-extra "^9.0.0"
 
