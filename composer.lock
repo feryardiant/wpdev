@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.145.1",
+            "version": "3.145.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d1997c62de872eadb12b6633ae480e3139969a07"
+                "reference": "69b7e99246c64d75b16dd3e926da0ea9f73088ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d1997c62de872eadb12b6633ae480e3139969a07",
-                "reference": "d1997c62de872eadb12b6633ae480e3139969a07",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/69b7e99246c64d75b16dd3e926da0ea9f73088ad",
+                "reference": "69b7e99246c64d75b16dd3e926da0ea9f73088ad",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-07-06T18:14:57+00:00"
+            "time": "2020-07-08T18:13:01+00:00"
         },
         {
             "name": "composer/installers",
@@ -433,16 +433,16 @@
         },
         {
             "name": "humanmade/s3-uploads",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/humanmade/S3-Uploads.git",
-                "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8"
+                "reference": "577886b941438793a5721bbbb6eddc6872ee73cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
-                "reference": "bc1df42517c1ccbfbfc61fe4802008d22948a9b8",
+                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/577886b941438793a5721bbbb6eddc6872ee73cb",
+                "reference": "577886b941438793a5721bbbb6eddc6872ee73cb",
                 "shasum": ""
             },
             "require": {
@@ -466,7 +466,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2019-11-18T16:44:45+00:00"
+            "time": "2020-07-08T12:09:08+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -892,8 +892,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.4.2",
-                "reference": "5.4.2"
+                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.4.2"
             },
             "require": {
                 "php": ">=5.3.2",
