@@ -27,7 +27,7 @@
     "@commitlint/cli": "^9.0",
     "@feryardiant/commitlint-config": "^0.0.1",
     "@wdio/browserstack-service": "^6.1",
-    "@wdio/cli": "^6.1",
+    "@wdio/cli": "^6.4",
     "@wdio/dot-reporter": "^6.1",
     "@wdio/local-runner": "^6.1",
     "@wdio/mocha-framework": "^6.1",
