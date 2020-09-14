@@ -30,7 +30,7 @@
     "@wdio/cli": "^6.1",
     "@wdio/dot-reporter": "^6.1",
     "@wdio/local-runner": "^6.1",
-    "@wdio/mocha-framework": "^6.1",
+    "@wdio/mocha-framework": "^6.5",
     "@wordpress/eslint-plugin": "^7.1",
     "babel-eslint": "^10.1.0",
     "browser-sync": "^2.26.7",
