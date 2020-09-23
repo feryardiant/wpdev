@@ -108,7 +108,7 @@
     "wp-cli/import-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/query-monitor": "^3.5",
-    "wpackagist-plugin/theme-check": "20200612.1"
+    "wpackagist-plugin/theme-check": "20200922.1"
   },
   "suggest": {
     "ext-bcmath": "*",
