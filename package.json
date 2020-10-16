@@ -62,7 +62,7 @@
     "stylelint-config-standard-scss": "^1.1.0",
     "stylelint-scss": "^3.17.2",
     "webdriverio": "^6.1",
-    "yargs": "^15.4"
+    "yargs": "^16.1"
   },
   "husky": {
     "hooks": {
