@@ -82,12 +82,12 @@
     "ext-gd": "*",
     "ext-imagick": "*",
     "ext-redis": "*",
-    "composer/installers": "^1.8",
+    "composer/installers": "^1.9",
     "humanmade/s3-uploads": "^2.1",
-    "oscarotero/env": "^1.2",
-    "rhubarbgroup/redis-cache": "^1.6",
+    "oscarotero/env": "^2.1",
+    "rhubarbgroup/redis-cache": "^2.0",
     "roots/bedrock-autoloader": "^1.0",
-    "roots/wordpress": "^5.4",
+    "roots/wordpress": "^5.5",
     "roots/wp-config": "^1.0",
     "roots/wp-password-bcrypt": "^1.0",
     "vlucas/phpdotenv": "^4.1",
@@ -108,7 +108,7 @@
     "wp-cli/import-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/query-monitor": "^3.5",
-    "wpackagist-plugin/theme-check": "20200612.1"
+    "wpackagist-plugin/theme-check": "20200922.1"
   },
   "suggest": {
     "ext-bcmath": "*",
