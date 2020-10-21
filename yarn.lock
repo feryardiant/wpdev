@@ -1466,9 +1466,9 @@
     strip-ansi "^6.0.0"
 
 "@wdio/mocha-framework@^6.6":
-  version "6.6.6"
-  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.6.6.tgz#c1849919d96472294a6e1c5885dec2728c365ba3"
-  integrity sha512-B3SdFUrfTFUatfMW8iR9cfFu9MyYRMd6iC5aPsrL3EkD8i/qWzGoKiCRMjewVBYvEF/JbPJUOi/eFsA6fYQHcQ==
+  version "6.6.7"
+  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.6.7.tgz#a993ee82688c9dbd0e5dfbe54c78ce9c3f4f8fd0"
+  integrity sha512-br+Y7nuEyuL3go9A5DyaTcwWA9qx3Xz9yiPkaxe1hj2W+zROdERWWwGExYklkfuORUGkvECFoEpGxeAOKUkQ5g==
   dependencies:
     "@wdio/logger" "6.6.0"
     "@wdio/utils" "6.6.3"
@@ -7243,12 +7243,7 @@ lodash.zip@^4.2.0:
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
-lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@~4.17.10:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
-
-lodash@^4.17.19, lodash@^4.17.20:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@~4.17.10:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
