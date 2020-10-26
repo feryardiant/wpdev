@@ -1225,6 +1225,18 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/cucumber@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@types/cucumber/-/cucumber-6.0.1.tgz#0fe9673d34568d35ff21957af049883635472fcd"
+  integrity sha512-+GZV6xfN0MeN9shDCdny8GbC8N0+U6uca8cjyaJndcwmrUhwS6qOU2vmYn0d71EOwJF568/v3SxJ8VKxuZNYRw==
+
+"@types/fs-extra@^9.0.1":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-9.0.2.tgz#e1e1b578c48e8d08ae7fc36e552b94c6f4621609"
+  integrity sha512-jp0RI6xfZpi5JL8v7WQwpBEQTq63RqW2kxwTZt+m27LcJqQdPVU1yGnT1ZI4EtCDynQQJtIGyQahkiCGCS7e+A==
+  dependencies:
+    "@types/node" "*"
+
 "@types/glob@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
@@ -1436,12 +1448,12 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/dot-reporter@^6.6":
-  version "6.6.6"
-  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-6.6.6.tgz#e22bd386c997e2fcf82dc8b65614ca6377e015a6"
-  integrity sha512-iTRihdeAVrymbk7BpWNayyBpa9arqT1wsM9M36T1zZpOnWxK0NLxhpld0A1w7zhMNrBc5lwQ7/ssWes53uYpSA==
+"@wdio/dot-reporter@^6.7":
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-6.7.0.tgz#5279374b0116f2b80d3fdb6e4a69d4dbe00de469"
+  integrity sha512-2XQCQTmc6kSSqTTlEuo3x+ZizyZh5hMP/eIAu+aEd8kf46Q+u9NGCoztNl6p+YI1/UdN7lou5tkAKmnSqxhNsA==
   dependencies:
-    "@wdio/reporter" "6.6.6"
+    "@wdio/reporter" "6.7.0"
     chalk "^4.0.0"
 
 "@wdio/local-runner@^6.6":
@@ -1487,11 +1499,13 @@
   dependencies:
     "@wdio/utils" "6.6.3"
 
-"@wdio/reporter@6.6.6":
-  version "6.6.6"
-  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-6.6.6.tgz#a94d96ee09a0178ade461c0dc139072155e7fd36"
-  integrity sha512-udCWCyMfNxAEyZutl0CYZwTeIFD9bgmu8+VJcZ5LDr+lbnpbW9OrYmvDfhKspm9jxfw0RbD/sV84UjIv2qierA==
+"@wdio/reporter@6.7.0":
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-6.7.0.tgz#209aacdc0abcbbcc138d9862c83ecb9094a27852"
+  integrity sha512-P8shE281uqPHJk5fRNgmvBFPaPF/J3j52fjVMn5oIUpqnDHeocDsLRNSWelFFPySZ/OFOl4pzMx5LTMqIKML6g==
   dependencies:
+    "@types/cucumber" "^6.0.1"
+    "@types/fs-extra" "^9.0.1"
     fs-extra "^9.0.0"
 
 "@wdio/runner@6.6.6":
@@ -7243,12 +7257,7 @@ lodash.zip@^4.2.0:
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
-lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@~4.17.10:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
-
-lodash@^4.17.19, lodash@^4.17.20:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@~4.17.10:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
