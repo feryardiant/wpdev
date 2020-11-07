@@ -1300,10 +1300,10 @@
     browserstack-local "^1.4.5"
     got "^11.0.2"
 
-"@wdio/cli@^6.6":
-  version "6.7.1"
-  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.7.1.tgz#bfff677e6974d85a0ac8bf1cc79fddc5147c538b"
-  integrity sha512-ZzEv4QgeTvrhmThjt3v0fleTf7pkP3bsAFjZOoW5EluoumMZNMDmQRFniSXAGZsCQuVyBGgfzHfcqpOPUFmXcA==
+"@wdio/cli@^6.7":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.7.2.tgz#9809e80bbf34435c7c65d814230ee65cec612179"
+  integrity sha512-g1L8FfrKBaOPqWPcn6NzGFf/ysNl9m+hC7OLYfxAb5Pa33RDBDxtZzsebmvveghw8ZXRGFmvdhEv71cp9dla/A==
   dependencies:
     "@wdio/config" "6.6.3"
     "@wdio/logger" "6.6.0"
@@ -1320,7 +1320,7 @@
     lodash.union "^4.6.0"
     mkdirp "^1.0.4"
     recursive-readdir "^2.2.2"
-    webdriverio "6.7.1"
+    webdriverio "6.7.2"
     yargs "^16.0.3"
     yarn-install "^1.0.0"
 
@@ -11112,39 +11112,6 @@ webdriver@6.7.1:
     "@wdio/utils" "6.7.0"
     got "^11.0.2"
     lodash.merge "^4.6.1"
-
-webdriverio@6.7.1:
-  version "6.7.1"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.7.1.tgz#f4710a4dc43d31c690651c2422f50e156b15009c"
-  integrity sha512-fhFeu7UwCzXpDE0a0iD6cTqe3nZYFReux3NnzUEC4WegcAw4oAMxJrVLXVl2kv8b/5LQ+h7uBBMv0Fsze8Jjvg==
-  dependencies:
-    "@types/archiver" "^3.1.1"
-    "@types/atob" "^2.1.2"
-    "@types/fs-extra" "^9.0.2"
-    "@types/lodash.clonedeep" "^4.5.6"
-    "@types/lodash.isplainobject" "^4.0.6"
-    "@types/puppeteer-core" "^2.0.0"
-    "@wdio/config" "6.6.3"
-    "@wdio/logger" "6.6.0"
-    "@wdio/repl" "6.7.1"
-    "@wdio/utils" "6.7.0"
-    archiver "^5.0.0"
-    atob "^2.1.2"
-    css-value "^0.0.1"
-    devtools "6.7.0"
-    fs-extra "^9.0.1"
-    get-port "^5.1.1"
-    grapheme-splitter "^1.0.2"
-    lodash.clonedeep "^4.5.0"
-    lodash.isobject "^3.0.2"
-    lodash.isplainobject "^4.0.6"
-    lodash.zip "^4.2.0"
-    minimatch "^3.0.4"
-    puppeteer-core "^5.1.0"
-    resq "^1.9.1"
-    rgb2hex "^0.2.0"
-    serialize-error "^7.0.0"
-    webdriver "6.7.1"
 
 webdriverio@6.7.2, webdriverio@^6.7:
   version "6.7.2"
