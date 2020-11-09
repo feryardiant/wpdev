@@ -1291,12 +1291,12 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
-"@wdio/browserstack-service@^6.6":
-  version "6.6.7"
-  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-6.6.7.tgz#771a3d33791826341e8652f243d11d099e76ab35"
-  integrity sha512-Sj/G2mK4TTm0Ncrh3jT53yuaaJjUTz40gA6xvW4VayZSjntcKelfkiRGkczXh3XZd3n9VnsKfwcKkOTlijnehA==
+"@wdio/browserstack-service@^6.7":
+  version "6.7.3"
+  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-6.7.3.tgz#71fbcde8df1d800099e37bdf070b04ffe0af0d1f"
+  integrity sha512-bp8Ntogl8gPAGlIowkdqLE6rJsDFrfUSiAwqJdejw35qF8NTVm8Qi9oy/U64UeX/cEf8FZ2CMkkOggL9l1Wm4Q==
   dependencies:
-    "@wdio/logger" "6.6.0"
+    "@wdio/logger" "6.7.3"
     browserstack-local "^1.4.5"
     got "^11.0.2"
 
@@ -1357,6 +1357,16 @@
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-6.6.0.tgz#69375d6cf373ee8e7db7cd05085e6a325fccfdf7"
   integrity sha512-BAvXcnlWdQC93MLWObetpcjHUEGR8niW2mH2KAwLPQhXwJkKxXjhlMKH/DmUn5uQ4/S7iySLlMq9EEEg9KuCwA==
+  dependencies:
+    chalk "^4.0.0"
+    loglevel "^1.6.0"
+    loglevel-plugin-prefix "^0.8.4"
+    strip-ansi "^6.0.0"
+
+"@wdio/logger@6.7.3":
+  version "6.7.3"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-6.7.3.tgz#d8b2c2d51e3413b3c9536e679bbd0f4dfbfc1f3f"
+  integrity sha512-wBQ7KXHWXDRKHQUqoR68mpcailW2xeH2LiWrYZh7jdyuN2DaYdxKW1RAuXbalJ9c9zEbQmwmGTGIOUELiCB8Ug==
   dependencies:
     chalk "^4.0.0"
     loglevel "^1.6.0"
