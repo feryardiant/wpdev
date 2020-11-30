@@ -191,14 +191,6 @@ msgstr ""
 msgid "Huge"
 msgstr ""
 
-#: includes/walker/nav-menu.php:44
-msgid "Menu items goes here"
-msgstr ""
-
-#: includes/walker/nav-menu.php:39
-msgid "You don't have menu yet, please create one here"
-msgstr ""
-
 #: includes/widgets.php:37
 msgid "Main Sidebar"
 msgstr ""
@@ -331,10 +323,6 @@ msgstr ""
 msgid "Preformated Font"
 msgstr ""
 
-#: templates/admin/help-tab.php:10
-msgid "Help content goes here"
-msgstr ""
-
 #. translators: %s: Name of current post. Only visible to screen readers
 #: templates/content.php:24
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
@@ -342,4 +330,16 @@ msgstr ""
 
 #: templates/full-width.php:4
 msgid "Full Width"
+msgstr ""
+
+#: includes/walker/nav-menu.php:44
+msgid "Menu items goes here"
+msgstr ""
+
+#: includes/walker/nav-menu.php:39
+msgid "You don't have menu yet, please create one here"
+msgstr ""
+
+#: templates/admin/help-tab.php:10
+msgid "Help content goes here"
 msgstr ""
