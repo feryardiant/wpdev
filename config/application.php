@@ -9,17 +9,18 @@
  */
 
 use Roots\WPConfig\Config;
+use function Env\env;
 
-/** @var string Directory containing all of the site's files */
+/** @var string $root_dir Directory containing all of the site's files */
 $root_dir = dirname(__DIR__);
 
-/** @var string Document Root */
+/** @var string $webroot_dir Document Root */
 $webroot_dir = $root_dir . '/public';
 
 /**
  * Expose global env() function from oscarotero/env
  */
-Env::init();
+// Env\Env::init();
 
 if (file_exists($root_dir . '/.env')) {
     /**
@@ -44,6 +45,7 @@ $_is_production = WP_ENV === 'production';
 
 /**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
+ *
  * @see https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
 $_SERVER['HTTPS']       = $_SERVER['HTTPS'] ?? $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'off';
@@ -139,6 +141,7 @@ Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?? false);
 
 /**
  * Enable JetPack Development Mode
+ *
  * @see https://jetpack.com/support/development-mode/
  */
 Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?? true);
@@ -166,6 +169,7 @@ if (file_exists($env_config = __DIR__ . '/environments/' . WP_ENV . '.php')) {
 
 /**
  * S3 Uploads settings
+ *
  * @link https://github.com/humanmade/S3-Uploads
  */
 $_s3_auto_upload = env('S3_UPLOADS_AUTOENABLE') ?? false;
@@ -183,6 +187,7 @@ unset($_s3_auto_upload);
 
 /**
  * Sendgrid Integration Settings
+ *
  * @link https://sendgrid.com/docs/for-developers/sending-email/wordpress-faq/<Paste>
  */
 Config::define('SENDGRID_API_KEY', env('SENDGRID_API_KEY'));
@@ -192,6 +197,7 @@ Config::define('SENDGRID_API_KEY', env('SENDGRID_API_KEY'));
  */
 /**
 * Configuration - Plugin: Redis
+*
 * @link https://wordpress.org/plugins/redis-cache/
 */
 $_redis_url    = env('REDIS_URL');
@@ -225,3 +231,4 @@ if (!defined('ABSPATH')) {
 }
 
 unset($multisite, $env_config, $_http_name, $_is_production);
+
