@@ -55,7 +55,7 @@
     "gulp-wp-pot": "2.5",
     "gulp-zip": "^5.0",
     "husky": "^4.3",
-    "lint-staged": "^10.4",
+    "lint-staged": "^10.5",
     "standard-changelog": "^2.0.27",
     "standard-version": "^9.0",
     "stylelint": "^10.0.0",
