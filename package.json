@@ -28,7 +28,7 @@
     "@feryardiant/commitlint-config": "~0.0.2",
     "@wdio/browserstack-service": "^6.6",
     "@wdio/cli": "^6.7",
-    "@wdio/dot-reporter": "^6.6",
+    "@wdio/dot-reporter": "^6.10",
     "@wdio/local-runner": "^6.10",
     "@wdio/mocha-framework": "^6.6",
     "@wordpress/eslint-plugin": "^7.3",
