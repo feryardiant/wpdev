@@ -1025,26 +1025,27 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.0.15",
+            "version": "2.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "ea603d36106658cd56978aca4b91f1a2f0bf69f1"
+                "reference": "3ceed91ed6b4b792a8145ee61fddf6ca7ce09c7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/ea603d36106658cd56978aca4b91f1a2f0bf69f1",
-                "reference": "ea603d36106658cd56978aca4b91f1a2f0bf69f1",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/3ceed91ed6b4b792a8145ee61fddf6ca7ce09c7b",
+                "reference": "3ceed91ed6b4b792a8145ee61fddf6ca7ce09c7b",
                 "shasum": ""
             },
             "require": {
                 "colinmollenhour/credis": "^1.11.1",
                 "composer/installers": "~1.0",
                 "mnsami/composer-custom-directory-installer": "^2.0",
+                "php": "^5.6|^7.0|^8.0",
                 "predis/predis": "^1.1"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "phpcompatibility/phpcompatibility-wp": "^2.1",
                 "wp-coding-standards/wpcs": "^2.3"
             },
@@ -1073,7 +1074,7 @@
             "homepage": "https://github.com/rhubarbgroup/redis-cache",
             "support": {
                 "issues": "https://github.com/rhubarbgroup/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.15"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.16"
             },
             "funding": [
                 {
@@ -1085,7 +1086,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-29T16:23:28+00:00"
+            "time": "2020-12-25T02:26:43+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
