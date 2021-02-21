@@ -1214,6 +1214,11 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
+"@types/mocha@^8.0.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-8.2.0.tgz#3eb56d13a1de1d347ecb1957c6860c911704bc44"
+  integrity sha512-/Sge3BymXo4lKc31C8OINJgXLaw+7vL1/L1pGiBNpGrBiT8FQiaFpSYV0uhTaG4y78vcMBTMFsWaHDvuD+xGzQ==
+
 "@types/node@*":
   version "14.14.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.10.tgz#5958a82e41863cfc71f2307b3748e3491ba03785"
@@ -1465,12 +1470,13 @@
     strip-ansi "^6.0.0"
 
 "@wdio/mocha-framework@^6.6":
-  version "6.10.4"
-  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.10.4.tgz#39d1da840d359c2d5533a1c7f73fb74a2d9b5537"
-  integrity sha512-H/vcnNpXqUmiS8fIJW9mOMhzRfYXnTUSefw6sCa912yqMJgQFVOSACL5CiNMAeMydvCdSOWx3nc/6K1/2EBmag==
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.11.0.tgz#ef247495b656cb079073ec48a7d6218741c2557d"
+  integrity sha512-ZiwiaXFZO6ZmxbKqjp5A3rDDb6vGk5E0ODFe1XgmIbjmaqfkiRREOWjdiE29ft3ieq52NKNwFtGSmbhuqPHv+Q==
   dependencies:
-    "@wdio/logger" "6.10.4"
-    "@wdio/utils" "6.10.4"
+    "@types/mocha" "^8.0.0"
+    "@wdio/logger" "6.10.10"
+    "@wdio/utils" "6.11.0"
     expect-webdriverio "^1.1.5"
     mocha "^8.0.1"
 
