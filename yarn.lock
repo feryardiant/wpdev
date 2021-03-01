@@ -1368,11 +1368,11 @@
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
 "@wdio/browserstack-service@^6.6":
-  version "6.10.4"
-  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-6.10.4.tgz#eb983dbc89ebd3545e29438337b0a15b94e9960b"
-  integrity sha512-N1Q0SWzY0iKmPkSuAibf9yW9YEjh9oY5rHLnG6F3l2epx8lM4SxQf9IUjLKQbzq7sEqLJ6OXBFaH6tDcAa+qJg==
+  version "6.12.1"
+  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-6.12.1.tgz#648cbf419f434f7e7dd31f04f25fe9178e2733a8"
+  integrity sha512-B4zYlaE8q1Jxb6ctcuUPlKL3inwloETwks+cB9fFtVMDf/HH2Cau3Pi0CoIs8435EI+J4/1LxLHQV2uhzbBSlQ==
   dependencies:
-    "@wdio/logger" "6.10.4"
+    "@wdio/logger" "6.10.10"
     browserstack-local "^1.4.5"
     got "^11.0.2"
 
@@ -1446,16 +1446,6 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
-"@wdio/logger@6.10.4":
-  version "6.10.4"
-  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-6.10.4.tgz#f821c01996d15faa6b5a399be2aea02a2661b61f"
-  integrity sha512-I+1I/5CtQigy59QJen56PHuwV0yiQdnZaOxmXIP6FzpWkeXLjcoUNaCRDuKwJx5GKrUSDqmGlMWSH53scwwzHg==
-  dependencies:
-    chalk "^4.0.0"
-    loglevel "^1.6.0"
-    loglevel-plugin-prefix "^0.8.4"
-    strip-ansi "^6.0.0"
-
 "@wdio/mocha-framework@^6.6":
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.11.0.tgz#ef247495b656cb079073ec48a7d6218741c2557d"
@@ -1499,13 +1489,6 @@
     gaze "^1.1.2"
     webdriver "6.12.1"
     webdriverio "6.12.1"
-
-"@wdio/utils@6.10.4":
-  version "6.10.4"
-  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-6.10.4.tgz#d71fb5ee3b6f8855bb0a95d16c9e46697e61d6c4"
-  integrity sha512-DkFguYGKUcv9TmIYuuwS/pxpiGcgyv8gWUWRXffirt2OYpFXJNwB+S96CSQnjgb4B5MqSFgEti+gl8A2wsdDgQ==
-  dependencies:
-    "@wdio/logger" "6.10.4"
 
 "@wdio/utils@6.11.0":
   version "6.11.0"
