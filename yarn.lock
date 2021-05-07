@@ -1500,13 +1500,6 @@
     webdriver "6.12.1"
     webdriverio "6.12.1"
 
-"@wdio/utils@6.10.4":
-  version "6.10.4"
-  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-6.10.4.tgz#d71fb5ee3b6f8855bb0a95d16c9e46697e61d6c4"
-  integrity sha512-DkFguYGKUcv9TmIYuuwS/pxpiGcgyv8gWUWRXffirt2OYpFXJNwB+S96CSQnjgb4B5MqSFgEti+gl8A2wsdDgQ==
-  dependencies:
-    "@wdio/logger" "6.10.4"
-
 "@wdio/utils@6.11.0":
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-6.11.0.tgz#878c2500efb1a325bf5a66d2ff3d08162f976e8c"
@@ -5849,9 +5842,9 @@ homedir-polyfill@^1.0.1:
     parse-passwd "^1.0.0"
 
 hosted-git-info@^2.1.4:
-  version "2.8.8"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
-  integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 hosted-git-info@^3.0.6:
   version "3.0.7"
