@@ -142,16 +142,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.11.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b"
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/ae03311f45dfe194412081526be2e003960df74b",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
                 "shasum": ""
             },
             "require": {
@@ -250,6 +250,7 @@
                 "modx",
                 "moodle",
                 "osclass",
+                "pantheon",
                 "phpbb",
                 "piwik",
                 "ppi",
@@ -272,7 +273,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.11.0"
+                "source": "https://github.com/composer/installers/tree/v1.12.0"
             },
             "funding": [
                 {
@@ -288,7 +289,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-28T06:42:17+00:00"
+            "time": "2021-09-13T08:19:44+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -807,16 +808,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v1.1.7",
+            "version": "v1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "b240daa106d4e02f0c5b7079b41e31ddf66fddf8"
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/b240daa106d4e02f0c5b7079b41e31ddf66fddf8",
-                "reference": "b240daa106d4e02f0c5b7079b41e31ddf66fddf8",
+                "url": "https://api.github.com/repos/predis/predis/zipball/c50c3393bb9f47fa012d0cdfb727a266b0818259",
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259",
                 "shasum": ""
             },
             "require": {
@@ -861,7 +862,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v1.1.7"
+                "source": "https://github.com/predis/predis/tree/v1.1.9"
             },
             "funding": [
                 {
@@ -869,7 +870,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-04T19:34:46+00:00"
+            "time": "2021-10-05T19:02:38+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1022,29 +1023,33 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.0.21",
+            "version": "2.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "d46a9ccbe63dda65fb6e558e6b7a42e4f25d267a"
+                "reference": "e07e28c6ce3c5960606b4a0d20aef8348e35cd3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/d46a9ccbe63dda65fb6e558e6b7a42e4f25d267a",
-                "reference": "d46a9ccbe63dda65fb6e558e6b7a42e4f25d267a",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/e07e28c6ce3c5960606b4a0d20aef8348e35cd3a",
+                "reference": "e07e28c6ce3c5960606b4a0d20aef8348e35cd3a",
                 "shasum": ""
             },
             "require": {
-                "colinmollenhour/credis": "^1.11.1",
+                "colinmollenhour/credis": "^1.12.1",
                 "composer/installers": "~1.0",
                 "mnsami/composer-custom-directory-installer": "^2.0",
-                "php": "^5.6|^7.0|^8.0",
+                "php": ">=5.6.0",
                 "predis/predis": "^1.1"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "phpcompatibility/phpcompatibility-wp": "^2.1",
+                "phpunit/phpunit": "^7.0 || ^8.0",
                 "wp-coding-standards/wpcs": "^2.3"
+            },
+            "suggest": {
+                "ext-redis": "A PHP extension for Redis"
             },
             "type": "wordpress-plugin",
             "extra": {
@@ -1069,9 +1074,14 @@
             ],
             "description": "A persistent object cache backend for WordPress powered by Redis. Supports Predis, PhpRedis, Credis, HHVM, replication and clustering.",
             "homepage": "https://github.com/rhubarbgroup/redis-cache",
+            "keywords": [
+                "redis",
+                "wordpress"
+            ],
             "support": {
-                "issues": "https://github.com/rhubarbgroup/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.21"
+                "docs": "https://github.com/leocolomb/redis-cache/wiki",
+                "issues": "https://github.com/leocolomb/redis-cache/issues",
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.22"
             },
             "funding": [
                 {
@@ -1083,7 +1093,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-07-20T19:15:36+00:00"
+            "time": "2021-11-27T19:00:42+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -1888,16 +1898,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.2.5",
+            "version": "3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "31f3ea725711245195f62e54ffa402d8ef2fdba9"
+                "reference": "83e511e247de329283478496f7a1e114c9517506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/31f3ea725711245195f62e54ffa402d8ef2fdba9",
-                "reference": "31f3ea725711245195f62e54ffa402d8ef2fdba9",
+                "url": "https://api.github.com/repos/composer/semver/zipball/83e511e247de329283478496f7a1e114c9517506",
+                "reference": "83e511e247de329283478496f7a1e114c9517506",
                 "shasum": ""
             },
             "require": {
@@ -1949,7 +1959,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.2.5"
+                "source": "https://github.com/composer/semver/tree/3.2.6"
             },
             "funding": [
                 {
@@ -1965,7 +1975,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-24T12:41:47+00:00"
+            "time": "2021-10-25T11:34:17+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
