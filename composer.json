@@ -83,7 +83,7 @@
     "ext-imagick": "*",
     "ext-redis": "*",
     "composer/installers": "^1.9",
-    "humanmade/s3-uploads": "^2.1",
+    "humanmade/s3-uploads": "^3.0",
     "oscarotero/env": "^2.1",
     "rhubarbgroup/redis-cache": "^2.0",
     "roots/bedrock-autoloader": "^1.0",
@@ -101,14 +101,14 @@
     "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
-    "phpunit/phpunit": "^7.5",
+    "phpunit/phpunit": "^9",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.4",
     "wp-cli/core-command": "^2.0",
     "wp-cli/import-command": "^2.0",
     "wp-coding-standards/wpcs": "^2.1",
     "wpackagist-plugin/query-monitor": "^3.5",
-    "wpackagist-plugin/theme-check": "20200922.1"
+    "wpackagist-plugin/theme-check": "20211203"
   },
   "suggest": {
     "ext-bcmath": "*",
@@ -137,7 +137,13 @@
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "mnsami/composer-custom-directory-installer": true,
+      "roots/wordpress-core-installer": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true
