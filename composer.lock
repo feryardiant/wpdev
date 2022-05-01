@@ -149,16 +149,16 @@
         },
         {
             "name": "colinmollenhour/credis",
-            "version": "v1.12.2",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/colinmollenhour/credis.git",
-                "reference": "77e6ede2e01c4cfaade114fe1e07d2f9756949f1"
+                "reference": "afec8e58ec93d2291c127fa19709a048f28641e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/77e6ede2e01c4cfaade114fe1e07d2f9756949f1",
-                "reference": "77e6ede2e01c4cfaade114fe1e07d2f9756949f1",
+                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/afec8e58ec93d2291c127fa19709a048f28641e5",
+                "reference": "afec8e58ec93d2291c127fa19709a048f28641e5",
                 "shasum": ""
             },
             "require": {
@@ -190,9 +190,9 @@
             "homepage": "https://github.com/colinmollenhour/credis",
             "support": {
                 "issues": "https://github.com/colinmollenhour/credis/issues",
-                "source": "https://github.com/colinmollenhour/credis/tree/v1.12.2"
+                "source": "https://github.com/colinmollenhour/credis/tree/v1.13.0"
             },
-            "time": "2022-03-08T18:12:43+00:00"
+            "time": "2022-04-07T14:57:22+00:00"
         },
         {
             "name": "composer/installers",
@@ -1234,21 +1234,21 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.0.23",
+            "version": "2.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "758b807e82c617bb4eaf9252485ade87eb201d21"
+                "reference": "a2a3c61bfac01e9f1106c3396439a05a7a83d001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/758b807e82c617bb4eaf9252485ade87eb201d21",
-                "reference": "758b807e82c617bb4eaf9252485ade87eb201d21",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/a2a3c61bfac01e9f1106c3396439a05a7a83d001",
+                "reference": "a2a3c61bfac01e9f1106c3396439a05a7a83d001",
                 "shasum": ""
             },
             "require": {
                 "colinmollenhour/credis": "^1.12.1",
-                "composer/installers": "~1.0",
+                "composer/installers": "~1.0 || ~2.0",
                 "mnsami/composer-custom-directory-installer": "^2.0",
                 "php": ">=5.6.0",
                 "predis/predis": "^1.1"
@@ -1292,7 +1292,7 @@
             "support": {
                 "docs": "https://github.com/leocolomb/redis-cache/wiki",
                 "issues": "https://github.com/leocolomb/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.23"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.0.25"
             },
             "funding": [
                 {
@@ -1304,7 +1304,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-24T18:44:57+00:00"
+            "time": "2022-04-16T23:32:00+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -2000,7 +2000,7 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank",
@@ -2020,7 +2020,7 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-child",
@@ -2041,7 +2041,7 @@
         },
         {
             "name": "wpdev/blank-extra",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-extra",
@@ -5781,5 +5781,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
