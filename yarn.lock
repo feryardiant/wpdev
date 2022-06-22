@@ -1604,16 +1604,16 @@
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
 "@wdio/browserstack-service@^7.19":
-  version "7.19.3"
-  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.19.3.tgz#56e5564eace694e48278060d5a53a5d70c21642e"
-  integrity sha512-w+P9C69ddRDcBtbPCBMhBIwL7/ivbJg0oXuHEpXlwVo8yM8piYlwhWn13bmuNF92XpQ3MSr6YC/gg+hzLV1cDQ==
+  version "7.20.4"
+  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.20.4.tgz#066b1134be344ece42e66e91be346cde3aed57e2"
+  integrity sha512-slSv1xxtiyi0BaHttZ//NxM8I6oviNdjH88kqbgzA9nraRCTTeW69GB11Pf3NGF+5T1rkwDATYb6s2RLjWhXWQ==
   dependencies:
-    "@types/node" "^17.0.4"
+    "@types/node" "^18.0.0"
     "@wdio/logger" "7.19.0"
-    "@wdio/types" "7.19.1"
+    "@wdio/types" "7.20.3"
     browserstack-local "^1.4.5"
     got "^11.0.2"
-    webdriverio "7.19.3"
+    webdriverio "7.20.4"
 
 "@wdio/cli@^7.19":
   version "7.20.4"
