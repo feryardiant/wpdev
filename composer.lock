@@ -1946,15 +1946,15 @@
         },
         {
             "name": "wpackagist-plugin/contact-form-7",
-            "version": "5.5.6",
+            "version": "5.5.6.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/contact-form-7/",
-                "reference": "tags/5.5.6"
+                "reference": "tags/5.5.6.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/contact-form-7.5.5.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/contact-form-7.5.5.6.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
