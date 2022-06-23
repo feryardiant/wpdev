@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.12",
     "@babel/preset-env": "^7.12",
-    "@commitlint/cli": "^11.0",
+    "@commitlint/cli": "^17.0.2",
     "@feryardiant/commitlint-config": "~0.2.0",
     "@wdio/browserstack-service": "^7.19",
     "@wdio/cli": "^7.19",
@@ -55,11 +55,11 @@
     "gulp-wp-pot": "2.5",
     "gulp-zip": "^5.0",
     "husky": "^4.3",
-    "lint-staged": "^12.3",
+    "lint-staged": "^13.0.2",
     "standard-changelog": "^2.0.27",
     "standard-version": "^9.0",
     "stylelint": "^14.6.0",
-    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-scss": "^4.2.0",
     "webdriverio": "^7.19",
     "yargs": "^17.4"
