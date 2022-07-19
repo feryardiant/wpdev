@@ -23,7 +23,7 @@ jobs:
           - 3306
     strategy:
       matrix:
-        php-versions: ['7.2']
+        php-versions: ['7.3']
         wp-versions: ['5.0', '5.1', '5.2', '5.3', '5.4', '5.5']
     steps:
     - name: Checkout
