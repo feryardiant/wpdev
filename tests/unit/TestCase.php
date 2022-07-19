@@ -19,6 +19,14 @@ class TestCase extends WP_Mock_TestCase {
         'author_uri' => 'http://example.com',
     ];
 
+    public function setUp(): void {
+        mock::setUp();
+    }
+
+    public function tearDown(): void {
+        mock::tearDown();
+    }
+
     protected function new_instance_without_constructor(string $class_name, Closure $callback = null) {
         $reflector = new ReflectionClass($class_name);
 
