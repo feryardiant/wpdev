@@ -1233,16 +1233,16 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.1.2",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "5698b7b9f46ed549040878c216a6c5ec414d323a"
+                "reference": "f1e40ff1df31a7c3ac5d9fcbb0886f7ad184302f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/5698b7b9f46ed549040878c216a6c5ec414d323a",
-                "reference": "5698b7b9f46ed549040878c216a6c5ec414d323a",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/f1e40ff1df31a7c3ac5d9fcbb0886f7ad184302f",
+                "reference": "f1e40ff1df31a7c3ac5d9fcbb0886f7ad184302f",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1294,7 @@
             "support": {
                 "docs": "https://github.com/leocolomb/redis-cache/wiki",
                 "issues": "https://github.com/leocolomb/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.1.2"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.1.6"
             },
             "funding": [
                 {
@@ -1306,7 +1306,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-19T03:21:39+00:00"
+            "time": "2022-07-20T20:21:45+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -2061,7 +2061,7 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank",
@@ -2081,7 +2081,7 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-child",
@@ -2102,7 +2102,7 @@
         },
         {
             "name": "wpdev/blank-extra",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-extra",
@@ -5877,5 +5877,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
