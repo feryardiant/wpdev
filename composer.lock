@@ -197,16 +197,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v2.1.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "af93ba6e52236418f07a278033eba6959ee5b983"
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/af93ba6e52236418f07a278033eba6959ee5b983",
-                "reference": "af93ba6e52236418f07a278033eba6959ee5b983",
+                "url": "https://api.github.com/repos/composer/installers/zipball/c29dc4b93137acb82734f672c37e029dfbd95b35",
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35",
                 "shasum": ""
             },
             "require": {
@@ -294,6 +294,7 @@
                 "magento",
                 "majima",
                 "mako",
+                "matomo",
                 "mediawiki",
                 "miaoxing",
                 "modulework",
@@ -321,7 +322,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v2.1.1"
+                "source": "https://github.com/composer/installers/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -337,7 +338,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-13T09:13:00+00:00"
+            "time": "2022-08-20T06:45:11+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1233,16 +1234,16 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "5698b7b9f46ed549040878c216a6c5ec414d323a"
+                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/5698b7b9f46ed549040878c216a6c5ec414d323a",
-                "reference": "5698b7b9f46ed549040878c216a6c5ec414d323a",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/56e0e20365afa2bdedd4408cc864464b93fb9def",
+                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def",
                 "shasum": ""
             },
             "require": {
@@ -1255,8 +1256,10 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "dms/phpunit-arraysubset-asserts": "^0.4.0",
+                "php-stubs/wp-cli-stubs": "^2.6",
                 "phpcompatibility/phpcompatibility-wp": "^2.1",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "szepeviktor/phpstan-wordpress": "^1.1",
                 "wp-coding-standards/wpcs": "^2.3",
                 "yoast/wp-test-utils": "^1.0"
             },
@@ -1294,7 +1297,7 @@
             "support": {
                 "docs": "https://github.com/leocolomb/redis-cache/wiki",
                 "issues": "https://github.com/leocolomb/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.1.2"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.2.0"
             },
             "funding": [
                 {
@@ -1306,7 +1309,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-19T03:21:39+00:00"
+            "time": "2022-08-26T19:11:35+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -2061,7 +2064,7 @@
         },
         {
             "name": "wpdev/blank",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank",
@@ -2081,7 +2084,7 @@
         },
         {
             "name": "wpdev/blank-child",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-child",
@@ -2102,7 +2105,7 @@
         },
         {
             "name": "wpdev/blank-extra",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/blank-extra",
@@ -5877,5 +5880,5 @@
         "ext-redis": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
