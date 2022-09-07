@@ -1735,9 +1735,9 @@
     webdriverio "7.20.7"
 
 "@wdio/cli@^7.19":
-  version "7.20.7"
-  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-7.20.7.tgz#e3bd06fab741b6296dd2f84a2b1ceef2f83ac340"
-  integrity sha512-7h6CNEoq5LLVxKO2swfXgmBAzYaWww2Iei3mHqyrE/jHsupq5ju7QKtdoaOTlRHVIDCqRZzmePafl2hu3DAXXw==
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-7.24.0.tgz#c2049b64396b4b6f7b7a4f77f3cffd346a870192"
+  integrity sha512-eP1f6Bw8glrMDMVzeLfb1PU3COSUn7PnMeJE210nuVarBBnfwKIJmu4WrYoYyImOThnmuiYMGpI8pbyBfm23nA==
   dependencies:
     "@types/ejs" "^3.0.5"
     "@types/fs-extra" "^9.0.4"
@@ -1747,11 +1747,11 @@
     "@types/lodash.union" "^4.6.6"
     "@types/node" "^18.0.0"
     "@types/recursive-readdir" "^2.2.0"
-    "@wdio/config" "7.20.7"
+    "@wdio/config" "7.24.0"
     "@wdio/logger" "7.19.0"
-    "@wdio/protocols" "7.20.6"
-    "@wdio/types" "7.20.7"
-    "@wdio/utils" "7.20.7"
+    "@wdio/protocols" "7.22.0"
+    "@wdio/types" "7.24.0"
+    "@wdio/utils" "7.24.0"
     async-exit-hook "^2.0.1"
     chalk "^4.0.0"
     chokidar "^3.0.0"
@@ -1764,7 +1764,7 @@
     lodash.union "^4.6.0"
     mkdirp "^1.0.4"
     recursive-readdir "^2.2.2"
-    webdriverio "7.20.7"
+    webdriverio "7.24.0"
     yargs "^17.0.0"
     yarn-install "^1.0.0"
 
@@ -11177,7 +11177,7 @@ webdriver@7.24.0:
     ky "0.30.0"
     lodash.merge "^4.6.1"
 
-webdriverio@7.20.7, webdriverio@^7.19:
+webdriverio@7.20.7:
   version "7.20.7"
   resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-7.20.7.tgz#2099ffceae731015fa480a0d98f4f0cdbcf53903"
   integrity sha512-8Vc9+Jp91cG89dXtVDhlrUxigaaixWly8hXOtMf3sp5mAJ5hYSJtthTXcoNWK0HRf6yo/SYKziCRr91B9JCT1Q==
@@ -11210,7 +11210,7 @@ webdriverio@7.20.7, webdriverio@^7.19:
     serialize-error "^8.0.0"
     webdriver "7.20.7"
 
-webdriverio@7.24.0:
+webdriverio@7.24.0, webdriverio@^7.19:
   version "7.24.0"
   resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-7.24.0.tgz#9a16a302dc7e555618eee5b43b5f57a4c997f032"
   integrity sha512-6V4+KS1SHE04+daV71TSJCd3RhPihbA5ShxV1tRCNxqdqzLD7XLxksPWvini9ieeZ9jmt7q4/SgBM8MY+08d6A==
