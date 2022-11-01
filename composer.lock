@@ -973,16 +973,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c"
+                "reference": "ff59f745815150c65ed388f7d64e7660fe961771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c",
-                "reference": "8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c",
+                "url": "https://api.github.com/repos/predis/predis/zipball/ff59f745815150c65ed388f7d64e7660fe961771",
+                "reference": "ff59f745815150c65ed388f7d64e7660fe961771",
                 "shasum": ""
             },
             "require": {
@@ -1032,7 +1032,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v2.0.2"
+                "source": "https://github.com/predis/predis/tree/v2.0.3"
             },
             "funding": [
                 {
@@ -1040,7 +1040,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-06T14:34:14+00:00"
+            "time": "2022-10-11T16:52:29+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1248,16 +1248,16 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def"
+                "reference": "d2fe9f3fcb5dcf8fe4e06a3327bfc8a26a7a51db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/56e0e20365afa2bdedd4408cc864464b93fb9def",
-                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/d2fe9f3fcb5dcf8fe4e06a3327bfc8a26a7a51db",
+                "reference": "d2fe9f3fcb5dcf8fe4e06a3327bfc8a26a7a51db",
                 "shasum": ""
             },
             "require": {
@@ -1311,7 +1311,7 @@
             "support": {
                 "docs": "https://github.com/leocolomb/redis-cache/wiki",
                 "issues": "https://github.com/leocolomb/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.2.0"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.2.1"
             },
             "funding": [
                 {
@@ -1323,7 +1323,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-26T19:11:35+00:00"
+            "time": "2022-10-31T01:04:50+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
