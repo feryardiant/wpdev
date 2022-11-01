@@ -1791,12 +1791,12 @@
     glob "^8.0.3"
 
 "@wdio/dot-reporter@^7.19":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-7.25.0.tgz#a5cd71840867e7d9d3c0459affabf1aa43b2e334"
-  integrity sha512-VxvBVWK8wtegFJbFga8qOHShpxhDZUZY5BRgBxbmQKiGO5wznYJWUXc46oyeq2M480LKI917kMGukOBqNX4v5w==
+  version "7.25.4"
+  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-7.25.4.tgz#20c9914664c3de8442c9b56db7b2a09c31a60990"
+  integrity sha512-upUvIQ4aeJocWF+zovkBkiiVWOPhN4NV1ESlDopsfuc18ehYGu5TpIX2H7xCMJct7p8WrTAdyO9Q2Yr/h+t3dQ==
   dependencies:
-    "@wdio/reporter" "7.25.0"
-    "@wdio/types" "7.25.0"
+    "@wdio/reporter" "7.25.4"
+    "@wdio/types" "7.25.4"
     chalk "^4.0.0"
 
 "@wdio/local-runner@^7.19":
@@ -1854,17 +1854,17 @@
   dependencies:
     "@wdio/utils" "7.25.1"
 
-"@wdio/reporter@7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.25.0.tgz#a2c9896a4f95b96fa4b3cea7f0f46dd095c8e0f6"
-  integrity sha512-Hp42KdBruuv3gR+zavw46l3FyElCTW8EABib59h1/G0J6rT8Vjf5H5wGXdv+K2NJCJqhZd2HkpgmMlx7B9bstA==
+"@wdio/reporter@7.25.4":
+  version "7.25.4"
+  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.25.4.tgz#b6a69652dd0c4ec131255000af128eac403a18b9"
+  integrity sha512-M37qzEmF5qNffyZmRQGjDlrXqWW21EFvgW8wsv1b/NtfpZc0c0MoRpeh6BnvX1KcE4nCXfjXgSJPOqV4ZCzUEQ==
   dependencies:
     "@types/diff" "^5.0.0"
     "@types/node" "^18.0.0"
     "@types/object-inspect" "^1.8.0"
     "@types/supports-color" "^8.1.0"
     "@types/tmp" "^0.2.0"
-    "@wdio/types" "7.25.0"
+    "@wdio/types" "7.25.4"
     diff "^5.0.0"
     fs-extra "^10.0.0"
     object-inspect "^1.10.3"
@@ -1896,6 +1896,14 @@
   version "7.25.1"
   resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.25.1.tgz#9e06f5479bc3c95f78811ba77dd96470417f882a"
   integrity sha512-9Xt2U0YXYxRW4UvMFwjt+44UkfhwrI1gPhW+y56SubpyKaUfdNGberteboQoR/7Os1SVtJry4FohEZNmFzPK6g==
+  dependencies:
+    "@types/node" "^18.0.0"
+    got "^11.8.1"
+
+"@wdio/types@7.25.4":
+  version "7.25.4"
+  resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.25.4.tgz#6f8f028e3108dc880de5068264695f1572e65352"
+  integrity sha512-muvNmq48QZCvocctnbe0URq2FjJjUPIG4iLoeMmyF0AQgdbjaUkMkw3BHYNHVTbSOU9WMsr2z8alhj/I2H6NRQ==
   dependencies:
     "@types/node" "^18.0.0"
     got "^11.8.1"
