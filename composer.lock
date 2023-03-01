@@ -152,16 +152,16 @@
         },
         {
             "name": "colinmollenhour/credis",
-            "version": "v1.13.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/colinmollenhour/credis.git",
-                "reference": "85df015088e00daf8ce395189de22c8eb45c8d49"
+                "reference": "dccc8a46586475075fbb012d8bd523b8a938c2dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/85df015088e00daf8ce395189de22c8eb45c8d49",
-                "reference": "85df015088e00daf8ce395189de22c8eb45c8d49",
+                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/dccc8a46586475075fbb012d8bd523b8a938c2dc",
+                "reference": "dccc8a46586475075fbb012d8bd523b8a938c2dc",
                 "shasum": ""
             },
             "require": {
@@ -193,9 +193,9 @@
             "homepage": "https://github.com/colinmollenhour/credis",
             "support": {
                 "issues": "https://github.com/colinmollenhour/credis/issues",
-                "source": "https://github.com/colinmollenhour/credis/tree/v1.13.1"
+                "source": "https://github.com/colinmollenhour/credis/tree/v1.14.0"
             },
-            "time": "2022-06-20T22:56:59+00:00"
+            "time": "2022-11-09T01:18:39+00:00"
         },
         {
             "name": "composer/installers",
@@ -973,16 +973,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v2.0.2",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c"
+                "reference": "c5b60884e89630f9518a7919f0566db438f0fc9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c",
-                "reference": "8b5fa928560b48a054fb1fd485fc65f2d8aa9e5c",
+                "url": "https://api.github.com/repos/predis/predis/zipball/c5b60884e89630f9518a7919f0566db438f0fc9a",
+                "reference": "c5b60884e89630f9518a7919f0566db438f0fc9a",
                 "shasum": ""
             },
             "require": {
@@ -992,8 +992,7 @@
                 "phpunit/phpunit": "^8.0 || ~9.4.4"
             },
             "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+                "ext-curl": "Allows access to Webdis when paired with phpiredis"
             },
             "type": "library",
             "extra": {
@@ -1012,15 +1011,15 @@
             ],
             "authors": [
                 {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net",
-                    "role": "Creator & Maintainer"
-                },
-                {
                     "name": "Till Krüss",
                     "homepage": "https://till.im",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net",
+                    "role": "Creator"
                 }
             ],
             "description": "A flexible and feature-complete Redis client for PHP.",
@@ -1032,7 +1031,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v2.0.2"
+                "source": "https://github.com/predis/predis/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -1040,7 +1039,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-06T14:34:14+00:00"
+            "time": "2023-01-17T20:57:35+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1248,16 +1247,16 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.2.0",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def"
+                "reference": "0293eb1576aca93ed568360cb643bd1bfc50decc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/56e0e20365afa2bdedd4408cc864464b93fb9def",
-                "reference": "56e0e20365afa2bdedd4408cc864464b93fb9def",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/0293eb1576aca93ed568360cb643bd1bfc50decc",
+                "reference": "0293eb1576aca93ed568360cb643bd1bfc50decc",
                 "shasum": ""
             },
             "require": {
@@ -1270,9 +1269,10 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "dms/phpunit-arraysubset-asserts": "^0.4.0",
-                "php-stubs/wp-cli-stubs": "^2.6",
+                "php-stubs/wp-cli-stubs": "^2.7",
                 "phpcompatibility/phpcompatibility-wp": "^2.1",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "squizlabs/php_codesniffer": "^3.7",
                 "szepeviktor/phpstan-wordpress": "^1.1",
                 "wp-coding-standards/wpcs": "^2.3",
                 "yoast/wp-test-utils": "^1.0"
@@ -1311,7 +1311,7 @@
             "support": {
                 "docs": "https://github.com/leocolomb/redis-cache/wiki",
                 "issues": "https://github.com/leocolomb/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.2.0"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.2.4"
             },
             "funding": [
                 {
@@ -1323,7 +1323,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-26T19:11:35+00:00"
+            "time": "2023-02-26T17:50:14+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
