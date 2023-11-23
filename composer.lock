@@ -1392,7 +1392,7 @@
         },
         {
             "name": "roots/wordpress",
-            "version": "6.0.2",
+            "version": "6.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/wordpress.git",
@@ -1423,16 +1423,12 @@
             ],
             "support": {
                 "issues": "https://github.com/roots/wordpress/issues",
-                "source": "https://github.com/roots/wordpress/tree/6.0.2"
+                "source": "https://github.com/roots/wordpress/tree/6.4.1"
             },
             "funding": [
                 {
                     "url": "https://github.com/roots",
                     "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/rootsdev",
-                    "type": "patreon"
                 }
             ],
             "time": "2022-06-01T16:54:37+00:00"
@@ -1510,22 +1506,22 @@
         },
         {
             "name": "roots/wordpress-no-content",
-            "version": "6.0.2",
+            "version": "6.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress.git",
-                "reference": "6.0.2"
+                "reference": "6.4.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/release/wordpress-6.0.2-no-content.zip",
-                "shasum": "9e78ef932a99d62e6a0b045ff846fe5b2bf35e29"
+                "url": "https://downloads.wordpress.org/release/wordpress-6.4.1-no-content.zip",
+                "shasum": "eb9d263b8ca8f087086dd41439d02900c5f66f99"
             },
             "require": {
-                "php": ">= 5.6.20"
+                "php": ">= 7.0.0"
             },
             "provide": {
-                "wordpress/core-implementation": "6.0.2"
+                "wordpress/core-implementation": "6.4.1"
             },
             "suggest": {
                 "ext-curl": "Performs remote request operations.",
@@ -1576,7 +1572,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2022-08-30T17:52:03+00:00"
+            "time": "2023-11-09T01:14:36+00:00"
         },
         {
             "name": "roots/wp-config",
