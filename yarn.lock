@@ -1982,9 +1982,9 @@
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
 "@wdio/browserstack-service@^7.19":
-  version "7.35.0"
-  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.35.0.tgz#42e5d0128e71097ff49e1e0ac81d874b0c856f45"
-  integrity sha512-MqyzK+0Cmx2RD2z195kzvpD6wpL3FDrHJlT0QLMGsAsCZ8fg5j4HbJUCbUIa0jfZ7unez5hgf6Kk0l8bAPKz/Q==
+  version "7.37.0"
+  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.37.0.tgz#f5687c56ab65161087d42df2085295b490687dd1"
+  integrity sha512-gJ36FqvwPL+f74xidOqVbnl/DT79HufY+GdeRb5zt0uf2Yi0/h7JE2ztrZwf3vyd5qqDGYvjkrnklJ33c/OWdg==
   dependencies:
     "@percy/appium-app" "^2.0.1"
     "@percy/selenium-webdriver" "^2.0.2"
@@ -1999,7 +1999,7 @@
     gitconfiglocal "^2.1.0"
     got "^11.0.2"
     uuid "^9.0.1"
-    webdriverio "7.35.0"
+    webdriverio "7.36.0"
     winston-transport "^4.5.0"
     yauzl "^2.10.0"
 
@@ -4380,11 +4380,6 @@ devtools-protocol@0.0.981744:
   version "0.0.981744"
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.981744.tgz#9960da0370284577d46c28979a0b32651022bacf"
   integrity sha512-0cuGS8+jhR67Fy7qG3i3Pc7Aw494sb9yG9QgpG97SFVWwolgYjlhJg7n+UaHxOQT30d1TYu/EYe9k01ivLErIg==
-
-devtools-protocol@^0.0.1258865:
-  version "0.0.1258865"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1258865.tgz#6be1356f551e08c57a4eedd69cfc24a595e2c085"
-  integrity sha512-bNa8CwBNfe77CMJ7maORqOxfS1LKi20wtUnBMKAWb+swPMTpQpc/cIVqP/rugeuGfX7YhKmr6kOIJ62312pNaQ==
 
 devtools-protocol@^0.0.1260888:
   version "0.0.1260888"
@@ -11650,39 +11645,6 @@ webdriver@7.33.0:
     got "^11.0.2"
     ky "0.30.0"
     lodash.merge "^4.6.1"
-
-webdriverio@7.35.0:
-  version "7.35.0"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-7.35.0.tgz#f9c93cf468e025d3b6e47fc75f079eb24afa2ea0"
-  integrity sha512-bXiINpNRg45J6NnfnvV2h7Y1Ck5lvsagsOCvnytwzAoDX4WeYMDJtWVHnyXTJplIzcdZ+/PHlYe+NTQQDUP+Fw==
-  dependencies:
-    "@types/aria-query" "^5.0.0"
-    "@types/node" "^18.0.0"
-    "@wdio/config" "7.33.0"
-    "@wdio/logger" "7.26.0"
-    "@wdio/protocols" "7.27.0"
-    "@wdio/repl" "7.33.0"
-    "@wdio/types" "7.33.0"
-    "@wdio/utils" "7.33.0"
-    archiver "^5.0.0"
-    aria-query "^5.2.1"
-    css-shorthand-properties "^1.1.1"
-    css-value "^0.0.1"
-    devtools "7.35.0"
-    devtools-protocol "^0.0.1258865"
-    fs-extra "^11.1.1"
-    grapheme-splitter "^1.0.2"
-    lodash.clonedeep "^4.5.0"
-    lodash.isobject "^3.0.2"
-    lodash.isplainobject "^4.0.6"
-    lodash.zip "^4.2.0"
-    minimatch "^6.0.4"
-    puppeteer-core "^13.1.3"
-    query-selector-shadow-dom "^1.0.0"
-    resq "^1.9.1"
-    rgb2hex "0.2.5"
-    serialize-error "^8.0.0"
-    webdriver "7.33.0"
 
 webdriverio@7.36.0, webdriverio@^7.19:
   version "7.36.0"
