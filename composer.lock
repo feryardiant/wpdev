@@ -1242,16 +1242,16 @@
         },
         {
             "name": "rhubarbgroup/redis-cache",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rhubarbgroup/redis-cache.git",
-                "reference": "e580c96fc6989731cdf212639887c412d4a7c2a3"
+                "reference": "14d740bdc10014906a6ccb09f2fd0a41722c9991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/e580c96fc6989731cdf212639887c412d4a7c2a3",
-                "reference": "e580c96fc6989731cdf212639887c412d4a7c2a3",
+                "url": "https://api.github.com/repos/rhubarbgroup/redis-cache/zipball/14d740bdc10014906a6ccb09f2fd0a41722c9991",
+                "reference": "14d740bdc10014906a6ccb09f2fd0a41722c9991",
                 "shasum": ""
             },
             "require": {
@@ -1306,7 +1306,7 @@
             "support": {
                 "docs": "https://github.com/rhubarbgroup/redis-cache",
                 "issues": "https://github.com/rhubarbgroup/redis-cache/issues",
-                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.5.1"
+                "source": "https://github.com/rhubarbgroup/redis-cache/tree/2.5.2"
             },
             "funding": [
                 {
@@ -1318,7 +1318,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-29T18:54:39+00:00"
+            "time": "2024-04-22T18:55:58+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
