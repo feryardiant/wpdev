@@ -2008,9 +2008,9 @@
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
 "@wdio/browserstack-service@^7.19":
-  version "7.37.1"
-  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.37.1.tgz#e50e16c21a58e69f1ddd03f841e4fa50e211c380"
-  integrity sha512-H7JOUXJBC1t3TCmhE9xkJKZMkOJzEoE4WHVGpdKYxCLYg5lqj9um0lz2bm0y6dQWc6xdHnJixgEpLLJAvs7caQ==
+  version "7.38.0"
+  resolved "https://registry.yarnpkg.com/@wdio/browserstack-service/-/browserstack-service-7.38.0.tgz#bf83d975ada2e0ccc84684f4d14498cf4ed9845c"
+  integrity sha512-FqAZlvD194+5d0BzssL0iyjkN09aQg6rP1MQkFdh6fzpGMaj0z8Jv2OKc1oWXfPg//vGSW3uvTd6Ai/XpgN4tQ==
   dependencies:
     "@percy/appium-app" "^2.0.1"
     "@percy/selenium-webdriver" "^2.0.2"
