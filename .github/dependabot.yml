@@ -1,47 +1,35 @@
 version: 2
+
 updates:
-- package-ecosystem: composer
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "22:00"
-    timezone: Asia/Jakarta
-  open-pull-requests-limit: 10
-  versioning-strategy: lockfile-only
-  ignore:
-  - dependency-name: phpunit/phpunit
-    versions:
-    - ">= 8.a, < 9"
-  - dependency-name: vlucas/phpdotenv
-    versions:
-    - ">= 5.a, < 6"
-  - dependency-name: composer/installers
-    versions:
-    - 1.10.0
-  - dependency-name: roots/wordpress
-    versions:
-    - "5.6"
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "22:00"
-    timezone: Asia/Jakarta
-  open-pull-requests-limit: 10
-  versioning-strategy: lockfile-only
-  ignore:
-  - dependency-name: eslint
-    versions:
-    - ">= 7.a, < 8"
-  - dependency-name: "@wdio/dot-reporter"
-    versions:
-    - 6.10.6
-  - dependency-name: "@wdio/cli"
-    versions:
-    - 6.10.11
-  - dependency-name: "@wdio/mocha-framework"
-    versions:
-    - 6.10.11
-  - dependency-name: "@babel/core"
-    versions:
-    - 7.12.10
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      timezone: Asia/Jakarta
+
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: weekly
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 10
+    versioning-strategy: lockfile-only
+    labels:
+      - dependencies
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 10
+    versioning-strategy: lockfile-only
+    labels:
+      - dependencies
+    groups:
+      dependencies:
+        dependency-type: production
+        patterns: ['*']
+      dev-dependencies:
+        dependency-type: development
+        patterns: ['*']
