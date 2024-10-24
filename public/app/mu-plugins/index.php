@@ -10,7 +10,10 @@ add_filter( 'http_request_args', function ( $args ) {
         return $args;
     }
 
-    $args['sslcertificates'] = ini_get( 'curl.cainfo' ) ?? $args['sslcertificates'];
+    if (! empty($cainfo = ini_get( 'curl.cainfo' ))) {
+        $args['sslcertificates'] = $cainfo;
+    }
+
 
     return $args;
 }, 0, 1 );

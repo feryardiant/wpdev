@@ -149,7 +149,7 @@ Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?? true);
 /**
  * Multisite Settings
  */
-// Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE'));
+Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE') ?? false);
 $multisite = env('MULTISITE') ?? false;
 
 if ($multisite) {
