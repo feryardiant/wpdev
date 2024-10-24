@@ -19,7 +19,7 @@ class Menu extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
 		add_filter( 'wp_nav_menu_args', [ $this, 'nav_menu_args' ], 10 );
@@ -39,10 +39,13 @@ class Menu extends Feature {
 		 * Register menu locations.
 		 */
 		register_nav_menus(
-			apply_filters( 'blank_register_nav_menus_args', [
-				'primary' => __( 'Primary Menu', 'blank' ),
-				'footer'  => __( 'Footer Menu', 'blank' ),
-			] )
+			apply_filters(
+				'blank_register_nav_menus_args',
+				[
+					'primary' => __( 'Primary Menu', 'blank' ),
+					'footer'  => __( 'Footer Menu', 'blank' ),
+				]
+			)
 		);
 	}
 

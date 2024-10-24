@@ -29,16 +29,22 @@ defined( 'BLANK_EXTRA_URL' ) || define( 'BLANK_EXTRA_URL', plugin_dir_url( __FIL
 /**
  * Load the plugin textdomain
  */
-add_action( 'plugins_loaded', function () {
-	load_plugin_textdomain( 'blank-extra', false, BLANK_EXTRA_DIR . '/languages' );
-} );
-
-add_filter( 'blank_init', function ( $features ) {
-	$features[] = Blank_Extra\Options::class;
-
-	if ( class_exists( Jetpack::class ) ) {
-		$features[] = Blank_Extra\Integrations\JetPack::class;
+add_action(
+	'plugins_loaded',
+	function () {
+		load_plugin_textdomain( 'blank-extra', false, BLANK_EXTRA_DIR . '/languages' );
 	}
+);
 
-	return $features;
-} );
+add_filter(
+	'blank_init',
+	function ( $features ) {
+		$features[] = Blank_Extra\Options::class;
+
+		if ( class_exists( Jetpack::class ) ) {
+			$features[] = Blank_Extra\Integrations\JetPack::class;
+		}
+
+		return $features;
+	}
+);

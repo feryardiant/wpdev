@@ -41,7 +41,7 @@ class Template extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'wp_head', [ $this, 'head' ] );
 
 		add_action( 'blank_before_main', [ $this, 'before_main' ], 10 );
@@ -62,7 +62,7 @@ class Template extends Feature {
 	 * @since 0.1.0
 	 * @return void
 	 */
-	public function head() : void {
+	public function head(): void {
 		$viewport = [
 			'width'         => 1024,
 			'initial-scale' => '1',
@@ -91,7 +91,7 @@ class Template extends Feature {
 	 * @param  array $classes
 	 * @return array
 	 */
-	public function body_classes( $classes ) : array {
+	public function body_classes( $classes ): array {
 		// Adds a class of hfeed to non-singular pages.
 		if ( ! is_singular() ) {
 			$classes[] = 'hfeed';
@@ -171,20 +171,23 @@ class Template extends Feature {
 	 * @param  bool   $returns
 	 * @return string
 	 */
-	public function site_logo_image( string $size = 'full', array $attr = [], bool $returns = true ) : string {
+	public function site_logo_image( string $size = 'full', array $attr = [], bool $returns = true ): string {
 		$logo = $this->site_logo( $size );
 
 		if ( ! $logo ) {
 			return '';
 		}
 
-		$attr = wp_parse_args( $attr, [
-			'class'  => 'custom-logo',
-			'src'    => esc_url( $logo->src ),
-			'alt'    => esc_attr( $logo->alt ),
-			'width'  => $logo->width ?? null,
-			'height' => $logo->height ?? null,
-		] );
+		$attr = wp_parse_args(
+			$attr,
+			[
+				'class'  => 'custom-logo',
+				'src'    => esc_url( $logo->src ),
+				'alt'    => esc_attr( $logo->alt ),
+				'width'  => $logo->width ?? null,
+				'height' => $logo->height ?? null,
+			]
+		);
 
 		return make_html_tag( 'img', $attr, true, $returns );
 	}
@@ -282,9 +285,9 @@ class Template extends Feature {
 
 			'button' => [
 				'attr' => [
-					'class'       => 'button',
-					'type'        => 'submit',
-					'aria-label'  => __( 'Submit', 'blank' ),
+					'class'      => 'button',
+					'type'       => 'submit',
+					'aria-label' => __( 'Submit', 'blank' ),
 				],
 				'ends' => [
 					'i' => [
@@ -311,10 +314,15 @@ class Template extends Feature {
 		$text      = apply_filters( 'blank_skip_link_text', __( 'Skip to content', 'blank' ) );
 		$target_id = apply_filters( 'blank_skip_link_target', $target_id );
 
-		make_html_tag( 'a', [
-			'class' => [ 'skip-link', 'screen-reader-text' ],
-			'href'  => '#' . esc_attr( $target_id ),
-		], $text, false );
+		make_html_tag(
+			'a',
+			[
+				'class' => [ 'skip-link', 'screen-reader-text' ],
+				'href'  => '#' . esc_attr( $target_id ),
+			],
+			$text,
+			false
+		);
 	}
 
 	/**
@@ -328,11 +336,15 @@ class Template extends Feature {
 	public function wrapper_attr( array $attr = [], bool $returns = false ) {
 		$attr = wp_parse_args( $attr, [ 'class' => [] ] );
 
-		add_filter( 'blank_wrapper_attributes', function ( $attr ) {
-			array_unshift( $attr['class'], 'site-wrapper' );
+		add_filter(
+			'blank_wrapper_attributes',
+			function ( $attr ) {
+				array_unshift( $attr['class'], 'site-wrapper' );
 
-			return $attr;
-		}, 99 );
+				return $attr;
+			},
+			99
+		);
 
 		$attr['class'][] = 'container';
 
@@ -393,11 +405,15 @@ class Template extends Feature {
 	public function header_attr( array $attr = [], bool $returns = false ) {
 		$attr = wp_parse_args( $attr, [ 'class' => [] ] );
 
-		add_filter( 'blank_header_attributes', function ( $attr ) {
-			array_unshift( $attr['class'], 'site-header' );
+		add_filter(
+			'blank_header_attributes',
+			function ( $attr ) {
+				array_unshift( $attr['class'], 'site-header' );
 
-			return $attr;
-		}, 99 );
+				return $attr;
+			},
+			99
+		);
 
 		return $this->print_attr( 'header', $attr, $returns );
 	}
@@ -426,11 +442,14 @@ class Template extends Feature {
 	 */
 	public function primary_navigation() {
 		$args = [ 'theme_location' => 'primary' ];
-		$attr = array_merge( [
-			'class'      => 'site-navigation',
-			'role'       => 'navigation',
-			'aria-label' => __( 'Site Navigation', 'blank' ),
-		], get_schema_org_attr( 'navigation' ) );
+		$attr = array_merge(
+			[
+				'class'      => 'site-navigation',
+				'role'       => 'navigation',
+				'aria-label' => __( 'Site Navigation', 'blank' ),
+			],
+			get_schema_org_attr( 'navigation' )
+		);
 
 		if ( ! has_nav_menu( 'primary' ) ) {
 			wp_nav_menu( $args );
@@ -439,23 +458,28 @@ class Template extends Feature {
 
 		$args['echo'] = false;
 
-		make_html_tag( 'nav', $attr, [
-			'button' => [
-				'attr' => [
-					'role'          => 'button',
-					'class'         => 'menu-toggle button',
-					'aria-controls' => 'menu-primary',
-					'aria-expanded' => 'false',
-				],
-				'ends' => [
-					'span' => [
-						'attr' => [ 'class' => 'mobile-menu' ],
-						'ends' => false,
+		make_html_tag(
+			'nav',
+			$attr,
+			[
+				'button' => [
+					'attr' => [
+						'role'          => 'button',
+						'class'         => 'menu-toggle button',
+						'aria-controls' => 'menu-primary',
+						'aria-expanded' => 'false',
+					],
+					'ends' => [
+						'span' => [
+							'attr' => [ 'class' => 'mobile-menu' ],
+							'ends' => false,
+						],
 					],
 				],
+				wp_nav_menu( $args ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 			],
-			wp_nav_menu( $args ), // phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
-		], false );
+			false
+		);
 	}
 
 	/**
@@ -524,11 +548,15 @@ class Template extends Feature {
 	public function content_attr( array $attr = [], bool $returns = false ) {
 		$attr = wp_parse_args( $attr, [ 'class' => [] ] );
 
-		add_filter( 'blank_content_attributes', function ( $attr ) {
-			array_unshift( $attr['class'], 'site-content' );
+		add_filter(
+			'blank_content_attributes',
+			function ( $attr ) {
+				array_unshift( $attr['class'], 'site-content' );
 
-			return $attr;
-		}, 99 );
+				return $attr;
+			},
+			99
+		);
 
 		return $this->print_attr( 'content', $attr, $returns );
 	}
@@ -552,13 +580,16 @@ class Template extends Feature {
 			'class' => (array) apply_filters( 'blank_main_class', $main_classes ),
 		];
 
-		echo wp_kses( '<main ' . make_attr_from_array( $main_attr ) . '>', [
-			'main' => [
-				'id'    => true,
-				'class' => true,
-				'role'  => true,
-			],
-		] );
+		echo wp_kses(
+			'<main ' . make_attr_from_array( $main_attr ) . '>',
+			[
+				'main' => [
+					'id'    => true,
+					'class' => true,
+					'role'  => true,
+				],
+			]
+		);
 	}
 
 	/**
@@ -596,12 +627,16 @@ class Template extends Feature {
 	public function footer_attr( array $attr = [], bool $returns = false ) {
 		$attr = wp_parse_args( $attr, [ 'class' => [] ] );
 
-		add_filter( 'blank_footer_attributes', function ( $attr ) {
-			array_unshift( $attr['class'], 'site-footer' );
-			$attr['role'] = 'contentinfo';
+		add_filter(
+			'blank_footer_attributes',
+			function ( $attr ) {
+				array_unshift( $attr['class'], 'site-footer' );
+				$attr['role'] = 'contentinfo';
 
-			return $attr;
-		}, 99 );
+				return $attr;
+			},
+			99
+		);
 
 		return $this->print_attr( 'footer', $attr, $returns );
 	}
@@ -633,10 +668,13 @@ class Template extends Feature {
 			return;
 		}
 
-		$wrapper = apply_filters( 'blank_footer_widgets_wrapper', [
-			'before' => '<div class="footer-widgets">',
-			'after'  => '</div> <!-- .site-info --!>',
-		] );
+		$wrapper = apply_filters(
+			'blank_footer_widgets_wrapper',
+			[
+				'before' => '<div class="footer-widgets">',
+				'after'  => '</div> <!-- .site-info --!>',
+			]
+		);
 
 		echo wp_kses( $wrapper['before'], [ 'div' => [ 'class' => true ] ] );
 
@@ -652,26 +690,35 @@ class Template extends Feature {
 	 * @return void
 	 */
 	public function footer_info() {
-		$args = apply_filters( 'blank_footer_info_wrapper', [
-			'class'   => 'site-footer__info',
-			'wrapper' => '<div class="%1$s">%2$s</div> <!-- .%3$s -->',
-		] );
+		$args = apply_filters(
+			'blank_footer_info_wrapper',
+			[
+				'class'   => 'site-footer__info',
+				'wrapper' => '<div class="%1$s">%2$s</div> <!-- .%3$s -->',
+			]
+		);
 
 		$output = [];
 
-		$output['menu'] = wp_nav_menu( [
-			'theme_location' => 'footer',
-			'depth'          => 1,
-			'echo'           => false,
-		] );
+		$output['menu'] = wp_nav_menu(
+			[
+				'theme_location' => 'footer',
+				'depth'          => 1,
+				'echo'           => false,
+			]
+		);
 
 		$output['logo'] = $this->site_identity( 'footer', true );
 
-		$output['credits'] = make_html_tag( 'p', [ 'class' => 'credits' ], sprintf(
+		$output['credits'] = make_html_tag(
+			'p',
+			[ 'class' => 'credits' ],
+			sprintf(
 			/* translators: %s: Current Year and Site Title. */
-			esc_html__( 'Copyright &copy; %s.', 'blank' ),
-			gmdate( 'Y' ) . ' ' . $this->site_name()
-		) );
+				esc_html__( 'Copyright &copy; %s.', 'blank' ),
+				gmdate( 'Y' ) . ' ' . $this->site_name()
+			)
+		);
 
 		$classes = Helpers\normalize_class_attr( 'site-footer__info', $args['class'] );
 		$output  = apply_filters( 'blank_footer_info', $output );
@@ -718,7 +765,7 @@ class Template extends Feature {
 	 * @param string ...$attrs
 	 * @return array
 	 */
-	public function common_kses( string ...$attrs ) : array {
+	public function common_kses( string ...$attrs ): array {
 		return Helpers\get_allowed_attr(
 			array_unique( array_merge( [ 'div', 'a', 'span' ], $attrs ) )
 		);

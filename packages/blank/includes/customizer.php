@@ -34,13 +34,13 @@ class Customizer extends Feature {
 	 * @var array
 	 */
 	private $controls = [
-		Customizer\Basic_Control::class => [
+		Customizer\Basic_Control::class      => [
 			'blank-text',
 			'blank-number',
 			'blank-email',
 			'blank-telp',
 		],
-		Customizer\Dropdown_Control::class => [
+		Customizer\Dropdown_Control::class   => [
 			'blank-dropdown',
 		],
 		Customizer\Typography_Control::class => [
@@ -53,7 +53,7 @@ class Customizer extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'customize_register', [ $this, 'register' ] );
 	}
 
@@ -160,10 +160,13 @@ class Customizer extends Feature {
 			}
 
 			if ( null !== $selector ) {
-				$customizer->selective_refresh->add_partial( $key, [
-					'selector'        => $selector,
-					'render_callback' => $callback,
-				] );
+				$customizer->selective_refresh->add_partial(
+					$key,
+					[
+						'selector'        => $selector,
+						'render_callback' => $callback,
+					]
+				);
 			}
 		}
 	}
@@ -180,15 +183,21 @@ class Customizer extends Feature {
 		$customizer->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
 		if ( isset( $customizer->selective_refresh ) ) {
-			$customizer->selective_refresh->add_partial( 'blogname', [
-				'selector'        => '.site-title',
-				'render_callback' => [ $this->theme->template, 'site_name' ],
-			] );
+			$customizer->selective_refresh->add_partial(
+				'blogname',
+				[
+					'selector'        => '.site-title',
+					'render_callback' => [ $this->theme->template, 'site_name' ],
+				]
+			);
 
-			$customizer->selective_refresh->add_partial( 'blogdescription', [
-				'selector'        => '.site-description',
-				'render_callback' => [ $this->theme->template, 'site_slogan' ],
-			] );
+			$customizer->selective_refresh->add_partial(
+				'blogdescription',
+				[
+					'selector'        => '.site-description',
+					'render_callback' => [ $this->theme->template, 'site_slogan' ],
+				]
+			);
 		}
 	}
 
@@ -198,15 +207,18 @@ class Customizer extends Feature {
 	 * @param string $type
 	 * @return string|null
 	 */
-	protected function get_control_alias( string $type ) : ?string {
+	protected function get_control_alias( string $type ): ?string {
 		if ( array_key_exists( $type, $this->control_aliases ) ) {
 			return $this->control_aliases[ $type ];
 		}
 
 		$controls = array_keys(
-			array_filter( $this->controls, function ( $control ) use ( $type ) {
-				return in_array( $type, $control, true );
-			} )
+			array_filter(
+				$this->controls,
+				function ( $control ) use ( $type ) {
+					return in_array( $type, $control, true );
+				}
+			)
 		);
 
 		if ( 1 === count( $controls ) ) {
@@ -222,7 +234,7 @@ class Customizer extends Feature {
 	 * @param string $name
 	 * @return string
 	 */
-	protected function add_prefix( string $name ) : string {
+	protected function add_prefix( string $name ): string {
 		return $this->theme->slug . '[' . $name . ']';
 	}
 

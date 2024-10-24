@@ -83,7 +83,7 @@ final class Theme implements ArrayAccess {
 		];
 
 		if ( empty( self::$cached->info ) ) {
-			/** @var WP_Theme $theme */
+			/** @var \WP_Theme $theme */
 			$theme      = wp_get_theme( get_template() );
 			$theme_info = [
 				'siteurl'    => get_option( 'siteurl' ),
@@ -106,17 +106,19 @@ final class Theme implements ArrayAccess {
 
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
-		$this->initialize( [
-			Asset::class,
-			Comment::class,
-			Content::class,
-			Customizer::class,
-			Menu::class,
-			Options::class,
-			Template::class,
-			Typography::class,
-			Widgets::class,
-		] );
+		$this->initialize(
+			[
+				Asset::class,
+				Comment::class,
+				Content::class,
+				Customizer::class,
+				Menu::class,
+				Options::class,
+				Template::class,
+				Typography::class,
+				Widgets::class,
+			]
+		);
 	}
 
 	/**
@@ -128,10 +130,14 @@ final class Theme implements ArrayAccess {
 	 */
 	public function transient_name( string $name ) {
 		if ( self::$cached && ! property_exists( self::$cached, 'transient_name' ) ) {
-			self::$cached->transient_names = preg_filter( '/^/', 'blank_', array_combine(
-				self::TRANSIENT_NAMES,
-				self::TRANSIENT_NAMES
-			) );
+			self::$cached->transient_names = preg_filter(
+				'/^/',
+				'blank_',
+				array_combine(
+					self::TRANSIENT_NAMES,
+					self::TRANSIENT_NAMES
+				)
+			);
 		}
 
 		return self::$cached->transient_names[ $name ] ?? null;
@@ -143,7 +149,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $template_name
 	 * @return bool
 	 */
-	public function is_template( $template_name ) : bool {
+	public function is_template( $template_name ): bool {
 		return $this->get_template_basename() === $template_name;
 	}
 
@@ -154,7 +160,7 @@ final class Theme implements ArrayAccess {
 	 *
 	 * @return string|null
 	 */
-	public function get_template_filename() : ?string {
+	public function get_template_filename(): ?string {
 		return $this->template ? $this->template->filename : null;
 	}
 
@@ -165,7 +171,7 @@ final class Theme implements ArrayAccess {
 	 *
 	 * @return string|null
 	 */
-	public function get_template_basename() : ?string {
+	public function get_template_basename(): ?string {
 		return $this->template ? $this->template->basename : null;
 	}
 
@@ -176,7 +182,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_dir( string $suffix ) : string {
+	public function get_dir( string $suffix ): string {
 		return $this->parent_dir . $suffix;
 	}
 
@@ -187,7 +193,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_child_dir( string $suffix ) : string {
+	public function get_child_dir( string $suffix ): string {
 		return $this->child_dir . $suffix;
 	}
 
@@ -198,7 +204,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_uri( string $suffix ) : string {
+	public function get_uri( string $suffix ): string {
 		return $this->parent_uri . $suffix;
 	}
 
@@ -209,7 +215,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $suffix
 	 * @return string
 	 */
-	public function get_child_uri( string $suffix ) : string {
+	public function get_child_uri( string $suffix ): string {
 		return $this->child_uri . $suffix;
 	}
 
@@ -223,7 +229,7 @@ final class Theme implements ArrayAccess {
 	 * @return void
 	 * @codeCoverageIgnore
 	 */
-	public function setup() : void {
+	public function setup(): void {
 		/**
 		 * Load Localisation files.
 		 *
@@ -264,9 +270,12 @@ final class Theme implements ArrayAccess {
 		 */
 		add_theme_support(
 			'site-logo',
-			apply_filters( 'blank_support_site_logo_args', [
-				'size' => 'full',
-			] )
+			apply_filters(
+				'blank_support_site_logo_args',
+				[
+					'size' => 'full',
+				]
+			)
 		);
 
 		/**
@@ -274,12 +283,15 @@ final class Theme implements ArrayAccess {
 		 */
 		add_theme_support(
 			'custom-logo',
-			apply_filters( 'blank_support_custom_logo_args', [
-				'height'      => 43,
-				'width'       => 160,
-				'flex-width'  => true,
-				'flex-height' => true,
-			] )
+			apply_filters(
+				'blank_support_custom_logo_args',
+				[
+					'height'      => 43,
+					'width'       => 160,
+					'flex-width'  => true,
+					'flex-height' => true,
+				]
+			)
 		);
 
 		/**
@@ -288,14 +300,17 @@ final class Theme implements ArrayAccess {
 		 */
 		add_theme_support(
 			'html5',
-			apply_filters( 'blank_support_html5_args', [
-				'search-form',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-				'widgets',
-			] )
+			apply_filters(
+				'blank_support_html5_args',
+				[
+					'search-form',
+					'comment-form',
+					'comment-list',
+					'gallery',
+					'caption',
+					'widgets',
+				]
+			)
 		);
 
 		/**
@@ -306,43 +321,48 @@ final class Theme implements ArrayAccess {
 		/**
 		 * Enqueue editor styles.
 		 */
-		add_editor_style( [
-			$this->typography->get_google_fonts_url(),
-			$this->asset->get_uri( 'gutenberg-editor.css' ),
-		] );
+		add_editor_style(
+			[
+				$this->typography->get_google_fonts_url(),
+				$this->asset->get_uri( 'gutenberg-editor.css' ),
+			]
+		);
 
 		/**
 		 * Add support for editor font sizes.
 		 */
 		add_theme_support(
 			'editor-font-sizes',
-			apply_filters( 'blank_editor_font_sizes_args', [
+			apply_filters(
+				'blank_editor_font_sizes_args',
 				[
-					'name' => __( 'Small', 'blank' ),
-					'size' => 12,
-					'slug' => 'small',
-				],
-				[
-					'name' => __( 'Normal', 'blank' ),
-					'size' => 14,
-					'slug' => 'normal',
-				],
-				[
-					'name' => __( 'Medium', 'blank' ),
-					'size' => 20,
-					'slug' => 'medium',
-				],
-				[
-					'name' => __( 'Large', 'blank' ),
-					'size' => 26,
-					'slug' => 'large',
-				],
-				[
-					'name' => __( 'Huge', 'blank' ),
-					'size' => 32,
-					'slug' => 'huge',
-				],
-			] )
+					[
+						'name' => __( 'Small', 'blank' ),
+						'size' => 12,
+						'slug' => 'small',
+					],
+					[
+						'name' => __( 'Normal', 'blank' ),
+						'size' => 14,
+						'slug' => 'normal',
+					],
+					[
+						'name' => __( 'Medium', 'blank' ),
+						'size' => 20,
+						'slug' => 'medium',
+					],
+					[
+						'name' => __( 'Large', 'blank' ),
+						'size' => 26,
+						'slug' => 'large',
+					],
+					[
+						'name' => __( 'Huge', 'blank' ),
+						'size' => 32,
+						'slug' => 'huge',
+					],
+				]
+			)
 		);
 
 		/**
@@ -353,23 +373,32 @@ final class Theme implements ArrayAccess {
 		/**
 		 * Add support for custom background.
 		 */
-		add_theme_support( 'custom-background', [
-			'default-color' => '#fff',
-		] );
+		add_theme_support(
+			'custom-background',
+			[
+				'default-color' => '#fff',
+			]
+		);
 
 		/**
 		 * Add support for custom header.
 		 */
-		add_theme_support( 'custom-header', [
+		add_theme_support(
+			'custom-header',
+			[
 			// .
-		] );
+			]
+		);
 
-		add_filter( 'blank_site_logo', function ( $logo ) {
-			if ( ! $logo['src'] ) {
-				$logo['src'] = $this->asset->get_uri( 'acme-logo.svg' );
+		add_filter(
+			'blank_site_logo',
+			function ( $logo ) {
+				if ( ! $logo['src'] ) {
+					$logo['src'] = $this->asset->get_uri( 'acme-logo.svg' );
+				}
+				return $logo;
 			}
-			return $logo;
-		} );
+		);
 	}
 
 	/**
@@ -427,7 +456,7 @@ final class Theme implements ArrayAccess {
 	 * @return \WP_Filesystem_Base
 	 * @codeCoverageIgnore
 	 */
-	public function get_filesystem() : \WP_Filesystem_Base {
+	public function get_filesystem(): \WP_Filesystem_Base {
 		if ( ! function_exists( 'WP_Filesystem' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
@@ -446,7 +475,7 @@ final class Theme implements ArrayAccess {
 	 * @param  array $options
 	 * @return void
 	 */
-	public function add_options( array $options = [] ) : void {
+	public function add_options( array $options = [] ): void {
 		foreach ( $options as $name => $attributes ) {
 			$this->add_option( $name, $attributes );
 		}
@@ -459,7 +488,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $dirname
 	 * @return void
 	 */
-	public function load_options( string $dirname = 'options' ) : void {
+	public function load_options( string $dirname = 'options' ): void {
 		$options_dir = $this->get_dir( $dirname );
 		$options     = [];
 
@@ -489,10 +518,10 @@ final class Theme implements ArrayAccess {
 	 * @internal
 	 * @param string $name
 	 * @param array  $attributes
-	 * @param string $parent
+	 * @param string $prev Parent option
 	 * @return void
 	 */
-	public function add_option( string $name, array $attributes = [], string $parent = null ) : void {
+	public function add_option( string $name, array $attributes = [], string $prev = null ): void {
 		$name     = str_replace( '-', '_', $name );
 		$type     = 'settings';
 		$children = [];
@@ -511,18 +540,21 @@ final class Theme implements ArrayAccess {
 			$children = $attributes['settings'];
 			unset( $attributes['settings'] );
 
-			if ( $parent ) {
-				$defaults['panel'] = $parent;
+			if ( $prev ) {
+				$defaults['panel'] = $prev;
 			}
 
 			$attributes = wp_parse_args( $attributes, $defaults );
 		} else {
-			$attributes = wp_parse_args( $attributes, [
-				'label'   => '',
-				'default' => null,
-				'section' => $parent,
-				'type'    => 'text',
-			] );
+			$attributes = wp_parse_args(
+				$attributes,
+				[
+					'label'   => '',
+					'default' => null,
+					'section' => $prev,
+					'type'    => 'text',
+				]
+			);
 
 			$attributes['default'] = apply_filters(
 				'blank_option_default',
@@ -580,7 +612,7 @@ final class Theme implements ArrayAccess {
 	 * @param string $key
 	 * @return bool
 	 */
-	public function has_option( string $name, string $key = 'settings' ) : bool {
+	public function has_option( string $name, string $key = 'settings' ): bool {
 		return array_key_exists( $name, $this->options( $key ) ?: [] );
 	}
 
@@ -591,7 +623,7 @@ final class Theme implements ArrayAccess {
 	 * @param  string $key
 	 * @return array|null
 	 */
-	public function options( ?string $key = null ) : ?array {
+	public function options( ?string $key = null ): ?array {
 		$options = self::$cached->options;
 
 		if ( $key ) {
@@ -611,10 +643,13 @@ final class Theme implements ArrayAccess {
 	 * @param string ...$constants
 	 * @return bool
 	 */
-	public static function enabled( string ...$constants ) : bool {
-		$enabled = array_map( function ( $constant ) {
-			return defined( $constant ) && constant( $constant ) === true;
-		}, $constants );
+	public static function enabled( string ...$constants ): bool {
+		$enabled = array_map(
+			function ( $constant ) {
+				return defined( $constant ) && constant( $constant ) === true;
+			},
+			$constants
+		);
 
 		return count( array_filter( $enabled ) ) === count( $constants );
 	}
@@ -627,6 +662,7 @@ final class Theme implements ArrayAccess {
 	 * @return mixed|null
 	 * @codeCoverageIgnore
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet( $name ) {
 		return $this->get_option( $name );
 	}
@@ -640,6 +676,7 @@ final class Theme implements ArrayAccess {
 	 * @return void
 	 * @codeCoverageIgnore
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetSet( $name, $value ) {
 		$this->add_option( $name, $value );
 	}
@@ -652,6 +689,7 @@ final class Theme implements ArrayAccess {
 	 * @return bool
 	 * @codeCoverageIgnore
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetExists( $name ) {
 		return $this->has_option( $name, 'values' );
 	}
@@ -664,6 +702,7 @@ final class Theme implements ArrayAccess {
 	 * @return void
 	 * @codeCoverageIgnore
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetUnset( $name ) {
 		// .
 	}

@@ -21,15 +21,20 @@ class Options extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
-		add_filter( 'blank_options_panel', function ( $panels ) {
-			$panels['extras'] = [
-				'title' => __( 'Extras', 'blank' ),
-				'panel' => [ $this, 'panel_extras' ],
-			];
+	protected function initialize(): void {
+		add_filter(
+			'blank_options_panel',
+			function ( $panels ) {
+				$panels['extras'] = [
+					'title' => __( 'Extras', 'blank' ),
+					'panel' => [ $this, 'panel_extras' ],
+				];
 
-			return $panels;
-		}, 10, 1 );
+				return $panels;
+			},
+			10,
+			1
+		);
 	}
 
 	/**

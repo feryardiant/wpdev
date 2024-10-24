@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Theme Coding Standards">
+<ruleset
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="../vendor/squizlabs/php_codesniffer/phpcs.xsd"
+    name="WordPress Theme Coding Standards">
 	<!-- See https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
 	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
 	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki -->
@@ -34,96 +37,73 @@
 	<!-- Check all files in this directory and the directories below it. -->
 	<file>.</file>
 
-	<exclude-pattern>*/vendor/*$</exclude-pattern>
-	<exclude-pattern>*\.old/*$</exclude-pattern>
+    <exclude-pattern>*/.git/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*\.old/*</exclude-pattern>
 
 
 	<!--
 	#############################################################################
-	USE THE WordPress RULESET
+	USE THE PHPCOMPATIBILITY RULESET
+
+	This checks code for PHP cross-version compatibility.
+	See: https://github.com/PHPCompatibility/PHPCompatibility
 	#############################################################################
 	-->
 
-	<rule ref="WordPress"/>
+	<rule ref="PHPCompatibility">
+		<!-- Only scan PHP files for PHP compatibility. -->
+		<include-pattern>*\.php$</include-pattern>
 
+		<!-- Polyfill package is included with WP-CLI, so available to all projects. -->
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.array_columnFound"/>
+	</rule>
 
 	<!--
 	#############################################################################
-	SNIFF SPECIFIC CONFIGURATION
+	USE THE WORDPRESS-EXTRA RULESET
+
+	This checks code against the WordPress Core code style requirements, as well as
+	a number of modern PHP style rules and other best practices which are
+	currently not yet covered in the Core style handbook.
+	See: https://make.wordpress.org/core/handbook/best-practices/coding-standards/
+	See: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards
 	#############################################################################
 	-->
 
-	<!-- Verify that the text_domain is set to the desired text-domain.
-		 Multiple valid text domains can be provided as a comma-delimited list. -->
-	<rule ref="WordPress.WP.I18n">
-		<properties>
-			<property name="text_domain" type="array" value="blank,blank-extra"/>
-		</properties>
-	</rule>
+	<rule ref="WordPress-Extra">
 
-	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<property name="prefixes" type="array" value="blank" />
-		</properties>
-	</rule>
+		<!-- No need for this sniff as the parallel linter command takes care of linting. -->
+		<exclude name="Generic.PHP.Syntax"/>
 
-	<!-- Allow for theme specific exceptions to the file name rules based on the theme hierarchy. -->
-	<rule ref="WordPress.Files.FileName">
-		<properties>
-			<property name="is_theme" value="true"/>
-			<property name="strict_class_file_names" value="false"/>
-		</properties>
-		<!-- <exclude name="WordPress.Files.FileName.InvalidClassFileName" /> -->
-	</rule>
+		<!-- To make autoloading easier, PSR-4 is mostly adhered to for file naming. -->
+		<exclude name="WordPress.Files.FileName"/>
 
-	<!-- Set the minimum supported WP version. This is used by several sniffs.
-		 The minimum version set here should be in line with the minimum WP version
-		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="4.5"/>
+		<!-- Output is sent to cli, not to HTML, so this sniff is not applicable to WP-CLI.
+			 Note: some output escaping may still be needed/beneficial, however this would probably
+			 require a custom sniff. -->
+		<exclude name="WordPress.Security.EscapeOutput"/>
 
-	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
-		<properties>
-			<!-- No need to adjust alignment of large arrays when the item with the largest key is removed. -->
-			<property name="exact" value="false"/>
-			<!-- Don't align multi-line items if ALL items in the array are multi-line. -->
-			<property name="alignMultilineItems" value="!=100"/>
-			<!-- Array assignment operator should always be on the same line as the array key. -->
-			<property name="ignoreNewlines" value="false"/>
-		</properties>
-	</rule>
+		<!-- WP-CLI is intended as a developer tool, so using development functions should be fine. -->
+		<exclude name="WordPress.PHP.DevelopmentFunctions"/>
 
+		<!-- Make some allowance for the fact that the code will be run in a command-line environment. -->
+		<exclude name="Generic.PHP.BacktickOperator"/>
 
-	<!--
-	#############################################################################
-	Custom ruleset
-	#############################################################################
-	-->
+		<!-- We want to stick with short array syntax for WP-CLI. -->
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
 
-	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
-	<rule ref="PEAR.Functions">
-		<exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-		<exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-		<exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments"/>
-		<exclude name="PEAR.Functions.FunctionDeclaration.BraceOnSameLine"/>
-	</rule>
+		<!-- Keep short ternaries around for WP-CLI. -->
+		<exclude name="Universal.Operators.DisallowShortTernary.Found"/>
 
-	<rule ref="Squiz.Commenting.FunctionComment">
-		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
-	</rule>
+		<!-- Allow filesystem operations because WordPress APIs may not be available -->
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents" />
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_mkdir" />
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_rmdir" />
+		<exclude name="WordPress.WP.AlternativeFunctions.rename_rename" />
+		<exclude name="WordPress.WP.AlternativeFunctions.unlink_unlink" />
 
-	<rule ref="Generic.Commenting">
-		<exclude name="Generic.Commenting.DocComment.MissingShort"/>
-	</rule>
-
-	<rule ref="Generic.Arrays">
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
-	</rule>
-
-	<rule ref="WordPress">
-		<exclude name="WordPress.PHP.DisallowShortTernary"/>
 	</rule>
 
 

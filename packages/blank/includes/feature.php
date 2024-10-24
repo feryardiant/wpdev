@@ -63,7 +63,7 @@ abstract class Feature {
 	 * @return void
 	 * @codeCoverageIgnore
 	 */
-	abstract protected function initialize() : void;
+	abstract protected function initialize(): void;
 
 	/**
 	 * Get instance of child class.

@@ -21,7 +21,7 @@ class JetPack extends \Blank\Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 	}
 
@@ -36,31 +36,37 @@ class JetPack extends \Blank\Feature {
 	 */
 	public function setup() {
 		// Add theme support for Infinite Scroll.
-		add_theme_support( 'infinite-scroll', [
-			'container' => 'main',
-			'render'    => [ $this, 'infinite_scroll_render' ],
-			'footer'    => 'page',
-		] );
+		add_theme_support(
+			'infinite-scroll',
+			[
+				'container' => 'main',
+				'render'    => [ $this, 'infinite_scroll_render' ],
+				'footer'    => 'page',
+			]
+		);
 
 		// Add theme support for Responsive Videos.
 		add_theme_support( 'jetpack-responsive-videos' );
 
 		// Add theme support for Content Options.
-		add_theme_support( 'jetpack-content-options', [
-			'post-details'    => [
-				'stylesheet' => 'blank-style',
-				'date'       => '.posted-on',
-				'categories' => '.cat-links',
-				'tags'       => '.tags-links',
-				'author'     => '.byline',
-				'comment'    => '.comments-link',
-			],
-			'featured-images' => [
-				'archive'    => true,
-				'post'       => true,
-				'page'       => true,
-			],
-		] );
+		add_theme_support(
+			'jetpack-content-options',
+			[
+				'post-details'    => [
+					'stylesheet' => 'blank-style',
+					'date'       => '.posted-on',
+					'categories' => '.cat-links',
+					'tags'       => '.tags-links',
+					'author'     => '.byline',
+					'comment'    => '.comments-link',
+				],
+				'featured-images' => [
+					'archive' => true,
+					'post'    => true,
+					'page'    => true,
+				],
+			]
+		);
 	}
 
 	/**
@@ -80,4 +86,3 @@ class JetPack extends \Blank\Feature {
 		}
 	}
 }
-

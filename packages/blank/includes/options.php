@@ -28,7 +28,7 @@ class Options extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 	}
 
@@ -52,16 +52,19 @@ class Options extends Feature {
 			}
 		);
 
-		$this->panels = apply_filters( 'blank_options_panel', [
-			'welcome' => [
-				'title' => __( 'Welcome', 'blank' ),
-				'panel' => [ $this, 'panel_welcome' ],
-			],
-			'general' => [
-				'title' => __( 'General', 'blank' ),
-				'panel' => [ $this, 'panel_general' ],
-			],
-		] );
+		$this->panels = apply_filters(
+			'blank_options_panel',
+			[
+				'welcome' => [
+					'title' => __( 'Welcome', 'blank' ),
+					'panel' => [ $this, 'panel_welcome' ],
+				],
+				'general' => [
+					'title' => __( 'General', 'blank' ),
+					'panel' => [ $this, 'panel_general' ],
+				],
+			]
+		);
 	}
 
 	/**

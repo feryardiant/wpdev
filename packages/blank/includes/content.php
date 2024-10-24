@@ -21,7 +21,7 @@ class Content extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		add_filter( 'content_width', [ $this, 'content_width' ] );
 		add_filter( 'post_class', [ $this, 'post_class' ] );
@@ -38,7 +38,7 @@ class Content extends Feature {
 	 * @since 0.2.0
 	 * @return void
 	 */
-	public function setup() : void {
+	public function setup(): void {
 		add_image_size( 'post_size', 600, null );
 		add_image_size( 'max_size', 1600, 900, true );
 	}
@@ -83,36 +83,40 @@ class Content extends Feature {
 			'method' => 'post',
 		];
 
-		return make_html_tag( 'form', $attr, [
-			'p' => [
-				'ends' => [
-					'span'   => [
-						'ends' => __( 'This content is password protected. To view it please enter your password below:', 'blank' ),
-					],
-					'label'  => [
-						'attr' => [ 'for' => $label ],
-						'ends' => __( 'Password:', 'blank' ),
-					],
-					'input'  => [
-						'attr' => [
-							'id'    => $label,
-							'name'  => 'post_password',
-							'type'  => 'password',
-							'class' => 'input',
+		return make_html_tag(
+			'form',
+			$attr,
+			[
+				'p' => [
+					'ends' => [
+						'span'   => [
+							'ends' => __( 'This content is password protected. To view it please enter your password below:', 'blank' ),
 						],
-						'ends' => true,
-					],
-					'button' => [
-						'attr' => [
-							'id'    => $label,
-							'type'  => 'submit',
-							'class' => 'button',
+						'label'  => [
+							'attr' => [ 'for' => $label ],
+							'ends' => __( 'Password:', 'blank' ),
 						],
-						'ends' => __( 'Submit', 'blank' ),
+						'input'  => [
+							'attr' => [
+								'id'    => $label,
+								'name'  => 'post_password',
+								'type'  => 'password',
+								'class' => 'input',
+							],
+							'ends' => true,
+						],
+						'button' => [
+							'attr' => [
+								'id'    => $label,
+								'type'  => 'submit',
+								'class' => 'button',
+							],
+							'ends' => __( 'Submit', 'blank' ),
+						],
 					],
 				],
-			],
-		] );
+			]
+		);
 	}
 
 	/**
@@ -136,7 +140,7 @@ class Content extends Feature {
 	 * @since 0.1.1
 	 * @return \WP_Post|null
 	 */
-	public function page_query() : ?\WP_Post {
+	public function page_query(): ?\WP_Post {
 		global $wp_query;
 
 		$query = $wp_query->get_queried_object();
@@ -193,7 +197,8 @@ class Content extends Feature {
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 		}
 
-		$time_string = sprintf( $time_string,
+		$time_string = sprintf(
+			$time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
 			esc_html( get_the_date() ),
 			esc_attr( get_the_modified_date( DATE_W3C ) ),
@@ -244,9 +249,12 @@ class Content extends Feature {
 		} else {
 			echo '<a class="post-thumbnail" href="' . esc_url( get_permalink() ) . '" aria-hidden="true" tabindex="-1">';
 
-			the_post_thumbnail( 'post-thumbnail', [
-				'alt' => the_title_attribute( [ 'echo' => false ] ),
-			] );
+			the_post_thumbnail(
+				'post-thumbnail',
+				[
+					'alt' => the_title_attribute( [ 'echo' => false ] ),
+				]
+			);
 
 			echo '</a>  <!-- .post-thumbnail -->';
 		}
@@ -258,10 +266,12 @@ class Content extends Feature {
 	 * @since 0.2.1
 	 */
 	public function link_pages() {
-		wp_link_pages( [
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'blank' ),
-			'after'  => '</div>',
-		] );
+		wp_link_pages(
+			[
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'blank' ),
+				'after'  => '</div>',
+			]
+		);
 	}
 
 	/**

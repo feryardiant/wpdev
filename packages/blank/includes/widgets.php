@@ -19,7 +19,7 @@ class Widgets extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'widgets_init', [ $this, 'init' ] );
 	}
 
@@ -33,25 +33,29 @@ class Widgets extends Feature {
 	 * @return void
 	 */
 	public function init() {
-		register_sidebar( [
-			'name'          => esc_html__( 'Main Sidebar', 'blank' ),
-			'id'            => 'main-sidebar',
-			'description'   => esc_html__( 'Main sidebar that placed on the side of your page.', 'blank' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section> <!-- #%1$s -->',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		] );
+		register_sidebar(
+			[
+				'name'          => esc_html__( 'Main Sidebar', 'blank' ),
+				'id'            => 'main-sidebar',
+				'description'   => esc_html__( 'Main sidebar that placed on the side of your page.', 'blank' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section> <!-- #%1$s -->',
+				'before_title'  => '<h2 class="widget-title">',
+				'after_title'   => '</h2>',
+			]
+		);
 
-		register_sidebar( [
-			'name'          => esc_html__( 'Footer Widgets', 'blank' ),
-			'id'            => 'footer-widgets',
-			'description'   => esc_html__( 'Footer widget that placed on the bottom of your page.', 'blank' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section> <!-- #%1$s -->',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		] );
+		register_sidebar(
+			[
+				'name'          => esc_html__( 'Footer Widgets', 'blank' ),
+				'id'            => 'footer-widgets',
+				'description'   => esc_html__( 'Footer widget that placed on the bottom of your page.', 'blank' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section> <!-- #%1$s -->',
+				'before_title'  => '<h2 class="widget-title">',
+				'after_title'   => '</h2>',
+			]
+		);
 	}
 
 	/**

@@ -30,16 +30,20 @@ class Typography_Control extends Abstract_Control {
 
 		/** @var Typography $typo */
 		$typo     = blank( 'typography' );
-		$families = array_reduce( $typo->get_fonts(), function ( $families, $font ) {
-			$source = $font->source;
+		$families = array_reduce(
+			$typo->get_fonts(),
+			function ( $families, $font ) {
+				$source = $font->source;
 
-			if ( ! isset( $families[ $source ] ) ) {
-				$families[ $source ] = [];
-			}
+				if ( ! isset( $families[ $source ] ) ) {
+					$families[ $source ] = [];
+				}
 
-			$families[ $source ][] = $font->family;
-			return $families;
-		}, [] );
+				$families[ $source ][] = $font->family;
+				return $families;
+			},
+			[]
+		);
 
 		$this->json['choices'] = [
 			'families'   => $families,

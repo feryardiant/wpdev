@@ -50,13 +50,16 @@ class Nav_Menu extends \Walker_Nav_Menu {
 			return $html;
 		}
 
-		echo wp_kses( $html, [
-			'div' => [ 'class' => true ],
-			'a'   => [
-				'class' => true,
-				'href'  => true,
-			],
-		] );
+		echo wp_kses(
+			$html,
+			[
+				'div' => [ 'class' => true ],
+				'a'   => [
+					'class' => true,
+					'href'  => true,
+				],
+			]
+		);
 	}
 
 	/**

@@ -17,7 +17,7 @@ namespace Blank\Helpers;
  * @param bool   $quoted
  * @return string
  */
-function make_attr_from_array( array $attr, string $attr_sep = ' ', bool $quoted = true ) : string {
+function make_attr_from_array( array $attr, string $attr_sep = ' ', bool $quoted = true ): string {
 	$output = [];
 
 	foreach ( array_filter( $attr ) as $name => $value ) {
@@ -50,7 +50,7 @@ function make_attr_from_array( array $attr, string $attr_sep = ' ', bool $quoted
  * @param  array $attr
  * @return string|null
  */
-function get_identifier_attr_from_array( array $attr ) : ?string {
+function get_identifier_attr_from_array( array $attr ): ?string {
 	if ( isset( $attr['id'] ) ) {
 		return '#' . $attr['id'];
 	}
@@ -69,24 +69,29 @@ function get_identifier_attr_from_array( array $attr ) : ?string {
 /**
  * HTML Class attribute normalizer.
  *
- * @param  string|array $class
+ * @param  string|array $class_attr
  * @param  string|array ...$classes
  * @return array
  */
-function normalize_class_attr( $class, ...$classes ) : array {
-	if ( ! empty( $classes ) ) {
-		$class = array_merge( [ $class ], $classes );
+function normalize_class_attr( $class_attr, ...$classe_attrs ): array {
+	if ( ! empty( $classe_attrs ) ) {
+		$class_attr = array_merge( [ $class_attr ], $classe_attrs );
 	}
 
-	$class = array_merge( ...array_map( function ( $class ) {
-		if ( is_string( $class ) ) {
-			return explode( ' ', $class );
-		}
+	$class_attr = array_merge(
+		...array_map(
+			function ( $class_attr ) {
+				if ( is_string( $class_attr ) ) {
+						return explode( ' ', $class_attr );
+				}
 
-		return normalize_class_attr( $class );
-	}, $class ) );
+				return normalize_class_attr( $class_attr );
+			},
+			$class_attr
+		)
+	);
 
-	return array_values( array_unique( array_filter( $class ) ) );
+	return array_values( array_unique( array_filter( $class_attr ) ) );
 }
 
 /**
@@ -95,20 +100,24 @@ function normalize_class_attr( $class, ...$classes ) : array {
  * @param string $html
  * @return array
  */
-function get_html_tags( string $html ) : array {
+function get_html_tags( string $html ): array {
 	preg_match_all( '~<(([^/]?).*?/?)>~', $html, $matches );
 
-	return array_reduce( $matches[0], function ( $tags, $match ) {
-		$match = preg_replace( '/[^\p{L}\p{N} ]+/', '', $match );
+	return array_reduce(
+		$matches[0],
+		function ( $tags, $matches ) {
+			$matches = preg_replace( '/[^\p{L}\p{N} ]+/', '', $matches );
 
-		list( $tag ) = explode( ' ', $match );
+			list( $tag ) = explode( ' ', $matches );
 
-		if ( ! in_array( $tag, $tags, true ) ) {
-			$tags[] = $tag;
-		}
+			if ( ! in_array( $tag, $tags, true ) ) {
+				$tags[] = $tag;
+			}
 
-		return $tags;
-	}, [] );
+			return $tags;
+		},
+		[]
+	);
 }
 
 /**
@@ -200,7 +209,7 @@ function make_html_tag( $tag, $attr = [], $ends = false, $returns = true ) {
  * @param  array        $attr
  * @return array
  */
-function get_allowed_attr( $tag, array $attr = [] ) : array {
+function get_allowed_attr( $tag, array $attr = [] ): array {
 	static $allowed_kses;
 
 	if ( ! $allowed_kses ) {
@@ -208,10 +217,14 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 	}
 
 	if ( is_array( $tag ) ) {
-		return array_reduce( $tag, function ( $tags, $tag ) {
-			$tags[ $tag ] = get_allowed_attr( $tag );
-			return $tags;
-		}, [] );
+		return array_reduce(
+			$tag,
+			function ( $tags, $tag ) {
+				$tags[ $tag ] = get_allowed_attr( $tag );
+				return $tags;
+			},
+			[]
+		);
 	}
 
 	// Additional attr from schema.org.
@@ -224,9 +237,12 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
 	if ( ! empty( $attr ) ) {
 		$extra_attr = array_merge(
 			$extra_attr,
-			array_map( function () {
-				return 1;
-			}, array_flip( array_keys( $attr ) ) )
+			array_map(
+				function () {
+					return 1;
+				},
+				array_flip( array_keys( $attr ) )
+			)
 		);
 	}
 
@@ -260,7 +276,7 @@ function get_allowed_attr( $tag, array $attr = [] ) : array {
  * @param  string $context
  * @return array
  */
-function get_schema_org_attr( string $context ) : array {
+function get_schema_org_attr( string $context ): array {
 	$attr = [ 'itemscope' => null ];
 
 	switch ( $context ) {

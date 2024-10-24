@@ -75,10 +75,13 @@ class Typography extends Feature {
 	/**
 	 * Initialize class.
 	 */
-	protected function initialize() : void {
-		add_action( 'wp_loaded', function () {
-			$this->get_google_webfonts();
-		} );
+	protected function initialize(): void {
+		add_action(
+			'wp_loaded',
+			function () {
+				$this->get_google_webfonts();
+			}
+		);
 
 		add_filter( 'blank_option_default', [ $this, 'default_option' ], 10, 3 );
 	}
@@ -89,7 +92,7 @@ class Typography extends Feature {
 	 * @since 0.2.1
 	 * @return array
 	 */
-	public function get_fonts() : array {
+	public function get_fonts(): array {
 		static $fonts = [];
 
 		$name  = $this->theme->transient_name( 'fonts_info' );
@@ -109,7 +112,7 @@ class Typography extends Feature {
 	 *
 	 * @return array
 	 */
-	public function get_options_values() : array {
+	public function get_options_values(): array {
 		static $values = [];
 
 		if ( ! empty( $values ) ) {
@@ -117,18 +120,24 @@ class Typography extends Feature {
 		}
 
 		$all_fonts = $this->get_fonts();
-		$options   = array_filter( $this->theme->options( 'settings' ), function ( $setting ) {
-			return 'blank-typography' === $setting['type'];
-		} );
+		$options   = array_filter(
+			$this->theme->options( 'settings' ),
+			function ( $setting ) {
+				return 'blank-typography' === $setting['type'];
+			}
+		);
 
 		foreach ( array_keys( $options ) as $name ) {
 			$value       = (object) $this->theme->get_option( $name );
 			$value->name = $name;
 
 			$fonts = array_values(
-				array_filter( $all_fonts, function ( $font ) use ( $value ) {
-					return $font->family === $value->family;
-				} )
+				array_filter(
+					$all_fonts,
+					function ( $font ) use ( $value ) {
+						return $font->family === $value->family;
+					}
+				)
 			);
 
 			$value->weight = in_array( $value->variant, [ 'regular', 'italic' ], true ) ? 400 : substr( $value->variant, 3 );
@@ -148,14 +157,14 @@ class Typography extends Feature {
 	 * Register Google fonts.
 	 *
 	 * @since 0.2.2
-	 * @param mixed  $default
+	 * @param mixed  $defaults
 	 * @param string $type
 	 * @param string $name
 	 * @return array Google fonts URL for the theme.
 	 */
-	public function default_option( $default, string $type, string $name ) {
+	public function default_option( $defaults, string $type, string $name ) {
 		if ( 'blank-typography' !== $type ) {
-			return $default;
+			return $defaults;
 		}
 
 		$family = 'Source Sans Pro';
@@ -164,14 +173,17 @@ class Typography extends Feature {
 			$family = 'Source Code Pro';
 		}
 
-		return wp_parse_args( $default ?: [], [
-			'family'    => $family,
-			'variant'   => 'regular',
-			'subsets'   => [ 'latin' ],
-			'size'      => [ 1, 'rem' ],
-			'height'    => [ 1, 'em' ],
-			'transform' => 'initial',
-		] );
+		return wp_parse_args(
+			$defaults ?: [],
+			[
+				'family'    => $family,
+				'variant'   => 'regular',
+				'subsets'   => [ 'latin' ],
+				'size'      => [ 1, 'rem' ],
+				'height'    => [ 1, 'em' ],
+				'transform' => 'initial',
+			]
+		);
 	}
 
 	/**
@@ -180,11 +192,14 @@ class Typography extends Feature {
 	 * @since 0.2.2
 	 * @return string|null Google fonts URL for the theme.
 	 */
-	public function get_google_fonts_url() : ?string {
+	public function get_google_fonts_url(): ?string {
 		$google_fonts = (object) [];
-		$enabled      = array_filter( $this->get_options_values(), function ( $option ) {
-			return 'google' === $option->category;
-		} );
+		$enabled      = array_filter(
+			$this->get_options_values(),
+			function ( $option ) {
+				return 'google' === $option->category;
+			}
+		);
 
 		if ( empty( $enabled ) ) {
 			return null;
@@ -220,7 +235,7 @@ class Typography extends Feature {
 	 * @since 0.2.1
 	 * @return array
 	 */
-	public function get_system_fonts() : array {
+	public function get_system_fonts(): array {
 		$fonts   = [];
 		$default = [
 			'source'   => 'system',
@@ -235,80 +250,125 @@ class Typography extends Feature {
 			],
 		];
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Segoe UI',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Segoe UI',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Roboto',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Roboto',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Helvetica Neue',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Helvetica Neue',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Helvetica',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Helvetica',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Verdana',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Verdana',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Arial',
-			'category' => 'sans-serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Arial',
+				'category' => 'sans-serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Times New Roman',
-			'category' => 'serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Times New Roman',
+				'category' => 'serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Times',
-			'category' => 'serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Times',
+				'category' => 'serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Georgia',
-			'category' => 'serif',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Georgia',
+				'category' => 'serif',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Menlo',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Menlo',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Monaco',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Monaco',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Consolas',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Consolas',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Liberation Mono',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Liberation Mono',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Courier New',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Courier New',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
-		$fonts[] = (object) wp_parse_args( [
-			'family'   => 'Courier',
-			'category' => 'monospace',
-		], $default );
+		$fonts[] = (object) wp_parse_args(
+			[
+				'family'   => 'Courier',
+				'category' => 'monospace',
+			],
+			$default
+		);
 
 		return $fonts;
 	}
@@ -319,7 +379,7 @@ class Typography extends Feature {
 	 * @since 0.2.1
 	 * @return array
 	 */
-	public function get_google_webfonts() : array {
+	public function get_google_webfonts(): array {
 		$fonts_cache_file = $this->theme->get_dir( 'assets/google-webfonts.json' );
 		$filesystem       = $this->theme->get_filesystem();
 
@@ -341,7 +401,7 @@ class Typography extends Feature {
 	 * @return array
 	 * @throws \RuntimeException If invalid.
 	 */
-	public function fetch_google_webfonts() : array {
+	public function fetch_google_webfonts(): array {
 		$google_key = getenv( 'GOOGLE_API_KEY' ) ?: null;
 
 		if ( null === $google_key ) {

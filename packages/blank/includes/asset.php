@@ -26,7 +26,7 @@ class Asset extends Feature {
 	 *
 	 * @since 0.1.1
 	 */
-	protected function initialize() : void {
+	protected function initialize(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue' ] );
 		add_action( 'customize_controls_init', [ $this, 'customizer_enqueue' ] );
@@ -91,10 +91,16 @@ class Asset extends Feature {
 		wp_enqueue_style( 'blank-customizer', $this->get_uri( 'customizer.css' ), $this->get_styles_dependencies( 'customizer' ), $this->version );
 		wp_register_script( 'blank-customizer', $this->get_uri( 'customizer.js' ), $this->get_scripts_dependencies( 'customizer' ), $this->version, true );
 
-		wp_localize_script( 'blank-customizer', 'blank_customizer', $this->get_localize_script( [
-			'customizer_url' => admin_url( '/customize.php?autofocus' ),
-			'webfonts'       => $this->theme->typography->get_fonts(),
-		] ) );
+		wp_localize_script(
+			'blank-customizer',
+			'blank_customizer',
+			$this->get_localize_script(
+				[
+					'customizer_url' => admin_url( '/customize.php?autofocus' ),
+					'webfonts'       => $this->theme->typography->get_fonts(),
+				]
+			)
+		);
 
 		wp_enqueue_script( 'blank-customizer' );
 	}
@@ -105,14 +111,17 @@ class Asset extends Feature {
 	 * @param  array $merge
 	 * @return array
 	 */
-	protected function get_localize_script( array $merge = [] ) : array {
-		return array_merge( [
-			'is_debug'   => self::is_debug(),
-			'nonce'      => wp_create_nonce( 'blank-ajax-nonce' ),
-			'ajax_url'   => admin_url( 'admin-ajax.php' ),
-			'assets_url' => $this->theme->get_uri( 'assets' ),
-			'rest_url'   => get_rest_url(),
-		], $merge );
+	protected function get_localize_script( array $merge = [] ): array {
+		return array_merge(
+			[
+				'is_debug'   => self::is_debug(),
+				'nonce'      => wp_create_nonce( 'blank-ajax-nonce' ),
+				'ajax_url'   => admin_url( 'admin-ajax.php' ),
+				'assets_url' => $this->theme->get_uri( 'assets' ),
+				'rest_url'   => get_rest_url(),
+			],
+			$merge
+		);
 	}
 
 	/**
@@ -121,7 +130,7 @@ class Asset extends Feature {
 	 * @param  string $context
 	 * @return array
 	 */
-	protected function get_styles_dependencies( string $context ) : array {
+	protected function get_styles_dependencies( string $context ): array {
 		wp_register_style( 'blank-variables', false, [], $this->version );
 		wp_add_inline_style( 'blank-variables', $this->css_variables( $this->theme ) );
 
@@ -136,11 +145,15 @@ class Asset extends Feature {
 			$common_deps[] = 'blank-google-fonts';
 		}
 
-		$deps = apply_filters( 'blank_scripts_dependencies', [
-			'theme'      => array_merge( $common_deps, [ 'wp-block-library' ] ),
-			'admin'      => $common_deps,
-			'customizer' => [],
-		], $context );
+		$deps = apply_filters(
+			'blank_scripts_dependencies',
+			[
+				'theme'      => array_merge( $common_deps, [ 'wp-block-library' ] ),
+				'admin'      => $common_deps,
+				'customizer' => [],
+			],
+			$context
+		);
 
 		return $deps[ $context ] ?? [];
 	}
@@ -151,25 +164,29 @@ class Asset extends Feature {
 	 * @param  string $context
 	 * @return array
 	 */
-	protected function get_scripts_dependencies( string $context ) : array {
-		$deps = apply_filters( 'blank_scripts_dependencies', [
-			'theme'      => [
-				'jquery',
+	protected function get_scripts_dependencies( string $context ): array {
+		$deps = apply_filters(
+			'blank_scripts_dependencies',
+			[
+				'theme'      => [
+					'jquery',
+				],
+				'admin'      => [
+					'jquery',
+					'wp-i18n',
+				],
+				'customizer' => [
+					'customize-preview',
+					'customize-controls',
+					'underscore',
+					'wp-element',
+					'wp-components',
+					'wp-date',
+					'wp-i18n',
+				],
 			],
-			'admin'      => [
-				'jquery',
-				'wp-i18n',
-			],
-			'customizer' => [
-				'customize-preview',
-				'customize-controls',
-				'underscore',
-				'wp-element',
-				'wp-components',
-				'wp-date',
-				'wp-i18n',
-			],
-		], $context );
+			$context
+		);
 
 		return $deps[ $context ] ?? [];
 	}
@@ -184,18 +201,18 @@ class Asset extends Feature {
 	 */
 	protected function css_variables( Theme $theme ) {
 		$variables = [
-			'--background-color'            => $theme->get_option( 'background_color' ),
+			'--background-color' => $theme->get_option( 'background_color' ),
 
-			'--max-site-width'              => $theme->get_option( 'max_site_width' ),
+			'--max-site-width'   => $theme->get_option( 'max_site_width' ),
 
-			'--primary-color'               => $theme->get_option( 'primary_color' ),
-			'--secondary-color'             => $theme->get_option( 'secondary_color' ),
-			'--info-color'                  => $theme->get_option( 'info_color' ),
-			'--success-color'               => $theme->get_option( 'success_color' ),
-			'--warning-color'               => $theme->get_option( 'warning_color' ),
-			'--danger-color'                => $theme->get_option( 'danger_color' ),
-			'--light-color'                 => $theme->get_option( 'light_color' ),
-			'--dark-color'                  => $theme->get_option( 'dark_color' ),
+			'--primary-color'    => $theme->get_option( 'primary_color' ),
+			'--secondary-color'  => $theme->get_option( 'secondary_color' ),
+			'--info-color'       => $theme->get_option( 'info_color' ),
+			'--success-color'    => $theme->get_option( 'success_color' ),
+			'--warning-color'    => $theme->get_option( 'warning_color' ),
+			'--danger-color'     => $theme->get_option( 'danger_color' ),
+			'--light-color'      => $theme->get_option( 'light_color' ),
+			'--dark-color'       => $theme->get_option( 'dark_color' ),
 		];
 
 		foreach ( $theme->typography->get_options_values() as $option ) {
@@ -216,7 +233,7 @@ class Asset extends Feature {
 	 * @param  string $filename
 	 * @return string
 	 */
-	public function get_uri( string $filename ) : string {
+	public function get_uri( string $filename ): string {
 		extract( pathinfo( $filename ) ); // phpcs:ignore WordPress.PHP.DontExtract
 
 		$prefix = 'assets/';
@@ -270,7 +287,7 @@ class Asset extends Feature {
 	 * @return bool
 	 * @codeCoverageIgnore
 	 */
-	public static function is_debug() : bool {
+	public static function is_debug(): bool {
 		return Theme::enabled( 'SCRIPT_DEBUG' );
 	}
 }

@@ -14,7 +14,7 @@ return [
 			'default'  => false,
 			'priority' => 8,
 		],
-		'mobile_logo_image' => [
+		'mobile_logo_image'  => [
 			'label'           => __( 'Mobile Logo', 'blank' ),
 			'type'            => 'text',
 			'default'         => '',
@@ -24,14 +24,14 @@ return [
 			},
 		],
 
-		'show_site_title' => [
+		'show_site_title'    => [
 			'label'    => __( 'Display Site Title', 'blank' ),
 			'type'     => 'checkbox',
 			'default'  => true,
 			'selector' => '.site-title',
 		],
 
-		'inline_site_title' => [
+		'inline_site_title'  => [
 			'label'           => __( 'Inline Logo & Site Title', 'blank' ),
 			'type'            => 'checkbox',
 			'default'         => true,
@@ -40,7 +40,7 @@ return [
 			},
 		],
 
-		'show_tagline' => [
+		'show_tagline'       => [
 			'label'    => __( 'Display Tagline', 'blank' ),
 			'type'     => 'checkbox',
 			'default'  => true,
