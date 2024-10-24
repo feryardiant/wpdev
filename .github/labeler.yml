@@ -1,0 +1,14 @@
+integration:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/*.yml'
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .env.example
+          - '**.md'
+
+enhancement:
+  - changed-files:
+      - any-glob-to-any-file: '**'
