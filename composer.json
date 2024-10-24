@@ -32,6 +32,9 @@
     "lint": [
       "phpcs --standard=packages/phpcs.xml packages"
     ],
+    "fix": [
+      "phpcbf --standard=packages/phpcs.xml packages"
+    ],
     "test": [
       "phpunit -c tests/phpunit.xml --coverage-text"
     ],
