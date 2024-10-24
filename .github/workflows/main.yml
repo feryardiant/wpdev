@@ -1,4 +1,4 @@
-name: Tests and Build
+name: Tests
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
       contents: read
 
   run:
-    name: Runs on WordPress ${{ matrix.wp }}
+    name: on WordPress ${{ matrix.wp }}
     runs-on: ubuntu-latest
     needs: [prepare]
 
@@ -75,7 +75,6 @@ jobs:
         run: |
           composer require "roots/wordpress=${{ matrix.wp }}" --no-update
           composer update --prefer-dist --no-interaction --no-progress
-          npm ci
 
       - name: Install WordPress Core
         env:
