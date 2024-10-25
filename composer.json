@@ -58,7 +58,11 @@
   "repositories": {
     "wpackagist": {
       "type": "composer",
-      "url": "https://wpackagist.org"
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
     },
     "theme": {
       "type": "path",
@@ -80,7 +84,7 @@
     }
   },
   "require": {
-    "php": ">=7.1",
+    "php": "8.x",
     "ext-exif": "*",
     "ext-gd": "*",
     "ext-imagick": "*",
