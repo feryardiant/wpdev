@@ -1,4 +1,7 @@
 backupwordpress-*-backups
+et-cache/
+jetpack-waf/
+jpcrm-storage/
 mu-plugins/*
 !mu-plugins/*.php
 plugins/*
