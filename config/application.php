@@ -144,7 +144,7 @@ Config::define('WP_LOCAL_DEV', env('WP_LOCAL_DEV') ?? false);
  *
  * @see https://jetpack.com/support/development-mode/
  */
-Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?? true);
+Config::define('JETPACK_DEV_DEBUG', env('JETPACK_DEV_DEBUG') ?: false);
 
 /**
  * Multisite Settings
