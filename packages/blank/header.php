@@ -22,6 +22,7 @@
 
 <body <?php body_class(); ?>>
 
+<?php wp_body_open(); ?>
 <?php blank( 'template' )->skip_link(); ?>
 
 <div id="page" <?php blank( 'template' )->wrapper_attr(); ?>>

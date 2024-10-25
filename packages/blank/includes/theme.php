@@ -9,6 +9,7 @@
 namespace Blank;
 
 use ArrayAccess;
+use Blank_Extra\Integrations\JetPack;
 
 /**
  * Theme Setup Class.
@@ -34,7 +35,7 @@ use ArrayAccess;
  * @property-read Template $template
  * @property-read Typography $typography
  * @property-read Widgets $widgets
- * @property-read Integrations\JetPack $jetpack
+ * @property-read JetPack $jetpack
  */
 final class Theme implements ArrayAccess {
 	/**
@@ -663,7 +664,7 @@ final class Theme implements ArrayAccess {
 	 * @codeCoverageIgnore
 	 */
 	#[\ReturnTypeWillChange]
-	public function offsetGet( $name ) {
+	public function offsetGet( $name ): mixed {
 		return $this->get_option( $name );
 	}
 
@@ -677,7 +678,7 @@ final class Theme implements ArrayAccess {
 	 * @codeCoverageIgnore
 	 */
 	#[\ReturnTypeWillChange]
-	public function offsetSet( $name, $value ) {
+	public function offsetSet( $name, $value ): void {
 		$this->add_option( $name, $value );
 	}
 
@@ -690,7 +691,7 @@ final class Theme implements ArrayAccess {
 	 * @codeCoverageIgnore
 	 */
 	#[\ReturnTypeWillChange]
-	public function offsetExists( $name ) {
+	public function offsetExists( $name ): bool {
 		return $this->has_option( $name, 'values' );
 	}
 
@@ -703,7 +704,7 @@ final class Theme implements ArrayAccess {
 	 * @codeCoverageIgnore
 	 */
 	#[\ReturnTypeWillChange]
-	public function offsetUnset( $name ) {
+	public function offsetUnset( $name ): void {
 		// .
 	}
 

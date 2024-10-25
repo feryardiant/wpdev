@@ -198,7 +198,7 @@ class Template extends Feature {
 	 * @since 0.1.1
 	 * @param string $location
 	 * @param bool   $returns
-	 * @return string
+	 * @return string|void
 	 */
 	public function site_identity( string $location, bool $returns = false ) {
 		$output    = [];

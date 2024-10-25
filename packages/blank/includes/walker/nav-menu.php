@@ -109,9 +109,9 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 * @internal
 	 * @since 0.1.1
 	 * @param  string         $output
-	 * @param  stdClass       $item
+	 * @param  object       $item
 	 * @param  int            $depth
-	 * @param  array|stdClass $args
+	 * @param  array|object $args
 	 * @param  int            $id
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
@@ -182,10 +182,10 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	 *
 	 * @internal
 	 * @since 0.1.1
-	 * @param  string         $output
-	 * @param  stdClass       $item
-	 * @param  int            $depth
-	 * @param  array|stdClass $args
+	 * @param  string       $output
+	 * @param  object       $item
+	 * @param  int          $depth
+	 * @param  array|object $args
 	 */
 	public function end_el( &$output, $item, $depth = 0, $args = [] ) {
 		list( $indent, $eol, $tab ) = $this->get_indentation( $args, $depth );
@@ -204,8 +204,8 @@ class Nav_Menu extends \Walker_Nav_Menu {
 	/**
 	 * Get indentation and EOL.
 	 *
-	 * @param  stdClass $args
-	 * @param  int      $depth
+	 * @param  object $args
+	 * @param  int    $depth
 	 * @return array
 	 */
 	protected function get_indentation( &$args, int $depth = 0 ) {
