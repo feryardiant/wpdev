@@ -1705,16 +1705,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1"
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
                 "shasum": ""
             },
             "require": {
@@ -1722,12 +1722,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -1752,7 +1752,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
             },
             "funding": [
                 {
@@ -1768,7 +1768,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-09-25T14:20:29+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5594,23 +5594,23 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v7.1.4",
+            "version": "v6.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "d95bbf319f7d052082fb7af147e0f835a695e823"
+                "reference": "daea9eca0b08d0ed1dc9ab702a46128fd1be4958"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/d95bbf319f7d052082fb7af147e0f835a695e823",
-                "reference": "d95bbf319f7d052082fb7af147e0f835a695e823",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/daea9eca0b08d0ed1dc9ab702a46128fd1be4958",
+                "reference": "daea9eca0b08d0ed1dc9ab702a46128fd1be4958",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2"
+                "php": ">=8.1"
             },
             "require-dev": {
-                "symfony/filesystem": "^6.4|^7.0"
+                "symfony/filesystem": "^6.0|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -5638,7 +5638,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v7.1.4"
+                "source": "https://github.com/symfony/finder/tree/v6.4.13"
             },
             "funding": [
                 {
@@ -5654,7 +5654,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-13T14:28:19+00:00"
+            "time": "2024-10-01T08:30:56+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -5708,21 +5708,21 @@
         },
         {
             "name": "wp-cli/core-command",
-            "version": "v2.1.18",
+            "version": "v2.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/core-command.git",
-                "reference": "f7580f93fe66a5584fa7b7c42bd2c0c1435c9d2e"
+                "reference": "ab65d194bbf00b018daca9d625b0297c5f813fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/core-command/zipball/f7580f93fe66a5584fa7b7c42bd2c0c1435c9d2e",
-                "reference": "f7580f93fe66a5584fa7b7c42bd2c0c1435c9d2e",
+                "url": "https://api.github.com/repos/wp-cli/core-command/zipball/ab65d194bbf00b018daca9d625b0297c5f813fca",
+                "reference": "ab65d194bbf00b018daca9d625b0297c5f813fca",
                 "shasum": ""
             },
             "require": {
                 "composer/semver": "^1.4 || ^2 || ^3",
-                "wp-cli/wp-cli": "^2.5.1"
+                "wp-cli/wp-cli": "^2.12"
             },
             "require-dev": {
                 "wp-cli/checksum-command": "^1 || ^2",
@@ -5733,9 +5733,6 @@
             },
             "type": "wp-cli-package",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                },
                 "bundled": true,
                 "commands": [
                     "core",
@@ -5748,7 +5745,10 @@
                     "core update",
                     "core update-db",
                     "core version"
-                ]
+                ],
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                }
             },
             "autoload": {
                 "files": [
@@ -5773,9 +5773,9 @@
             "homepage": "https://github.com/wp-cli/core-command",
             "support": {
                 "issues": "https://github.com/wp-cli/core-command/issues",
-                "source": "https://github.com/wp-cli/core-command/tree/v2.1.18"
+                "source": "https://github.com/wp-cli/core-command/tree/v2.1.19"
             },
-            "time": "2024-04-12T09:36:36+00:00"
+            "time": "2024-12-20T15:13:02+00:00"
         },
         {
             "name": "wp-cli/import-command",
@@ -5890,20 +5890,20 @@
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.11.22",
+            "version": "v0.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51"
+                "reference": "d1fe500378f53fb5ae1072c0daa77095c384a082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/a6bb94664ca36d0962f9c2ff25591c315a550c51",
-                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/d1fe500378f53fb5ae1072c0daa77095c384a082",
+                "reference": "d1fe500378f53fb5ae1072c0daa77095c384a082",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 5.3.0"
+                "php": ">= 5.6.0"
             },
             "require-dev": {
                 "roave/security-advisories": "dev-latest",
@@ -5947,22 +5947,22 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.11.22"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.1"
             },
-            "time": "2023-12-03T19:25:05+00:00"
+            "time": "2024-10-01T11:13:49+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
-            "version": "v2.11.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "53f0df112901fcf95099d0f501912a209429b6a9"
+                "reference": "0187f2b4ce7e83f31bf4beecd5ad4f11ddf8b57b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/53f0df112901fcf95099d0f501912a209429b6a9",
-                "reference": "53f0df112901fcf95099d0f501912a209429b6a9",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/0187f2b4ce7e83f31bf4beecd5ad4f11ddf8b57b",
+                "reference": "0187f2b4ce7e83f31bf4beecd5ad4f11ddf8b57b",
                 "shasum": ""
             },
             "require": {
@@ -5971,7 +5971,7 @@
                 "php": "^5.6 || ^7.0 || ^8.0",
                 "symfony/finder": ">2.7",
                 "wp-cli/mustangostang-spyc": "^0.6.3",
-                "wp-cli/php-cli-tools": "~0.11.2"
+                "wp-cli/php-cli-tools": "~0.12.1"
             },
             "require-dev": {
                 "roave/security-advisories": "dev-latest",
@@ -5985,6 +5985,7 @@
                 "ext-readline": "Include for a better --prompt implementation",
                 "ext-zip": "Needed to support extraction of ZIP archives when doing downloads or updates"
             },
+            "default-branch": true,
             "bin": [
                 "bin/wp",
                 "bin/wp.bat"
@@ -5992,7 +5993,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.11.x-dev"
+                    "dev-main": "2.12.x-dev"
                 }
             },
             "autoload": {
@@ -6019,7 +6020,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2024-08-08T03:04:55+00:00"
+            "time": "2024-11-26T19:13:58+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
